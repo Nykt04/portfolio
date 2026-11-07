@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-28T06:55:28.226Z",
+  "title": "Design System: Gian Karlo Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Charcoal Green",
+        "tonalRamp": [
+          "oklch(15% 0.0107 185.70)",
+          "oklch(26.43% 0.0107 185.70)",
+          "oklch(37.86% 0.0107 185.70)",
+          "oklch(49.29% 0.0107 185.70)",
+          "oklch(60.71% 0.0107 185.70)",
+          "oklch(72.14% 0.0107 185.70)",
+          "oklch(83.57% 0.0107 185.70)",
+          "oklch(95% 0.0107 185.70)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Deep Teal Charcoal",
+        "tonalRamp": [
+          "oklch(15% 0.0135 180.02)",
+          "oklch(26.43% 0.0135 180.02)",
+          "oklch(37.86% 0.0135 180.02)",
+          "oklch(49.29% 0.0135 180.02)",
+          "oklch(60.71% 0.0135 180.02)",
+          "oklch(72.14% 0.0135 180.02)",
+          "oklch(83.57% 0.0135 180.02)",
+          "oklch(95% 0.0135 180.02)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Warm Off-white",
+        "tonalRamp": [
+          "oklch(15% 0.0095 119.58)",
+          "oklch(26.43% 0.0095 119.58)",
+          "oklch(37.86% 0.0095 119.58)",
+          "oklch(49.29% 0.0095 119.58)",
+          "oklch(60.71% 0.0095 119.58)",
+          "oklch(72.14% 0.0095 119.58)",
+          "oklch(83.57% 0.0095 119.58)",
+          "oklch(95% 0.0095 119.58)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Sage Gray",
+        "tonalRamp": [
+          "oklch(15% 0.0151 169.09)",
+          "oklch(26.43% 0.0151 169.09)",
+          "oklch(37.86% 0.0151 169.09)",
+          "oklch(49.29% 0.0151 169.09)",
+          "oklch(60.71% 0.0151 169.09)",
+          "oklch(72.14% 0.0151 169.09)",
+          "oklch(83.57% 0.0151 169.09)",
+          "oklch(95% 0.0151 169.09)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Clear Mint",
+        "tonalRamp": [
+          "oklch(15% 0.0904 173.37)",
+          "oklch(26.43% 0.0904 173.37)",
+          "oklch(37.86% 0.0904 173.37)",
+          "oklch(49.29% 0.0904 173.37)",
+          "oklch(60.71% 0.0904 173.37)",
+          "oklch(72.14% 0.0904 173.37)",
+          "oklch(83.57% 0.0904 173.37)",
+          "oklch(95% 0.0904 173.37)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Light Mint",
+        "tonalRamp": [
+          "oklch(15% 0.0740 173.44)",
+          "oklch(26.43% 0.0740 173.44)",
+          "oklch(37.86% 0.0740 173.44)",
+          "oklch(49.29% 0.0740 173.44)",
+          "oklch(60.71% 0.0740 173.44)",
+          "oklch(72.14% 0.0740 173.44)",
+          "oklch(83.57% 0.0740 173.44)",
+          "oklch(95% 0.0740 173.44)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Forest Gray",
+        "tonalRamp": [
+          "oklch(15% 0.0179 168.19)",
+          "oklch(26.43% 0.0179 168.19)",
+          "oklch(37.86% 0.0179 168.19)",
+          "oklch(49.29% 0.0179 168.19)",
+          "oklch(60.71% 0.0179 168.19)",
+          "oklch(72.14% 0.0179 168.19)",
+          "oklch(83.57% 0.0179 168.19)",
+          "oklch(95% 0.0179 168.19)"
+        ]
+      },
+      "project-mint": {
+        "role": "neutral",
+        "displayName": "Soft Project Mint",
+        "tonalRamp": [
+          "oklch(15% 0.0220 158.52)",
+          "oklch(26.43% 0.0220 158.52)",
+          "oklch(37.86% 0.0220 158.52)",
+          "oklch(49.29% 0.0220 158.52)",
+          "oklch(60.71% 0.0220 158.52)",
+          "oklch(72.14% 0.0220 158.52)",
+          "oklch(83.57% 0.0220 158.52)",
+          "oklch(95% 0.0220 158.52)"
+        ]
+      },
+      "project-ink": {
+        "role": "neutral",
+        "displayName": "Project Forest Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0331 161.11)",
+          "oklch(26.43% 0.0331 161.11)",
+          "oklch(37.86% 0.0331 161.11)",
+          "oklch(49.29% 0.0331 161.11)",
+          "oklch(60.71% 0.0331 161.11)",
+          "oklch(72.14% 0.0331 161.11)",
+          "oklch(83.57% 0.0331 161.11)",
+          "oklch(95% 0.0331 161.11)"
+        ]
+      },
+      "contact-mint": {
+        "role": "neutral",
+        "displayName": "Contact Mint",
+        "tonalRamp": [
+          "oklch(15% 0.0346 165.92)",
+          "oklch(26.43% 0.0346 165.92)",
+          "oklch(37.86% 0.0346 165.92)",
+          "oklch(49.29% 0.0346 165.92)",
+          "oklch(60.71% 0.0346 165.92)",
+          "oklch(72.14% 0.0346 165.92)",
+          "oklch(83.57% 0.0346 165.92)",
+          "oklch(95% 0.0346 165.92)"
+        ]
+      },
+      "contact-ink": {
+        "role": "neutral",
+        "displayName": "Contact Forest Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0409 164.28)",
+          "oklch(26.43% 0.0409 164.28)",
+          "oklch(37.86% 0.0409 164.28)",
+          "oklch(49.29% 0.0409 164.28)",
+          "oklch(60.71% 0.0409 164.28)",
+          "oklch(72.14% 0.0409 164.28)",
+          "oklch(83.57% 0.0409 164.28)",
+          "oklch(95% 0.0409 164.28)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Desktop hero; responsive sizes are documented in DESIGN.md."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Project Title",
+        "purpose": "Featured project card heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text, with longer paragraphs constrained by character width."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Supporting metadata."
+      }
+    },
+    "motion": [
+      {
+        "name": "feedback",
+        "value": "160ms",
+        "purpose": "Navigation colors and case-arrow background."
+      },
+      {
+        "name": "button-feedback",
+        "value": "180ms",
+        "purpose": "Primary-action background and transform."
+      },
+      {
+        "name": "monogram-settle",
+        "value": "900ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Decorative monogram entrance only when reduced motion is not requested."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none; scroll-behavior: auto",
+        "purpose": "Preference-specific suppression in the application."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "380px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "tablet",
+        "value": "1000px"
+      },
+      {
+        "name": "wide",
+        "value": "1500px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary work and contact actions.",
+      "html": "<a class=\"ds-button-primary\" href=\"#work\">Explore my work<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></a>",
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:26px;padding:15px 22px;min-height:54px;font:700 .875rem/1.7 var(--font-sans,'Manrope Variable',sans-serif);border-radius:5px;text-decoration:none;transition:background 180ms,transform 180ms}.ds-button-primary{background:var(--color-accent,#8de2c9);color:var(--color-canvas,#111817)}.ds-button-primary:hover{background:#adf1dc;transform:translateY(-2px)}.ds-button-primary:focus-visible{outline:2px solid var(--color-accent,#8de2c9);outline-offset:6px;border-radius:3px}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Available source action when a real repository URL exists.",
+      "html": "<a class=\"ds-button-secondary\" href=\"#case-study\">View source<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></a>",
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:26px;padding:15px 22px;min-height:54px;font:700 .875rem/1.7 var(--font-sans,'Manrope Variable',sans-serif);border-radius:5px;text-decoration:none;transition:background 180ms,transform 180ms}.ds-button-secondary{background:var(--color-canvas,#111817);color:var(--color-ink,#f1f3ec);border:1px solid var(--line,#35413c)}.ds-button-secondary:focus-visible{outline:2px solid var(--color-accent,#8de2c9);outline-offset:6px;border-radius:3px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "Quiet secondary navigation with a directional icon.",
+      "html": "<a class=\"ds-text-link\" href=\"#contact\">Get in touch<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></a>",
+      "css": ".ds-text-link{display:inline-flex;align-items:center;gap:15px;min-height:44px;color:var(--color-ink,#f1f3ec);font:.875rem/1.7 var(--font-sans,'Manrope Variable',sans-serif);text-decoration:none}.ds-text-link:hover{color:var(--color-accent,#8de2c9)}.ds-text-link:focus-visible{outline:2px solid var(--color-accent,#8de2c9);outline-offset:6px;border-radius:3px}"
+    },
+    {
+      "name": "Main Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Native links with an underlined current location; mobile application behavior is documented in DESIGN.md.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Portfolio preview navigation\"><a href=\"#home\" aria-current=\"location\">Home</a><a href=\"#about\">About</a><a href=\"#work\">Work</a><a href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:34px;background:var(--color-canvas,#111817)}.ds-nav a{position:relative;font:.875rem/1.7 var(--font-sans,'Manrope Variable',sans-serif);padding:12px 0;color:var(--color-muted,#a7b3ae);text-decoration:none;transition:color 160ms}.ds-nav a:hover,.ds-nav a[aria-current]{color:var(--color-ink,#f1f3ec)}.ds-nav a[aria-current]::after{content:'';height:2px;position:absolute;bottom:4px;left:0;right:0;background:var(--color-accent,#8de2c9)}.ds-nav a:focus-visible{outline:2px solid var(--color-accent,#8de2c9);outline-offset:6px;border-radius:3px}@media(prefers-reduced-motion:reduce){.ds-nav a{transition:none}}"
+    },
+    {
+      "name": "Skill Chip",
+      "kind": "chip",
+      "refersTo": "skill-chip",
+      "description": "Informational language label without proficiency or interactive state.",
+      "html": "<span class=\"ds-skill\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m16 18 6-6-6-6M8 6l-6 6 6 6m6.5-16-5 20\"/></svg><span>TypeScript</span><span class=\"ds-skill-square\" aria-hidden=\"true\"></span></span>",
+      "css": ".ds-skill{display:inline-flex;gap:8px;align-items:center;color:var(--color-ink,#f1f3ec);border:1px solid #45574e;border-radius:5px;font:.8rem/1.7 var(--font-sans,'Manrope Variable',sans-serif);padding:9px 11px}.ds-skill svg{color:var(--color-accent,#8de2c9)}.ds-skill-square{width:5px;height:5px;border-radius:1px;background:var(--color-accent,#8de2c9);margin-left:7px}"
+    },
+    {
+      "name": "Featured Project Card",
+      "kind": "card",
+      "refersTo": "featured-card",
+      "description": "Inset mint imagery paired with editable project content and case study access.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-visual\"><span>SOFTWARE ENGINEERING</span><div class=\"ds-code\" aria-hidden=\"true\">&lt;/&gt;</div><span>Project screenshot<br><strong>Coming into focus.</strong></span></div><div class=\"ds-card-content\"><span class=\"ds-card-status\">Content coming soon</span><h3>[Project Name]</h3><p>[Brief Project Description]</p><a href=\"#case-study\">Explore the case study<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></a></div></article>",
+      "css": ".ds-card{display:grid;grid-template-columns:1.1fr 1fr;background:var(--color-surface,#18211f);border-radius:var(--radius,14px);overflow:hidden;color:var(--color-ink,#f1f3ec);font:1rem/1.7 var(--font-sans,'Manrope Variable',sans-serif)}.ds-card-visual{display:flex;flex-direction:column;justify-content:space-between;margin:15px;min-height:330px;padding:28px;border-radius:8px;background:#c7d7cd;color:#283d32;font-size:.75rem}.ds-code{font:400 8rem/1 var(--font-display,'Space Grotesk Variable',sans-serif);letter-spacing:-.04em;text-align:center}.ds-card-visual strong{font:500 1.25rem/1.7 var(--font-display,'Space Grotesk Variable',sans-serif)}.ds-card-content{padding:43px 39px 32px}.ds-card-status{display:inline-flex;padding:5px 9px;color:#c0cfc6;border:1px solid #45564d;border-radius:4px;font-size:.75rem}.ds-card h3{font:500 2.25rem/1.2 var(--font-display,'Space Grotesk Variable',sans-serif);letter-spacing:-.03em;margin:31px 0 16px}.ds-card p{color:var(--color-muted,#a7b3ae);font-size:.875rem}.ds-card a{display:flex;justify-content:space-between;align-items:center;margin-top:26px;padding-top:18px;border-top:1px solid var(--line,#35413c);color:var(--color-accent,#8de2c9);font-size:.875rem;text-decoration:none}.ds-card a svg{border:1px solid #56766a;border-radius:50%;padding:7px;width:20px;height:20px;transition:background 160ms}.ds-card a:hover svg{background:#2e4d40}.ds-card a:focus-visible{outline:2px solid var(--color-accent,#8de2c9);outline-offset:6px;border-radius:3px}@media(max-width:760px){.ds-card{grid-template-columns:1fr}.ds-card-content{padding:23px 26px 28px}}@media(prefers-reduced-motion:reduce){.ds-card a svg{transition:none}}"
+    },
+    {
+      "name": "Role Disclosure",
+      "kind": "custom",
+      "description": "Native disclosure for personal contributions in the case study.",
+      "html": "<details class=\"ds-role\"><summary>Project Manager<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><p>[Describe your specific planning and coordination contributions.]</p></details>",
+      "css": ".ds-role{border-block:1px solid var(--line,#35413c);color:var(--color-ink,#f1f3ec);font-family:var(--font-sans,'Manrope Variable',sans-serif)}.ds-role summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:19px;font-size:.95rem;list-style:none}.ds-role summary::-webkit-details-marker{display:none}.ds-role[open] summary svg{transform:rotate(180deg)}.ds-role p{margin:0;padding-bottom:22px;color:var(--color-muted,#a7b3ae);font-size:.875rem;line-height:1.7}.ds-role summary:focus-visible{outline:2px solid var(--color-accent,#8de2c9);outline-offset:6px;border-radius:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Editorial Developer Portfolio",
+    "overview": "An editorial developer portfolio built around generous dark space, geometric typography, and restrained mint accents. The implemented visual signature is the GK monogram inside an arched frame with fine elliptical outlines. These descriptions record the current code and the owner's portfolio brief; they are not answers to a separate brand interview.\n\nOff-white reading text, muted supporting copy, and visible dividers establish hierarchy without shadows. Mint becomes a larger field in project imagery and contact, providing a clear change of pace. Components remain simple, readable, and responsive, with native links, buttons, and disclosure controls.",
+    "keyCharacteristics": [
+      "Charcoal and muted teal surfaces with off-white reading text.",
+      "Space Grotesk headings paired with Manrope body copy.",
+      "Geometric GK identity and clearly labeled project placeholders.",
+      "Tonal depth, fine borders, restrained motion, and visible focus."
+    ],
+    "rules": [
+      {
+        "name": "The Visible State Rule",
+        "body": "State must remain understandable without color alone: current navigation uses an underline on desktop, placeholders use explicit text, and open disclosures change their chevron direction.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tonal Depth Rule",
+        "body": "Keep the existing canvas/surface separation and border hierarchy as the baseline for depth.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use the extracted tokens as the baseline when extending the interface.",
+      "**Do** retain visible labels for missing project imagery and contact details.",
+      "**Do** pair Lucide SVG icons with readable text when meaning is unclear.",
+      "**Do** preserve keyboard focus, reduced motion, and section offsets beneath sticky navigation.",
+      "**Do** keep reading copy within the observed comfortable line lengths."
+    ],
+    "donts": [
+      "**Don't** invent project screenshots, outcomes, personal achievements, or contact links.",
+      "**Don't** replace SVG icons with emojis.",
+      "**Don't** add scroll hijacking, custom cursors, or excessive animation.",
+      "**Don't** turn informational skill chips into implied proficiency ratings.",
+      "**Don't** obscure keyboard focus inside clipped visual containers."
+    ]
+  }
+}
+

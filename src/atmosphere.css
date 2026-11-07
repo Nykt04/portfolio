@@ -1,0 +1,22 @@
+/* Section-specific atmosphere keeps the Home and About surfaces as alive as the work area. */
+.hero-stage, .about-section { overflow: hidden; }
+.section-atmosphere { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero-stage > .hero, .about-section > .about-grid, .about-section > .responsibilities { position: relative; z-index: 1; }
+.atmosphere-home::before { content: ''; position: absolute; width: min(54vw, 760px); height: min(54vw, 760px); right: -15%; top: -34%; border: 1px solid rgba(53, 89, 71, .2); border-radius: 50%; transform: rotate(-24deg); }
+.atmosphere-home::after { content: ''; position: absolute; width: 70%; height: 1px; left: 0; bottom: 15%; background: linear-gradient(90deg, transparent, rgba(53, 89, 71, .25), transparent); transform: rotate(-8deg); transform-origin: left; }
+.atmosphere-home i, .atmosphere-about i { position: absolute; display: block; width: 6px; height: 6px; border: 1px solid currentColor; border-radius: 50%; color: var(--graphic-muted); opacity: .55; }
+.atmosphere-home i:nth-child(1) { left: 9%; top: 22%; }.atmosphere-home i:nth-child(2) { right: 5%; top: 40%; }.atmosphere-home i:nth-child(3) { left: 44%; bottom: 11%; }
+.section-atmosphere span { position: absolute; font: .65rem var(--font-display); letter-spacing: .16em; color: var(--graphic-muted); opacity: .65; }
+.atmosphere-home span { right: 4%; bottom: 8%; }
+.atmosphere-about::before { content: ''; position: absolute; width: 48vw; height: 48vw; left: -22%; top: 12%; border: 1px solid rgba(141, 226, 201, .15); border-radius: 50%; box-shadow: 0 0 0 44px rgba(141, 226, 201, .025), 0 0 0 88px rgba(141, 226, 201, .02); }
+.atmosphere-about::after { content: ''; position: absolute; width: 100%; height: 100%; opacity: .08; background-image: linear-gradient(rgba(141,226,201,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(141,226,201,.4) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(90deg, #000, transparent 70%); }
+.atmosphere-about i { color: var(--ui-accent); }.atmosphere-about i:nth-child(1) { left: 5%; top: 24%; }.atmosphere-about i:nth-child(2) { left: 31%; bottom: 18%; }.atmosphere-about i:nth-child(3) { right: 7%; top: 14%; }
+.atmosphere-about span { right: 4%; top: 10%; color: var(--ui-accent); }
+html[data-motion="enabled"] .atmosphere-home::before { animation: atmosphere-orbit 16s ease-in-out infinite alternate; }
+html[data-motion="enabled"] .atmosphere-about::before { animation: atmosphere-orbit 22s ease-in-out infinite alternate-reverse; }
+html[data-motion="enabled"] .section-atmosphere i { animation: atmosphere-node 4.5s ease-in-out infinite; }
+html[data-motion="enabled"] .section-atmosphere i:nth-child(2) { animation-delay: -1.6s; }.section-atmosphere i:nth-child(3) { animation-delay: -3.1s; }
+@keyframes atmosphere-orbit { from { transform: rotate(-24deg) translate3d(-10px, 0, 0); } to { transform: rotate(18deg) translate3d(10px, 12px, 0); } }
+@keyframes atmosphere-node { 0%, 100% { transform: scale(.7); opacity: .25; } 50% { transform: scale(1.35); opacity: .85; } }
+@media (max-width: 760px) { .atmosphere-home::before { width: 100vw; height: 100vw; right: -55%; top: -10%; }.atmosphere-home::after { bottom: 13%; }.atmosphere-about::after { background-size: 48px 48px; opacity: .06; }.section-atmosphere span { font-size: .55rem; } }
+@media (prefers-reduced-motion: reduce) { .atmosphere-home::before, .atmosphere-about::before { transform: none; } }

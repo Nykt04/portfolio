@@ -1,0 +1,67 @@
+/* Editorial density: personal introduction, work studies, and an explorable process. */
+.hero { padding-top: 66px; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+.hero h1 { font-size: clamp(3.5rem, 6.7vw, 6rem); width: 100%; line-height: .98; }
+.hero h1 .hero-surname { display: block; color: var(--ui-ink); }
+.hero-manifesto { margin-top: 26px; font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw, 2.1rem); line-height: 1.25; letter-spacing: -.025em; color: var(--ui-accent); }
+.hero-manifesto .glitch-word { position: relative; display: inline-block; }
+.hero-intro { margin-top: 24px; }
+.hero-art { min-height: 500px; margin: 0; border-radius: 180px 180px var(--ui-card-radius) var(--ui-card-radius); }
+.hero-art .large-monogram { align-self: flex-start; margin-top: 96px; font-size: clamp(9rem, 16vw, 13rem); }
+.hero-art .orbit { top: 90px; }
+.hero-art .orbit-two { top: 45px; height: 56%; }
+.hero-art .token-code { top: 28%; left: 8%; }
+.hero-art .token-layers { top: 23%; }
+.hero-art .token-scan { bottom: 40%; }
+.art-profile { position: absolute; bottom: 62px; left: 28px; right: 28px; padding-top: 18px; border-top: 1px solid #557164; display: grid; grid-template-columns: 1fr auto; gap: 9px; }
+.art-profile > span { color: #b8c9bf; font-size: .75rem; }
+.art-profile strong { grid-row: span 2; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; font-weight: 500; }
+.hero-bottom { margin-top: 10px; padding-block: 24px; width: 100%; }
+.about-section { padding-block: 76px; }
+.about-grid { grid-template-columns: 1fr 1.15fr; gap: 72px; }
+.about-grid h2 { font-size: clamp(2.25rem, 3.3vw, 3rem); }
+.portrait { max-width: none; background: var(--ui-canvas); }
+.portrait-placeholder { min-height: 240px; }
+.portrait-placeholder svg { width: 80px; height: 80px; }
+.portrait > img { height: 320px; }
+.responsibilities { margin-top: 38px; }
+.work-section { padding-block: 78px; }
+.project-study-art { width: 100%; padding: 26px 0; }
+.study-frame { width: 88%; margin-inline: auto; border: 1px solid currentColor; border-radius: 12px; overflow: hidden; transform: rotate(-6deg); transition: transform var(--ui-motion-reveal) var(--ui-ease-out); }
+.project-visual-link:hover .study-frame { transform: rotate(0); }
+.study-frame-bar { height: 28px; padding: 10px 12px; display: flex; gap: 5px; border-bottom: 1px solid currentColor; }
+.study-frame-bar i { width: 5px; height: 5px; border: 1px solid currentColor; border-radius: 50%; }
+.study-frame-body { padding: 34px 24px; display: flex; align-items: center; gap: 22px; }
+.study-lines { flex: 1; display: grid; gap: 12px; }
+.study-lines i { display: block; height: 6px; background: currentColor; opacity: .45; }
+.study-lines i:nth-child(2) { width: 65%; }.study-lines i:nth-child(3) { width: 82%; }
+.study-frame-footer { display: flex; justify-content: space-between; padding: 12px 16px; border-top: 1px solid currentColor; font-size: .65rem; letter-spacing: .1em; }
+.study-art-label { display: block; text-align: right; font-size: .75rem; margin: 22px 12px 0; }
+.approach-section { padding-block: 0 90px; }
+.approach-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; padding-top: 54px; border-top: 1px solid var(--ui-line); margin-bottom: 36px; }
+.approach-heading > p { max-width: 350px; color: var(--ui-muted); font-size: .95rem; }
+.approach-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.approach-steps button { width: 100%; display: flex; align-items: center; text-align: left; gap: 20px; min-height: 80px; border-bottom: 1px solid var(--ui-line); padding: 15px 4px; color: var(--ui-muted); }
+.approach-steps button > svg { margin-left: auto; }
+.approach-steps button[aria-pressed="true"] { color: var(--ui-accent); font-weight: 700; background: var(--ui-surface); }
+.approach-steps button:hover { color: var(--ui-ink); }
+.step-number { font-size: .75rem; font-variant-numeric: tabular-nums; }
+.approach-detail { background: var(--ui-surface); border-radius: var(--ui-card-radius); padding: 32px; }
+.approach-detail > svg { color: var(--ui-accent); margin-bottom: 24px; }
+.approach-detail h3 { font-size: 1.7rem; line-height: 1.2; letter-spacing: -.025em; }
+.approach-detail p { margin-top: 18px; color: var(--ui-muted); font-size: .95rem; }
+.approach-topics { display: block; margin-top: 26px; color: var(--ui-accent); font-size: .75rem; }
+@media (max-width: 1000px) {
+  .hero { gap: 24px; }.hero h1 { font-size: clamp(3rem, 6.7vw, 5rem); }.hero-art { min-height: 480px; }
+  .art-profile { grid-template-columns: 1fr; gap: 8px; }.art-profile strong { grid-row: auto; }.art-profile > span:last-child { display: none; }
+  .about-grid { gap: 38px; }.approach-layout { gap: 32px; }
+}
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding-top: 40px; }.hero h1 { font-size: clamp(3.5rem, 13vw, 5.5rem); }.hero-manifesto { margin-top: 20px; }
+  .hero-art { min-height: 390px; margin-top: 16px; max-width: none; border-radius: 150px 150px 14px 14px; }
+  .hero-art .large-monogram { margin-top: 64px; font-size: 10rem; }.hero-art .top-left { top: 30px; }
+  .art-profile { grid-template-columns: 1fr auto; left: 22px; right: 22px; bottom: 58px; }.art-profile strong { font-size: 1.25rem; }.art-profile > span:last-child { display: block; }.art-profile strong { grid-row: span 2; }
+  .hero-bottom { margin-top: 0; }.about-grid { grid-template-columns: 1fr; }.about-section { padding-block: 52px; }
+  .work-section { padding-block: 54px; }.project-study-art { padding: 12px 0; }.study-frame { width: 75%; }.study-frame-body { padding: 16px; }.study-frame-body svg { width: 32px; height: 32px; }.study-frame-footer { padding-block: 7px; }.study-art-label { margin-top: 12px; }.project-slide .project-visual { min-height: 320px; height: 320px; }
+  .approach-section { padding-bottom: 56px; }.approach-heading { flex-direction: column; align-items: start; gap: 22px; padding-top: 38px; }.approach-layout { grid-template-columns: 1fr; gap: 24px; }.approach-steps button { min-height: 64px; }.approach-detail { padding: 26px; min-height: 350px; }
+}
+@media (prefers-reduced-motion: reduce) { .study-frame, .project-visual-link:hover .study-frame { transform: none; } }

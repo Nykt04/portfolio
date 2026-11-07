@@ -1,0 +1,193 @@
+/* Christen Dijoux Inspired Kinetic Preloader */
+
+.preloader-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(24px, 4vw, 44px) 0;
+  background: #070d0b;
+  color: var(--ui-ink, #f1f5f9);
+  user-select: none;
+  pointer-events: all;
+  isolation: isolate;
+  will-change: transform;
+}
+
+.preloader-curtain.phase-finishing {
+  animation: preloader-exit 0.65s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes preloader-exit {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
+}
+
+.preloader-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(141, 226, 201, 0.08) 0%, transparent 60%),
+    #070d0b;
+}
+
+.preloader-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ui-font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.preloader-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.preloader-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ui-ink);
+  letter-spacing: -0.04em;
+}
+
+.preloader-logo span {
+  color: var(--ui-accent);
+}
+
+.preloader-author {
+  color: var(--ui-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.preloader-status-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--ui-accent);
+}
+
+.status-blink {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ui-accent);
+  box-shadow: 0 0 8px var(--ui-accent);
+  animation: status-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes status-pulse {
+  0% { opacity: 0.35; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Center Kinetic Counter */
+.preloader-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.preloader-counter {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-family: var(--ui-font-display);
+  font-size: clamp(5.5rem, 16vw, 13rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+  color: var(--ui-ink);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 45px rgba(141, 226, 201, 0.25);
+}
+
+.counter-digits {
+  color: var(--ui-ink);
+}
+
+.counter-unit {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  color: var(--ui-accent);
+  margin-left: 4px;
+}
+
+/* Progress track */
+.preloader-track {
+  width: min(320px, 70vw);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.preloader-bar {
+  width: 100%;
+  height: 100%;
+  background: var(--ui-accent);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.preloader-subtext {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ui-font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--ui-muted);
+  margin-top: 8px;
+}
+
+.preloader-dot {
+  color: var(--ui-accent);
+  font-size: 0.6rem;
+}
+
+/* Bottom Telemetry */
+.preloader-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ui-font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--ui-muted);
+}
+
+.preloader-coord {
+  opacity: 0.8;
+}
+
+.preloader-hint {
+  color: var(--ui-accent);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .preloader-coord {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-curtain.phase-finishing {
+    animation-duration: 0.1s !important;
+  }
+}

@@ -1,0 +1,41 @@
+/* Customize the portfolio here. Keep text/background contrast accessible. */
+:root {
+  /* Color and type */
+  --ui-canvas: #111817;
+  --ui-surface: #18211f;
+  --ui-ink: #f1f3ec;
+  --ui-muted: #a7b3ae;
+  --ui-accent: #8de2c9;
+  --ui-accent-hover: #adf1dc;
+  --ui-line: #35413c;
+  --ui-font-body: 'Manrope Variable', sans-serif;
+  --ui-font-display: 'Space Grotesk Variable', sans-serif;
+
+  /* Layout and shape */
+  --ui-content-width: 1200px;
+  --ui-page-gutter: 48px;
+  --ui-section-space: clamp(4.5rem, 9vw, 8rem);
+  --ui-card-radius: 14px;
+  --ui-control-radius: 5px;
+  --ui-project-gap: 24px;
+  --ui-header-height: 94px;
+  --ui-focus-width: 2px;
+  --ui-focus-offset: 6px;
+
+  /* Motion: durations are milliseconds so CSS and JS share the same values. */
+  --ui-motion-fast: 180ms;
+  --ui-motion-page: 420ms;
+  --ui-motion-reveal: 650ms;
+  --ui-motion-float: 6000ms;
+  --ui-motion-orbit: 18000ms;
+  --ui-float-distance: 10px;
+  --ui-reveal-distance: 18px;
+  --ui-hover-distance: -3px;
+  --ui-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ui-ease-float: cubic-bezier(.45, 0, .55, 1);
+}
+
+@media (max-width: 1000px) { :root { --ui-page-gutter: 32px; } }
+@media (max-width: 760px) {
+  :root { --ui-page-gutter: 20px; --ui-header-height: 78px; --ui-float-distance: 7px; }
+}
