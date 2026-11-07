@@ -237,7 +237,7 @@ export default function ProjectWireframes({ projectId, projectName }: ProjectWir
 }
 
 // Render Desktop wireframe mockups
-function renderDesktopWireframe(projectId: string, _screenIdx: number, showAnnotations: boolean) {
+function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnotations: boolean) {
   if (projectId === 'project-2') {
     // CRHS Web Desktop
     return (
@@ -403,7 +403,37 @@ function renderDesktopWireframe(projectId: string, _screenIdx: number, showAnnot
     );
   }
 
-  // Default: ACE IT Desktop Dashboard
+  // ACE IT Desktop Wireframe
+  if (screenIdx === 1) {
+    // Desktop Active Recall Study Mode
+    return (
+      <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '16px' }}>
+        <div style={{ borderRight: '1px solid rgba(141, 226, 201, 0.16)', paddingRight: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+            <Sparkles size={16} color="var(--ui-accent)" />
+            <strong style={{ fontSize: '0.85rem' }}>ACE IT Study Session</strong>
+          </div>
+          <div className="wf-btn-primary" style={{ justifyContent: 'flex-start', fontSize: '0.7rem' }}>
+            <BookOpen size={13} />
+            <span>CS 311: Algorithms</span>
+          </div>
+          <div className="wf-ui-card" style={{ margin: '8px 0 0', padding: '10px', fontSize: '0.68rem' }}>
+            <span style={{ color: '#88a99c', display: 'block' }}>Recall Retention</span>
+            <strong style={{ fontSize: '0.88rem', color: 'var(--ui-accent)' }}>84% Spaced Mastery</strong>
+            <div style={{ width: '100%', height: '4px', background: 'rgba(141, 226, 201, 0.2)', borderRadius: '2px', marginTop: '6px', overflow: 'hidden' }}>
+              <div style={{ width: '84%', height: '100%', background: 'var(--ui-accent)' }} />
+            </div>
+          </div>
+          <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(141, 226, 201, 0.14)', fontSize: '0.62rem', color: '#88a99c' }}>
+            <span>Focus Mode: Global chrome hidden to reduce cognitive load</span>
+          </div>
+        </div>
+        <InteractiveFlashcardStudy showAnnotations={showAnnotations} isDesktop />
+      </div>
+    );
+  }
+
+  // Desktop Deck Hub (Default)
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '14px' }}>
       {/* Sidebar */}
@@ -492,8 +522,138 @@ function renderDesktopWireframe(projectId: string, _screenIdx: number, showAnnot
   );
 }
 
+// Interactive Study Flashcard Component
+function InteractiveFlashcardStudy({ showAnnotations, isDesktop = false }: { showAnnotations: boolean; isDesktop?: boolean }) {
+  const [flipped, setFlipped] = useState(false);
+  const [cardIndex, setCardIndex] = useState(0);
+  const [ratingMessage, setRatingMessage] = useState<string | null>(null);
+
+  const CARDS = [
+    {
+      q: 'What is the worst-case time complexity of QuickSort, and what pivot choice causes it?',
+      a: 'O(n²). Occurs when the chosen pivot is consistently the maximum or minimum element (e.g. partition on an already sorted array without random pivot selection).',
+      tag: 'CS 311: Algorithms & Data Structures'
+    },
+    {
+      q: "In UI/UX design, what does Fitts's Law predict about user interaction speed?",
+      a: 'The time required to rapidly move to a target area is a function of the ratio between target distance and target width (larger, closer targets are hit faster).',
+      tag: 'CS 314: Human-Computer Interaction'
+    },
+    {
+      q: 'What is the fundamental difference between declarative and imperative UI programming?',
+      a: 'Imperative code explicitly instructs the machine step-by-step how to mutate DOM state. Declarative code describes what the UI should look like for a given state (e.g. React).',
+      tag: 'CS 316: Web Development'
+    }
+  ];
+
+  const current = CARDS[cardIndex % CARDS.length];
+
+  const handleRate = (difficulty: 'hard' | 'good' | 'easy') => {
+    const feedback = difficulty === 'hard' ? 'Hard (+1d interval)' : difficulty === 'good' ? 'Good (+3d interval)' : 'Easy (+7d interval)';
+    setRatingMessage(feedback);
+    setFlipped(false);
+    setTimeout(() => {
+      setCardIndex(i => i + 1);
+      setRatingMessage(null);
+    }, 320);
+  };
+
+  return (
+    <div style={{ display: 'grid', gap: isDesktop ? '14px' : '10px' }}>
+      {/* Study Session Top Bar */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '6px' }}>
+        <span style={{ fontSize: '0.68rem', color: 'var(--ui-accent)' }}>← Back to Hub</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.62rem', color: '#88a99c' }}>{current.tag}</span>
+          <span className="wf-status-chip is-cleared" style={{ fontSize: '0.62rem' }}>
+            Card #{cardIndex + 1} of 42
+          </span>
+        </div>
+      </div>
+
+      {/* 3D Flashcard Canvas */}
+      <div
+        className={`wf-interactive-flashcard ${flipped ? 'is-flipped' : ''}`}
+        tabIndex={0}
+        role="button"
+        aria-pressed={flipped}
+        aria-label={`Interactive study flashcard: ${flipped ? 'Showing Answer' : 'Showing Question'}. Tap or press Enter to flip.`}
+        onClick={() => setFlipped(!flipped)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setFlipped(!flipped);
+          }
+        }}
+      >
+        {showAnnotations && <span className="wf-pin" style={{ top: '-8px', right: '-6px' }}>②</span>}
+        <div className="flashcard-inner" style={{ minHeight: isDesktop ? '190px' : '165px' }}>
+          {/* Front Face: Question */}
+          <div className="flashcard-front">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className="wf-status-chip is-cleared" style={{ fontSize: '0.58rem' }}>QUESTION · ACTIVE RECALL GATE</span>
+              <RotateCw size={12} color="var(--ui-accent)" />
+            </div>
+            <p className="flashcard-text">"{current.q}"</p>
+            <span className="flashcard-hint">[ Tap or press Enter to reveal Answer ↺ ]</span>
+          </div>
+
+          {/* Back Face: Answer */}
+          <div className="flashcard-back">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className="wf-status-chip is-pending" style={{ fontSize: '0.58rem' }}>ANSWER EXPLANATION</span>
+              <RotateCw size={12} color="var(--ui-accent)" />
+            </div>
+            <p className="flashcard-text" style={{ color: 'var(--ui-accent)' }}>"{current.a}"</p>
+            <span className="flashcard-hint" style={{ color: '#88a99c' }}>[ Tap again to return to Question ↻ ]</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Thumb-Zone Recall Rating Buttons */}
+      <div style={{ position: 'relative' }}>
+        {showAnnotations && <span className="wf-pin" style={{ top: '-10px', left: '-6px' }}>③</span>}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+          <span style={{ fontSize: '0.62rem', color: '#88a99c' }}>Rate Recall Difficulty (Spaced Repetition Algorithm):</span>
+          {ratingMessage && (
+            <span style={{ fontSize: '0.65rem', color: 'var(--ui-accent)', fontWeight: 600 }}>
+              {ratingMessage}
+            </span>
+          )}
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+          <button
+            type="button"
+            className="wf-btn-secondary"
+            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#ef4444', color: '#fca5a5' }}
+            onClick={(e) => { e.stopPropagation(); handleRate('hard'); }}
+          >
+            🔴 Hard (1d)
+          </button>
+          <button
+            type="button"
+            className="wf-btn-secondary"
+            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#eab308', color: '#fef08a' }}
+            onClick={(e) => { e.stopPropagation(); handleRate('good'); }}
+          >
+            🟡 Good (3d)
+          </button>
+          <button
+            type="button"
+            className="wf-btn-secondary"
+            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#22c55e', color: '#86efac' }}
+            onClick={(e) => { e.stopPropagation(); handleRate('easy'); }}
+          >
+            🟢 Easy (7d)
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Render Mobile wireframe mockups
-function renderMobileWireframe(projectId: string, _screenIdx: number, showAnnotations: boolean) {
+function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotations: boolean) {
   if (projectId === 'project-3') {
     // Check8 Mobile Student Passport
     return (
@@ -579,50 +739,60 @@ function renderMobileWireframe(projectId: string, _screenIdx: number, showAnnota
     );
   }
 
-  // Default: ACE IT Mobile Study Mode
-  return (
-    <div style={{ display: 'grid', gap: '10px' }}>
-      {/* Study Session Top Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '6px' }}>
-        <span style={{ fontSize: '0.68rem', color: 'var(--ui-accent)' }}>← Back to Hub</span>
-        <span className="wf-status-chip is-cleared" style={{ fontSize: '0.62rem' }}>18 / 42 Cards</span>
-      </div>
-
-      {/* 3D Flashcard Canvas */}
-      <div className="wf-ui-card" style={{ minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', textAlign: 'center', margin: 0, position: 'relative' }}>
-        {showAnnotations && <span className="wf-pin" style={{ top: '-8px', right: '-6px' }}>②</span>}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span className="wf-status-chip is-cleared" style={{ fontSize: '0.58rem' }}>QUESTION · CARD #18</span>
-          <RotateCw size={12} color="var(--ui-accent)" />
+  // Default: ACE IT Mobile
+  if (screenIdx === 0) {
+    // Mobile Deck Hub
+    return (
+      <div style={{ display: 'grid', gap: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Sparkles size={14} color="var(--ui-accent)" />
+            <strong style={{ fontSize: '0.78rem' }}>ACE IT Mobile</strong>
+          </div>
+          <span className="wf-status-chip is-cleared" style={{ fontSize: '0.6rem' }}>● Cloud Sync</span>
         </div>
 
-        <p style={{ fontSize: '0.76rem', fontWeight: 600, color: '#e2f4ed', margin: '14px 0' }}>
-          "What is the worst-case time complexity of QuickSort, and what pivot choice causes it?"
-        </p>
+        <div className="wf-ui-card" style={{ margin: 0, padding: '10px', position: 'relative' }}>
+          {showAnnotations && <span className="wf-pin" style={{ top: '-8px', right: '-6px' }}>①</span>}
+          <span style={{ fontSize: '0.64rem', color: 'var(--ui-accent)', fontWeight: 600 }}>✦ Instant AI Deck Prompt</span>
+          <div className="wf-input-box" style={{ marginTop: '6px' }}>
+            <Search size={12} />
+            <span style={{ fontSize: '0.64rem' }}>Generate deck from lecture topic...</span>
+          </div>
+        </div>
 
-        <span style={{ fontSize: '0.62rem', color: '#88a99c', borderTop: '1px dashed rgba(141, 226, 201, 0.2)', paddingTop: '6px' }}>
-          [ Tap anywhere to flip card ↺ ]
-        </span>
-      </div>
-
-      {/* Thumb-Zone Recall Rating Buttons */}
-      <div style={{ position: 'relative' }}>
-        {showAnnotations && <span className="wf-pin" style={{ top: '-10px', left: '-6px' }}>③</span>}
-        <span style={{ fontSize: '0.62rem', color: '#88a99c', display: 'block', textAlign: 'center', marginBottom: '4px' }}>Rate Recall Difficulty:</span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
-          <button type="button" className="wf-btn-secondary" style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#ef4444', color: '#fca5a5' }}>
-            🔴 Hard (1d)
-          </button>
-          <button type="button" className="wf-btn-secondary" style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#eab308', color: '#fef08a' }}>
-            🟡 Good (3d)
-          </button>
-          <button type="button" className="wf-btn-secondary" style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#22c55e', color: '#86efac' }}>
-            🟢 Easy (7d)
-          </button>
+        <div style={{ position: 'relative' }}>
+          {showAnnotations && <span className="wf-pin" style={{ top: '-8px', right: '-6px' }}>②</span>}
+          <span style={{ fontSize: '0.68rem', fontWeight: 600, color: '#e2f4ed', display: 'block', marginBottom: '6px' }}>Active Study Decks (3 Due)</span>
+          <div style={{ display: 'grid', gap: '6px' }}>
+            <div className="wf-ui-card" style={{ margin: 0, padding: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <strong style={{ fontSize: '0.74rem' }}>CS 311: Data Structures</strong>
+                <span className="wf-status-chip is-cleared">86%</span>
+              </div>
+              <small style={{ fontSize: '0.62rem', color: '#88a99c', display: 'block', margin: '4px 0' }}>42 active recall flashcards</small>
+              <button type="button" className="wf-btn-primary" style={{ width: '100%', fontSize: '0.66rem', padding: '5px' }}>
+                Study Active Recall ▷
+              </button>
+            </div>
+            <div className="wf-ui-card" style={{ margin: 0, padding: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <strong style={{ fontSize: '0.74rem' }}>CS 314: Web Development</strong>
+                <span className="wf-status-chip is-pending">71%</span>
+              </div>
+              <small style={{ fontSize: '0.62rem', color: '#88a99c', display: 'block', margin: '4px 0' }}>28 active recall flashcards</small>
+              <button type="button" className="wf-btn-primary" style={{ width: '100%', fontSize: '0.66rem', padding: '5px' }}>
+                Study Active Recall ▷
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  // Mobile Active Recall Study Mode (Default Screen 1)
+  return <InteractiveFlashcardStudy showAnnotations={showAnnotations} isDesktop={false} />;
 }
 
 console.assert(typeof ProjectWireframes === 'function', 'ProjectWireframes self-check failed');

@@ -6,6 +6,21 @@
 .toolkit .skill > small { font-size: .60rem; line-height: 1.3; color: var(--graphic-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; }
 .toolkit .skill .tool-arrow { right: 8px; top: 9px; width: 11px; height: 11px; }
 .toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 6px; }
+
+/* Interactive Toolkit Search & Filter Bar */
+.toolkit-search-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin: 18px 0 10px; }
+.toolkit-input-wrap { position: relative; display: flex; align-items: center; flex: 1; min-width: 240px; max-width: 440px; }
+.toolkit-search-icon { position: absolute; left: 12px; color: var(--graphic-muted); pointer-events: none; }
+.toolkit-search-input { width: 100%; padding: 8px 34px 8px 36px; background: #13241d; border: 1px solid rgba(141, 226, 201, 0.24); border-radius: 6px; color: #e2f4ed; font-size: 0.82rem; outline: none; transition: border-color 180ms, box-shadow 180ms; }
+.toolkit-search-input:focus { border-color: var(--ui-accent); box-shadow: 0 0 0 2px rgba(141, 226, 201, 0.2); }
+.toolkit-search-clear { position: absolute; right: 10px; background: none; border: none; color: var(--graphic-muted); cursor: pointer; padding: 4px; display: flex; align-items: center; }
+.toolkit-search-clear:hover { color: var(--ui-accent); }
+.toolkit-counts-badge { font-size: 0.76rem; color: var(--graphic-muted); font-family: var(--ui-font-display, monospace); letter-spacing: 0.04em; }
+.toolkit-counts-badge strong { color: var(--ui-accent); }
+.cat-pill { font-size: 0.68rem; opacity: 0.72; margin-left: 2px; }
+.toolkit-empty { padding: 32px 18px; text-align: center; background: rgba(19, 36, 29, 0.5); border: 1px dashed rgba(141, 226, 201, 0.25); border-radius: 6px; margin: 16px 0; }
+.toolkit-empty p { margin: 0; font-size: 0.85rem; color: var(--graphic-muted); }
+
 .motion-control { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 7px 10px; border: 1px solid var(--ui-line); color: var(--ui-accent); font-size: .75rem; }
 .reading-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; background: var(--ui-accent); transform: scaleX(0); transform-origin: left; pointer-events: none; }
 .floating-top { position: fixed; bottom: 22px; right: 22px; width: 46px; height: 46px; display: grid; place-items: center; background: var(--graphic-ink); color: var(--graphic-mint); border: 1px solid var(--graphic-rule); z-index: 20; }

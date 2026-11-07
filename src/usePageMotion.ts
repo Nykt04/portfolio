@@ -61,6 +61,43 @@ export function usePageMotion(view: boolean, mainRef: RefObject<HTMLElement | nu
     };
     main.addEventListener('pointerdown', ripple, { passive: true });
 
+    // Interactive 3D tilt & dynamic light glare on project cards and portrait
+    let activeCard: HTMLElement | null = null;
+    const cardMove = (event: PointerEvent) => {
+      if (event.pointerType && event.pointerType !== 'mouse') return;
+      const card = (event.target as Element).closest<HTMLElement>('.featured-project, .portrait');
+      if (!card) {
+        if (activeCard) {
+          activeCard.style.setProperty('--tilt-x', '0deg');
+          activeCard.style.setProperty('--tilt-y', '0deg');
+          activeCard.style.setProperty('--glare-opacity', '0');
+          activeCard = null;
+        }
+        return;
+      }
+      activeCard = card;
+      const rect = card.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width;
+      const py = (event.clientY - rect.top) / rect.height;
+      const tiltX = (py - 0.5) * -10;
+      const tiltY = (px - 0.5) * 10;
+      card.style.setProperty('--tilt-x', `${tiltX.toFixed(2)}deg`);
+      card.style.setProperty('--tilt-y', `${tiltY.toFixed(2)}deg`);
+      card.style.setProperty('--glare-x', `${(px * 100).toFixed(1)}%`);
+      card.style.setProperty('--glare-y', `${(py * 100).toFixed(1)}%`);
+      card.style.setProperty('--glare-opacity', '1');
+    };
+    const cardLeave = () => {
+      if (activeCard) {
+        activeCard.style.setProperty('--tilt-x', '0deg');
+        activeCard.style.setProperty('--tilt-y', '0deg');
+        activeCard.style.setProperty('--glare-opacity', '0');
+        activeCard = null;
+      }
+    };
+    document.addEventListener('pointermove', cardMove, { passive: true });
+    document.addEventListener('pointerleave', cardLeave, { passive: true });
+
     // Header, button, and toolkit card micro-decoder on mouse hover
     const decoding = new WeakSet<Element>();
     const navHover = (event: PointerEvent) => {
@@ -103,6 +140,9 @@ export function usePageMotion(view: boolean, mainRef: RefObject<HTMLElement | nu
       activeCancels.forEach(cancel => cancel());
       activeCancels.clear();
       document.removeEventListener('pointerover', navHover);
+      document.removeEventListener('pointermove', cardMove);
+      document.removeEventListener('pointerleave', cardLeave);
+      cardLeave();
       reveal.disconnect();
       visibility.disconnect();
       main.removeEventListener('pointerdown', ripple);

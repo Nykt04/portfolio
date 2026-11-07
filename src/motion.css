@@ -105,7 +105,7 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
   .project-visual-link:hover .project-image { scale: 1; }
 }
 
-/* Motion borrowed from dev.robertoattanasio.com: circular view reveal, toolkit marquee, press ripple. */
+/* Motion: circular view reveal, toolkit marquee, press ripple. */
 ::view-transition-old(root) { animation: none; }
 ::view-transition-new(root) { animation: view-reveal 620ms var(--ui-ease-out); }
 @keyframes view-reveal {
@@ -139,9 +139,7 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
 @keyframes art-scan { from { translate: 0 -55%; } to { translate: 0 55%; } }
 @keyframes caret-blink { 50% { opacity: 0; } }
 
-/* Full Roberto Attanasio (dev.robertoattanasio.com) motion kit */
-
-/* 1. Top Holdbar Progress Indicator */
+/* Full screen transition and holdbar */
 [data-holdbar] { position: fixed; top: 0; inset-inline: 0; height: 3px; z-index: 10000; pointer-events: none; }
 [data-holdbar]::before { content: ''; display: block; height: 100%; width: 100%; transform-origin: 0 0; background: var(--ui-accent); box-shadow: 0 0 12px var(--ui-accent); opacity: 0; scale: 0 1; transition: scale .2s ease-out, opacity .2s ease-out .25s; }
 [data-holdbar-state="loading"]::before { opacity: 1; animation: holdbar-fill 2s cubic-bezier(0, .7, .2, 1) forwards; }
@@ -149,7 +147,6 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
 @keyframes holdbar-fill { 0% { scale: .08 1; } 60% { scale: .72 1; } 100% { scale: .94 1; } }
 @keyframes holdbar-finish { 0%, 55% { scale: 1 1; opacity: 1; } 100% { scale: 1 1; opacity: 0; } }
 
-/* 2. Full-Screen Transition Screen: Left-to-Right or Right-to-Left with Initials ("GK.") */
 .transition-curtain { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; pointer-events: none; visibility: hidden; will-change: transform; }
 .transition-curtain.is-active { visibility: visible; }
 .transition-curtain.is-active.dir-ltr { animation: curtain-slide-ltr 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
@@ -166,15 +163,15 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
 .initials-halo { position: absolute; top: 50%; left: 50%; width: min(340px, 75vw); height: min(340px, 75vw); border-radius: 50%; border: 1px dashed rgba(141, 226, 201, 0.35); transform: translate(-50%, -50%); animation: halo-rotate 10s linear infinite; }
 @keyframes halo-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-/* 3. Button & Element Micro-Squish / Springs */
+/* Button & Element Micro-Squish / Springs */
 .button, .skill, .header-contact, .copy-button, .navigation a { transition: transform 180ms cubic-bezier(0, 0, 0.2, 1), background 180ms, color 180ms, border-color 180ms, box-shadow 180ms; }
 .button:active, .skill:active, .header-contact:active, .copy-button:active { transform: scale(0.95) !important; }
 .button:hover svg, .text-link:hover svg, .case-link:hover svg, .header-contact:hover svg { transform: translate(3px, -3px); }
 
-/* 4. Marquee Interaction */
+/* Marquee Interaction */
 .marquee:hover .marquee-track { animation-play-state: paused; }
 
-/* 5. Staggered Child Reveal on View */
+/* Staggered Child Reveal on View */
 .scroll-reveal.is-in-view .roles-row > div:nth-child(1),
 .scroll-reveal.is-in-view .skills-list > button:nth-child(1),
 .scroll-reveal.is-in-view .about-facts > div:nth-child(1) { transition-delay: 50ms; }
@@ -190,13 +187,55 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
 .scroll-reveal.is-in-view .skills-list > button:nth-child(7) { transition-delay: 350ms; }
 .scroll-reveal.is-in-view .skills-list > button:nth-child(8) { transition-delay: 400ms; }
 
-/* 6. Card Hover Depth & Glow */
-.featured-project { transition: transform 320ms cubic-bezier(.16, 1, .3, 1), box-shadow 320ms, border-color 320ms; }
-.featured-project:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0, 0, 0, .45), 0 0 1px var(--ui-accent); }
+/* 6. Interactive 3D Parallax Tilt, Card Depth & Light Glare */
+.featured-project, .portrait {
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transform-style: preserve-3d;
+  position: relative;
+  transition: transform 120ms ease-out, box-shadow 320ms, border-color 320ms;
+}
+.featured-project:hover, .portrait:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .55), 0 0 1px var(--ui-accent);
+}
+.featured-project::after, .portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle 420px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(141, 226, 201, 0.14), transparent 70%);
+  opacity: var(--glare-opacity, 0);
+  transition: opacity 280ms ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 7. Button Interactive Shimmer */
+.button.primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.button.primary:hover::before {
+  transform: translateX(100%);
+}
 
 /* Paused / Reduced-motion protection */
 html[data-motion="paused"] .transition-curtain,
-html[data-motion="paused"] [data-holdbar] { display: none !important; }
+html[data-motion="paused"] [data-holdbar],
+html[data-motion="paused"] .featured-project::after,
+html[data-motion="paused"] .portrait::after,
+html[data-motion="paused"] .button.primary::before { display: none !important; }
+
+html[data-motion="paused"] .featured-project,
+html[data-motion="paused"] .portrait { transform: none !important; }
+
 @media (prefers-reduced-motion: reduce) {
-  .transition-curtain, [data-holdbar] { display: none !important; }
+  .transition-curtain, [data-holdbar],
+  .featured-project::after, .portrait::after,
+  .button.primary::before { display: none !important; }
+  .featured-project, .portrait { transform: none !important; }
 }

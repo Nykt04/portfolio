@@ -422,3 +422,65 @@
     padding: 8px 10px;
   }
 }
+
+/* Interactive 3D Study Flashcard */
+.wf-interactive-flashcard {
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  width: 100%;
+}
+.wf-interactive-flashcard:focus-visible .flashcard-inner {
+  border-color: var(--ui-accent);
+  box-shadow: 0 0 0 2px var(--ui-accent);
+}
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  border-radius: 6px;
+  background: #11201a;
+  border: 1px solid rgba(141, 226, 201, 0.28);
+}
+.wf-interactive-flashcard.is-flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  inset: 0;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: inherit;
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+  background: #0d1b15;
+}
+.flashcard-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e2f4ed;
+  margin: 12px 0;
+  line-height: 1.45;
+}
+.flashcard-hint {
+  font-size: 0.62rem;
+  color: #88a99c;
+  border-top: 1px dashed rgba(141, 226, 201, 0.2);
+  padding-top: 6px;
+}
+html[data-motion="paused"] .flashcard-inner {
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flashcard-inner {
+    transition: none !important;
+  }
+}
