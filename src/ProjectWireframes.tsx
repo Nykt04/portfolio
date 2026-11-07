@@ -102,7 +102,12 @@ const PROJECT_SCREENS: Record<string, WireframeScreen[]> = {
 };
 
 export default function ProjectWireframes({ projectId, projectName }: ProjectWireframesProps) {
-  const [viewport, setViewport] = useState<'desktop' | 'mobile'>('desktop');
+  const [viewport, setViewport] = useState<'desktop' | 'mobile'>(() => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      return 'mobile';
+    }
+    return 'desktop';
+  });
   const [screenIdx, setScreenIdx] = useState(0);
   const [showAnnotations, setShowAnnotations] = useState(true);
 

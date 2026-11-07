@@ -137,9 +137,11 @@ function App() {
         <nav id="navigation" className={`navigation ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
           {navItems.map(item => <a key={item.id} href={`#${item.id}`} aria-current={!isCaseStudy && active === item.id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{item.label}</a>)}
         </nav>
-        <SettingsMenu paused={paused} setPaused={setPaused} onReplayIntro={() => setIntroDone(false)} />
-        <a className="header-contact" href="#contact">Let’s connect <ArrowUpRight {...iconProps} /></a>
-        <button ref={menuButton} className="menu-toggle" aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><Menu size={18} aria-hidden="true" /><span>Menu</span></button>
+        <div className="header-controls">
+          <SettingsMenu paused={paused} setPaused={setPaused} onReplayIntro={() => setIntroDone(false)} />
+          <a className="header-contact" href="#contact">Let’s connect <ArrowUpRight {...iconProps} /></a>
+          <button ref={menuButton} className="menu-toggle" aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><Menu size={18} aria-hidden="true" /><span>Menu</span></button>
+        </div>
       </div>
     </header>
     <NavDrawer isOpen={menuOpen} onClose={() => setMenuOpen(false)} active={active} isCaseStudy={isCaseStudy} paused={paused} setPaused={setPaused} />
@@ -164,7 +166,17 @@ function App() {
             <div className="floating-token token-scan" aria-hidden="true"><ScanLine size={22} strokeWidth={1.5} /></div>
             <div className="art-coordinate bottom-left">SYS: TELEMETRY ACTIVE // 14.5995° N</div><div className="art-profile"><span>Computer Science</span><strong>A curious mind.<br />A work in progress.</strong><span>Learning. Building. Refining.</span></div>
           </div>
-          <div className="hero-bottom"><span><GraduationCap {...iconProps} /> {p.course}</span><a href="#about">A little more about me <ArrowDown size={16} aria-hidden="true" /></a><a className="hero-project-preview" href="#case-study"><span className="hero-project-thumbnail">{p.project.screenshot ? <img src={p.project.screenshot} alt="" /> : <Code2 size={23} strokeWidth={1.5} aria-hidden="true" />}</span><span className="hero-project-label">Featured case study<strong>{p.project.name}</strong></span><ArrowUpRight size={18} aria-hidden="true" /></a></div>
+          <div className="hero-bottom">
+            <div className="hero-bottom-meta">
+              <span><GraduationCap {...iconProps} /> {p.course}</span>
+              <a href="#about">A little more about me <ArrowDown size={16} aria-hidden="true" /></a>
+            </div>
+            <a className="hero-project-preview" href="#case-study">
+              <span className="hero-project-thumbnail">{p.project.screenshot ? <img src={p.project.screenshot} alt="" /> : <Code2 size={23} strokeWidth={1.5} aria-hidden="true" />}</span>
+              <span className="hero-project-label">Featured case study<strong>{p.project.name}</strong></span>
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+          </div>
         </div></section>
 
         <Marquee />

@@ -56,12 +56,12 @@
   .about-grid { gap: 38px; }.approach-layout { gap: 32px; }
 }
 @media (max-width: 760px) {
-  .hero { grid-template-columns: 1fr; padding-top: 40px; }.hero h1 { font-size: clamp(3.5rem, 13vw, 5.5rem); }.hero-manifesto { margin-top: 20px; }
-  .hero-art { min-height: 390px; margin-top: 16px; max-width: none; border-radius: 150px 150px 14px 14px; }
-  .hero-art .large-monogram { margin-top: 64px; font-size: 10rem; }.hero-art .top-left { top: 30px; }
-  .art-profile { grid-template-columns: 1fr auto; left: 22px; right: 22px; bottom: 58px; }.art-profile strong { font-size: 1.25rem; }.art-profile > span:last-child { display: block; }.art-profile strong { grid-row: span 2; }
+  .hero { grid-template-columns: 1fr; padding-top: 40px; }.hero h1 { font-size: clamp(2.2rem, 9.2vw, 3.2rem); width: 100%; word-break: normal; overflow-wrap: break-word; line-height: 1.08; }.hero-manifesto { margin-top: 18px; font-size: clamp(1.2rem, 4.5vw, 1.55rem); }
+  .hero-art { min-height: 340px; margin-top: 18px; max-width: 100%; border-radius: 120px 120px 14px 14px; }
+  .hero-art .large-monogram { margin-top: 32px; font-size: clamp(6.5rem, 24vw, 8rem); }.hero-art .top-left { top: 14px; left: 16px; font-size: .62rem; }
+
   .hero-bottom { margin-top: 0; }.about-grid { grid-template-columns: 1fr; }.about-section { padding-block: 52px; }
-  .work-section { padding-block: 54px; }.project-study-art { padding: 12px 0; }.study-frame { width: 75%; }.study-frame-body { padding: 16px; }.study-frame-body svg { width: 32px; height: 32px; }.study-frame-footer { padding-block: 7px; }.study-art-label { margin-top: 12px; }.project-slide .project-visual { min-height: 320px; height: 320px; }
-  .approach-section { padding-bottom: 56px; }.approach-heading { flex-direction: column; align-items: start; gap: 22px; padding-top: 38px; }.approach-layout { grid-template-columns: 1fr; gap: 24px; }.approach-steps button { min-height: 64px; }.approach-detail { padding: 26px; min-height: 350px; }
+  .work-section { padding-block: 48px; }.project-study-art { padding: 10px 0; }.study-frame { width: 80%; }.study-frame-body { padding: 14px; }.study-frame-body svg { width: 28px; height: 28px; }.study-frame-footer { padding-block: 6px; }.study-art-label { margin-top: 10px; }.project-slide .project-visual { min-height: 240px; height: 240px; }
+  .approach-section { padding-bottom: 48px; }.approach-heading { flex-direction: column; align-items: start; gap: 16px; padding-top: 32px; }.approach-layout { grid-template-columns: 1fr; gap: 20px; }.approach-steps button { min-height: 56px; }.approach-detail { padding: 20px 18px; min-height: 280px; }
 }
 @media (prefers-reduced-motion: reduce) { .study-frame, .project-visual-link:hover .study-frame { transform: none; } }

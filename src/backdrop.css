@@ -39,6 +39,8 @@ html[data-motion="enabled"] .binary-column { animation: binary-stream 22s linear
   .backdrop-binary { opacity: .08; }
   .binary-column:nth-child(even) { display: none; }
   .backdrop-star:nth-child(even) { display: none; }
+  .shooting-star { display: none; }
+  .backdrop-constellations { overflow: hidden; max-width: 100vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {
