@@ -1,5 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Code2, Github, Image, Pause, Play } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Code2,
+  ExternalLink,
+  Github,
+  Image,
+  Pause,
+  Play,
+  Sparkles,
+  Layers,
+  Atom,
+  Waves,
+  Database,
+  Zap,
+  Terminal,
+  Cpu,
+  Layout,
+  FileCode2,
+  type LucideIcon,
+} from 'lucide-react';
 import { portfolio, projects, type PortfolioProject } from './portfolio';
 import { motionAllowed } from './usePageMotion';
 
@@ -14,6 +34,20 @@ export function ProjectVisual({ compact = false, project = portfolio.project, ca
     <div className="project-study-art" aria-hidden="true"><div className="study-frame"><div className="study-frame-bar"><i /><i /><i /></div><div className="study-frame-body"><Code2 size={52} strokeWidth={1} /><div className="study-lines"><i /><i /><i /></div></div><div className="study-frame-footer"><span>IDEA</span><span>BUILD</span><span>REFINE</span></div></div><span className="study-art-label">Preview placeholder</span></div>
     <div className="visual-bottom"><span>Project screenshot<br /><strong>Coming into focus.</strong></span><span className="image-mark"><Image {...iconProps} /></span></div>
   </div>;
+}
+
+function getTechIcon(name: string): LucideIcon {
+  const n = name.toLowerCase();
+  if (n.includes('next') || n.includes('html') || n.includes('js') || n.includes('node')) return Code2;
+  if (n.includes('typescript') || n.includes('ts') || n.includes('layer')) return Layers;
+  if (n.includes('react')) return Atom;
+  if (n.includes('tailwind') || n.includes('css')) return Waves;
+  if (n.includes('supa') || n.includes('sql') || n.includes('data') || n.includes('base') || n.includes('postgre')) return Database;
+  if (n.includes('vercel') || n.includes('deploy') || n.includes('zap') || n.includes('fast')) return Zap;
+  if (n.includes('python')) return Terminal;
+  if (n.includes('c') && n.length <= 3) return Cpu;
+  if (n.includes('figma') || n.includes('design') || n.includes('responsive')) return Layout;
+  return FileCode2;
 }
 
 export default function ProjectsSection() {
@@ -38,7 +72,6 @@ export default function ProjectsSection() {
     rail.scrollTo({ left: slide.offsetLeft, behavior: motionAllowed() ? 'smooth' : 'instant' });
   };
 
-  // Track touch, trackpad, and button scrolling with one source of truth.
   const syncPosition = () => {
     cancelAnimationFrame(scrollFrame.current);
     scrollFrame.current = requestAnimationFrame(() => {
@@ -75,7 +108,6 @@ export default function ProjectsSection() {
       if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
       if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'Home' || event.key === 'End') {
         event.preventDefault();
-        // Move focus out of the slide before it becomes inert.
         if (track.current?.contains(document.activeElement)) track.current.focus({ preventScroll: true });
         if (event.key === 'Home') goTo(0);
         else if (event.key === 'End') goTo(total - 1);
@@ -94,20 +126,79 @@ export default function ProjectsSection() {
 
     <div id="project-slides" className="project-track" ref={track} onScroll={syncPosition} tabIndex={0} aria-label="Projects. Use left and right arrow keys to browse.">
       {projects.map((project, index) => <article key={project.id} className="featured-project project-slide" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${total}: ${project.name}`} inert={active !== index}>
+        <div className="project-card-sleek">
+          <div className="project-card-top">
+            <div className="project-title-group">
+              <div className="project-badge">
+                <Sparkles size={14} className="project-sparkle" aria-hidden="true" />
+                <span>{project.featured ? 'Featured project' : project.category}</span>
+                {project.name.startsWith('[') && <span className="status-tag">Coming soon</span>}
+              </div>
+              <h3 className="project-heading">
+                {project.caseStudy ? <a href={project.caseStudy}>{project.name}</a> : project.name}
+              </h3>
+            </div>
 
-        <div className="project-content">
-          <div className="project-type"><span>{project.featured ? 'Featured project' : project.category}</span>{project.name.startsWith('[') && <span className="status-tag">Content coming soon</span>}</div>
-          <h3>{project.caseStudy ? <a href={project.caseStudy}>{project.name}</a> : project.name}</h3>
-          <p>{project.description}</p>
-          <div className="project-tags">{project.technologies.map(tag => <span key={tag}>{tag}</span>)}</div>
+            <div className="project-divider" aria-hidden="true" />
 
-          <div className="project-actions">
-            {project.caseStudy && <a href={project.caseStudy} className="case-link">Explore the case study <ArrowUpRight size={15} aria-hidden="true" /></a>}
-            {(project.repository || project.liveDemo) && <div className="project-external-links">
-              {project.repository && <a className="text-link" href={project.repository} target="_blank" rel="noopener noreferrer"><Github size={17} aria-hidden="true" />Source code<span className="sr-only"> (opens in a new tab)</span></a>}
-              {project.liveDemo && <a className="text-link" href={project.liveDemo} target="_blank" rel="noopener noreferrer">Live demo<ArrowUpRight size={17} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>}
-            </div>}
+            <p className="project-desc">{project.description}</p>
 
+            <div className="project-actions-corner">
+              {project.liveDemo ? (
+                <a
+                  className="project-icon-btn"
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open live demo (opens in a new tab)"
+                  aria-label={`Open live demo for ${project.name} (opens in a new tab)`}
+                >
+                  <ExternalLink size={18} aria-hidden="true" />
+                </a>
+              ) : project.repository ? (
+                <a
+                  className="project-icon-btn"
+                  href={project.repository}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="View repository (opens in a new tab)"
+                  aria-label={`View repository for ${project.name} (opens in a new tab)`}
+                >
+                  <Github size={18} aria-hidden="true" />
+                </a>
+              ) : (
+                <span className="project-icon-btn disabled" aria-hidden="true" title="Demo coming soon">
+                  <ExternalLink size={18} />
+                </span>
+              )}
+
+              {project.caseStudy ? (
+                <a
+                  className="project-icon-btn play-btn"
+                  href={project.caseStudy}
+                  title={`Explore case study for ${project.name}`}
+                  aria-label={`Explore case study for ${project.name}`}
+                >
+                  <Play size={16} fill="currentColor" aria-hidden="true" />
+                </a>
+              ) : (
+                <span className="project-icon-btn disabled" aria-hidden="true">
+                  <Play size={16} fill="currentColor" />
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="project-pills-row" aria-label="Technologies used">
+            {project.technologies.map(tag => {
+              const TagIcon = getTechIcon(tag);
+              return (
+                <span key={tag} className="tech-pill">
+                  <TagIcon size={14} aria-hidden="true" />
+                  <span>{tag}</span>
+                </span>
+              );
+            })}
           </div>
         </div>
       </article>)}

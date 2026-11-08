@@ -1,22 +1,22 @@
 /* Editorial density: personal introduction, work studies, and an explorable process. */
-.hero { padding-top: 66px; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
-.hero h1 { font-size: clamp(3.5rem, 6.7vw, 6rem); width: 100%; line-height: .98; }
+.hero { padding-top: 36px; grid-template-columns: 1.25fr 1fr; gap: 24px; align-items: center; }
+.hero h1 { font-size: clamp(2.4rem, 4.2vw, 3.8rem); width: 100%; line-height: 1.05; }
 .hero h1 .hero-surname { display: block; color: var(--ui-ink); }
-.hero-manifesto { margin-top: 26px; font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw, 2.1rem); line-height: 1.25; letter-spacing: -.025em; color: var(--ui-accent); }
+.hero-manifesto { margin-top: 14px; font-family: var(--font-display); font-size: clamp(1.15rem, 1.7vw, 1.4rem); line-height: 1.25; letter-spacing: -.025em; color: var(--ui-accent); }
 .hero-manifesto .glitch-word { position: relative; display: inline-block; }
-.hero-intro { margin-top: 24px; }
+.hero-intro { margin-top: 16px; }
 
-.hero-art { min-height: 500px; margin: 0; border-radius: 180px 180px var(--ui-card-radius) var(--ui-card-radius); }
-.hero-art .large-monogram { align-self: flex-start; margin-top: 96px; font-size: clamp(9rem, 16vw, 13rem); }
-.hero-art .orbit { top: 90px; }
-.hero-art .orbit-two { top: 45px; height: 56%; }
-.hero-art .token-code { top: 28%; left: 8%; }
-.hero-art .token-layers { top: 23%; }
-.hero-art .token-scan { bottom: 40%; }
-.art-profile { position: absolute; bottom: 62px; left: 28px; right: 28px; padding-top: 18px; border-top: 1px solid #557164; display: grid; grid-template-columns: 1fr auto; gap: 9px; }
-.art-profile > span { color: #b8c9bf; font-size: .75rem; }
-.art-profile strong { grid-row: span 2; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; font-weight: 500; }
-.hero-bottom { margin-top: 10px; padding-block: 24px; width: 100%; }
+.hero-art { min-height: 330px; margin: 0; border-radius: 120px 120px var(--ui-card-radius) var(--ui-card-radius); }
+.hero-art .large-monogram { align-self: flex-start; margin-top: 40px; font-size: clamp(5.8rem, 9.5vw, 7.5rem); }
+.hero-art .orbit { top: 46px; }
+.hero-art .orbit-two { top: 20px; height: 56%; }
+.hero-art .token-code { top: 22%; left: 8%; }
+.hero-art .token-layers { top: 18%; }
+.hero-art .token-scan { bottom: 36%; }
+.art-profile { position: absolute; bottom: 26px; left: 22px; right: 22px; padding-top: 12px; border-top: 1px solid #557164; display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.art-profile > span { color: #b8c9bf; font-size: .72rem; }
+.art-profile strong { grid-row: span 2; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.2; font-weight: 500; }
+.hero-bottom { margin-top: 14px; padding-block: 16px 14px; width: 100%; }
 .about-section { padding-block: 76px; }
 .about-grid { grid-template-columns: 1fr 1.15fr; gap: 72px; }
 .about-grid h2 { font-size: clamp(2.25rem, 3.3vw, 3rem); }
@@ -25,7 +25,7 @@
 .portrait-placeholder svg { width: 80px; height: 80px; }
 .portrait > img { height: 320px; object-fit: cover; object-position: center 20%; }
 .responsibilities { margin-top: 38px; }
-.work-section { padding-block: 54px 18px; }
+.work-section { padding-block: 40px 18px; }
 .project-study-art { width: 100%; padding: 26px 0; }
 .study-frame { width: 88%; margin-inline: auto; border: 1px solid currentColor; border-radius: 12px; overflow: hidden; transform: rotate(-6deg); transition: transform var(--ui-motion-reveal) var(--ui-ease-out); }
 .project-visual-link:hover .study-frame { transform: rotate(0); }
@@ -52,17 +52,17 @@
 .approach-detail p { margin-top: 18px; color: var(--ui-muted); font-size: .95rem; }
 .approach-topics { display: block; margin-top: 26px; color: var(--ui-accent); font-size: .75rem; }
 @media (max-width: 1000px) {
-  .hero { gap: 24px; }.hero h1 { font-size: clamp(3rem, 6.7vw, 5rem); }.hero-art { min-height: 480px; }
+  .hero { gap: 20px; }.hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }.hero-art { min-height: 320px; }
   .art-profile { grid-template-columns: 1fr; gap: 8px; }.art-profile strong { grid-row: auto; }.art-profile > span:last-child { display: none; }
   .about-grid { gap: 38px; }.approach-layout { gap: 32px; }
 }
 @media (max-width: 760px) {
-  .hero { grid-template-columns: 1fr; padding-top: 40px; }.hero h1 { font-size: clamp(2.2rem, 9.2vw, 3.2rem); width: 100%; word-break: normal; overflow-wrap: break-word; line-height: 1.08; }.hero-manifesto { margin-top: 18px; font-size: clamp(1.2rem, 4.5vw, 1.55rem); }
-  .hero-art { min-height: 340px; margin-top: 18px; max-width: 100%; border-radius: 120px 120px 14px 14px; }
-  .hero-art .large-monogram { margin-top: 32px; font-size: clamp(6.5rem, 24vw, 8rem); }.hero-art .top-left { top: 14px; left: 16px; font-size: .62rem; }
+  .hero { grid-template-columns: 1fr; padding-top: 32px; }.hero h1 { font-size: clamp(2rem, 8.5vw, 2.9rem); width: 100%; word-break: normal; overflow-wrap: break-word; line-height: 1.08; }.hero-manifesto { margin-top: 14px; font-size: clamp(1.1rem, 4vw, 1.35rem); }
+  .hero-art { min-height: 300px; margin-top: 16px; max-width: 100%; border-radius: 120px 120px 14px 14px; }
+  .hero-art .large-monogram { margin-top: 28px; font-size: clamp(5.5rem, 20vw, 7rem); }.hero-art .top-left { top: 12px; left: 16px; font-size: .62rem; }
 
   .hero-bottom { margin-top: 0; }.about-grid { grid-template-columns: 1fr; }.about-section { padding-block: 52px; }
-  .work-section { padding-block: 36px 14px; }.project-study-art { padding: 10px 0; }.study-frame { width: 80%; }.study-frame-body { padding: 14px; }.study-frame-body svg { width: 28px; height: 28px; }.study-frame-footer { padding-block: 6px; }.study-art-label { margin-top: 10px; }.project-slide .project-visual { min-height: 240px; height: 240px; }
+  .work-section { padding-block: 32px 14px; }.project-study-art { padding: 10px 0; }.study-frame { width: 80%; }.study-frame-body { padding: 14px; }.study-frame-body svg { width: 28px; height: 28px; }.study-frame-footer { padding-block: 6px; }.study-art-label { margin-top: 10px; }.project-slide .project-visual { min-height: 240px; height: 240px; }
   .approach-section { padding-bottom: 48px; }.approach-heading { flex-direction: column; align-items: start; gap: 16px; padding-top: 32px; }.approach-layout { grid-template-columns: 1fr; gap: 20px; }.approach-steps button { min-height: 56px; }.approach-detail { padding: 20px 18px; min-height: 280px; }
 }
 @media (prefers-reduced-motion: reduce) { .study-frame, .project-visual-link:hover .study-frame { transform: none; } }
