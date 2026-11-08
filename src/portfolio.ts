@@ -10,7 +10,7 @@ export const portfolio = {
   interests: 'Games, money, and coffee-fueled debugging.',
   skills: ['Python', 'TypeScript', 'JavaScript', 'C'],
   // Put your photo in public/images/ and set src to '/images/your-photo.jpg'.
-  portrait: { src: '', alt: 'Portrait of Gian Karlo C. Reguindin' },
+  portrait: { src: '/images/gian-karlo.jpg', alt: 'Portrait of Gian Karlo C. Reguindin' },
   tools: [
     { name: 'VS Code', category: 'IDE & AI', description: 'Code editing, debugging, and development tools.' },
     { name: 'Codex', category: 'IDE & AI', description: 'AI assistance for writing, reviewing, and understanding code.' },

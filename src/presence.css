@@ -35,7 +35,7 @@ html[data-motion="paused"] .beacon-ping { animation: none !important; opacity: 0
 .portrait { max-width: none; background: var(--ui-canvas); }
 .portrait-placeholder { min-height: 240px; }
 .portrait-placeholder svg { width: 80px; height: 80px; }
-.portrait > img { height: 320px; }
+.portrait > img { height: 320px; object-fit: cover; object-position: center 20%; }
 .responsibilities { margin-top: 38px; }
 .work-section { padding-block: 78px; }
 .project-study-art { width: 100%; padding: 26px 0; }

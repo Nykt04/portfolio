@@ -1,7 +1,7 @@
 /* Shared interactions. The existing layout and content stay in styles.css. */
 :root { --ui-portrait-height: 310px; --ui-motion-glitch: 480ms; --ui-reveal-opacity: 0; }
 .portrait { margin: 32px 0 0; max-width: 380px; overflow: hidden; border: 1px solid var(--ui-line); border-radius: var(--ui-card-radius); background: var(--ui-surface); }
-.portrait > img { width: 100%; height: var(--ui-portrait-height); object-fit: cover; object-position: center; }
+.portrait > img { width: 100%; height: var(--ui-portrait-height); object-fit: cover; object-position: center 20%; }
 .portrait-placeholder { min-height: var(--ui-portrait-height); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; text-align: center; }
 .portrait-placeholder svg { color: var(--ui-accent); margin-bottom: 8px; }
 .portrait-placeholder span, .portrait small { color: var(--ui-muted); font-size: .85rem; }
