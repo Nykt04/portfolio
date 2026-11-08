@@ -132,7 +132,7 @@ section[id] { scroll-margin-top: 110px; }
 .project-arrow { width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid #637c71; border-radius: 50%; color: var(--color-ink); background: transparent; transition: background 180ms, color 180ms; }
 .project-arrow:hover:not([aria-disabled="true"]) { background: var(--color-accent); color: var(--color-canvas); border-color: var(--color-accent); }
 .project-arrow[aria-disabled="true"] { opacity: .4; cursor: default; }
-.project-track { position: relative; display: flex; align-items: stretch; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; border-radius: var(--radius); }
+.project-track { position: relative; display: flex; align-items: stretch; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; border-radius: var(--radius); scroll-behavior: smooth; }
 .project-track::-webkit-scrollbar { display: none; }
 .project-track:focus-visible { outline-offset: 6px; }
 .project-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }

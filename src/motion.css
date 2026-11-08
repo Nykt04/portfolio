@@ -139,30 +139,6 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
 @keyframes art-scan { from { translate: 0 -55%; } to { translate: 0 55%; } }
 @keyframes caret-blink { 50% { opacity: 0; } }
 
-/* Full screen transition and holdbar */
-[data-holdbar] { position: fixed; top: 0; inset-inline: 0; height: 3px; z-index: 10000; pointer-events: none; }
-[data-holdbar]::before { content: ''; display: block; height: 100%; width: 100%; transform-origin: 0 0; background: var(--ui-accent); box-shadow: 0 0 12px var(--ui-accent); opacity: 0; scale: 0 1; transition: scale .2s ease-out, opacity .2s ease-out .25s; }
-[data-holdbar-state="loading"]::before { opacity: 1; animation: holdbar-fill 2s cubic-bezier(0, .7, .2, 1) forwards; }
-[data-holdbar-state="finishing"]::before { scale: 1 1; opacity: 1; animation: holdbar-finish .45s ease-out forwards; }
-@keyframes holdbar-fill { 0% { scale: .08 1; } 60% { scale: .72 1; } 100% { scale: .94 1; } }
-@keyframes holdbar-finish { 0%, 55% { scale: 1 1; opacity: 1; } 100% { scale: 1 1; opacity: 0; } }
-
-.transition-curtain { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; pointer-events: none; visibility: hidden; will-change: transform; }
-.transition-curtain.is-active { visibility: visible; }
-.transition-curtain.is-active.dir-ltr { animation: curtain-slide-ltr 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
-.transition-curtain.is-active.dir-rtl { animation: curtain-slide-rtl 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
-@keyframes curtain-slide-ltr { 0% { transform: translateX(-100%); } 42%, 58% { transform: translateX(0%); } 100% { transform: translateX(100%); } }
-@keyframes curtain-slide-rtl { 0% { transform: translateX(100%); } 42%, 58% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-.curtain-bg { position: absolute; inset: 0; background: #0b1310; border-inline: 3px solid var(--ui-accent); box-shadow: 0 0 80px rgba(0, 0, 0, 0.95); }
-.curtain-center { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; user-select: none; }
-.transition-curtain.is-active .curtain-center { animation: initials-appear 0.8s cubic-bezier(.16, 1, .3, 1) forwards; }
-@keyframes initials-appear { 0% { opacity: 0; transform: scale(0.85); } 40%, 60% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.92); } }
-.initials-circle { display: flex; align-items: baseline; justify-content: center; font-family: var(--ui-font-display); font-size: clamp(4.5rem, 11vw, 8.5rem); font-weight: 700; line-height: .9; letter-spacing: -.05em; color: var(--ui-accent); text-shadow: 0 0 35px rgba(141, 226, 201, 0.55); }
-.initials-dot { color: #ffffff; }
-.initials-sub { font-family: var(--ui-font-display); font-size: clamp(.7rem, 1.6vw, .9rem); font-weight: 700; letter-spacing: .28em; color: var(--ui-ink); opacity: .88; }
-.initials-halo { position: absolute; top: 50%; left: 50%; width: min(340px, 75vw); height: min(340px, 75vw); border-radius: 50%; border: 1px dashed rgba(141, 226, 201, 0.35); transform: translate(-50%, -50%); animation: halo-rotate 10s linear infinite; }
-@keyframes halo-rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-
 /* Button & Element Micro-Squish / Springs */
 .button, .skill, .header-contact, .copy-button, .navigation a { transition: transform 180ms cubic-bezier(0, 0, 0.2, 1), background 180ms, color 180ms, border-color 180ms, box-shadow 180ms; }
 .button:active, .skill:active, .header-contact:active, .copy-button:active { transform: scale(0.95) !important; }
@@ -224,8 +200,6 @@ html[data-motion="paused"] *, html[data-motion="paused"] *::before, html[data-mo
 }
 
 /* Paused / Reduced-motion protection */
-html[data-motion="paused"] .transition-curtain,
-html[data-motion="paused"] [data-holdbar],
 html[data-motion="paused"] .featured-project::after,
 html[data-motion="paused"] .portrait::after,
 html[data-motion="paused"] .button.primary::before { display: none !important; }
@@ -234,7 +208,6 @@ html[data-motion="paused"] .featured-project,
 html[data-motion="paused"] .portrait { transform: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
-  .transition-curtain, [data-holdbar],
   .featured-project::after, .portrait::after,
   .button.primary::before { display: none !important; }
   .featured-project, .portrait { transform: none !important; }

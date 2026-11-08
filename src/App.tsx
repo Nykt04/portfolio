@@ -33,8 +33,6 @@ function App() {
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState('home');
-  const [holdbar, setHoldbar] = useState<'idle' | 'loading' | 'finishing'>('idle');
-  const [transitionScreen, setTransitionScreen] = useState<{ active: boolean; direction: 'ltr' | 'rtl' }>({ active: false, direction: 'ltr' });
   const menuButton = useRef<HTMLButtonElement>(null);
   const mainRef = useRef<HTMLElement>(null);
   const priorView = useRef(isCaseStudy);
@@ -51,17 +49,6 @@ function App() {
       const pidMatch = hash.match(/[?&]p=([^&]+)/);
       setCaseStudyId(pidMatch ? pidMatch[1] : 'featured-project');
 
-      setHoldbar('loading');
-      setTimeout(() => setHoldbar('finishing'), 350);
-      setTimeout(() => setHoldbar('idle'), 800);
-
-      const isBack = hash === '#home' || hash === '' || (priorView.current && !next);
-      const dir: 'ltr' | 'rtl' = isBack ? 'rtl' : 'ltr';
-
-      if (motionAllowed()) {
-        setTransitionScreen({ active: true, direction: dir });
-      }
-
       const viewChanging = next !== priorView.current;
       if (viewChanging && document.startViewTransition && motionAllowed()) {
         document.startViewTransition(() => {
@@ -74,9 +61,7 @@ function App() {
         setMenuOpen(false);
         const target = document.getElementById(hash.slice(1));
         if (target) {
-          setTimeout(() => {
-            target.scrollIntoView({ behavior: motionAllowed() ? 'smooth' : 'instant' });
-          }, 320);
+          target.scrollIntoView({ behavior: motionAllowed() ? 'smooth' : 'instant' });
         }
       }
     };
@@ -121,22 +106,6 @@ function App() {
     {!introDone && (
       <Preloader onComplete={() => setIntroDone(true)} />
     )}
-    <div data-holdbar data-holdbar-state={holdbar} aria-hidden="true" />
-    <div
-      className={`transition-curtain ${transitionScreen.active ? 'is-active' : ''} dir-${transitionScreen.direction}`}
-      onAnimationEnd={() => setTransitionScreen(prev => ({ ...prev, active: false }))}
-      aria-hidden="true"
-    >
-      <div className="curtain-bg" />
-      <div className="curtain-center">
-        <div className="initials-halo" />
-        <div className="initials-circle">
-          <span className="initials-letters">GK</span>
-          <span className="initials-dot">.</span>
-        </div>
-        <span className="initials-sub">{p.name.toUpperCase()}</span>
-      </div>
-    </div>
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header">
       <div className="container header-inner">
