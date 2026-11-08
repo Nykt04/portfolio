@@ -93,21 +93,21 @@ export default function ProjectsSection() {
     </div>
 
     <div id="project-slides" className="project-track" ref={track} onScroll={syncPosition} tabIndex={0} aria-label="Projects. Use left and right arrow keys to browse.">
-      {projects.map((project, index) => <article key={project.id} className="featured-project project-slide" data-tone={index % 4} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${total}: ${project.name}`} inert={active !== index}>
-        {project.caseStudy ? <a className="project-visual-link" href={project.caseStudy} aria-label={`Explore ${project.name} case study`}><ProjectVisual project={project} category={project.category} /></a> : <div className="project-visual-link"><ProjectVisual project={project} category={project.category} /></div>}
+      {projects.map((project, index) => <article key={project.id} className="featured-project project-slide" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${total}: ${project.name}`} inert={active !== index}>
+
         <div className="project-content">
           <div className="project-type"><span>{project.featured ? 'Featured project' : project.category}</span>{project.name.startsWith('[') && <span className="status-tag">Content coming soon</span>}</div>
           <h3>{project.caseStudy ? <a href={project.caseStudy}>{project.name}</a> : project.name}</h3>
           <p>{project.description}</p>
           <div className="project-tags">{project.technologies.map(tag => <span key={tag}>{tag}</span>)}</div>
-          <div className="project-role"><span>My role</span><p>{project.role}</p></div>
+
           <div className="project-actions">
-            {project.caseStudy && <a href={project.caseStudy} className="case-link">Explore the case study <span><ArrowUpRight {...iconProps} /></span></a>}
+            {project.caseStudy && <a href={project.caseStudy} className="case-link">Explore the case study <ArrowUpRight size={15} aria-hidden="true" /></a>}
             {(project.repository || project.liveDemo) && <div className="project-external-links">
               {project.repository && <a className="text-link" href={project.repository} target="_blank" rel="noopener noreferrer"><Github size={17} aria-hidden="true" />Source code<span className="sr-only"> (opens in a new tab)</span></a>}
               {project.liveDemo && <a className="text-link" href={project.liveDemo} target="_blank" rel="noopener noreferrer">Live demo<ArrowUpRight size={17} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>}
             </div>}
-            {!project.caseStudy && !project.repository && !project.liveDemo && <p className="project-links-pending">Project links to be added</p>}
+
           </div>
         </div>
       </article>)}

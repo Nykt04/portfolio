@@ -45,7 +45,7 @@ html { scroll-padding-top: 100px; }
 
 
 
-.projects-heading h2, .approach-heading h2 { text-transform: uppercase; font-weight: 600; }.featured-project { background: transparent; border-top: 1px solid var(--ui-line); border-bottom: 1px solid var(--ui-line); border-radius: 0; }.project-track { border-radius: 0; }.project-visual-link { margin: 20px 20px 20px 0; border-radius: 0; }.project-visual { background: var(--graphic-mint); }.project-content { padding-right: 0; }.project-content h3 { text-transform: uppercase; }.project-picker button[aria-current] { font-weight: 700; }.project-autoplay { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 10px; border: 1px solid var(--ui-line); color: var(--ui-muted); font-size: .7rem; }.project-autoplay:hover { color: var(--ui-ink); border-color: var(--ui-accent); }
+.projects-heading h2, .approach-heading h2 { text-transform: uppercase; font-weight: 600; }.featured-project { background: var(--ui-surface, #14241d); border: 1px solid var(--ui-line, rgba(141, 226, 201, 0.22)); border-radius: 8px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45); }.project-track { border-radius: 8px; }.project-picker button[aria-current] { font-weight: 700; }.project-autoplay { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 10px; border: 1px solid var(--ui-line); color: var(--ui-muted); font-size: .7rem; }.project-autoplay:hover { color: var(--ui-ink); border-color: var(--ui-accent); }
 .approach-detail { border-radius: 0; }.contact-section { background: var(--graphic-mint); }.contact-top h2 { text-transform: uppercase; font-weight: 600; }.contact-top h2 span { color: var(--graphic-ink); }
 @media (max-width: 1000px) { .hero { grid-template-columns: 1.2fr 1fr; }.hero h1 { font-size: clamp(3rem, 6.4vw, 5rem); }.hero-art { min-height: 420px; }.about-grid { gap: 36px; } }
 @media (max-width: 760px) {
@@ -127,8 +127,7 @@ html { scroll-padding-top: 100px; }
     text-overflow: ellipsis;
   }
 
-  .project-visual-link { margin: 16px 0 0; }
-  .project-slide .project-content { padding-inline: 0; }
+
   .project-controls { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .toolkit .skill:hover { transform: none; } }
