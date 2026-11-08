@@ -11,12 +11,7 @@
 .toolkit-filters { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 12px 0 18px; }
 .toolkit-filters button { min-height: 44px; padding: 6px 2px; color: var(--ui-muted); border-bottom: 2px solid transparent; }
 .toolkit-filters button[aria-pressed="true"] { color: var(--ui-accent); border-bottom-color: currentColor; }
-.toolkit .skill { min-height: 46px; cursor: pointer; }
-.toolkit .skill[aria-pressed="true"] { border-color: var(--ui-accent); background: var(--ui-surface); }
 .toolkit .skill svg { flex-shrink: 0; color: var(--ui-accent); }
-.tool-description { margin-top: 22px; min-height: 100px; padding-top: 18px; border-top: 1px solid var(--ui-line); }
-.tool-description strong { font-size: .95rem; }
-.about-content .tool-description p { margin: 6px 0 0; font-size: .9rem; }
 .hero-copy h1 .glitch-word { position: relative; display: inline-block; color: inherit; }
 .glitch-word::after { content: attr(data-text); position: absolute; inset: 0; color: var(--ui-accent); clip-path: inset(42% 0 36%); opacity: 0; pointer-events: none; }
 @media all {

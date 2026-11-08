@@ -29,25 +29,25 @@ html { scroll-padding-top: 100px; }
 .about-content .large-body { font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.6; }.about-note { display: flex; align-items: start; gap: 18px; margin-top: 34px; border-top: 1px solid var(--ui-line); padding-top: 24px; color: var(--ui-accent); }.about-note p { font-size: .9rem; }.about-note strong { color: var(--ui-ink); font-weight: 500; }
 .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--ui-line); }.about-facts div { display: grid; gap: 5px; }.about-facts span { color: var(--ui-muted); font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; }.about-facts strong { font-size: .85rem; font-weight: 500; }
 .responsibilities { margin-top: 44px; }
-.toolkit-section { background: rgba(181, 239, 213, .96); color: var(--graphic-ink); padding-block: 48px 36px; }.toolkit { margin: 0; }.toolkit-title-row { display: flex; justify-content: space-between; gap: 24px; align-items: end; }.toolkit-title-row h2 { text-transform: uppercase; font-size: clamp(2.5rem, 4.5vw, 4rem); font-weight: 600; }.toolkit-title-row > p { color: var(--graphic-muted); max-width: 360px; font-size: .9rem; }
-.toolkit-section :focus-visible { outline-color: var(--graphic-ink); outline-offset: 4px; }.toolkit-filters { margin: 20px 0 18px; gap: 8px 18px; }.toolkit-filters button { color: var(--graphic-muted); font-size: .84rem; padding: 4px 2px; }.toolkit-filters button[aria-pressed="true"] { color: var(--graphic-ink); font-weight: 700; }
-.toolkit .skills-list { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px 8px; padding-bottom: 12px; }
-.toolkit .skill { position: relative; display: flex; flex-direction: column; align-items: start; justify-content: end; gap: 0; height: 84px; padding: 8px 9px; border: 1px solid var(--graphic-rule); border-radius: 0; background: transparent; color: var(--graphic-ink); text-align: left; overflow: hidden; }
-.toolkit .skill > svg:first-child { position: absolute; top: 9px; left: 9px; width: 19px; height: 19px; color: inherit; }.toolkit .skill > span { font-family: var(--font-display); font-size: .74rem; font-weight: 600; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; }.toolkit .skill > small { font-size: .60rem; line-height: 1.3; color: var(--graphic-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; }.toolkit .skill .tool-arrow { position: absolute; right: 8px; top: 9px; width: 11px; height: 11px; color: inherit; }
-.toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 6px; }
+.toolkit-section { background: rgba(181, 239, 213, .96); color: var(--graphic-ink); padding-block: 36px 28px; }.toolkit { margin: 0; }.toolkit-title-row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; flex-wrap: wrap; }.toolkit-title-row h2 { text-transform: uppercase; font-size: clamp(1.8rem, 3.2vw, 2.5rem); font-weight: 600; margin: 0; }.toolkit-title-row > p { color: var(--graphic-muted); max-width: 400px; font-size: .85rem; margin: 0; }
+.toolkit-section :focus-visible { outline-color: var(--graphic-ink); outline-offset: 3px; }.toolkit-filters { margin: 14px 0 14px; gap: 6px 12px; display: flex; flex-wrap: wrap; }.toolkit-filters button { color: var(--graphic-muted); font-size: .82rem; padding: 3px 6px; border: 0; background: transparent; cursor: pointer; border-radius: 4px; transition: color 140ms, background 140ms; }.toolkit-filters button[aria-pressed="true"] { color: var(--graphic-ink); font-weight: 700; background: rgba(19, 36, 29, 0.08); }
+.toolkit .skills-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; padding-bottom: 4px; }
+.toolkit .skill { position: relative; display: inline-flex; align-items: center; justify-content: flex-start; gap: 8px; height: 38px; min-height: 38px; padding: 0 12px; border: 1px solid var(--graphic-rule); border-radius: 6px; background: rgba(19, 36, 29, 0.04); color: var(--graphic-ink); text-align: left; cursor: default; transition: background 180ms, color 180ms, border-color 180ms, transform 180ms; }
+.toolkit .skill > svg:first-child { width: 17px; height: 17px; flex-shrink: 0; color: inherit; }.toolkit .skill > span { font-family: var(--font-display); font-size: .78rem; font-weight: 600; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 0; }
 @media (hover: hover) {
-  .toolkit .skill:hover { background: var(--graphic-ink); color: var(--graphic-mint); border-color: var(--graphic-ink); transform: translateY(-3px); }
-  .toolkit .skill:hover small { color: var(--graphic-mint); }
-  .toolkit .skill:hover .tool-arrow { transform: rotate(45deg); }
+  .toolkit .skill:hover { background: var(--graphic-ink); color: var(--graphic-mint); border-color: var(--graphic-ink); transform: translateY(-2px); }
+
+
 }
 .toolkit .skill:focus-visible { background: var(--graphic-ink); color: var(--graphic-mint); border-color: var(--graphic-ink); }
-.toolkit .skill:focus-visible small { color: var(--graphic-mint); }
-.toolkit .skill:focus-visible .tool-arrow { transform: rotate(45deg); }
 
-.tool-description { border-color: var(--graphic-rule); display: flex; gap: 30px; align-items: baseline; min-height: 60px; margin-top: 24px; }.tool-description strong { min-width: 100px; }.tool-description p { margin: 0; color: var(--graphic-muted); font-size: .9rem; }
+
+
+
 .projects-heading h2, .approach-heading h2 { text-transform: uppercase; font-weight: 600; }.featured-project { background: transparent; border-top: 1px solid var(--ui-line); border-bottom: 1px solid var(--ui-line); border-radius: 0; }.project-track { border-radius: 0; }.project-visual-link { margin: 20px 20px 20px 0; border-radius: 0; }.project-visual { background: var(--graphic-mint); }.project-content { padding-right: 0; }.project-content h3 { text-transform: uppercase; }.project-picker button[aria-current] { font-weight: 700; }.project-autoplay { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 10px; border: 1px solid var(--ui-line); color: var(--ui-muted); font-size: .7rem; }.project-autoplay:hover { color: var(--ui-ink); border-color: var(--ui-accent); }
 .approach-detail { border-radius: 0; }.contact-section { background: var(--graphic-mint); }.contact-top h2 { text-transform: uppercase; font-weight: 600; }.contact-top h2 span { color: var(--graphic-ink); }
-@media (max-width: 1000px) { .hero { grid-template-columns: 1.2fr 1fr; }.hero h1 { font-size: clamp(3rem, 6.4vw, 5rem); }.hero-art { min-height: 420px; }.about-grid { gap: 36px; }.toolkit .skills-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }.toolkit .skill { padding: 7px 8px; height: 80px; }.toolkit .skill > span { font-size: .72rem; } }
+@media (max-width: 1000px) { .hero { grid-template-columns: 1.2fr 1fr; }.hero h1 { font-size: clamp(3rem, 6.4vw, 5rem); }.hero-art { min-height: 420px; }.about-grid { gap: 36px; } }
 @media (max-width: 760px) {
   .site-header { height: 78px; }
   .hero { grid-template-columns: 1fr; padding-top: 36px; }
@@ -107,7 +107,7 @@ html { scroll-padding-top: 100px; }
     font-weight: 700;
   }
   .toolkit .skills-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 8px 6px;
     padding-bottom: 8px;
   }
@@ -115,7 +115,8 @@ html { scroll-padding-top: 100px; }
     top: 0 !important;
   }
   .toolkit .skill {
-    height: 76px;
+    height: 34px;
+    min-height: 34px;
     padding: 8px;
     border-radius: 4px;
   }
@@ -125,13 +126,7 @@ html { scroll-padding-top: 100px; }
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .toolkit .skill > small {
-    font-size: 0.58rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .tool-description { flex-direction: column; gap: 6px; min-height: 70px; margin-top: 14px; }
+
   .project-visual-link { margin: 16px 0 0; }
   .project-slide .project-content { padding-inline: 0; }
   .project-controls { margin-left: 0; }

@@ -1,11 +1,9 @@
 /* Compact toolkit and optional motion. The system preference is the default. */
-.toolkit .skills-list { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px 8px; padding-bottom: 10px; }
-.toolkit .skill { height: 84px; padding: 8px 9px; gap: 0; overflow: hidden; }
-.toolkit .skill > svg:first-child { top: 9px; left: 9px; width: 19px; height: 19px; transition: transform 240ms var(--ui-ease-out); }
-.toolkit .skill > span { font-size: .74rem; line-height: 1.25; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; }
-.toolkit .skill > small { font-size: .60rem; line-height: 1.3; color: var(--graphic-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: block; }
-.toolkit .skill .tool-arrow { right: 8px; top: 9px; width: 11px; height: 11px; }
-.toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 6px; }
+.toolkit .skills-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; padding-bottom: 4px; }
+.toolkit .skill { height: 38px; min-height: 38px; padding: 0 12px; gap: 8px; display: inline-flex; align-items: center; }
+.toolkit .skill > svg:first-child { position: static; width: 17px; height: 17px; flex-shrink: 0; transition: transform 240ms var(--ui-ease-out); }
+.toolkit .skill > span { font-size: .78rem; line-height: 1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 0; }
 
 .cat-pill { font-size: 0.68rem; opacity: 0.72; margin-left: 2px; }
 .toolkit-empty { padding: 32px 18px; text-align: center; background: rgba(19, 36, 29, 0.5); border: 1px dashed rgba(141, 226, 201, 0.25); border-radius: 6px; margin: 16px 0; }
@@ -25,28 +23,26 @@ html[data-motion="enabled"] .approach-steps button { transition: padding 240ms v
 html[data-motion="enabled"] .approach-steps button:hover { padding-left: 14px; }
 html[data-motion="enabled"] .floating-top { animation: detail-arrive 250ms var(--ui-ease-out); transition: transform 180ms; }
 @media (hover: hover) {
-  html[data-motion="enabled"] .toolkit .skill:hover > svg:first-child { transform: translateY(-2px) rotate(-8deg) scale(1.12); }
-  html[data-motion="enabled"] .toolkit .skill:hover { transform: translateY(-4px); }
+  html[data-motion="enabled"] .toolkit .skill:hover > svg:first-child { transform: scale(1.15); }
+  html[data-motion="enabled"] .toolkit .skill:hover { transform: translateY(-2px); }
   html[data-motion="enabled"] .floating-top:hover { transform: translateY(-4px); }
 }
 @media (max-width: 1100px) {
-  .toolkit .skills-list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .toolkit .skill { height: 80px; padding: 7px 8px; }
-  .toolkit .skill > svg:first-child { width: 18px; height: 18px; top: 8px; left: 8px; }
-  .toolkit .skill .tool-arrow { top: 8px; right: 7px; width: 10px; height: 10px; }
+  .toolkit .skills-list { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .toolkit .skill { height: 36px; min-height: 36px; padding: 0 10px; gap: 8px; }
+  .toolkit .skill > svg:first-child { width: 16px; height: 16px; }
 }
 @media (max-width: 760px) {
-  .toolkit .skills-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 6px; }
-  .toolkit .skill { height: 78px; padding: 7px 8px; }
+  .toolkit .skills-list { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; }
+  .toolkit .skill { height: 34px; min-height: 34px; padding: 0 9px; gap: 7px; border-radius: 5px; }
   .toolkit .skill > span { font-size: .72rem; }
-  .toolkit .skill > small { font-size: .58rem; }
-  .toolkit .skill > svg:first-child { left: 7px; top: 7px; width: 17px; height: 17px; }
-  .toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 4px; }
+  .toolkit .skill > svg:first-child { width: 15px; height: 15px; }
+  .toolkit .skills-list[data-filter="All"] .skill:nth-child(even) { top: 0; }
   .header-contact { display: none; }.motion-control { margin-left: auto; margin-right: 12px; }.floating-top { right: 12px; bottom: 12px; }
 }
 @media (max-width: 440px) {
-  .toolkit .skills-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 5px; }
-  .toolkit .skill { height: 74px; padding: 6px 7px; }
-  .toolkit .skill > svg:first-child { width: 15px; height: 15px; top: 6px; left: 6px; }
-  .toolkit .skill > span { font-size: .67rem; }
+  .toolkit .skills-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .toolkit .skill { height: 34px; min-height: 34px; padding: 0 8px; }
+  .toolkit .skill > svg:first-child { width: 14px; height: 14px; }
+  .toolkit .skill > span { font-size: .70rem; }
 }

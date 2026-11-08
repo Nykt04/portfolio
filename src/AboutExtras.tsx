@@ -31,14 +31,13 @@ export function Marquee() {
 
 export function Toolkit() {
   const [category, setCategory] = useState('All');
-  const [selected, setSelected] = useState<(typeof toolkit)[number] | null>(null);
 
   const visible = toolkit.filter(tool => category === 'All' || tool.category === category);
 
   return <div className="skills-block toolkit">
     <div className="toolkit-title-row">
-      <h2 id="toolkit-title">Tools of<br /><span>the trade.</span></h2>
-      <p>A growing toolkit for ideas,<br />interfaces, and everything in between.</p>
+      <h2 id="toolkit-title">Tools of <span>the trade.</span></h2>
+      <p>A growing toolkit for ideas, interfaces, and code.</p>
     </div>
 
     <div className="toolkit-filters" role="group" aria-label="Filter toolkit by category">
@@ -49,7 +48,7 @@ export function Toolkit() {
             key={value}
             type="button"
             aria-pressed={category === value}
-            onClick={() => { setCategory(value); setSelected(null); }}
+            onClick={() => setCategory(value)}
           >
             {value} <span className="cat-pill">({count})</span>
           </button>
@@ -62,20 +61,17 @@ export function Toolkit() {
         {visible.map(tool => {
           const icon = icons[tool.name as keyof typeof icons];
           return (
-            <button
+            <div
               className="skill"
-              type="button"
               key={tool.name}
-              aria-controls="tool-description"
-              onMouseEnter={() => setSelected(tool)}
-              onFocus={() => setSelected(tool)}
-              onClick={() => setSelected(tool)}
+              title={`${tool.name} — ${tool.description}`}
+              tabIndex={0}
+              role="group"
+              aria-label={tool.name}
             >
-              {icon ? <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={icon.path} /></svg> : <Code2 size={19} aria-hidden="true" />}
+              {icon ? <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={icon.path} /></svg> : <Code2 size={17} aria-hidden="true" />}
               <span>{tool.name}</span>
-              <small>{tool.category}</small>
-              <ArrowUpRight className="tool-arrow" size={18} aria-hidden="true" />
-            </button>
+            </div>
           );
         })}
       </div>
@@ -92,10 +88,5 @@ export function Toolkit() {
         </button>
       </div>
     )}
-
-    <div className="tool-description" id="tool-description" role="status" aria-live="polite" aria-atomic="true">
-      <strong>{selected?.name || 'Explore the toolkit'}</strong>
-      <p>{selected?.description || 'Hover, focus, or tap a tool to learn what it does.'}</p>
-    </div>
   </div>;
 }
