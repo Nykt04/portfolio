@@ -127,6 +127,7 @@ export interface PortfolioCertification {
   credentialUrl?: string;
   skills: string[];
   description: string;
+  image?: string;
 }
 
 export interface ProjectPersona {
