@@ -98,6 +98,39 @@ const PROJECT_SCREENS: Record<string, WireframeScreen[]> = {
         { pin: '②', rule: 'Cryptographic Audit Trail', description: 'Records staff ID and timestamp for tamper-proof accountability.' }
       ]
     }
+  ],
+  'project-4': [
+    {
+      id: 'p4-workspace',
+      title: 'Full-Stack Application Blueprint',
+      url: 'giankarlo.dev/project-4/app',
+      annotations: [
+        { pin: '①', rule: 'Modular Layout', description: 'Separation of navigation, work canvas, and contextual inspection panels.' },
+        { pin: '②', rule: 'Data Flow Visibility', description: 'Prominent status indicators communicating real-time state and async operations.' },
+      ]
+    }
+  ],
+  'project-5': [
+    {
+      id: 'p5-mobile',
+      title: 'Mobile-First Experience Blueprint',
+      url: 'giankarlo.dev/project-5/flow',
+      annotations: [
+        { pin: '①', rule: 'Thumb Reach Hierarchy', description: 'Primary interactive targets anchored within bottom reach zones.' },
+        { pin: '②', rule: 'Progressive Disclosure', description: 'Essential data surfaced first with drill-down views on demand.' },
+      ]
+    }
+  ],
+  'project-6': [
+    {
+      id: 'p6-systems',
+      title: 'Systems & Tools Console Blueprint',
+      url: 'giankarlo.dev/project-6/dashboard',
+      annotations: [
+        { pin: '①', rule: 'Telemetry Dashboard', description: 'Operational telemetry indicators visualizing pipeline health.' },
+        { pin: '②', rule: 'Audit Verification', description: 'Structured audit trail and clear event action logging.' },
+      ]
+    }
   ]
 };
 

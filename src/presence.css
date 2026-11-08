@@ -4,19 +4,7 @@
 .hero h1 .hero-surname { display: block; color: var(--ui-ink); }
 .hero-manifesto { margin-top: 26px; font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw, 2.1rem); line-height: 1.25; letter-spacing: -.025em; color: var(--ui-accent); }
 .hero-manifesto .glitch-word { position: relative; display: inline-block; }
-.hero-intro { margin-top: 20px; }
-
-/* Live Telemetry Radar HUD */
-.hero-telemetry { display: inline-flex; align-items: center; gap: 8px; margin: 18px 0 6px; padding: 6px 14px; background: rgba(20, 36, 29, 0.7); border: 1px solid rgba(141, 226, 201, 0.28); border-radius: 999px; font-family: var(--ui-font-display, monospace); font-size: 0.74rem; letter-spacing: 0.04em; color: #a4c5b8; backdrop-filter: blur(8px); width: fit-content; max-width: 100%; flex-wrap: wrap; }
-.telemetry-beacon { position: relative; width: 8px; height: 8px; display: inline-block; flex-shrink: 0; }
-.beacon-core { position: absolute; inset: 0; border-radius: 50%; background: var(--ui-accent, #8de2c9); }
-.beacon-ping { position: absolute; inset: -4px; border-radius: 50%; background: var(--ui-accent, #8de2c9); opacity: 0.75; animation: beacon-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-@keyframes beacon-pulse { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(2.4); opacity: 0; } }
-.telemetry-tag { color: #e2f4ed; font-variant-numeric: tabular-nums; font-weight: 600; }
-.telemetry-role { color: var(--ui-accent, #8de2c9); font-weight: 500; font-size: 0.7rem; }
-.telemetry-sep { opacity: 0.4; }
-html[data-motion="paused"] .beacon-ping { animation: none !important; opacity: 0 !important; }
-@media (prefers-reduced-motion: reduce) { .beacon-ping { animation: none !important; opacity: 0 !important; } }
+.hero-intro { margin-top: 24px; }
 
 .hero-art { min-height: 500px; margin: 0; border-radius: 180px 180px var(--ui-card-radius) var(--ui-card-radius); }
 .hero-art .large-monogram { align-self: flex-start; margin-top: 96px; font-size: clamp(9rem, 16vw, 13rem); }
@@ -72,7 +60,7 @@ html[data-motion="paused"] .beacon-ping { animation: none !important; opacity: 0
   .hero { grid-template-columns: 1fr; padding-top: 40px; }.hero h1 { font-size: clamp(2.2rem, 9.2vw, 3.2rem); width: 100%; word-break: normal; overflow-wrap: break-word; line-height: 1.08; }.hero-manifesto { margin-top: 18px; font-size: clamp(1.2rem, 4.5vw, 1.55rem); }
   .hero-art { min-height: 340px; margin-top: 18px; max-width: 100%; border-radius: 120px 120px 14px 14px; }
   .hero-art .large-monogram { margin-top: 32px; font-size: clamp(6.5rem, 24vw, 8rem); }.hero-art .top-left { top: 14px; left: 16px; font-size: .62rem; }
-  .hero-telemetry { font-size: 0.7rem; padding: 5px 10px; }
+
   .hero-bottom { margin-top: 0; }.about-grid { grid-template-columns: 1fr; }.about-section { padding-block: 52px; }
   .work-section { padding-block: 48px; }.project-study-art { padding: 10px 0; }.study-frame { width: 80%; }.study-frame-body { padding: 14px; }.study-frame-body svg { width: 28px; height: 28px; }.study-frame-footer { padding-block: 6px; }.study-art-label { margin-top: 10px; }.project-slide .project-visual { min-height: 240px; height: 240px; }
   .approach-section { padding-bottom: 48px; }.approach-heading { flex-direction: column; align-items: start; gap: 16px; padding-top: 32px; }.approach-layout { grid-template-columns: 1fr; gap: 20px; }.approach-steps button { min-height: 56px; }.approach-detail { padding: 20px 18px; min-height: 280px; }

@@ -16,9 +16,10 @@ const navItems = [
   { id: 'about', label: 'About', tag: '02' },
   { id: 'toolkit', label: 'Toolkit', tag: '03' },
   { id: 'work', label: 'Selected Work', tag: '04' },
-  { id: 'approach', label: 'Approach', tag: '05' },
-  { id: 'case-study', label: 'Case Study', tag: '06' },
-  { id: 'contact', label: 'Contact', tag: '07' },
+  { id: 'certifications', label: 'Certifications', tag: '05' },
+  { id: 'approach', label: 'Approach', tag: '06' },
+  { id: 'case-study', label: 'Case Study', tag: '07' },
+  { id: 'contact', label: 'Contact', tag: '08' },
 ];
 
 export default function NavDrawer({ isOpen, onClose, active, isCaseStudy, paused, setPaused }: NavDrawerProps) {

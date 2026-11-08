@@ -84,7 +84,50 @@ export const portfolio = {
       ],
     },
   },
+  certifications: [
+    {
+      id: 'cert-1',
+      title: '[Certification Title Placeholder]',
+      issuer: '[Issuing Organization / Institution, e.g. Coursera, Cisco, freeCodeCamp, Google]',
+      date: '[Issue Date, e.g. 2026]',
+      credentialId: '[Credential ID or Verification Code]',
+      credentialUrl: '',
+      skills: ['Python', 'TypeScript', 'Web Development'],
+      description: 'Placeholder slot for technical certification, professional badge, or academic training course. Ready for your actual credential details.',
+    },
+    {
+      id: 'cert-2',
+      title: '[Certification Title Placeholder]',
+      issuer: '[Issuing Organization / Institution, e.g. Meta, Oracle, AWS, DICT]',
+      date: '[Issue Date, e.g. 2026]',
+      credentialId: '[Credential ID or Verification Code]',
+      credentialUrl: '',
+      skills: ['UI/UX Design', 'Accessibility', 'Figma'],
+      description: 'Placeholder slot for specialized workshop, university certification, or technical training achievement.',
+    },
+    {
+      id: 'cert-3',
+      title: '[Certification Title Placeholder]',
+      issuer: '[Issuing Organization / Institution]',
+      date: '[Issue Date, e.g. 2026]',
+      credentialId: '',
+      credentialUrl: '',
+      skills: ['Software Engineering', 'Quality Assurance'],
+      description: 'Placeholder slot for future certification, industry-recognized course, or hackathon / competition milestone.',
+    },
+  ],
 };
+
+export interface PortfolioCertification {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  credentialId?: string;
+  credentialUrl?: string;
+  skills: string[];
+  description: string;
+}
 
 export interface ProjectPersona {
   name: string;
@@ -245,5 +288,95 @@ export const projects: PortfolioProject[] = [
         'Needs fast one-handed scanning with zero native app installation friction.',
       ],
     },
+  },
+  {
+    id: 'project-4',
+    name: '[Project 4 Title]',
+    description: 'Upcoming software engineering project placeholder. Describe the problem, user audience, and core architecture once details are ready.',
+    category: 'Full-Stack Development · Web Application',
+    role: 'Lead Developer & System Architect',
+    technologies: ['TypeScript', 'React', 'Node.js', 'PostgreSQL'],
+    screenshot: '',
+    screenshotAlt: 'Preview placeholder for Project 4',
+    repository: '',
+    liveDemo: '',
+    caseStudy: '#case-study?p=project-4',
+    featured: false,
+    roles: [
+      { title: 'System Architect', description: 'Defined technical requirements, schema relationships, and component boundaries.' },
+      { title: 'Full-Stack Developer', description: 'Implemented core frontend interactions, server routes, and database models.' },
+      { title: 'Quality Assurance', description: 'Conducted unit testing, responsive viewport validation, and accessibility sweeps.' },
+      { title: 'UI Designer', description: 'Created intuitive wireframes and interactive prototypes in Figma.' },
+    ],
+    sections: [
+      { id: 'overview', title: 'Project overview', prompt: 'Project 4 overview placeholder. Detail the vision, technology choices, and target goals.' },
+      { id: 'problem', title: 'The problem & target users', prompt: 'Describe the core problem solved for students, organizations, or users.' },
+      { id: 'requirements', title: 'Requirements analysis', prompt: 'Outline the primary user stories and functional requirements.' },
+      { id: 'process', title: 'From idea to interface', prompt: 'Document the design iterations, sprint milestones, and architectural decisions.' },
+      { id: 'accessibility', title: 'Designing for people', prompt: 'Detail accessibility standards, keyboard support, and contrast compliance.' },
+      { id: 'testing', title: 'Testing & quality assurance', prompt: 'Summarize verification methodologies, edge case handling, and test passes.' },
+      { id: 'result', title: 'The final result', prompt: 'Present the outcomes, working deployment, and user feedback.' },
+      { id: 'lessons', title: 'What I learned', prompt: 'Reflect on technical hurdles overcome and future feature roadmap.' },
+    ],
+  },
+  {
+    id: 'project-5',
+    name: '[Project 5 Title]',
+    description: 'Upcoming mobile or web application placeholder. Ready for project background, technologies used, and deployment links.',
+    category: 'Mobile / Web Experience · Software Engineering',
+    role: 'Frontend Developer & UI/UX Designer',
+    technologies: ['JavaScript', 'React', 'Tailwind CSS', 'Vercel'],
+    screenshot: '',
+    screenshotAlt: 'Preview placeholder for Project 5',
+    repository: '',
+    liveDemo: '',
+    caseStudy: '#case-study?p=project-5',
+    featured: false,
+    roles: [
+      { title: 'Frontend Developer', description: 'Crafted responsive component layouts and stateful UI interactions.' },
+      { title: 'UI/UX Designer', description: 'Constructed design tokens, color systems, and user flows.' },
+      { title: 'Quality Assurance', description: 'Tested usability, load performance, and device responsiveness.' },
+      { title: 'Requirements Analyst', description: 'Identified user pain points and structured functional feature specifications.' },
+    ],
+    sections: [
+      { id: 'overview', title: 'Project overview', prompt: 'Project 5 overview placeholder. Ready for summary and key objectives.' },
+      { id: 'problem', title: 'The problem & target users', prompt: 'Describe the specific challenge this application addresses.' },
+      { id: 'requirements', title: 'Requirements analysis', prompt: 'Detail key functional specifications and constraints.' },
+      { id: 'process', title: 'From idea to interface', prompt: 'Walk through wireframing, component implementation, and styling.' },
+      { id: 'accessibility', title: 'Designing for people', prompt: 'Document inclusive design choices and WCAG conformance.' },
+      { id: 'testing', title: 'Testing & quality assurance', prompt: 'Outline testing strategies and cross-browser verification.' },
+      { id: 'result', title: 'The final result', prompt: 'Showcase final deliverables and live deployment milestones.' },
+      { id: 'lessons', title: 'What I learned', prompt: 'Highlight key takeaways and technical growth.' },
+    ],
+  },
+  {
+    id: 'project-6',
+    name: '[Project 6 Title]',
+    description: 'Upcoming client or coursework software engineering project placeholder. Fill in when development is complete.',
+    category: 'Systems & Tools · Web Development',
+    role: 'Project Manager & Quality Assurance',
+    technologies: ['Python', 'TypeScript', 'SQL', 'Git'],
+    screenshot: '',
+    screenshotAlt: 'Preview placeholder for Project 6',
+    repository: '',
+    liveDemo: '',
+    caseStudy: '#case-study?p=project-6',
+    featured: false,
+    roles: [
+      { title: 'Project Manager', description: 'Organized sprint timelines, managed task allocation, and coordinated releases.' },
+      { title: 'Backend / Logic Developer', description: 'Built core data processing algorithms and API interfaces.' },
+      { title: 'Quality Assurance', description: 'Executed end-to-end testing, error boundary checks, and regression passes.' },
+      { title: 'Documentation Lead', description: 'Authored technical documentation, user guides, and deployment workflows.' },
+    ],
+    sections: [
+      { id: 'overview', title: 'Project overview', prompt: 'Project 6 overview placeholder. Summarize purpose and tech stack.' },
+      { id: 'problem', title: 'The problem & target users', prompt: 'Highlight who this project serves and what pain point it eliminates.' },
+      { id: 'requirements', title: 'Requirements analysis', prompt: 'Detail system requirements and workflow specifications.' },
+      { id: 'process', title: 'From idea to interface', prompt: 'Review architecture, schema design, and implementation.' },
+      { id: 'accessibility', title: 'Designing for people', prompt: 'Explain UX decisions and accessibility compliance.' },
+      { id: 'testing', title: 'Testing & quality assurance', prompt: 'Document testing procedures and performance benchmarks.' },
+      { id: 'result', title: 'The final result', prompt: 'Detail the completed solution and operational highlights.' },
+      { id: 'lessons', title: 'What I learned', prompt: 'Summarize challenges faced and future opportunities.' },
+    ],
   },
 ];

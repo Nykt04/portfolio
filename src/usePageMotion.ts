@@ -28,7 +28,7 @@ export function usePageMotion(view: boolean, mainRef: RefObject<HTMLElement | nu
     const main = mainRef.current;
     if (!main || paused) return;
 
-    const targets = main.querySelectorAll<HTMLElement>('.hero-copy, .hero-art, .about-grid > div, .responsibilities, .toolkit-title-row, .skills-list, .tool-description, .projects-heading, .project-track, .approach-heading, .approach-steps, .approach-detail, .contact-top, .contact-bottom, .case-title, .case-meta, .case-section');
+    const targets = main.querySelectorAll<HTMLElement>('.hero-copy, .hero-art, .about-grid > div, .responsibilities, .toolkit-title-row, .skills-list, .tool-description, .projects-heading, .project-track, .certifications-heading, .certifications-grid, .approach-heading, .approach-steps, .approach-detail, .contact-top, .contact-bottom, .case-title, .case-meta, .case-section');
 
     // Smoothly fade in/out on scroll without thrashing GPU memory
     const reveal = new IntersectionObserver(entries => {

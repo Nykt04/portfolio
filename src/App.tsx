@@ -12,10 +12,17 @@ import SettingsMenu from './SettingsMenu';
 import NavDrawer from './NavDrawer';
 import Preloader from './Preloader';
 import ProjectWireframes from './ProjectWireframes';
+import CertificationsSection from './Certifications';
 
 const iconProps = { size: 20, strokeWidth: 1.7, 'aria-hidden': true as const };
 const roleIcons = [Users, Code2, ScanLine, Layers3];
-const navItems = [{ id: 'home', label: 'Home' }, { id: 'about', label: 'About' }, { id: 'work', label: 'Work' }, { id: 'contact', label: 'Contact' }];
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Work' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'contact', label: 'Contact' },
+];
 
 function App() {
   const [introDone, setIntroDone] = useState(false);
@@ -32,28 +39,6 @@ function App() {
   const mainRef = useRef<HTMLElement>(null);
   const priorView = useRef(isCaseStudy);
   const { paused, setPaused } = usePageMotion(isCaseStudy, mainRef);
-  const [timeString, setTimeString] = useState(() => {
-    return new Intl.DateTimeFormat('en-US', {
-      timeZone: 'Asia/Manila',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    }).format(new Date());
-  });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeString(new Intl.DateTimeFormat('en-US', {
-        timeZone: 'Asia/Manila',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      }).format(new Date()));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     // Circular reveal from the last press point when switching views (reference: dev.robertoattanasio.com).
@@ -175,15 +160,6 @@ function App() {
           <div className="hero-copy">
             <h1 aria-label={p.name}>Gian Karlo<span className="hero-surname">Reguindin<span className="accent">.</span></span></h1>
             <p className="hero-manifesto">Thoughtful <span className="glitch-word" data-text="code" aria-hidden="true">code</span><span className="sr-only">code</span>.<br />Human experiences.</p>
-            <div className="hero-telemetry" aria-label="System status and local time">
-              <span className="telemetry-beacon" aria-hidden="true">
-                <span className="beacon-ping" />
-                <span className="beacon-core" />
-              </span>
-              <span className="telemetry-tag">MANILA // UTC+8 {timeString}</span>
-              <span className="telemetry-sep" aria-hidden="true">·</span>
-              <span className="telemetry-role">AVAILABLE FOR JUNIOR DEV / UI ROLES</span>
-            </div>
             <div className="hero-intro"><div className="intro-line" aria-hidden="true" /><div><p className="intro-name">Hi, I’m {p.shortName}.</p><p className="intro-description">{p.title} &<br />third-year Computer Science student.</p></div></div>
             <div className="hero-actions"><a className="button primary" href="#work">Explore my work <ArrowUpRight {...iconProps} /></a><a className="text-link" href="#contact">Get in touch <ArrowRight {...iconProps} /></a></div>
           </div>
@@ -223,6 +199,8 @@ function App() {
         <section id="toolkit" className="toolkit-section" aria-labelledby="toolkit-title"><BinaryStreams theme="light" /><div className="container"><Toolkit /></div></section>
 
         <ProjectsSection />
+
+        <CertificationsSection />
 
         <Approach />
 

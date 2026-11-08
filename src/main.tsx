@@ -13,5 +13,6 @@ import './atmosphere.css';
 import './settings.css';
 import './preloader.css';
 import './wireframes.css';
+import './certifications.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
