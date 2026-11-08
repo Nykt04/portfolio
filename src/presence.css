@@ -25,7 +25,7 @@
 .portrait-placeholder svg { width: 80px; height: 80px; }
 .portrait > img { height: 320px; object-fit: cover; object-position: center 20%; }
 .responsibilities { margin-top: 38px; }
-.work-section { padding-block: 78px; }
+.work-section { padding-block: 54px 18px; }
 .project-study-art { width: 100%; padding: 26px 0; }
 .study-frame { width: 88%; margin-inline: auto; border: 1px solid currentColor; border-radius: 12px; overflow: hidden; transform: rotate(-6deg); transition: transform var(--ui-motion-reveal) var(--ui-ease-out); }
 .project-visual-link:hover .study-frame { transform: rotate(0); }
@@ -62,7 +62,7 @@
   .hero-art .large-monogram { margin-top: 32px; font-size: clamp(6.5rem, 24vw, 8rem); }.hero-art .top-left { top: 14px; left: 16px; font-size: .62rem; }
 
   .hero-bottom { margin-top: 0; }.about-grid { grid-template-columns: 1fr; }.about-section { padding-block: 52px; }
-  .work-section { padding-block: 48px; }.project-study-art { padding: 10px 0; }.study-frame { width: 80%; }.study-frame-body { padding: 14px; }.study-frame-body svg { width: 28px; height: 28px; }.study-frame-footer { padding-block: 6px; }.study-art-label { margin-top: 10px; }.project-slide .project-visual { min-height: 240px; height: 240px; }
+  .work-section { padding-block: 36px 14px; }.project-study-art { padding: 10px 0; }.study-frame { width: 80%; }.study-frame-body { padding: 14px; }.study-frame-body svg { width: 28px; height: 28px; }.study-frame-footer { padding-block: 6px; }.study-art-label { margin-top: 10px; }.project-slide .project-visual { min-height: 240px; height: 240px; }
   .approach-section { padding-bottom: 48px; }.approach-heading { flex-direction: column; align-items: start; gap: 16px; padding-top: 32px; }.approach-layout { grid-template-columns: 1fr; gap: 20px; }.approach-steps button { min-height: 56px; }.approach-detail { padding: 20px 18px; min-height: 280px; }
 }
 @media (prefers-reduced-motion: reduce) { .study-frame, .project-visual-link:hover .study-frame { transform: none; } }
