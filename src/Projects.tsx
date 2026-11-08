@@ -8,7 +8,7 @@ import {
   Image,
   Pause,
   Play,
-  Sparkles,
+  Sparkle,
   Layers,
   Atom,
   Waves,
@@ -130,7 +130,7 @@ export default function ProjectsSection() {
           <div className="project-card-top">
             <div className="project-title-group">
               <div className="project-badge">
-                <Sparkles size={14} className="project-sparkle" aria-hidden="true" />
+                <Sparkle size={15} className="project-sparkle" fill="currentColor" aria-hidden="true" />
                 <span>{project.featured ? 'Featured project' : project.category}</span>
                 {project.name.startsWith('[') && <span className="status-tag">Coming soon</span>}
               </div>
@@ -153,7 +153,7 @@ export default function ProjectsSection() {
                   title="Open live demo (opens in a new tab)"
                   aria-label={`Open live demo for ${project.name} (opens in a new tab)`}
                 >
-                  <ExternalLink size={18} aria-hidden="true" />
+                  <ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" />
                 </a>
               ) : project.repository ? (
                 <a
@@ -164,11 +164,11 @@ export default function ProjectsSection() {
                   title="View repository (opens in a new tab)"
                   aria-label={`View repository for ${project.name} (opens in a new tab)`}
                 >
-                  <Github size={18} aria-hidden="true" />
+                  <Github size={18} strokeWidth={1.8} aria-hidden="true" />
                 </a>
               ) : (
                 <span className="project-icon-btn disabled" aria-hidden="true" title="Demo coming soon">
-                  <ExternalLink size={18} />
+                  <ExternalLink size={18} strokeWidth={1.8} />
                 </span>
               )}
 
@@ -179,11 +179,11 @@ export default function ProjectsSection() {
                   title={`Explore case study for ${project.name}`}
                   aria-label={`Explore case study for ${project.name}`}
                 >
-                  <Play size={16} fill="currentColor" aria-hidden="true" />
+                  <Play size={17} strokeWidth={1.8} aria-hidden="true" />
                 </a>
               ) : (
                 <span className="project-icon-btn disabled" aria-hidden="true">
-                  <Play size={16} fill="currentColor" />
+                  <Play size={17} strokeWidth={1.8} />
                 </span>
               )}
             </div>
@@ -194,7 +194,7 @@ export default function ProjectsSection() {
               const TagIcon = getTechIcon(tag);
               return (
                 <span key={tag} className="tech-pill">
-                  <TagIcon size={14} aria-hidden="true" />
+                  <TagIcon size={14} strokeWidth={1.8} aria-hidden="true" />
                   <span>{tag}</span>
                 </span>
               );
