@@ -1,4 +1,4 @@
-import { Award, Calendar, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Award, ExternalLink } from 'lucide-react';
 import { portfolio as p, type PortfolioCertification } from './portfolio';
 
 export default function CertificationsSection() {
@@ -14,7 +14,7 @@ export default function CertificationsSection() {
       <div className="section-heading certifications-heading">
         <div>
           <h2 id="certifications-title">Certifications<span className="accent">.</span></h2>
-          <p>Verified technical coursework, certifications, and specialized training.</p>
+          <p>Verified technical coursework and credentials.</p>
         </div>
         <span className="certifications-count" aria-hidden="true">
           <strong>{String(certifications.length).padStart(2, '0')}</strong>
@@ -24,49 +24,30 @@ export default function CertificationsSection() {
 
       <div className="certifications-grid">
         {certifications.map(cert => {
-          const isPlaceholder = cert.title.startsWith('[');
+          const tooltip = [cert.title, cert.issuer, cert.date].filter(Boolean).join(' • ');
           return (
-            <article key={cert.id} className="cert-card">
-              <div className="cert-card-header">
-                <div className="cert-badge-wrap" aria-hidden="true">
-                  <Award size={26} strokeWidth={1.5} />
-                </div>
-                <div className="cert-meta">
-                  <span className="cert-issuer">{cert.issuer}</span>
-                  <span className="cert-date">
-                    <Calendar size={13} aria-hidden="true" />
-                    <span>{cert.date}</span>
-                  </span>
-                </div>
-              </div>
-
-              <div className="cert-card-body">
-                <div className="cert-title-row">
-                  <h3>{cert.title}</h3>
-                  {isPlaceholder && <span className="status-tag">Placeholder</span>}
-                </div>
-                <p>{cert.description}</p>
-                <div className="cert-skills">
-                  {cert.skills.map(skill => (
-                    <span key={skill} className="cert-skill-tag">{skill}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="cert-card-footer">
-                {cert.credentialUrl ? (
-                  <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className="cert-verify-link">
-                    <span>Verify Credential</span>
-                    <ExternalLink size={14} aria-hidden="true" />
-                  </a>
-                ) : (
-                  <span className="cert-pending-note">
-                    <ShieldCheck size={14} aria-hidden="true" />
-                    <span>{cert.credentialId ? `ID: ${cert.credentialId}` : 'Verification link to be added'}</span>
-                  </span>
-                )}
-              </div>
-            </article>
+            <div
+              key={cert.id}
+              className="cert-card"
+              title={tooltip}
+              tabIndex={0}
+              role="group"
+              aria-label={`${cert.title} — ${cert.issuer}`}
+            >
+              <Award size={17} className="cert-icon" aria-hidden="true" />
+              <span className="cert-title">{cert.title}</span>
+              {cert.credentialUrl && (
+                <a
+                  href={cert.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cert-ext-link"
+                  aria-label={`Verify ${cert.title} (opens in a new tab)`}
+                >
+                  <ExternalLink size={13} aria-hidden="true" />
+                </a>
+              )}
+            </div>
           );
         })}
       </div>
