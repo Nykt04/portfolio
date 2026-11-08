@@ -42,7 +42,8 @@ html { scroll-padding-top: 88px; }
 .hero-project-label strong { color: var(--graphic-ink); }
 .hero-project-thumbnail { color: var(--graphic-mint); background: var(--graphic-ink); border-radius: 0; width: 36px; height: 36px; }
 
-.about-section { background: rgba(17, 24, 23, .85); backdrop-filter: blur(2px); padding-block: 76px 52px; }
+/* Harmonized Section Rhythm Tokens */
+.about-section { background: rgba(17, 24, 23, .85); backdrop-filter: blur(2px); padding-block: clamp(54px, 6vw, 72px); }
 .about-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; }
 .about-grid > div:first-child { display: contents; }
 .about-grid h2 { grid-column: 1 / -1; font-size: clamp(2.4rem, 4.2vw, 3.8rem); max-width: 900px; }
@@ -63,7 +64,7 @@ html { scroll-padding-top: 88px; }
 .about-facts strong { font-size: .85rem; font-weight: 500; }
 .responsibilities { margin-top: 38px; }
 
-.toolkit-section { background: rgba(181, 239, 213, .96); color: var(--graphic-ink); padding-block: 34px 26px; }
+.toolkit-section { background: rgba(181, 239, 213, .96); color: var(--graphic-ink); padding-block: clamp(38px, 4.5vw, 48px); }
 .toolkit { margin: 0; }
 .toolkit-title-row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; flex-wrap: wrap; }
 .toolkit-title-row h2 { text-transform: uppercase; font-size: clamp(1.8rem, 3.2vw, 2.5rem); font-weight: 600; margin: 0; }
@@ -82,11 +83,61 @@ html { scroll-padding-top: 88px; }
 }
 .toolkit .skill:focus-visible { background: var(--graphic-ink); color: var(--graphic-mint); border-color: var(--graphic-ink); }
 
+.work-section { padding-block: clamp(40px, 5vw, 54px) 18px; }
 .projects-heading h2, .approach-heading h2 { text-transform: uppercase; font-weight: 600; }
 .project-track { border-radius: 22px; }
-.project-picker button[aria-current] { font-weight: 700; }
 .project-autoplay { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border: 1px solid var(--ui-line); color: var(--ui-muted); font-size: .72rem; border-radius: 6px; }
 .project-autoplay:hover { color: var(--ui-ink); border-color: var(--ui-accent); }
+
+/* Refined Dual Controls: Sleek and compact bottom project tabs */
+.project-picker {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+.project-picker button {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 0;
+  border-top: 2px solid rgba(141, 226, 201, 0.18);
+  background: transparent;
+  color: var(--ui-muted, #7c988b);
+  font-size: 0.76rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.project-picker button:hover {
+  color: var(--ui-ink, #e6f3ec);
+  border-top-color: rgba(82, 222, 186, 0.5);
+}
+.project-picker button[aria-current] {
+  color: #ffffff;
+  border-top-color: #52deba;
+  font-weight: 700;
+}
+.project-picker .picker-number {
+  font-family: var(--font-display, monospace);
+  font-size: 0.74rem;
+  opacity: 0.75;
+}
+.project-picker .picker-featured {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(82, 222, 186, 0.15);
+  color: #52deba;
+  margin-left: auto;
+}
 
 /* Sleek horizontal project card matching user reference exactly */
 .featured-project {
@@ -236,8 +287,10 @@ html { scroll-padding-top: 88px; }
   color: #ffffff;
 }
 
+.approach-section { padding-block: clamp(48px, 6vw, 68px); }
+.approach-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; padding-top: 48px; border-top: 1px solid var(--ui-line); margin-bottom: 32px; }
 .approach-detail { border-radius: 0; }
-.contact-section { background: var(--graphic-mint); }
+.contact-section { background: var(--graphic-mint); padding-block: clamp(56px, 6.5vw, 76px); }
 .contact-top h2 { text-transform: uppercase; font-weight: 600; }
 .contact-top h2 span { color: var(--graphic-ink); }
 
@@ -249,7 +302,8 @@ html { scroll-padding-top: 88px; }
   .project-card-top { gap: 0; }
 }
 
-@media (max-width: 860px) {
+/* Fluid Adaptive Breakpoint for tablet / laptop at 920px */
+@media (max-width: 920px) {
   .project-card-top {
     flex-wrap: wrap;
     gap: 16px;
@@ -264,6 +318,18 @@ html { scroll-padding-top: 88px; }
     max-width: 100%;
     width: 100%;
     order: 3;
+    line-height: 1.55;
+  }
+  .project-picker {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .project-picker::-webkit-scrollbar { display: none; }
+  .project-picker button {
+    flex: 0 0 auto;
+    min-width: 120px;
   }
 }
 
