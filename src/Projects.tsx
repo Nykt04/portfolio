@@ -2,211 +2,540 @@ import { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUpRight,
   Code2,
   ExternalLink,
+  FolderGit2,
   Github,
-  Image,
-  Pause,
-  Play,
-  Sparkle,
   Layers,
-  Atom,
-  Waves,
-  Database,
-  Zap,
   Terminal,
-  Cpu,
-  Layout,
-  FileCode2,
-  type LucideIcon,
+  X,
 } from 'lucide-react';
 import { portfolio, projects, type PortfolioProject } from './portfolio';
-import { motionAllowed } from './usePageMotion';
-
-const iconProps = { size: 20, strokeWidth: 1.7, 'aria-hidden': true as const };
 
 type VisualProject = Pick<PortfolioProject, 'name' | 'screenshot' | 'screenshotAlt'>;
 
-export function ProjectVisual({ compact = false, project = portfolio.project, category = 'Software engineering' }: { compact?: boolean; project?: VisualProject; category?: string }) {
-  if (project.screenshot) return <img className="project-image" src={project.screenshot} alt={project.screenshotAlt || `${project.name} interface`} loading="lazy" />;
-  return <div className={`project-visual ${compact ? 'compact' : ''}`}>
-    <div className="visual-top"><span>{category}</span><Code2 {...iconProps} /></div>
-    <div className="project-study-art" aria-hidden="true"><div className="study-frame"><div className="study-frame-bar"><i /><i /><i /></div><div className="study-frame-body"><Code2 size={52} strokeWidth={1} /><div className="study-lines"><i /><i /><i /></div></div><div className="study-frame-footer"><span>IDEA</span><span>BUILD</span><span>REFINE</span></div></div><span className="study-art-label">Preview placeholder</span></div>
-    <div className="visual-bottom"><span>Project screenshot<br /><strong>Coming into focus.</strong></span><span className="image-mark"><Image {...iconProps} /></span></div>
-  </div>;
+export function LaurelSide({ flip = false }: { flip?: boolean }) {
+  return (
+    <svg
+      width="15"
+      height="24"
+      viewBox="0 0 18 28"
+      fill="currentColor"
+      aria-hidden="true"
+      className={`shrink-0 text-[rgb(var(--accent))] ${flip ? '-scale-x-100' : ''}`}
+    >
+      <path d="M15.2 26C9.5 23 5.5 17 5.5 9.5 5.5 5.5 7 2 8.5 0.5" stroke="currentColor" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      <ellipse cx="5.2" cy="5.2" rx="1.6" ry="3.2" transform="rotate(-28 5.2 5.2)" />
+      <ellipse cx="4.2" cy="10.2" rx="1.7" ry="3.4" transform="rotate(-18 4.2 10.2)" />
+      <ellipse cx="4.8" cy="15.5" rx="1.7" ry="3.4" transform="rotate(-5 4.8 15.5)" />
+      <ellipse cx="7.0" cy="20.3" rx="1.6" ry="3.2" transform="rotate(14 7.0 20.3)" />
+      <ellipse cx="10.5" cy="24.0" rx="1.5" ry="2.8" transform="rotate(32 10.5 24.0)" />
+    </svg>
+  );
 }
 
-function getTechIcon(name: string): LucideIcon {
-  const n = name.toLowerCase();
-  if (n.includes('next') || n.includes('html') || n.includes('js') || n.includes('node')) return Code2;
-  if (n.includes('typescript') || n.includes('ts') || n.includes('layer')) return Layers;
-  if (n.includes('react')) return Atom;
-  if (n.includes('tailwind') || n.includes('css')) return Waves;
-  if (n.includes('supa') || n.includes('sql') || n.includes('data') || n.includes('base') || n.includes('postgre')) return Database;
-  if (n.includes('vercel') || n.includes('deploy') || n.includes('zap') || n.includes('fast')) return Zap;
-  if (n.includes('python')) return Terminal;
-  if (n.includes('c') && n.length <= 3) return Cpu;
-  if (n.includes('figma') || n.includes('design') || n.includes('responsive')) return Layout;
-  return FileCode2;
+export function ProjectVisual({
+  compact = false,
+  project = portfolio.project,
+  category = 'Software Engineering',
+}: {
+  compact?: boolean;
+  project?: VisualProject;
+  category?: string;
+}) {
+  if (project.screenshot) {
+    return (
+      <img
+        className="block h-auto w-full rounded-xl border border-[rgb(var(--g200))] object-cover"
+        src={project.screenshot}
+        alt={project.screenshotAlt || `${project.name} interface screenshot`}
+        loading="lazy"
+      />
+    );
+  }
+
+  return (
+    <div
+      className={`relative overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] ${
+        compact ? 'p-4' : 'p-5'
+      }`}
+      role="img"
+      aria-label={project.screenshotAlt || `Project screenshot placeholder for ${project.name}`}
+    >
+      <div aria-hidden="true" className="halftone mask-tr pointer-events-none absolute inset-0 opacity-60" />
+
+      {/* Mini Browser / Blueprint Chrome */}
+      <div className="relative z-10 flex items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-2.5">
+        <div className="flex items-center gap-1.5" aria-hidden="true">
+          <span className="h-2 w-2 rounded-full bg-[rgb(var(--accent))]" />
+          <span className="h-2 w-2 rounded-full bg-[rgb(var(--g300))]" />
+          <span className="h-2 w-2 rounded-full bg-[rgb(var(--g300))]" />
+        </div>
+        <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--g500))] truncate">
+          {category}
+        </span>
+        <Terminal size={13} className="text-[rgb(var(--accent))]" aria-hidden="true" />
+      </div>
+
+      {/* Architectural Wireframe Preview Placeholder */}
+      <div className="relative z-10 my-4 rounded-lg border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] p-4">
+        <div className="flex items-center justify-between gap-2">
+          <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+            <Code2 size={13} aria-hidden="true" />
+            <span>Interactive Blueprint</span>
+          </span>
+          <span className="font-mono text-[9.5px] text-[rgb(var(--g400))]">[Screenshot Slot]</span>
+        </div>
+
+        <p className="mt-2 font-display-ui text-base text-[rgb(var(--ink))]">{project.name}</p>
+
+        {/* Simulated wireframe bars */}
+        <div className="mt-3 space-y-1.5" aria-hidden="true">
+          <div className="h-2 w-4/5 rounded bg-[rgb(var(--g100))]" />
+          <div className="h-2 w-3/5 rounded bg-[rgb(var(--g100))]" />
+          <div className="mt-2.5 grid grid-cols-3 gap-1.5 pt-1">
+            <div className="h-6 rounded border border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.1)]" />
+            <div className="h-6 rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))]" />
+            <div className="h-6 rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))]" />
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 flex items-center justify-between font-mono text-[10.5px] text-[rgb(var(--g500))]">
+        <span>UI/UX Architecture &amp; Case Study</span>
+        <span className="text-[rgb(var(--accent))] font-medium">Inspect →</span>
+      </div>
+    </div>
+  );
 }
 
 export default function ProjectsSection() {
-  const [active, setActive] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(() => motionAllowed());
-  const [engaged, setEngaged] = useState(false);
-  const track = useRef<HTMLDivElement>(null);
-  const activeRef = useRef(0);
-  const scrollFrame = useRef(0);
-  const total = projects.length;
+  // Top 3 shipped projects form the bryllim.com 3-card fan deck:
+  // Index 0 = ACE IT (Flagship, starts in center)
+  // Index 1 = CRHS Web (Right)
+  // Index 2 = Check8 (Left)
+  const deckProjects = projects.slice(0, 3);
+  const [centerIndex, setCenterIndex] = useState(0);
+  const [modalProject, setModalProject] = useState<PortfolioProject | null>(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  const lastTriggerRef = useRef<HTMLElement | null>(null);
+
+  const prevCard = () => setCenterIndex((c) => (c - 1 + deckProjects.length) % deckProjects.length);
+  const nextCard = () => setCenterIndex((c) => (c + 1) % deckProjects.length);
 
   useEffect(() => {
-    if (!autoPlay || engaged || total < 2 || !motionAllowed()) return;
-    const timer = window.setInterval(() => goTo((active + 1) % total), 5000);
-    return () => window.clearInterval(timer);
-  }, [active, autoPlay, engaged, total]);
+    if (!modalProject) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setModalProject(null);
+        lastTriggerRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    modalRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [modalProject]);
 
-  const goTo = (index: number) => {
-    const rail = track.current;
-    const slide = rail?.children[index] as HTMLElement | undefined;
-    if (!rail || !slide || index < 0 || index >= total) return;
-    rail.scrollTo({ left: slide.offsetLeft, behavior: motionAllowed() ? 'smooth' : 'instant' });
+  const closeModal = () => {
+    setModalProject(null);
+    lastTriggerRef.current?.focus();
   };
 
-  const syncPosition = () => {
-    cancelAnimationFrame(scrollFrame.current);
-    scrollFrame.current = requestAnimationFrame(() => {
-      const rail = track.current;
-      if (!rail) return;
-      const slides = Array.from(rail.children) as HTMLElement[];
-      const closest = slides.reduce((best, slide, index) =>
-        Math.abs(slide.offsetLeft - rail.scrollLeft) < Math.abs(slides[best].offsetLeft - rail.scrollLeft) ? index : best, 0);
-      if (activeRef.current !== closest) {
-        activeRef.current = closest;
-        setActive(closest);
-      }
-    });
+  const getSlotClass = (idx: number) => {
+    if (idx === centerIndex) return 'is-center';
+    const leftIdx = (centerIndex - 1 + deckProjects.length) % deckProjects.length;
+    if (idx === leftIdx) return 'is-left';
+    return 'is-right';
   };
 
-  useEffect(() => {
-    const rail = track.current;
-    if (!rail) return;
-    let previousWidth = rail.clientWidth;
-    const observer = new ResizeObserver(() => {
-      if (rail.clientWidth === previousWidth) return;
-      previousWidth = rail.clientWidth;
-      const slide = rail.children[activeRef.current] as HTMLElement | undefined;
-      if (slide) rail.scrollTo({ left: slide.offsetLeft, behavior: 'instant' });
-    });
-    observer.observe(rail);
-    return () => { observer.disconnect(); cancelAnimationFrame(scrollFrame.current); };
-  }, []);
+  const activeDeckProject = deckProjects[centerIndex] || deckProjects[0];
 
-  if (!total) return null;
+  return (
+    <section id="work" className="py-16 border-t border-[rgb(var(--g200))]" aria-labelledby="work-title">
+      {/* Section Header (bryllim.com style) */}
+      <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2">
+        <div className="flex items-center gap-2.5">
+          <span className="section-index-badge">01</span>
+          <h2 id="work-title" className="section-index-title">
+            Projects
+          </h2>
+        </div>
+        <span className="micro-label">click side card to cycle · click center to inspect</span>
+      </div>
 
-  return <section id="work" className="section work-section container" aria-labelledby="work-title" aria-roledescription="carousel" onMouseEnter={() => setEngaged(true)} onMouseLeave={() => setEngaged(false)}
-    onKeyDown={event => {
-      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'Home' || event.key === 'End') {
-        event.preventDefault();
-        if (track.current?.contains(document.activeElement)) track.current.focus({ preventScroll: true });
-        if (event.key === 'Home') goTo(0);
-        else if (event.key === 'End') goTo(total - 1);
-        else goTo(active + (event.key === 'ArrowRight' ? 1 : -1));
-      }
-    }}>
-    <div className="section-heading projects-heading">
-      <div><h2 id="work-title">Work in focus<span className="accent">.</span></h2><p>A closer look at how I think, build, and solve problems.</p></div>
-      {total > 1 && <div className="project-controls" role="group" aria-label="Project navigation">
-        <span className="project-count" aria-hidden="true"><strong>{String(active + 1).padStart(2, '0')}</strong><span>/ {String(total).padStart(2, '0')}</span></span>
-        <button className="project-autoplay" type="button" aria-pressed={autoPlay} aria-label={autoPlay ? 'Pause automatic project rotation' : 'Resume automatic project rotation'} onClick={() => setAutoPlay(value => !value)}>{autoPlay ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}<span>{autoPlay ? 'Auto' : 'Manual'}</span></button>
-        <button className="project-arrow" type="button" aria-label="Previous project" aria-controls="project-slides" aria-disabled={active === 0} onClick={() => goTo(active - 1)}><ArrowLeft {...iconProps} /></button>
-        <button className="project-arrow" type="button" aria-label="Next project" aria-controls="project-slides" aria-disabled={active === total - 1} onClick={() => goTo(active + 1)}><ArrowRight {...iconProps} /></button>
-      </div>}
-    </div>
+      {/* Bryl Lim Signature 3-Card Spotlight Fan Deck */}
+      <div
+        className="bryl-fan-stage mx-auto max-w-3xl"
+        role="region"
+        aria-label="Featured projects spotlight deck"
+      >
+        {deckProjects.map((proj, idx) => {
+          const slot = getSlotClass(idx);
+          const isCenter = slot === 'is-center';
+          const badgeLabel = proj.featured
+            ? 'Flagship SE Case Study'
+            : proj.category.split('·')[0].trim();
 
-    <div id="project-slides" className="project-track" ref={track} onScroll={syncPosition} tabIndex={0} aria-label="Projects. Use left and right arrow keys to browse.">
-      {projects.map((project, index) => <article key={project.id} className="featured-project project-slide" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${total}: ${project.name}`} inert={active !== index}>
-        <div className="project-card-sleek">
-          <div className="project-card-top">
-            <div className="project-title-group">
-              <div className="project-badge">
-                <Sparkle size={15} className="project-sparkle" fill="currentColor" aria-hidden="true" />
-                <span>{project.featured ? 'Featured project' : project.category}</span>
-                {project.name.startsWith('[') && <span className="status-tag">Coming soon</span>}
+          return (
+            <div
+              key={proj.id}
+              role="button"
+              tabIndex={0}
+              aria-label={
+                isCenter
+                  ? `${proj.name} (active center card). Click to inspect details or open case study.`
+                  : `Bring ${proj.name} to the center of the deck`
+              }
+              onClick={(e) => {
+                if (isCenter) {
+                  lastTriggerRef.current = e.currentTarget;
+                  setModalProject(proj);
+                } else {
+                  setCenterIndex(idx);
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft') {
+                  e.preventDefault();
+                  prevCard();
+                } else if (e.key === 'ArrowRight') {
+                  e.preventDefault();
+                  nextCard();
+                } else if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  if (isCenter) {
+                    lastTriggerRef.current = e.currentTarget;
+                    setModalProject(proj);
+                  } else {
+                    setCenterIndex(idx);
+                  }
+                }
+              }}
+              className={`bryl-fan-card group cursor-pointer select-none ${slot}`}
+            >
+              {/* 5px inset hairline frame (bryllim.com signature) */}
+              <span className="bryl-inset-frame" aria-hidden="true" />
+
+              {/* Top Row: App Monogram Icon + Arrow */}
+              <div className="relative z-10 flex items-start justify-between gap-2">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[rgb(var(--accent)/0.4)] bg-[rgb(var(--accent)/0.12)] font-pixel text-xs font-bold text-[rgb(var(--accent))] shadow-sm">
+                  {proj.name.slice(0, 2).toUpperCase()}
+                </div>
+                <ArrowUpRight
+                  size={16}
+                  aria-hidden="true"
+                  className="text-[rgb(var(--g400))] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[rgb(var(--accent))]"
+                />
               </div>
-              <h3 className="project-heading">
-                {project.caseStudy ? <a href={project.caseStudy}>{project.name}</a> : project.name}
-              </h3>
+
+              {/* Laurel Wreath Highlight Badge (bryllim.com signature) */}
+              <div className="relative z-10 mt-3.5 inline-flex items-center gap-1.5 text-[rgb(var(--ink))]">
+                <LaurelSide />
+                <div className="text-center leading-tight">
+                  <span className="block font-mono text-[9.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                    {badgeLabel}
+                  </span>
+                  <span className="block font-mono text-[8.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
+                    {proj.role}
+                  </span>
+                </div>
+                <LaurelSide flip />
+              </div>
+
+              {/* Project Title & Description */}
+              <div className="relative z-10 mt-3">
+                <h3 className="font-display-ui text-lg font-bold tracking-tight text-[rgb(var(--ink))] group-hover:text-[rgb(var(--accent))] transition-colors">
+                  {proj.name}
+                </h3>
+                <p className="mt-1.5 line-clamp-3 text-[13px] leading-relaxed text-[rgb(var(--g600))]">
+                  {proj.description}
+                </p>
+              </div>
+
+              {/* Footer: Stack Pills & Direct Case Study Link */}
+              <div className="relative z-10 mt-4 flex items-center justify-between gap-2 border-t border-[rgb(var(--g200))] pt-3">
+                <div className="flex flex-wrap gap-1">
+                  {proj.technologies.slice(0, 3).map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--g50))] px-1.5 py-0.5 font-mono text-[9.5px] text-[rgb(var(--g500))]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={proj.caseStudy}
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex shrink-0 items-center gap-1 font-mono text-[10.5px] font-semibold text-[rgb(var(--accent))] hover:underline"
+                >
+                  <span>case study</span>
+                  <ArrowUpRight size={12} aria-hidden="true" />
+                </a>
+              </div>
             </div>
+          );
+        })}
+      </div>
 
-            <div className="project-divider" aria-hidden="true" />
-
-            <p className="project-desc">{project.description}</p>
-
-            <div className="project-actions-corner">
-              {project.liveDemo ? (
-                <a
-                  className="project-icon-btn"
-                  href={project.liveDemo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Open live demo (opens in a new tab)"
-                  aria-label={`Open live demo for ${project.name} (opens in a new tab)`}
-                >
-                  <ExternalLink size={18} strokeWidth={1.8} aria-hidden="true" />
-                </a>
-              ) : project.repository ? (
-                <a
-                  className="project-icon-btn"
-                  href={project.repository}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="View repository (opens in a new tab)"
-                  aria-label={`View repository for ${project.name} (opens in a new tab)`}
-                >
-                  <Github size={18} strokeWidth={1.8} aria-hidden="true" />
-                </a>
-              ) : (
-                <span className="project-icon-btn disabled" aria-hidden="true" title="Demo coming soon">
-                  <ExternalLink size={18} strokeWidth={1.8} />
-                </span>
-              )}
-
-              {project.caseStudy ? (
-                <a
-                  className="project-icon-btn play-btn"
-                  href={project.caseStudy}
-                  title={`Explore case study for ${project.name}`}
-                  aria-label={`Explore case study for ${project.name}`}
-                >
-                  <Play size={17} strokeWidth={1.8} aria-hidden="true" />
-                </a>
-              ) : (
-                <span className="project-icon-btn disabled" aria-hidden="true">
-                  <Play size={17} strokeWidth={1.8} />
-                </span>
-              )}
-            </div>
-          </div>
-
-          <div className="project-pills-row" aria-label="Technologies used">
-            {project.technologies.map(tag => {
-              const TagIcon = getTechIcon(tag);
+      {/* Deck Controls + Active Project Quick Bar */}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-b border-[rgb(var(--g200))] pb-5">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={prevCard}
+            aria-label="Previous project in deck"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] text-[rgb(var(--ink))] hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--accent))]"
+          >
+            <ArrowLeft size={14} aria-hidden="true" />
+          </button>
+          <div className="flex items-center gap-1.5 px-1" role="tablist" aria-label="Select spotlight project">
+            {deckProjects.map((proj, idx) => {
+              const active = idx === centerIndex;
               return (
-                <span key={tag} className="tech-pill">
-                  <TagIcon size={14} strokeWidth={1.8} aria-hidden="true" />
-                  <span>{tag}</span>
-                </span>
+                <button
+                  key={proj.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  aria-label={`Spotlight ${proj.name}`}
+                  onClick={() => setCenterIndex(idx)}
+                  className={`h-2 rounded-full transition-all ${
+                    active
+                      ? 'w-6 bg-[rgb(var(--accent))]'
+                      : 'w-2 bg-[rgb(var(--g300))] hover:bg-[rgb(var(--g400))]'
+                  }`}
+                />
               );
             })}
           </div>
+          <button
+            type="button"
+            onClick={nextCard}
+            aria-label="Next project in deck"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] text-[rgb(var(--ink))] hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--accent))]"
+          >
+            <ArrowRight size={14} aria-hidden="true" />
+          </button>
         </div>
-      </article>)}
-    </div>
 
-    {total > 1 && <div className="project-picker" role="group" aria-label="Choose a project">
-      {projects.map((project, index) => <button key={project.id} type="button" aria-label={`Show project ${index + 1}: ${project.name}`} aria-current={index === active ? 'true' : undefined} aria-controls="project-slides" onClick={() => goTo(index)}><span className="picker-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span>{project.name}</span>{project.featured && <span className="picker-featured">Featured</span>}</button>)}
-    </div>}
-    <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">Project {active + 1} of {total}: {projects[active].name}</p>
-  </section>;
+        {/* Direct Action Buttons for Active Center Card (AGENTS.md Case Study Link requirement) */}
+        <div className="flex flex-wrap items-center gap-2">
+          <a href={activeDeckProject.caseStudy} className="bryl-btn-primary">
+            <span>Open {activeDeckProject.name} Case Study</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+          {activeDeckProject.liveDemo && (
+            <a
+              href={activeDeckProject.liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bryl-btn-secondary"
+            >
+              <span>Live Demo</span>
+              <ExternalLink size={13} aria-hidden="true" />
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Expandable Full Project Archive & Placeholder Slots (AGENTS.md requirement) */}
+      <div className="mt-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Layers size={14} className="text-[rgb(var(--accent))]" aria-hidden="true" />
+            <span className="micro-label">
+              All Projects &amp; Expandable Slots ({projects.length} total)
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowAllProjects((v) => !v)}
+            aria-expanded={showAllProjects}
+            className="font-mono text-[11.5px] font-medium text-[rgb(var(--accent))] hover:underline underline-offset-4"
+          >
+            {showAllProjects ? 'Hide project index ↑' : 'View all projects & placeholder slots ↓'}
+          </button>
+        </div>
+
+        {showAllProjects && (
+          <div className="mt-4 divide-y divide-[rgb(var(--g200))] rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] px-4">
+            {projects.map((item, idx) => {
+              const isPlaceholder = item.name.startsWith('[');
+              return (
+                <div
+                  key={item.id}
+                  className="flex flex-wrap items-center justify-between gap-3 py-3.5"
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-mono text-[10.5px] text-[rgb(var(--accent))]">
+                        0{idx + 1}
+                      </span>
+                      <a
+                        href={item.caseStudy}
+                        className="font-display-ui text-[15px] font-semibold text-[rgb(var(--ink))] hover:text-[rgb(var(--accent))]"
+                      >
+                        {item.name}
+                      </a>
+                      <span className="bryl-tag-pill">
+                        {isPlaceholder ? 'Expandable Placeholder' : item.category}
+                      </span>
+                    </div>
+                    <p className="mt-1 truncate text-[12.5px] text-[rgb(var(--g500))]">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div className="flex shrink-0 items-center gap-3 font-mono text-[11.5px]">
+                    {item.liveDemo && (
+                      <a
+                        href={item.liveDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]"
+                      >
+                        <span>live</span>
+                        <ExternalLink size={12} aria-hidden="true" />
+                      </a>
+                    )}
+                    {item.repository && (
+                      <a
+                        href={item.repository}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]"
+                      >
+                        <FolderGit2 size={12} aria-hidden="true" />
+                        <span>code</span>
+                      </a>
+                    )}
+                    <a
+                      href={item.caseStudy}
+                      className="inline-flex items-center gap-1 font-semibold text-[rgb(var(--accent))] hover:underline"
+                    >
+                      <span>case study</span>
+                      <ArrowUpRight size={13} aria-hidden="true" />
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Bryl Lim Style Project Detail Modal (when clicking the center card) */}
+      {modalProject && (
+        <div
+          className="bryl-modal-backdrop"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeModal();
+          }}
+          role="presentation"
+        >
+          <div
+            className="bryl-modal-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
+            ref={modalRef}
+          >
+            <button
+              type="button"
+              onClick={closeModal}
+              aria-label="Close project preview modal"
+              className="absolute right-4 top-4 inline-flex h-7 w-7 items-center justify-center rounded-full text-[rgb(var(--g400))] hover:bg-[rgb(var(--g100))] hover:text-[rgb(var(--ink))]"
+            >
+              <X size={16} aria-hidden="true" />
+            </button>
+
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[rgb(var(--accent)/0.4)] bg-[rgb(var(--accent)/0.12)] font-pixel text-xs font-bold text-[rgb(var(--accent))]">
+                {modalProject.name.slice(0, 2).toUpperCase()}
+              </div>
+              <div>
+                <span className="bryl-chip-inverted">{modalProject.category}</span>
+                <h3
+                  id="project-modal-title"
+                  className="mt-1 font-display-ui text-xl font-bold text-[rgb(var(--ink))]"
+                >
+                  {modalProject.name}
+                </h3>
+              </div>
+            </div>
+
+            <p className="mt-4 text-[14px] leading-relaxed text-[rgb(var(--g600))]">
+              {modalProject.description}
+            </p>
+
+            <div className="mt-4">
+              <ProjectVisual compact project={modalProject} category={modalProject.category} />
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 divide-x divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] py-3 font-mono text-[11px]">
+              <div className="pr-3">
+                <span className="block text-[9.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
+                  Role
+                </span>
+                <strong className="mt-1 block text-[rgb(var(--ink))]">{modalProject.role}</strong>
+              </div>
+              <div className="pl-3">
+                <span className="block text-[9.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
+                  Stack
+                </span>
+                <strong className="mt-1 block text-[rgb(var(--ink))]">
+                  {modalProject.technologies.join(', ')}
+                </strong>
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={modalProject.caseStudy}
+                  onClick={() => setModalProject(null)}
+                  className="bryl-btn-primary"
+                >
+                  <span>Full Case Study &amp; Wireframes</span>
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+                {modalProject.liveDemo && (
+                  <a
+                    href={modalProject.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bryl-btn-secondary"
+                  >
+                    <span>Live Demo</span>
+                    <ExternalLink size={13} aria-hidden="true" />
+                  </a>
+                )}
+                {modalProject.repository && (
+                  <a
+                    href={modalProject.repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bryl-btn-secondary"
+                  >
+                    <Github size={13} aria-hidden="true" />
+                    <span>Source</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
 }

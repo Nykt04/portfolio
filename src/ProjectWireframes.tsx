@@ -276,19 +276,19 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
     return (
       <div style={{ display: 'grid', gap: '12px' }}>
         {/* Top Emergency Bulletin */}
-        <div style={{ background: 'rgba(234, 179, 8, 0.12)', border: '1px solid #eab308', padding: '6px 12px', borderRadius: '4px', fontSize: '0.72rem', color: '#fef08a', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>⚠️ ADVISORY: Midterm Examinations Schedule for Q2 — Nov 12-14, 2026</span>
+        <div style={{ background: 'var(--ui-surface)', border: '1px solid var(--ui-line)', padding: '6px 12px', borderRadius: '4px', fontSize: '0.72rem', color: 'var(--ui-ink)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>[ADVISORY] Midterm Examinations Schedule for Q2 — Nov 12-14, 2026</span>
           <span style={{ fontSize: '0.65rem', textDecoration: 'underline' }}>View PDF Notice</span>
           {showAnnotations && <span className="wf-pin" style={{ top: '10px', right: '120px' }}>①</span>}
         </div>
 
         {/* Global Navigation */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ui-line)', paddingBottom: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '28px', height: '28px', background: 'rgba(141, 226, 201, 0.2)', borderRadius: '50%', display: 'grid', placeItems: 'center', fontSize: '0.65rem', fontWeight: 'bold' }}>CR</div>
+            <div style={{ width: '28px', height: '28px', background: 'var(--ui-line)', borderRadius: '50%', display: 'grid', placeItems: 'center', fontSize: '0.65rem', fontWeight: 'bold' }}>CR</div>
             <strong style={{ fontSize: '0.85rem' }}>Col. Ramon High School</strong>
           </div>
-          <div style={{ display: 'flex', gap: '14px', fontSize: '0.74rem', color: '#88a99c' }}>
+          <div style={{ display: 'flex', gap: '14px', fontSize: '0.74rem', color: 'var(--ui-muted)' }}>
             <span style={{ color: 'var(--ui-accent)', fontWeight: 600 }}>Home</span>
             <span>Academics</span>
             <span>Admissions</span>
@@ -302,8 +302,8 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
         <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '12px' }}>
           <div className="wf-ui-card">
             <span style={{ fontSize: '0.65rem', color: 'var(--ui-accent)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Official Campus Gateway</span>
-            <h4 style={{ margin: '6px 0', fontSize: '1rem', color: '#e2f4ed' }}>Empowering Excellence in Public Secondary Education</h4>
-            <p style={{ fontSize: '0.75rem', color: '#88a99c', margin: '0 0 10px' }}>Access official schedules, enrollment prerequisites, and academic track guidelines.</p>
+            <h4 style={{ margin: '6px 0', fontSize: '1rem', color: 'var(--ui-ink)' }}>Empowering Excellence in Public Secondary Education</h4>
+            <p style={{ fontSize: '0.75rem', color: 'var(--ui-muted)', margin: '0 0 10px' }}>Access official schedules, enrollment prerequisites, and academic track guidelines.</p>
             <div style={{ display: 'flex', gap: '8px' }}>
               <button type="button" className="wf-btn-primary" style={{ fontSize: '0.7rem' }}>Download Enrollment Form</button>
               <button type="button" className="wf-btn-secondary" style={{ fontSize: '0.7rem' }}>School Calendar</button>
@@ -316,22 +316,22 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
             <div className="wf-ui-card" style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px', margin: 0 }}>
               <Calendar size={14} color="var(--ui-accent)" />
               <strong style={{ fontSize: '0.72rem' }}>Grading Periods</strong>
-              <small style={{ fontSize: '0.6rem', color: '#88a99c' }}>Quarterly Timetables</small>
+              <small style={{ fontSize: '0.6rem', color: 'var(--ui-muted)' }}>Quarterly Timetables</small>
             </div>
             <div className="wf-ui-card" style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px', margin: 0 }}>
               <Users size={14} color="var(--ui-accent)" />
               <strong style={{ fontSize: '0.72rem' }}>Faculty Heads</strong>
-              <small style={{ fontSize: '0.6rem', color: '#88a99c' }}>Department Directory</small>
+              <small style={{ fontSize: '0.6rem', color: 'var(--ui-muted)' }}>Department Directory</small>
             </div>
             <div className="wf-ui-card" style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px', margin: 0 }}>
               <FileText size={14} color="var(--ui-accent)" />
               <strong style={{ fontSize: '0.72rem' }}>Senior High Vouchers</strong>
-              <small style={{ fontSize: '0.6rem', color: '#88a99c' }}>DepEd Requirements</small>
+              <small style={{ fontSize: '0.6rem', color: 'var(--ui-muted)' }}>DepEd Requirements</small>
             </div>
             <div className="wf-ui-card" style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px', margin: 0 }}>
               <Phone size={14} color="var(--ui-accent)" />
               <strong style={{ fontSize: '0.72rem' }}>Emergency Desk</strong>
-              <small style={{ fontSize: '0.6rem', color: '#88a99c' }}>Guidance & Clinic</small>
+              <small style={{ fontSize: '0.6rem', color: 'var(--ui-muted)' }}>Guidance & Clinic</small>
             </div>
           </div>
         </div>
@@ -347,17 +347,17 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
             <div className="wf-ui-card" style={{ margin: 0 }}>
               <span className="wf-status-chip is-cleared">STEM Track</span>
               <p style={{ fontSize: '0.72rem', margin: '6px 0', fontWeight: 600 }}>Science & Technology Fair 2026 Project Guidelines</p>
-              <small style={{ fontSize: '0.62rem', color: '#88a99c' }}>Published Nov 01, 2026</small>
+              <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>Published Nov 01, 2026</small>
             </div>
             <div className="wf-ui-card" style={{ margin: 0 }}>
               <span className="wf-status-chip is-pending">Guardians</span>
               <p style={{ fontSize: '0.72rem', margin: '6px 0', fontWeight: 600 }}>General Parents & Teachers Assembly for Grade 11</p>
-              <small style={{ fontSize: '0.62rem', color: '#88a99c' }}>Published Oct 29, 2026</small>
+              <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>Published Oct 29, 2026</small>
             </div>
             <div className="wf-ui-card" style={{ margin: 0 }}>
               <span className="wf-status-chip is-locked">Admissions</span>
               <p style={{ fontSize: '0.72rem', margin: '6px 0', fontWeight: 600 }}>Transferee & Freshmen Orientation Timetable</p>
-              <small style={{ fontSize: '0.62rem', color: '#88a99c' }}>Published Oct 24, 2026</small>
+              <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>Published Oct 24, 2026</small>
             </div>
           </div>
         </div>
@@ -370,14 +370,14 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
     return (
       <div style={{ display: 'grid', gap: '14px' }}>
         {/* Officer Status Bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#0e1d18', padding: '8px 14px', borderRadius: '4px', border: '1px solid rgba(141, 226, 201, 0.25)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--ui-surface)', padding: '8px 14px', borderRadius: '4px', border: '1px solid var(--ui-line)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <ShieldCheck size={18} color="var(--ui-accent)" />
             <strong style={{ fontSize: '0.8rem' }}>Check8 Station: CCS Computer Laboratory 3</strong>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span className="wf-status-chip is-cleared">Station Active</span>
-            <small style={{ fontSize: '0.7rem', color: '#88a99c' }}>Officer ID: #CCS-LAB-402</small>
+            <small style={{ fontSize: '0.7rem', color: 'var(--ui-muted)' }}>Officer ID: #CCS-LAB-402</small>
           </div>
         </div>
 
@@ -386,37 +386,37 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
           {/* Camera Scanner Viewport */}
           <div className="wf-ui-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '220px', borderStyle: 'dashed', position: 'relative' }}>
             {showAnnotations && <span className="wf-pin" style={{ top: '8px', left: '8px' }}>①</span>}
-            <div style={{ width: '130px', height: '130px', border: '2px dashed var(--ui-accent)', borderRadius: '12px', display: 'grid', placeItems: 'center', background: 'rgba(141, 226, 201, 0.05)' }}>
+            <div style={{ width: '130px', height: '130px', border: '2px dashed var(--ui-accent)', borderRadius: '12px', display: 'grid', placeItems: 'center', background: 'var(--ui-line)' }}>
               <QrCode size={56} color="var(--ui-accent)" strokeWidth={1.5} />
             </div>
-            <span style={{ fontSize: '0.72rem', marginTop: '10px', color: '#a4c4b8' }}>Align Student Digital QR Code in Frame</span>
-            <small style={{ fontSize: '0.65rem', color: '#688c7e' }}>Auto-detects active student tokens</small>
+            <span style={{ fontSize: '0.72rem', marginTop: '10px', color: 'var(--ui-muted)' }}>Align Student Digital QR Code in Frame</span>
+            <small style={{ fontSize: '0.65rem', color: 'var(--ui-muted)' }}>Auto-detects active student tokens</small>
           </div>
 
           {/* Student Verification Record */}
           <div className="wf-ui-card" style={{ position: 'relative' }}>
             {showAnnotations && <span className="wf-pin" style={{ top: '-10px', right: '-8px' }}>②</span>}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--ui-line)', paddingBottom: '10px' }}>
               <div>
                 <span className="wf-status-chip is-cleared" style={{ marginBottom: '4px' }}>QR Validated</span>
                 <h4 style={{ margin: '4px 0', fontSize: '0.95rem' }}>Marco Reyes</h4>
-                <small style={{ fontSize: '0.7rem', color: '#88a99c' }}>BSCS 4A · Student ID: 2023-10492-OC</small>
+                <small style={{ fontSize: '0.7rem', color: 'var(--ui-muted)' }}>BSCS 4A · Student ID: 2023-10492-OC</small>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <span style={{ fontSize: '0.68rem', color: '#88a99c' }}>Clearance Progress</span>
+                <span style={{ fontSize: '0.68rem', color: 'var(--ui-muted)' }}>Clearance Progress</span>
                 <div style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--ui-accent)' }}>6 / 8 Cleared</div>
               </div>
             </div>
 
             {/* Department Hold Checks */}
             <div style={{ margin: '12px 0', display: 'grid', gap: '6px', fontSize: '0.74rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 8px', background: 'rgba(141, 226, 201, 0.08)', borderRadius: '4px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--ui-line)', borderRadius: '4px' }}>
                 <span>Lab Equipment Return Status:</span>
-                <strong style={{ color: '#8de2c9' }}>0 Items Pending (All Clear)</strong>
+                <strong style={{ color: 'var(--ui-ink)' }}>0 Items Pending (All Clear)</strong>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 8px', background: 'rgba(141, 226, 201, 0.08)', borderRadius: '4px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 8px', background: 'var(--ui-line)', borderRadius: '4px' }}>
                 <span>Programming Project Submission:</span>
-                <strong style={{ color: '#8de2c9' }}>Verified · Grade Passed</strong>
+                <strong style={{ color: 'var(--ui-ink)' }}>Verified · Grade Passed</strong>
               </div>
             </div>
 
@@ -441,7 +441,7 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
     // Desktop Active Recall Study Mode
     return (
       <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '16px' }}>
-        <div style={{ borderRight: '1px solid rgba(141, 226, 201, 0.16)', paddingRight: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ borderRight: '1px solid var(--ui-line)', paddingRight: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
             <Sparkles size={16} color="var(--ui-accent)" />
             <strong style={{ fontSize: '0.85rem' }}>ACE IT Study Session</strong>
@@ -451,13 +451,13 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
             <span>CS 311: Algorithms</span>
           </div>
           <div className="wf-ui-card" style={{ margin: '8px 0 0', padding: '10px', fontSize: '0.68rem' }}>
-            <span style={{ color: '#88a99c', display: 'block' }}>Recall Retention</span>
+            <span style={{ color: 'var(--ui-muted)', display: 'block' }}>Recall Retention</span>
             <strong style={{ fontSize: '0.88rem', color: 'var(--ui-accent)' }}>84% Spaced Mastery</strong>
-            <div style={{ width: '100%', height: '4px', background: 'rgba(141, 226, 201, 0.2)', borderRadius: '2px', marginTop: '6px', overflow: 'hidden' }}>
+            <div style={{ width: '100%', height: '4px', background: 'var(--ui-line)', borderRadius: '2px', marginTop: '6px', overflow: 'hidden' }}>
               <div style={{ width: '84%', height: '100%', background: 'var(--ui-accent)' }} />
             </div>
           </div>
-          <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(141, 226, 201, 0.14)', fontSize: '0.62rem', color: '#88a99c' }}>
+          <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid var(--ui-line)', fontSize: '0.62rem', color: 'var(--ui-muted)' }}>
             <span>Focus Mode: Global chrome hidden to reduce cognitive load</span>
           </div>
         </div>
@@ -470,7 +470,7 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '14px' }}>
       {/* Sidebar */}
-      <div style={{ borderRight: '1px solid rgba(141, 226, 201, 0.16)', paddingRight: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <div style={{ borderRight: '1px solid var(--ui-line)', paddingRight: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
           <Sparkles size={16} color="var(--ui-accent)" />
           <strong style={{ fontSize: '0.85rem' }}>ACE IT</strong>
@@ -487,7 +487,7 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
           <Clock size={13} />
           <span>Study Sessions</span>
         </div>
-        <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid rgba(141, 226, 201, 0.14)', fontSize: '0.62rem', color: '#88a99c' }}>
+        <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid var(--ui-line)', fontSize: '0.62rem', color: 'var(--ui-muted)' }}>
           <span className="wf-status-chip is-cleared" style={{ fontSize: '0.6rem' }}>● Cloud Sync</span>
         </div>
       </div>
@@ -498,13 +498,13 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <h4 style={{ margin: 0, fontSize: '0.95rem' }}>Study Deck Hub</h4>
-            <small style={{ fontSize: '0.7rem', color: '#88a99c' }}>14 custom decks · 3 due for spaced-repetition review</small>
+            <small style={{ fontSize: '0.7rem', color: 'var(--ui-muted)' }}>14 custom decks · 3 due for spaced-repetition review</small>
           </div>
           <button type="button" className="wf-btn-primary" style={{ fontSize: '0.7rem' }}>+ Create Deck</button>
         </div>
 
         {/* AI Quick Generator Prompt Box */}
-        <div className="wf-ui-card" style={{ position: 'relative', margin: 0, background: 'rgba(141, 226, 201, 0.06)' }}>
+        <div className="wf-ui-card" style={{ position: 'relative', margin: 0, background: 'var(--ui-line)' }}>
           {showAnnotations && <span className="wf-pin" style={{ top: '-10px', right: '-8px' }}>①</span>}
           <span style={{ fontSize: '0.68rem', color: 'var(--ui-accent)', fontWeight: 600 }}>✦ Instant AI Deck Generation</span>
           <div style={{ display: 'flex', gap: '8px', marginTop: '6px' }}>
@@ -524,8 +524,8 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
             <div className="wf-ui-card" style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <span className="wf-status-chip is-cleared">Mastered 86%</span>
-              <strong style={{ fontSize: '0.76rem', color: '#e2f4ed' }}>CS 311: Data Structures</strong>
-              <small style={{ fontSize: '0.65rem', color: '#88a99c' }}>42 active recall flashcards</small>
+              <strong style={{ fontSize: '0.76rem', color: 'var(--ui-ink)' }}>CS 311: Data Structures</strong>
+              <small style={{ fontSize: '0.65rem', color: 'var(--ui-muted)' }}>42 active recall flashcards</small>
               <button type="button" className="wf-btn-primary" style={{ width: '100%', marginTop: '6px', fontSize: '0.68rem' }}>
                 Study Active Recall ▷
               </button>
@@ -533,8 +533,8 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
 
             <div className="wf-ui-card" style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <span className="wf-status-chip is-pending">Mastered 71%</span>
-              <strong style={{ fontSize: '0.76rem', color: '#e2f4ed' }}>CS 314: Web Development</strong>
-              <small style={{ fontSize: '0.65rem', color: '#88a99c' }}>28 active recall flashcards</small>
+              <strong style={{ fontSize: '0.76rem', color: 'var(--ui-ink)' }}>CS 314: Web Development</strong>
+              <small style={{ fontSize: '0.65rem', color: 'var(--ui-muted)' }}>28 active recall flashcards</small>
               <button type="button" className="wf-btn-primary" style={{ width: '100%', marginTop: '6px', fontSize: '0.68rem' }}>
                 Study Active Recall ▷
               </button>
@@ -542,8 +542,8 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
 
             <div className="wf-ui-card" style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <span className="wf-status-chip is-cleared">Mastered 92%</span>
-              <strong style={{ fontSize: '0.76rem', color: '#e2f4ed' }}>CS 316: Software Eng.</strong>
-              <small style={{ fontSize: '0.65rem', color: '#88a99c' }}>35 active recall flashcards</small>
+              <strong style={{ fontSize: '0.76rem', color: 'var(--ui-ink)' }}>CS 316: Software Eng.</strong>
+              <small style={{ fontSize: '0.65rem', color: 'var(--ui-muted)' }}>35 active recall flashcards</small>
               <button type="button" className="wf-btn-primary" style={{ width: '100%', marginTop: '6px', fontSize: '0.68rem' }}>
                 Study Active Recall ▷
               </button>
@@ -594,10 +594,10 @@ function InteractiveFlashcardStudy({ showAnnotations, isDesktop = false }: { sho
   return (
     <div style={{ display: 'grid', gap: isDesktop ? '14px' : '10px' }}>
       {/* Study Session Top Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '6px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ui-line)', paddingBottom: '6px' }}>
         <span style={{ fontSize: '0.68rem', color: 'var(--ui-accent)' }}>← Back to Hub</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '0.62rem', color: '#88a99c' }}>{current.tag}</span>
+          <span style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>{current.tag}</span>
           <span className="wf-status-chip is-cleared" style={{ fontSize: '0.62rem' }}>
             Card #{cardIndex + 1} of 42
           </span>
@@ -638,7 +638,7 @@ function InteractiveFlashcardStudy({ showAnnotations, isDesktop = false }: { sho
               <RotateCw size={12} color="var(--ui-accent)" />
             </div>
             <p className="flashcard-text" style={{ color: 'var(--ui-accent)' }}>"{current.a}"</p>
-            <span className="flashcard-hint" style={{ color: '#88a99c' }}>[ Tap again to return to Question ↻ ]</span>
+            <span className="flashcard-hint" style={{ color: 'var(--ui-muted)' }}>[ Tap again to return to Question ↻ ]</span>
           </div>
         </div>
       </div>
@@ -647,7 +647,7 @@ function InteractiveFlashcardStudy({ showAnnotations, isDesktop = false }: { sho
       <div style={{ position: 'relative' }}>
         {showAnnotations && <span className="wf-pin" style={{ top: '-10px', left: '-6px' }}>③</span>}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-          <span style={{ fontSize: '0.62rem', color: '#88a99c' }}>Rate Recall Difficulty (Spaced Repetition Algorithm):</span>
+          <span style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>Rate Recall Difficulty (Spaced Repetition Algorithm):</span>
           {ratingMessage && (
             <span style={{ fontSize: '0.65rem', color: 'var(--ui-accent)', fontWeight: 600 }}>
               {ratingMessage}
@@ -658,26 +658,26 @@ function InteractiveFlashcardStudy({ showAnnotations, isDesktop = false }: { sho
           <button
             type="button"
             className="wf-btn-secondary"
-            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#ef4444', color: '#fca5a5' }}
+            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: 'var(--ui-line)', color: 'var(--ui-ink)' }}
             onClick={(e) => { e.stopPropagation(); handleRate('hard'); }}
           >
-            🔴 Hard (1d)
+            Hard (1d)
           </button>
           <button
             type="button"
             className="wf-btn-secondary"
-            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#eab308', color: '#fef08a' }}
+            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: 'var(--ui-line)', color: 'var(--ui-ink)' }}
             onClick={(e) => { e.stopPropagation(); handleRate('good'); }}
           >
-            🟡 Good (3d)
+            Good (3d)
           </button>
           <button
             type="button"
             className="wf-btn-secondary"
-            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: '#22c55e', color: '#86efac' }}
+            style={{ padding: '8px 4px', fontSize: '0.66rem', borderColor: 'var(--ui-line)', color: 'var(--ui-ink)' }}
             onClick={(e) => { e.stopPropagation(); handleRate('easy'); }}
           >
-            🟢 Easy (7d)
+            Easy (7d)
           </button>
         </div>
       </div>
@@ -692,10 +692,10 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
     return (
       <div style={{ display: 'grid', gap: '10px' }}>
         {/* Student Profile Header */}
-        <div style={{ borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ borderBottom: '1px solid var(--ui-line)', paddingBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <strong style={{ fontSize: '0.82rem' }}>Marco Reyes</strong>
-            <div style={{ fontSize: '0.65rem', color: '#88a99c' }}>BSCS 4A · 2023-10492-OC</div>
+            <div style={{ fontSize: '0.65rem', color: 'var(--ui-muted)' }}>BSCS 4A · 2023-10492-OC</div>
           </div>
           <span className="wf-status-chip is-cleared" style={{ fontSize: '0.62rem' }}>6/8 Cleared</span>
         </div>
@@ -703,33 +703,33 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
         {/* Digital QR Passport Box */}
         <div className="wf-ui-card" style={{ textAlign: 'center', padding: '12px 8px', margin: 0, position: 'relative' }}>
           {showAnnotations && <span className="wf-pin" style={{ top: '-8px', right: '-6px' }}>②</span>}
-          <div style={{ width: '110px', height: '110px', margin: '0 auto 8px', border: '2px solid var(--ui-accent)', borderRadius: '8px', display: 'grid', placeItems: 'center', background: 'rgba(141, 226, 201, 0.08)' }}>
+          <div style={{ width: '110px', height: '110px', margin: '0 auto 8px', border: '2px solid var(--ui-accent)', borderRadius: '8px', display: 'grid', placeItems: 'center', background: 'var(--ui-line)' }}>
             <QrCode size={64} color="var(--ui-accent)" />
           </div>
           <strong style={{ fontSize: '0.72rem', color: 'var(--ui-accent)' }}>SECURE CLEARANCE TOKEN</strong>
-          <p style={{ fontSize: '0.62rem', color: '#88a99c', margin: '2px 0 0' }}>Present this QR code to station signees across campus</p>
+          <p style={{ fontSize: '0.62rem', color: 'var(--ui-muted)', margin: '2px 0 0' }}>Present this QR code to station signees across campus</p>
         </div>
 
         {/* 8-Station Checklist */}
         <div style={{ position: 'relative' }}>
           {showAnnotations && <span className="wf-pin" style={{ top: '-10px', right: '-6px' }}>①</span>}
-          <span style={{ fontSize: '0.68rem', fontWeight: 600, color: '#e2f4ed', display: 'block', marginBottom: '4px' }}>Checkpoint Checklist</span>
+          <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'var(--ui-ink)', display: 'block', marginBottom: '4px' }}>Checkpoint Checklist</span>
           <div style={{ display: 'grid', gap: '4px', maxHeight: '180px', overflowY: 'auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: '#0e1d18', borderRadius: '3px', fontSize: '0.66rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: 'var(--ui-surface)', borderRadius: '3px', fontSize: '0.66rem' }}>
               <span>1. Computer Labs</span>
               <span className="wf-status-chip is-cleared">✓ Cleared</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: '#0e1d18', borderRadius: '3px', fontSize: '0.66rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: 'var(--ui-surface)', borderRadius: '3px', fontSize: '0.66rem' }}>
               <span>2. University Library</span>
               <span className="wf-status-chip is-cleared">✓ Cleared</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: '#0e1d18', borderRadius: '3px', fontSize: '0.66rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: 'var(--ui-surface)', borderRadius: '3px', fontSize: '0.66rem' }}>
               <span>3. Student Council</span>
-              <span className="wf-status-chip is-pending">⏳ Pending</span>
+              <span className="wf-status-chip is-pending">Pending</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: '#0e1d18', borderRadius: '3px', fontSize: '0.66rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 8px', background: 'var(--ui-surface)', borderRadius: '3px', fontSize: '0.66rem' }}>
               <span>4. Dean's Office</span>
-              <span className="wf-status-chip is-locked">🔒 Locked</span>
+              <span className="wf-status-chip is-locked">Locked</span>
             </div>
           </div>
         </div>
@@ -741,18 +741,18 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
     // CRHS Web Mobile
     return (
       <div style={{ display: 'grid', gap: '10px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '6px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ui-line)', paddingBottom: '6px' }}>
           <strong style={{ fontSize: '0.78rem' }}>Col. Ramon High School</strong>
           <span style={{ fontSize: '0.7rem', color: 'var(--ui-accent)' }}>☰ Menu</span>
         </div>
 
-        <div style={{ background: 'rgba(234, 179, 8, 0.15)', border: '1px solid #eab308', padding: '6px 8px', borderRadius: '4px', fontSize: '0.65rem', color: '#fef08a' }}>
-          ⚠️ ADVISORY: Q2 Examination Schedule Released (Nov 12-14)
+        <div style={{ background: 'var(--ui-surface)', border: '1px solid var(--ui-line)', padding: '6px 8px', borderRadius: '4px', fontSize: '0.65rem', color: 'var(--ui-ink)' }}>
+          [ADVISORY] Q2 Examination Schedule Released (Nov 12-14)
         </div>
 
         <div className="wf-ui-card" style={{ margin: 0, padding: '10px' }}>
           <h4 style={{ fontSize: '0.82rem', margin: '0 0 4px' }}>Public School Gateway</h4>
-          <p style={{ fontSize: '0.66rem', color: '#88a99c', margin: '0 0 8px' }}>Fast announcements for parents and students on low-bandwidth networks.</p>
+          <p style={{ fontSize: '0.66rem', color: 'var(--ui-muted)', margin: '0 0 8px' }}>Fast announcements for parents and students on low-bandwidth networks.</p>
           <button type="button" className="wf-btn-primary" style={{ width: '100%', fontSize: '0.68rem', padding: '6px' }}>
             Download Enrollment Form ↵
           </button>
@@ -777,7 +777,7 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
     // Mobile Deck Hub
     return (
       <div style={{ display: 'grid', gap: '10px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(141, 226, 201, 0.2)', paddingBottom: '6px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ui-line)', paddingBottom: '6px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Sparkles size={14} color="var(--ui-accent)" />
             <strong style={{ fontSize: '0.78rem' }}>ACE IT Mobile</strong>
@@ -796,14 +796,14 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
 
         <div style={{ position: 'relative' }}>
           {showAnnotations && <span className="wf-pin" style={{ top: '-8px', right: '-6px' }}>②</span>}
-          <span style={{ fontSize: '0.68rem', fontWeight: 600, color: '#e2f4ed', display: 'block', marginBottom: '6px' }}>Active Study Decks (3 Due)</span>
+          <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'var(--ui-ink)', display: 'block', marginBottom: '6px' }}>Active Study Decks (3 Due)</span>
           <div style={{ display: 'grid', gap: '6px' }}>
             <div className="wf-ui-card" style={{ margin: 0, padding: '8px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <strong style={{ fontSize: '0.74rem' }}>CS 311: Data Structures</strong>
                 <span className="wf-status-chip is-cleared">86%</span>
               </div>
-              <small style={{ fontSize: '0.62rem', color: '#88a99c', display: 'block', margin: '4px 0' }}>42 active recall flashcards</small>
+              <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)', display: 'block', margin: '4px 0' }}>42 active recall flashcards</small>
               <button type="button" className="wf-btn-primary" style={{ width: '100%', fontSize: '0.66rem', padding: '5px' }}>
                 Study Active Recall ▷
               </button>
@@ -813,7 +813,7 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
                 <strong style={{ fontSize: '0.74rem' }}>CS 314: Web Development</strong>
                 <span className="wf-status-chip is-pending">71%</span>
               </div>
-              <small style={{ fontSize: '0.62rem', color: '#88a99c', display: 'block', margin: '4px 0' }}>28 active recall flashcards</small>
+              <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)', display: 'block', margin: '4px 0' }}>28 active recall flashcards</small>
               <button type="button" className="wf-btn-primary" style={{ width: '100%', fontSize: '0.66rem', padding: '5px' }}>
                 Study Active Recall ▷
               </button>

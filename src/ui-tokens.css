@@ -1,41 +1,77 @@
-/* Customize the portfolio here. Keep text/background contrast accessible. */
+/* GK Architectural Blueprint — Custom Design Tokens
+   Deep Slate-Navy & Warm Drafting Paper with Electric Teal/Cyan Accents */
+
 :root {
-  /* Color and type */
-  --ui-canvas: #111817;
-  --ui-surface: #18211f;
-  --ui-ink: #f1f3ec;
-  --ui-muted: #a7b3ae;
-  --ui-accent: #8de2c9;
-  --ui-accent-hover: #adf1dc;
-  --ui-line: #35413c;
-  --ui-font-body: 'Manrope Variable', sans-serif;
-  --ui-font-display: 'Space Grotesk Variable', sans-serif;
+  color-scheme: light;
 
-  /* Layout and shape */
-  --ui-content-width: 1200px;
-  --ui-page-gutter: 48px;
-  --ui-section-space: clamp(4.5rem, 9vw, 8rem);
-  --ui-card-radius: 14px;
-  --ui-control-radius: 5px;
-  --ui-project-gap: 24px;
-  --ui-header-height: 94px;
+  /* Light Mode: Warm Architectural Paper + Deep Slate Ink + Teal Accent */
+  --bg: 247 248 246;
+  --surface: 255 255 255;
+  --ink: 15 23 34;
+  --accent: 13 148 136;       /* Teal 600 (#0d9488) — WCAG AA on light */
+  --accent-fg: 255 255 255;
+  --accent-soft: 204 251 241; /* Teal 100 */
+  --g50: 241 244 242;
+  --g100: 232 237 234;
+  --g200: 213 220 217;
+  --g300: 184 194 190;
+  --g400: 116 128 124;
+  --g500: 84 96 92;
+  --g600: 58 69 66;
+  --g700: 39 48 46;
+  --g800: 26 34 32;
+  --g900: 15 23 34;
+  --g950: 10 15 24;
+
+  /* Semantic tokens */
+  --ui-canvas: rgb(var(--bg));
+  --ui-surface: rgb(var(--surface));
+  --ui-ink: rgb(var(--ink));
+  --ui-muted: rgb(var(--g500));
+  --ui-faint: rgb(var(--g400));
+  --ui-accent: rgb(var(--accent));
+  --ui-accent-hover: rgb(var(--ink));
+  --ui-line: rgb(var(--g200));
+  --ui-line-strong: rgb(var(--g300));
+
+  /* Typography: Space Grotesk (Display) + Geist (UI) + Geist Mono (Technical) + Source Serif 4 (Case Study Prose) */
+  --ui-font-display: 'Space Grotesk Variable', 'Geist', system-ui, sans-serif;
+  --ui-font-body: 'Geist', 'Manrope Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ui-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ui-font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+
+  /* Radii */
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 7px;
+  --radius-xs: 5px;
+  --ui-card-radius: var(--radius-lg);
+  --ui-control-radius: var(--radius-xs);
+
+  /* Focus */
   --ui-focus-width: 2px;
-  --ui-focus-offset: 6px;
-
-  /* Motion: durations are milliseconds so CSS and JS share the same values. */
-  --ui-motion-fast: 180ms;
-  --ui-motion-page: 420ms;
-  --ui-motion-reveal: 650ms;
-  --ui-motion-float: 6000ms;
-  --ui-motion-orbit: 18000ms;
-  --ui-float-distance: 10px;
-  --ui-reveal-distance: 18px;
-  --ui-hover-distance: -3px;
-  --ui-ease-out: cubic-bezier(.16, 1, .3, 1);
-  --ui-ease-float: cubic-bezier(.45, 0, .55, 1);
+  --ui-focus-offset: 3px;
 }
 
-@media (max-width: 1000px) { :root { --ui-page-gutter: 32px; } }
-@media (max-width: 760px) {
-  :root { --ui-page-gutter: 20px; --ui-header-height: 78px; --ui-float-distance: 7px; }
+html.dark {
+  color-scheme: dark;
+
+  /* Dark Mode: Deep Slate-Navy Foundation + Crisp Off-White + Cyan-Teal Accent (AGENTS.md) */
+  --bg: 11 16 23;             /* #0b1017 Deep Navy-Charcoal */
+  --surface: 17 24 35;        /* #111823 Elevated Slate-Navy */
+  --ink: 238 242 246;         /* #eef2f6 Readable Off-White */
+  --accent: 45 212 191;       /* #2dd4bf Restrained Teal/Cyan Accent */
+  --accent-fg: 11 16 23;
+  --accent-soft: 19 46 48;
+  --g50: 17 24 35;
+  --g100: 24 33 47;
+  --g200: 36 49 66;
+  --g300: 54 71 92;
+  --g400: 130 146 166;
+  --g500: 158 173 191;
+  --g600: 192 204 218;
+  --g700: 214 223 233;
+  --g800: 228 234 241;
+  --g900: 238 242 246;
+  --g950: 248 250 252;
 }
