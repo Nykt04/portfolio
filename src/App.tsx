@@ -94,14 +94,7 @@ const processSteps = [
 ];
 
 function CornerTicks() {
-  return (
-    <>
-      <span className="gk-corner-tick tl" aria-hidden="true" />
-      <span className="gk-corner-tick tr" aria-hidden="true" />
-      <span className="gk-corner-tick bl" aria-hidden="true" />
-      <span className="gk-corner-tick br" aria-hidden="true" />
-    </>
-  );
+  return null;
 }
 
 function ThemeSwitcher() {
@@ -145,7 +138,7 @@ function ThemeSwitcher() {
         type="button"
         onClick={(e) => choose('light', e)}
         className={`theme-opt ${pref === 'light' ? 'is-active' : ''}`}
-        title="Light theme (Drafting Paper)"
+        title="Light theme (Crisp White)"
         aria-label="Light theme"
         aria-pressed={pref === 'light'}
       >
@@ -155,7 +148,7 @@ function ThemeSwitcher() {
         type="button"
         onClick={(e) => choose('dark', e)}
         className={`theme-opt ${pref === 'dark' ? 'is-active' : ''}`}
-        title="Dark theme (Slate Blueprint)"
+        title="Dark theme (Monochrome Dark)"
         aria-label="Dark theme"
         aria-pressed={pref === 'dark'}
       >
@@ -321,8 +314,8 @@ export default function App() {
               <span className="block whitespace-nowrap font-pixel text-[14px] font-bold tracking-tight text-[rgb(var(--ink))]">
                 {p.shortName}
               </span>
-              <span className="mt-1 block whitespace-nowrap font-mono text-[9.5px] uppercase tracking-widest text-[rgb(var(--g400))]">
-                BSCS // 03
+              <span className="mt-1 block whitespace-nowrap font-mono text-[10px] text-[rgb(var(--g400))]">
+                {p.course}
               </span>
             </div>
           </a>
@@ -455,23 +448,23 @@ export default function App() {
                   <CornerTicks />
 
                   <div>
-                    {/* Telemetry Top Status Row */}
+                    {/* Top Status Row */}
                     <div className="reveal d1 flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3.5">
                       <div className="inline-flex items-center gap-2">
                         <span className="pulse-dot h-2 w-2 rounded-full bg-[rgb(var(--accent))]" aria-hidden="true" />
-                        <span className="font-mono text-[11px] font-medium uppercase tracking-wider text-[rgb(var(--ink))]">
-                          {p.course} · Gordon College
+                        <span className="font-mono text-[11px] font-medium text-[rgb(var(--ink))]">
+                          Available for Projects &amp; Collaborations
                         </span>
                       </div>
-                      <span className="rounded border border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.1)] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-[rgb(var(--accent))]">
-                        {p.title}
+                      <span className="rounded-full border border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.1)] px-2.5 py-0.5 font-mono text-[10.5px] font-semibold text-[rgb(var(--accent))]">
+                        {p.course} · Gordon College
                       </span>
                     </div>
 
                     {/* Display Name & Role */}
                     <div className="reveal d2 mt-5">
-                      <span className="font-mono text-[10.5px] uppercase tracking-widest text-[rgb(var(--g400))]">
-                        PORTFOLIO // UI-UX &amp; SOFTWARE ENGINEERING
+                      <span className="font-mono text-[11px] font-medium uppercase tracking-wider text-[rgb(var(--accent))]">
+                        Aspiring Web Developer &amp; Software Engineer
                       </span>
                       <h1 className="mt-1 font-pixel text-3xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-[2.5rem] sm:leading-[1.1]">
                         {p.name}
@@ -560,14 +553,14 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Bottom Telemetry Metrics Strip */}
+                  {/* Bottom Highlights Metrics Strip */}
                   <div
                     aria-label="Portfolio highlights"
                     className="reveal d6 mt-6 grid grid-cols-3 divide-x divide-[rgb(var(--g200))] border-t border-[rgb(var(--g200))] pt-4"
                   >
                     <a href="#about" className="group block pr-3">
                       <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--accent))]">
-                        LEVEL // 01
+                        Academic Standing
                       </span>
                       <div className="mt-0.5 flex items-center gap-1">
                         <span className="font-pixel text-base sm:text-lg font-bold leading-none text-[rgb(var(--ink))]">
@@ -578,7 +571,7 @@ export default function App() {
 
                     <a href="#about" className="group block px-3">
                       <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--accent))]">
-                        ROLES // 02
+                        Core Competencies
                       </span>
                       <div className="mt-0.5 flex items-center gap-1">
                         <span className="font-pixel text-base sm:text-lg font-bold leading-none text-[rgb(var(--ink))]">
@@ -589,11 +582,11 @@ export default function App() {
 
                     <a href="#work" className="group block pl-3">
                       <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--accent))]">
-                        SHIPPED // 03
+                        Verified Systems
                       </span>
                       <div className="mt-0.5 flex items-center gap-1">
                         <span className="font-pixel text-base sm:text-lg font-bold leading-none text-[rgb(var(--ink))]">
-                          3+ Live Apps
+                          3 Shipped Apps
                         </span>
                       </div>
                     </a>
@@ -612,10 +605,10 @@ export default function App() {
                   <CornerTicks />
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[rgb(var(--accent))]">
-                        FEATURED BUILD // 01
+                      <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                        FEATURED CASE STUDY
                       </span>
-                      <span className="font-mono text-[10px] text-[rgb(var(--g400))]">
+                      <span className="font-mono text-[10.5px] text-[rgb(var(--g400))]">
                         · {projects[0].category}
                       </span>
                     </div>
@@ -700,8 +693,8 @@ export default function App() {
               <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
                 <div className="gk-blueprint-card p-6 lg:col-span-7">
                   <CornerTicks />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[rgb(var(--accent))]">
-                    PROFILE // NARRATIVE
+                  <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                    About Gian Karlo
                   </span>
                   <p className="mt-2.5 text-[15.5px] font-medium leading-relaxed text-[rgb(var(--ink))]">
                     {p.introduction}
@@ -714,8 +707,8 @@ export default function App() {
                 <div className="gk-blueprint-card flex flex-col justify-between p-6 lg:col-span-5">
                   <CornerTicks />
                   <div>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-[rgb(var(--accent))]">
-                      ACADEMIC // TELEMETRY
+                    <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                      Academic Background
                     </span>
                     <div className="mt-3 border-b border-[rgb(var(--g200))] pb-3.5">
                       <span className="micro-label block">Education</span>
@@ -737,31 +730,25 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Areas of Project Responsibility (2x2 Architectural Bento Grid) */}
-              <div className="mt-10">
-                <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="micro-label">Areas of Project Responsibility</h3>
-                  <span className="font-mono text-[11px] text-[rgb(var(--g400))]">
-                    editable in src/portfolio.ts
-                  </span>
-                </div>
+              {/* Areas of Project Responsibility (Compact Monochrome Strip) */}
+              <div className="mt-8">
+                <h3 className="micro-label mb-3">Areas of Project Responsibility</h3>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--g200))] sm:grid-cols-2 lg:grid-cols-4">
                   {p.roles.map((role, idx) => (
-                    <div key={role.title} className="gk-blueprint-card p-5">
-                      <CornerTicks />
-                      <div className="flex items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-2.5">
-                        <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[rgb(var(--accent))]">
-                          ROLE // 0{idx + 1}
+                    <div
+                      key={role.title}
+                      className="bg-[rgb(var(--surface))] p-4 transition-colors hover:bg-[rgb(var(--g50))]"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10.5px] font-medium text-[rgb(var(--g400))]">
+                          0{idx + 1}
                         </span>
-                        <span className="font-mono text-[10px] text-[rgb(var(--g400))]">
-                          CORE COMPETENCY
-                        </span>
+                        <h4 className="font-pixel text-[14px] font-bold text-[rgb(var(--ink))]">
+                          {role.title}
+                        </h4>
                       </div>
-                      <h4 className="mt-3 font-pixel text-base font-bold text-[rgb(var(--ink))]">
-                        {role.title}
-                      </h4>
-                      <p className="mt-1.5 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
+                      <p className="mt-1.5 text-[12.5px] leading-snug text-[rgb(var(--g500))]">
                         {role.description}
                       </p>
                     </div>
@@ -1066,7 +1053,7 @@ function GitHubSection() {
           <div className="flex items-center gap-2">
             <Github size={15} className="text-[rgb(var(--accent))]" aria-hidden="true" />
             <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--ink))]">
-              COMMIT MATRIX // @{username}
+              Contributions // @{username}
             </span>
           </div>
           <span className="font-mono text-[11px] text-[rgb(var(--g500))]">
@@ -1354,7 +1341,7 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
         aria-label="Case study contents"
         className="mt-8 flex flex-wrap items-center gap-2 rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] px-4 py-3 font-mono text-[11px]"
       >
-        <span className="micro-label mr-2 text-[rgb(var(--accent))]">BLUEPRINT INDEX:</span>
+        <span className="micro-label mr-2 text-[rgb(var(--accent))]">CONTENTS:</span>
         <a href="#case-study-overview" className="underline decoration-[rgb(var(--g300))] underline-offset-4 hover:text-[rgb(var(--accent))]">
           01 Overview
         </a>
@@ -1390,11 +1377,11 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
 
               <p className="case-prose">{section.prompt}</p>
 
-              {/* Target User Persona Card */}
+              {/* Illustrative Target Persona Card */}
               {section.id === 'problem' && currentProject.persona && (
                 <div
                   className="gk-blueprint-card mt-6 p-5 sm:p-6"
-                  aria-label={`Target User Persona: ${currentProject.persona.name}`}
+                  aria-label={`Illustrative Target Persona: ${currentProject.persona.name}`}
                 >
                   <CornerTicks />
                   <div className="flex flex-wrap items-center gap-3.5 border-b border-[rgb(var(--g200))] pb-4">
@@ -1409,7 +1396,7 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
                         .join('')}
                     </div>
                     <div>
-                      <span className="micro-label text-[rgb(var(--accent))]">Target User Persona</span>
+                      <span className="micro-label text-[rgb(var(--accent))]">Illustrative Target Persona</span>
                       <h3 className="text-[15px] font-semibold text-[rgb(var(--ink))]">
                         {currentProject.persona.name}
                       </h3>

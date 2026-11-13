@@ -70,10 +70,10 @@ const PROJECT_SCREENS: Record<string, WireframeScreen[]> = {
     },
     {
       id: 'faculty-dept',
-      title: 'Admissions & Department Directory',
-      url: 'crhs-web.vercel.app/departments.html',
+      title: 'Academics & Department Directory',
+      url: 'crhs-web.vercel.app/academics.html',
       annotations: [
-        { pin: '①', rule: 'Clear Heading Hierarchy', description: 'H1/H2 semantic tree enables assistive screen readers to skip to specific tracks.' },
+        { pin: '①', rule: 'Clear Heading Hierarchy', description: 'H1/H2 semantic tree enables assistive screen readers to skip to specific programs.' },
         { pin: '②', rule: 'Direct Action Links', description: 'Single-tap phone and email triggers allow direct parent-to-faculty consultation.' }
       ]
     }
@@ -152,7 +152,7 @@ export default function ProjectWireframes({ projectId, projectName }: ProjectWir
       {/* Blueprint Header */}
       <div className="wireframe-header">
         <div className="wireframe-title-group">
-          <span className="wireframe-badge">UI/UX Blueprint</span>
+          <span className="wireframe-badge">UI/UX Architecture</span>
           <h3 className="wireframe-header-title">Wireframe & Interaction Flow: {projectName}</h3>
         </div>
 
@@ -213,9 +213,9 @@ export default function ProjectWireframes({ projectId, projectName }: ProjectWir
             {/* Browser Window Header */}
             <div className="wf-window-bar">
               <div className="wf-dots" aria-hidden="true">
-                <span className="wf-dot" style={{ borderColor: '#ef4444' }} />
-                <span className="wf-dot" style={{ borderColor: '#eab308' }} />
-                <span className="wf-dot" style={{ borderColor: '#22c55e' }} />
+                <span className="wf-dot" />
+                <span className="wf-dot" />
+                <span className="wf-dot" />
               </div>
               <div className="wf-address-bar">
                 <Lock size={10} aria-hidden="true" />
@@ -286,7 +286,7 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ui-line)', paddingBottom: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ width: '28px', height: '28px', background: 'var(--ui-line)', borderRadius: '50%', display: 'grid', placeItems: 'center', fontSize: '0.65rem', fontWeight: 'bold' }}>CR</div>
-            <strong style={{ fontSize: '0.85rem' }}>Col. Ramon High School</strong>
+            <strong style={{ fontSize: '0.85rem' }}>Castillejos Resettlement High School</strong>
           </div>
           <div style={{ display: 'flex', gap: '14px', fontSize: '0.74rem', color: 'var(--ui-muted)' }}>
             <span style={{ color: 'var(--ui-accent)', fontWeight: 600 }}>Home</span>
@@ -295,7 +295,7 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
             <span>Faculty</span>
             <span>Contact</span>
           </div>
-          <button type="button" className="wf-btn-primary" style={{ padding: '4px 10px', fontSize: '0.7rem' }}>Student Portal</button>
+          <button type="button" className="wf-btn-primary" style={{ padding: '4px 10px', fontSize: '0.7rem' }}>Enroll Now</button>
         </div>
 
         {/* Hero Banner Grid */}
@@ -303,7 +303,7 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
           <div className="wf-ui-card">
             <span style={{ fontSize: '0.65rem', color: 'var(--ui-accent)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Official Campus Gateway</span>
             <h4 style={{ margin: '6px 0', fontSize: '1rem', color: 'var(--ui-ink)' }}>Empowering Excellence in Public Secondary Education</h4>
-            <p style={{ fontSize: '0.75rem', color: 'var(--ui-muted)', margin: '0 0 10px' }}>Access official schedules, enrollment prerequisites, and academic track guidelines.</p>
+            <p style={{ fontSize: '0.75rem', color: 'var(--ui-muted)', margin: '0 0 10px' }}>Access official schedules, enrollment prerequisites, and Junior High curriculum guidelines.</p>
             <div style={{ display: 'flex', gap: '8px' }}>
               <button type="button" className="wf-btn-primary" style={{ fontSize: '0.7rem' }}>Download Enrollment Form</button>
               <button type="button" className="wf-btn-secondary" style={{ fontSize: '0.7rem' }}>School Calendar</button>
@@ -325,8 +325,8 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
             </div>
             <div className="wf-ui-card" style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px', margin: 0 }}>
               <FileText size={14} color="var(--ui-accent)" />
-              <strong style={{ fontSize: '0.72rem' }}>Senior High Vouchers</strong>
-              <small style={{ fontSize: '0.6rem', color: 'var(--ui-muted)' }}>DepEd Requirements</small>
+              <strong style={{ fontSize: '0.72rem' }}>ARAL Program</strong>
+              <small style={{ fontSize: '0.6rem', color: 'var(--ui-muted)' }}>DepEd Remediation</small>
             </div>
             <div className="wf-ui-card" style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px', margin: 0 }}>
               <Phone size={14} color="var(--ui-accent)" />
@@ -345,13 +345,13 @@ function renderDesktopWireframe(projectId: string, screenIdx: number, showAnnota
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
             <div className="wf-ui-card" style={{ margin: 0 }}>
-              <span className="wf-status-chip is-cleared">STEM Track</span>
+              <span className="wf-status-chip is-cleared">Junior High</span>
               <p style={{ fontSize: '0.72rem', margin: '6px 0', fontWeight: 600 }}>Science & Technology Fair 2026 Project Guidelines</p>
               <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>Published Nov 01, 2026</small>
             </div>
             <div className="wf-ui-card" style={{ margin: 0 }}>
               <span className="wf-status-chip is-pending">Guardians</span>
-              <p style={{ fontSize: '0.72rem', margin: '6px 0', fontWeight: 600 }}>General Parents & Teachers Assembly for Grade 11</p>
+              <p style={{ fontSize: '0.72rem', margin: '6px 0', fontWeight: 600 }}>General Parents & Teachers Assembly for Junior High</p>
               <small style={{ fontSize: '0.62rem', color: 'var(--ui-muted)' }}>Published Oct 29, 2026</small>
             </div>
             <div className="wf-ui-card" style={{ margin: 0 }}>
@@ -742,7 +742,7 @@ function renderMobileWireframe(projectId: string, screenIdx: number, showAnnotat
     return (
       <div style={{ display: 'grid', gap: '10px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--ui-line)', paddingBottom: '6px' }}>
-          <strong style={{ fontSize: '0.78rem' }}>Col. Ramon High School</strong>
+          <strong style={{ fontSize: '0.78rem' }}>Castillejos Resettlement HS</strong>
           <span style={{ fontSize: '0.7rem', color: 'var(--ui-accent)' }}>☰ Menu</span>
         </div>
 

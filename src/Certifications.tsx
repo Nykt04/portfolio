@@ -1,31 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Award, CheckCircle2, ExternalLink, ShieldCheck, X } from 'lucide-react';
+import { Award, CheckCircle2, ExternalLink, Eye, X, ZoomIn } from 'lucide-react';
 import { portfolio as p, type PortfolioCertification } from './portfolio';
 
 export default function CertificationsSection() {
   const certifications: PortfolioCertification[] = p.certifications || [];
   const [activeCert, setActiveCert] = useState<PortfolioCertification | null>(null);
-  const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const [imgZoomed, setImgZoomed] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const lastTriggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!activeCert) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
+    setImgZoomed(false);
+    setImgFailed(false);
+
+    const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setActiveCert(null);
-        lastTriggerRef.current?.focus();
+        if (imgZoomed) setImgZoomed(false);
+        else closeModal();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    const originalOverflow = document.body.style.overflow;
+    window.addEventListener('keydown', onKeyDown);
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     modalRef.current?.querySelector<HTMLElement>('button, a')?.focus();
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prevOverflow;
     };
-  }, [activeCert]);
+  }, [activeCert, imgZoomed]);
 
   if (!certifications.length) return null;
 
@@ -37,77 +42,89 @@ export default function CertificationsSection() {
   return (
     <section
       id="certifications"
-      className="py-16 border-t border-[rgb(var(--g200))]"
+      className="py-20 border-t border-[rgb(var(--g200))]"
       aria-labelledby="certifications-title"
     >
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 id="certifications-title" className="section-index-title">
+          <div className="flex items-center gap-2.5">
             <span className="section-index-badge">04</span>
-            <span>Certifications &amp; Credentials</span>
-          </h2>
-          <p className="mt-2 text-[14px] text-[rgb(var(--g500))]">
-            Verified credentials and coursework across cybersecurity, programming, and web development.
+            <h2 id="certifications-title" className="section-index-title">
+              Certifications &amp; Verified Credentials
+            </h2>
+          </div>
+          <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
+            Professional certifications and coursework accredited in visual design, programming, and cybersecurity fundamentals.
           </p>
         </div>
         <span className="micro-label">{certifications.length} verified credentials</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {certifications.map((cert, index) => (
-          <button
-            type="button"
-            key={cert.id}
-            aria-haspopup="dialog"
-            onClick={(e) => {
-              lastTriggerRef.current = e.currentTarget;
-              setActiveCert(cert);
-            }}
-            className="gk-blueprint-card group flex flex-col justify-between p-5 text-left"
-          >
-            <span className="gk-corner-tick tl" aria-hidden="true" />
-            <span className="gk-corner-tick br" aria-hidden="true" />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {certifications.map((cert) => {
+          const openModal = (el: HTMLElement) => {
+            lastTriggerRef.current = el;
+            setActiveCert(cert);
+          };
 
-            <div>
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.1)] text-[rgb(var(--accent))]"
-                  aria-hidden="true"
+          return (
+            <article
+              key={cert.id}
+              className="group flex flex-col justify-between rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-5 shadow-xs transition-all duration-200 hover:border-[rgb(var(--accent)/0.5)] hover:shadow-sm"
+            >
+              {/* Header Row with View Credential Icon Alongside */}
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] text-[rgb(var(--ink))]"
+                      aria-hidden="true"
+                    >
+                      <Award size={14} strokeWidth={1.75} />
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded border border-[rgb(var(--accent)/0.3)] bg-[rgb(var(--accent)/0.1)] px-2 py-0.5 font-mono text-[10px] font-semibold text-[rgb(var(--accent))]">
+                      <CheckCircle2 size={11} aria-hidden="true" />
+                      <span>Verified</span>
+                    </span>
+                    <span className="font-mono text-[10.5px] text-[rgb(var(--g500))]">
+                      {cert.date.split('·')[0].trim()}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-3 font-display-ui text-[15px] font-bold leading-snug text-[rgb(var(--ink))]">
+                    {cert.title}
+                  </h3>
+
+                  <p className="mt-1 font-mono text-xs leading-relaxed text-[rgb(var(--g500))]">
+                    {cert.issuer}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  aria-label={`View credential details for ${cert.title}`}
+                  title="View credential details"
+                  onClick={(e) => openModal(e.currentTarget)}
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] text-[rgb(var(--ink))] transition-colors hover:border-[rgb(var(--accent))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--accent-fg))]"
                 >
-                  <Award size={17} strokeWidth={1.7} />
-                </span>
-                <span className="font-mono text-[10px] text-[rgb(var(--g400))]">
-                  CERT // 0{index + 1}
-                </span>
+                  <Eye size={16} aria-hidden="true" />
+                </button>
               </div>
 
-              <h3 className="mt-4 font-display-ui text-[15px] leading-snug text-[rgb(var(--ink))] group-hover:text-[rgb(var(--accent))] transition-colors">
-                {cert.title}
-              </h3>
-
-              <p className="mt-1 font-mono text-[10.5px] text-[rgb(var(--g500))] line-clamp-1">
-                {cert.issuer}
-              </p>
-
-              <div className="mt-3 flex flex-wrap gap-1">
+              <div className="mt-4 flex flex-wrap gap-1.5 pt-1">
                 {cert.skills.slice(0, 3).map((s) => (
-                  <span key={s} className="bryl-tag-pill">
+                  <span
+                    key={s}
+                    className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-2 py-0.5 font-mono text-[10px] text-[rgb(var(--g600))]"
+                  >
                     {s}
                   </span>
                 ))}
               </div>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between border-t border-[rgb(var(--g200))] pt-3 font-mono text-[11px] text-[rgb(var(--accent))]">
-              <span>Inspect certificate</span>
-              <ArrowUpRight
-                size={13}
-                aria-hidden="true"
-                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </div>
-          </button>
-        ))}
+            </article>
+          );
+        })}
       </div>
 
       {/* Accessible Certificate Modal */}
@@ -129,65 +146,78 @@ export default function CertificationsSection() {
             <button
               type="button"
               onClick={closeModal}
-              aria-label="Close certificate details"
-              className="absolute right-4 top-4 inline-flex h-7 w-7 items-center justify-center rounded-full text-[rgb(var(--g400))] hover:bg-[rgb(var(--g100))] hover:text-[rgb(var(--ink))]"
+              className="absolute right-4 top-4 rounded-md p-1.5 text-[rgb(var(--g400))] hover:bg-[rgb(var(--g100))] hover:text-[rgb(var(--ink))]"
+              aria-label="Close credential details"
             >
-              <X size={16} aria-hidden="true" />
+              <X size={18} aria-hidden="true" />
             </button>
 
-            <span className="bryl-chip-inverted">Credential Record</span>
-            <h3 id="cert-dialog-title" className="mt-3 font-display-ui text-xl leading-snug text-[rgb(var(--ink))]">
-              {activeCert.title}
-            </h3>
-            <p className="mt-1 font-mono text-[12px] text-[rgb(var(--g500))]">{activeCert.issuer}</p>
-
-            {/* High-Resolution Certificate Document View */}
-            {activeCert.image && (
-              <div className="mt-4 overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--g50))]">
-                <img
-                  src={activeCert.image}
-                  alt={`${activeCert.title} Certificate for Gian Karlo Reguindin`}
-                  className="block h-auto w-full object-contain"
-                />
-              </div>
-            )}
-
-            <p className="mt-4 text-[14px] leading-relaxed text-[rgb(var(--g600))]">{activeCert.description}</p>
-
-            <div className="mt-5 grid grid-cols-2 divide-x divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] py-3 font-mono text-[11px]">
-              <div className="pr-3">
-                <span className="block text-[9.5px] uppercase tracking-wider text-[rgb(var(--g400))]">Date</span>
-                <strong className="mt-1 block text-[rgb(var(--ink))]">{activeCert.date}</strong>
-              </div>
-              <div className="pl-3">
-                <span className="block text-[9.5px] uppercase tracking-wider text-[rgb(var(--g400))]">Status</span>
-                <strong className="mt-1 inline-flex items-center gap-1 text-[rgb(var(--accent))]">
-                  <CheckCircle2 size={12} aria-hidden="true" />
-                  <span>Verified Credential</span>
-                </strong>
-              </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-[rgb(var(--accent)/0.15)] px-3 py-0.5 font-mono text-[11px] font-semibold text-[rgb(var(--accent))]">
+                Official Credential Record
+              </span>
+              <span className="font-mono text-xs text-[rgb(var(--g500))]">{activeCert.date}</span>
             </div>
 
+            <h3 id="cert-dialog-title" className="mt-3 font-display-ui text-xl font-bold text-[rgb(var(--ink))]">
+              {activeCert.title}
+            </h3>
+
+            <p className="mt-1 font-mono text-xs text-[rgb(var(--accent))] font-medium">
+              Issued by {activeCert.issuer}
+            </p>
+
             {activeCert.credentialId && (
-              <div className="mt-3.5 flex items-center gap-2 rounded-lg border border-[rgb(var(--g200))] bg-[rgb(var(--g50))] px-3 py-2 font-mono text-[11px]">
-                <ShieldCheck size={14} className="text-[rgb(var(--accent))]" aria-hidden="true" />
-                <span className="text-[rgb(var(--g400))]">Credential ID:</span>
-                <span className="text-[rgb(var(--ink))] font-medium break-all">{activeCert.credentialId}</span>
-              </div>
+              <p className="mt-2 font-mono text-xs text-[rgb(var(--g500))] bg-[rgb(var(--bg))] px-2.5 py-1.5 rounded border border-[rgb(var(--g200))]">
+                <strong>ID:</strong> {activeCert.credentialId}
+              </p>
             )}
 
-            {activeCert.skills && activeCert.skills.length > 0 && (
-              <div className="mt-4">
-                <span className="micro-label block mb-2">Associated Skills</span>
-                <div className="flex flex-wrap gap-1.5">
-                  {activeCert.skills.map((skill) => (
-                    <span key={skill} className="bryl-tag-pill">
-                      {skill}
-                    </span>
-                  ))}
+            {/* Certificate Image Preview */}
+            {activeCert.image && !imgFailed && (
+              <div className="mt-4 overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--bg))]">
+                <div className="relative">
+                  <img
+                    src={activeCert.image}
+                    alt={`${activeCert.title} certificate issued by ${activeCert.issuer}`}
+                    className={`block w-full object-contain transition-transform duration-300 ${
+                      imgZoomed ? 'scale-150 cursor-zoom-out' : 'max-h-72 cursor-zoom-in'
+                    }`}
+                    onClick={() => setImgZoomed((z) => !z)}
+                    onError={() => setImgFailed(true)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setImgZoomed((z) => !z)}
+                    aria-label={imgZoomed ? 'Zoom out certificate image' : 'Zoom in certificate image'}
+                    className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 rounded bg-[rgb(var(--surface)/0.9)] px-2 py-1 font-mono text-[10.5px] text-[rgb(var(--ink))] shadow-sm backdrop-blur-xs hover:bg-[rgb(var(--surface))]"
+                  >
+                    <ZoomIn size={12} aria-hidden="true" />
+                    <span>{imgZoomed ? '100%' : 'Zoom'}</span>
+                  </button>
                 </div>
               </div>
             )}
+
+            <p className="mt-4 text-xs leading-relaxed text-[rgb(var(--g600))]">
+              {activeCert.description}
+            </p>
+
+            <div className="mt-4">
+              <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
+                Competencies Validated
+              </span>
+              <div className="mt-1.5 flex flex-wrap gap-1">
+                {activeCert.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-2 py-0.5 font-mono text-[10px] text-[rgb(var(--g600))]"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-4">
               {activeCert.credentialUrl ? (
@@ -197,14 +227,19 @@ export default function CertificationsSection() {
                   rel="noopener noreferrer"
                   className="bryl-btn-primary"
                 >
-                  <span>Verify Credential</span>
+                  <span>Verify at {activeCert.issuer.split(' ')[0]}</span>
                   <ExternalLink size={13} aria-hidden="true" />
                 </a>
               ) : (
-                <div />
+                <span className="font-mono text-xs text-[rgb(var(--g400))]">Verified Institutional Record</span>
               )}
-              <button type="button" onClick={closeModal} className="bryl-btn-secondary">
-                Close
+
+              <button
+                type="button"
+                onClick={closeModal}
+                className="bryl-btn-secondary"
+              >
+                <span>Close</span>
               </button>
             </div>
           </div>

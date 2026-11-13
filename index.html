@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b1017" />
+    <meta name="theme-color" content="#09090b" />
     <meta name="description" content="Gian Karlo C. Reguindin — 3rd Year BSCS student and aspiring web developer building thoughtful, user-friendly digital experiences." />
     <meta property="og:title" content="Gian Karlo C. Reguindin — Aspiring Web Developer" />
     <meta property="og:description" content="Personal portfolio and software engineering case studies by Gian Karlo C. Reguindin." />
@@ -40,7 +40,7 @@
           root.dataset.themePref = p;
           root.style.colorScheme = dark ? 'dark' : 'light';
           var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', dark ? '#0b1017' : '#f7f8f6');
+          if (meta) meta.setAttribute('content', dark ? '#09090b' : '#ffffff');
           window.dispatchEvent(new CustomEvent('gk-theme-change', { detail: { pref: p, dark: dark } }));
         }
         window.setPortfolioTheme = function (p, ev) {

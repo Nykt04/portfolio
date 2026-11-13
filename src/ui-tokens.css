@@ -1,27 +1,27 @@
-/* GK Architectural Blueprint — Custom Design Tokens
-   Deep Slate-Navy & Warm Drafting Paper with Electric Teal/Cyan Accents */
+/* GK Professional Monochrome — Custom Design Tokens
+   Pure Black & White with Calibrated Neutral Grayscale */
 
 :root {
   color-scheme: light;
 
-  /* Light Mode: Warm Architectural Paper + Deep Slate Ink + Teal Accent */
-  --bg: 247 248 246;
-  --surface: 255 255 255;
-  --ink: 15 23 34;
-  --accent: 13 148 136;       /* Teal 600 (#0d9488) — WCAG AA on light */
-  --accent-fg: 255 255 255;
-  --accent-soft: 204 251 241; /* Teal 100 */
-  --g50: 241 244 242;
-  --g100: 232 237 234;
-  --g200: 213 220 217;
-  --g300: 184 194 190;
-  --g400: 116 128 124;
-  --g500: 84 96 92;
-  --g600: 58 69 66;
-  --g700: 39 48 46;
-  --g800: 26 34 32;
-  --g900: 15 23 34;
-  --g950: 10 15 24;
+  /* Light Mode: Crisp White + Deep Pitch Black Ink + Solid Black Accent */
+  --bg: 250 250 250;          /* #fafafa Crisp Off-White Base */
+  --surface: 255 255 255;     /* #ffffff Pure Elevated Surface */
+  --ink: 9 9 11;              /* #09090b Deep Pitch Black */
+  --accent: 0 0 0;            /* #000000 Solid Black Accent */
+  --accent-fg: 255 255 255;   /* #ffffff Pure White Text on Accent */
+  --accent-soft: 244 244 245; /* #f4f4f5 */
+  --g50: 250 250 250;
+  --g100: 244 244 245;
+  --g200: 228 228 231;
+  --g300: 212 212 216;
+  --g400: 161 161 170;
+  --g500: 113 113 122;
+  --g600: 63 63 70;
+  --g700: 39 39 42;
+  --g800: 24 24 27;
+  --g900: 9 9 11;
+  --g950: 0 0 0;
 
   /* Semantic tokens */
   --ui-canvas: rgb(var(--bg));
@@ -56,22 +56,22 @@
 html.dark {
   color-scheme: dark;
 
-  /* Dark Mode: Deep Slate-Navy Foundation + Crisp Off-White + Cyan-Teal Accent (AGENTS.md) */
-  --bg: 11 16 23;             /* #0b1017 Deep Navy-Charcoal */
-  --surface: 17 24 35;        /* #111823 Elevated Slate-Navy */
-  --ink: 238 242 246;         /* #eef2f6 Readable Off-White */
-  --accent: 45 212 191;       /* #2dd4bf Restrained Teal/Cyan Accent */
-  --accent-fg: 11 16 23;
-  --accent-soft: 19 46 48;
-  --g50: 17 24 35;
-  --g100: 24 33 47;
-  --g200: 36 49 66;
-  --g300: 54 71 92;
-  --g400: 130 146 166;
-  --g500: 158 173 191;
-  --g600: 192 204 218;
-  --g700: 214 223 233;
-  --g800: 228 234 241;
-  --g900: 238 242 246;
-  --g950: 248 250 252;
+  /* Dark Mode: Deep Pitch Black + Elevated Charcoal + Solid White Accent */
+  --bg: 9 9 11;               /* #09090b Neutral Dark Foundation */
+  --surface: 18 18 20;        /* #121214 Clean Elevated Surface */
+  --ink: 250 250 250;         /* #fafafa Crisp Readable Pure White */
+  --accent: 255 255 255;      /* #ffffff Solid White Accent */
+  --accent-fg: 0 0 0;         /* #000000 Solid Black Text on Accent */
+  --accent-soft: 39 39 42;    /* #27272a */
+  --g50: 18 18 20;
+  --g100: 28 28 32;
+  --g200: 39 39 42;
+  --g300: 63 63 70;
+  --g400: 113 113 122;
+  --g500: 161 161 170;
+  --g600: 212 212 216;
+  --g700: 228 228 231;
+  --g800: 244 244 245;
+  --g900: 250 250 250;
+  --g950: 255 255 255;
 }
