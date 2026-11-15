@@ -93,10 +93,6 @@ const processSteps = [
   },
 ];
 
-function CornerTicks() {
-  return null;
-}
-
 function ThemeSwitcher() {
   const [pref, setPref] = useState<'system' | 'light' | 'dark'>(() => {
     const attr = document.documentElement.dataset.themePref;
@@ -164,16 +160,25 @@ export default function App() {
     const match = typeof window !== 'undefined' ? window.location.hash.match(/[?&]p=([^&]+)/) : null;
     return match ? match[1] : 'featured-project';
   });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [navDrawerOpen, setNavDrawerOpen] = useState(false);
   const [quickJumpOpen, setQuickJumpOpen] = useState(false);
   const [quickQuery, setQuickQuery] = useState('');
   const [activeSection, setActiveSection] = useState('home');
   const [activeProcess, setActiveProcess] = useState(0);
+  const [specsMode, setSpecsMode] = useState(false);
 
   const mainRef = useRef<HTMLElement>(null);
-  const mobileMenuBtnRef = useRef<HTMLButtonElement>(null);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const closeDrawerBtnRef = useRef<HTMLButtonElement>(null);
   const quickInputRef = useRef<HTMLInputElement>(null);
   const priorView = useRef(isCaseStudy);
+
+  const closeNavDrawer = (returnFocus = false) => {
+    setNavDrawerOpen(false);
+    if (returnFocus) {
+      requestAnimationFrame(() => menuBtnRef.current?.focus());
+    }
+  };
 
   // Sync hash navigation (#case-study vs #home/#work/etc.)
   useEffect(() => {
@@ -189,7 +194,7 @@ export default function App() {
 
       const applyState = () => {
         setIsCaseStudy(nextIsCase);
-        setMobileMenuOpen(false);
+        setNavDrawerOpen(false);
         setQuickJumpOpen(false);
       };
 
@@ -254,11 +259,20 @@ export default function App() {
     return () => observer.disconnect();
   }, [isCaseStudy, caseStudyId]);
 
-  // Global keyboard shortcuts: Alt+K / Cmd+K for Quick Jump, Escape for overlays
+  // Sync Architect's Blueprint Specs Overlay (Alt+I)
+  useEffect(() => {
+    document.documentElement.classList.toggle('specs-mode', specsMode);
+    return () => {
+      document.documentElement.classList.remove('specs-mode');
+    };
+  }, [specsMode]);
+
+  // Global keyboard shortcuts: Alt+K Quick Jump, Alt+I Specs Overlay, Escape closes overlays
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyK') {
         e.preventDefault();
+        setNavDrawerOpen(false);
         setQuickJumpOpen((prev) => {
           const next = !prev;
           if (next) setQuickQuery('');
@@ -266,18 +280,41 @@ export default function App() {
         });
         return;
       }
+      if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyI') {
+        e.preventDefault();
+        setSpecsMode((prev) => !prev);
+        return;
+      }
       if (e.key === 'Escape') {
         if (quickJumpOpen) {
           setQuickJumpOpen(false);
-        } else if (mobileMenuOpen) {
-          setMobileMenuOpen(false);
-          mobileMenuBtnRef.current?.focus();
+        } else if (navDrawerOpen) {
+          closeNavDrawer(true);
         }
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [quickJumpOpen, mobileMenuOpen]);
+  }, [quickJumpOpen, navDrawerOpen]);
+
+  useEffect(() => {
+    if (navDrawerOpen && window.innerWidth < 1024) {
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => closeDrawerBtnRef.current?.focus(), 30);
+    } else {
+      document.body.style.overflow = '';
+    }
+    const onResize = () => {
+      if (window.innerWidth >= 1024 && navDrawerOpen) {
+        setNavDrawerOpen(false);
+      }
+    };
+    window.addEventListener('resize', onResize);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('resize', onResize);
+    };
+  }, [navDrawerOpen]);
 
   useEffect(() => {
     if (quickJumpOpen) {
@@ -286,6 +323,163 @@ export default function App() {
   }, [quickJumpOpen]);
 
   const coreLogoSkills = ['Python', 'TypeScript', 'JavaScript', 'C'];
+  const activeNavItem = isCaseStudy
+    ? navItems.find((item) => item.isCaseLink) || navItems[2]
+    : navItems.find((item) => item.id === activeSection) || navItems[0];
+
+  const renderSideNav = (isDrawer: boolean) => (
+    <>
+      <div>
+        <div className="flex items-center justify-between border-b border-[rgb(var(--g200))] pb-3.5">
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[rgb(var(--accent))]" aria-hidden="true" />
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--g500))]">
+              Navigation
+            </span>
+          </div>
+          {isDrawer ? (
+            <button
+              ref={closeDrawerBtnRef}
+              type="button"
+              aria-label="Close navigation menu"
+              onClick={() => closeNavDrawer(true)}
+              className="inline-flex h-8 items-center gap-1.5 px-1 font-mono text-[11.5px] text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--ink))]"
+            >
+              <X size={14} aria-hidden="true" />
+              <span>Close</span>
+            </button>
+          ) : (
+            <span className="font-mono text-[10px] text-[rgb(var(--g400))]">00–06</span>
+          )}
+        </div>
+
+        <nav
+          aria-label={isDrawer ? 'Mobile navigation' : 'Main navigation'}
+          className="mt-4 flex flex-col gap-1 font-mono text-[12.5px]"
+        >
+          {navItems.map((item) => {
+            const Icon = item.Icon;
+            const isCurrent = item.isCaseLink
+              ? isCaseStudy
+              : !isCaseStudy && activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={isCurrent ? 'location' : undefined}
+                onClick={isDrawer ? () => closeNavDrawer(false) : undefined}
+                className={`group flex items-center justify-between border-l-2 py-2 pl-3 pr-1 transition-colors ${
+                  isCurrent
+                    ? 'border-[rgb(var(--accent))] font-semibold text-[rgb(var(--ink))]'
+                    : 'border-transparent text-[rgb(var(--g500))] hover:border-[rgb(var(--g300))] hover:text-[rgb(var(--ink))]'
+                }`}
+              >
+                <span className="inline-flex items-center gap-2.5">
+                  <Icon
+                    size={15}
+                    strokeWidth={isCurrent ? 2 : 1.7}
+                    aria-hidden="true"
+                    className={
+                      isCurrent
+                        ? 'text-[rgb(var(--accent))]'
+                        : 'text-[rgb(var(--g400))] group-hover:text-[rgb(var(--ink))]'
+                    }
+                  />
+                  <span>{item.label}</span>
+                </span>
+                <span className={`text-[10.5px] ${isCurrent ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'}`}>
+                  {item.num}
+                </span>
+              </a>
+            );
+          })}
+        </nav>
+      </div>
+
+      <div className="mt-6 border-t border-[rgb(var(--g200))] pt-4 font-mono text-[12px]">
+        {/* Jump Search, Specs Overlay & Theme Switcher above Direct Contact */}
+        <div className="mb-4 space-y-2.5 border-b border-[rgb(var(--g200))] pb-4">
+          <button
+            type="button"
+            onClick={() => {
+              if (isDrawer) closeNavDrawer(false);
+              setQuickQuery('');
+              setQuickJumpOpen(true);
+            }}
+            aria-label="Open quick navigation command palette"
+            className="flex w-full items-center justify-between py-1 text-[11.5px] text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--ink))]"
+          >
+            <span className="inline-flex items-center gap-2">
+              <Search size={13} aria-hidden="true" className="text-[rgb(var(--accent))]" />
+              <span>Jump Search</span>
+            </span>
+            <span className="text-[10px] text-[rgb(var(--g400))]">Alt+K</span>
+          </button>
+
+          <button
+            type="button"
+            aria-pressed={specsMode}
+            onClick={() => setSpecsMode((prev) => !prev)}
+            className="flex w-full items-center justify-between py-1 text-[11.5px] text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--ink))]"
+          >
+            <span className="inline-flex items-center gap-2">
+              <ScanLine
+                size={13}
+                aria-hidden="true"
+                className={specsMode ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'}
+              />
+              <span className={specsMode ? 'font-semibold text-[rgb(var(--ink))]' : ''}>Specs Lens</span>
+            </span>
+            <span className={`text-[10px] ${specsMode ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'}`}>
+              {specsMode ? 'ON' : 'Alt+I'}
+            </span>
+          </button>
+
+          <div className="flex items-center justify-between">
+            <span className="text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">Theme</span>
+            <ThemeSwitcher />
+          </div>
+        </div>
+
+        <p className="text-[10px] uppercase tracking-wider text-[rgb(var(--g400))]">Direct Contact</p>
+        {p.contact.email && (
+          <a
+            href={`mailto:${p.contact.email}`}
+            className="mt-1.5 flex w-full min-w-0 items-center gap-1.5 text-[10.5px] text-[rgb(var(--ink))] hover:underline"
+          >
+            <Mail size={12} aria-hidden="true" className="shrink-0 text-[rgb(var(--accent))]" />
+            <span className="truncate">{p.contact.email}</span>
+          </a>
+        )}
+        <div className="mt-3 flex items-center gap-3">
+          {p.contact.github && (
+            <a
+              href={p.contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile (opens in a new tab)"
+              className="inline-flex items-center gap-1.5 text-[11px] text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--ink))]"
+            >
+              <Github size={14} aria-hidden="true" />
+              <span>GitHub</span>
+            </a>
+          )}
+          {p.contact.linkedin && (
+            <a
+              href={p.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile (opens in a new tab)"
+              className="inline-flex items-center gap-1.5 text-[11px] text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--ink))]"
+            >
+              <Linkedin size={14} aria-hidden="true" />
+              <span>LinkedIn</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -296,157 +490,96 @@ export default function App() {
       {/* Architectural Blueprint Drafting Grid Backdrop (GK signature) */}
       <div aria-hidden="true" className="blueprint-backdrop pointer-events-none fixed inset-0 z-0" />
 
-      {/* Top Floating Command Deck Header (replaces Bryl's left sidebar) */}
-      <header className="sticky top-0 z-50 border-b border-[rgb(var(--g200))] bg-[rgb(var(--bg)/0.85)] backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-3 sm:px-6">
-          {/* Brand Monogram & Telemetry */}
+      {/* Minimal Editorial Top Navbar */}
+      <header className="sticky top-0 z-50 border-b border-[rgb(var(--g200))] bg-[rgb(var(--bg)/0.85)] backdrop-blur-md lg:mr-64">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+          {/* Brand Monogram & Identity */}
           <a
             href="#home"
-            className="group flex shrink-0 items-center gap-2.5 whitespace-nowrap text-[rgb(var(--ink))] focus:outline-none"
+            className="group flex shrink-0 items-baseline gap-2 whitespace-nowrap text-[rgb(var(--ink))] focus:outline-none"
           >
-            <span
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[rgb(var(--accent))] font-mono text-[12px] font-bold tracking-tight text-[rgb(var(--accent-fg))] shadow-sm transition-transform group-hover:scale-105"
-              aria-hidden="true"
-            >
+            <span className="font-mono text-[14px] font-bold tracking-tight text-[rgb(var(--accent))]">
               gk.
             </span>
-            <div className="leading-none">
-              <span className="block whitespace-nowrap font-pixel text-[14px] font-bold tracking-tight text-[rgb(var(--ink))]">
-                {p.shortName}
-              </span>
-              <span className="mt-1 block whitespace-nowrap font-mono text-[10px] text-[rgb(var(--g400))]">
-                {p.course}
-              </span>
-            </div>
+            <span className="font-pixel text-[15px] font-bold tracking-tight text-[rgb(var(--ink))]">
+              {p.shortName}
+            </span>
           </a>
 
-          {/* Desktop Section Command Pills */}
-          <nav
-            aria-label="Main navigation"
-            className="hidden items-center gap-0.5 rounded-full border border-[rgb(var(--g200))] bg-[rgb(var(--surface)/0.9)] p-1 lg:flex"
-          >
-            {navItems.map((item) => {
-              const isCurrent = item.isCaseLink
-                ? isCaseStudy
-                : !isCaseStudy && activeSection === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  aria-current={isCurrent ? 'location' : undefined}
-                  className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 font-mono text-[11px] transition-colors ${
-                    isCurrent
-                      ? 'bg-[rgb(var(--accent)/0.14)] font-semibold text-[rgb(var(--accent))] ring-1 ring-[rgb(var(--accent)/0.45)]'
-                      : 'text-[rgb(var(--g500))] hover:bg-[rgb(var(--g100))] hover:text-[rgb(var(--ink))]'
-                  }`}
-                >
-                  <span className="text-[9px] opacity-65">{item.num}</span>
-                  <span>{item.label}</span>
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Right Controls: Quick Jump (Alt+K), Theme Switcher, Mobile Menu */}
-          <div className="flex shrink-0 items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setQuickQuery('');
-                setQuickJumpOpen(true);
-              }}
-              aria-label="Open quick navigation command palette"
-              className="hidden items-center gap-2 rounded-lg border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] px-2.5 py-1.5 font-mono text-[11px] text-[rgb(var(--g500))] transition-colors hover:border-[rgb(var(--accent)/0.5)] hover:text-[rgb(var(--ink))] sm:inline-flex"
-            >
-              <Search size={12} aria-hidden="true" className="text-[rgb(var(--accent))]" />
-              <span>Jump</span>
-              <kbd className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--g50))] px-1 py-0.5 text-[9.5px] leading-none text-[rgb(var(--g400))]">
-                Alt+K
-              </kbd>
-            </button>
-
-            <ThemeSwitcher />
+          {/* Desktop Editorial Telemetry (Section & Availability) + Mobile Menu Trigger */}
+          <div className="flex shrink-0 items-center gap-4">
+            <div className="hidden items-center gap-3 font-mono text-[11px] lg:flex">
+              <span className="text-[rgb(var(--g500))]">
+                {activeNavItem.num} ·{' '}
+                <strong className="font-medium text-[rgb(var(--ink))]">{activeNavItem.label}</strong>
+              </span>
+              <span className="text-[rgb(var(--g300))]" aria-hidden="true">
+                /
+              </span>
+              <span className="inline-flex items-center gap-2 text-[rgb(var(--g500))]">
+                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-[rgb(var(--accent))]" aria-hidden="true" />
+                <span>Available for Projects</span>
+              </span>
+            </div>
 
             <button
-              ref={mobileMenuBtnRef}
+              ref={menuBtnRef}
               type="button"
-              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-nav"
-              onClick={() => setMobileMenuOpen((v) => !v)}
-              className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] px-2.5 font-mono text-[11.5px] text-[rgb(var(--ink))] lg:hidden"
+              aria-label={navDrawerOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={navDrawerOpen}
+              aria-controls="side-nav-drawer"
+              onClick={() => setNavDrawerOpen((v) => !v)}
+              className="inline-flex h-9 items-center gap-1.5 px-1 font-mono text-[12px] text-[rgb(var(--ink))] transition-colors hover:text-[rgb(var(--accent))] lg:hidden"
             >
-              {mobileMenuOpen ? <X size={15} aria-hidden="true" /> : <Menu size={15} aria-hidden="true" />}
-              <span>{mobileMenuOpen ? 'close' : 'menu'}</span>
+              {navDrawerOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
+              <span>{navDrawerOpen ? 'Close' : 'Menu'}</span>
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Full-Screen Overlay Menu */}
-      {mobileMenuOpen && (
-        <div
-          id="mobile-nav"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-          className="fixed inset-0 z-40 flex flex-col justify-between overflow-y-auto bg-[rgb(var(--bg)/0.97)] px-6 pt-20 pb-8 backdrop-blur-lg lg:hidden"
-        >
-          <nav aria-label="Mobile sections" className="flex flex-col gap-3 font-mono text-[14px]">
-            {navItems.map((item) => {
-              const Icon = item.Icon;
-              const isCurrent = item.isCaseLink
-                ? isCaseStudy
-                : !isCaseStudy && activeSection === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between rounded-xl border px-4 py-3 transition-colors ${
-                    isCurrent
-                      ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent)/0.1)] text-[rgb(var(--accent))]'
-                      : 'border-[rgb(var(--g200))] bg-[rgb(var(--surface))] text-[rgb(var(--ink))]'
-                  }`}
-                >
-                  <span className="inline-flex items-center gap-3">
-                    <Icon size={16} strokeWidth={1.7} aria-hidden="true" />
-                    <span>{item.label}</span>
-                  </span>
-                  <span className="font-mono text-[11px] text-[rgb(var(--g400))]">{item.num}</span>
-                </a>
-              );
-            })}
-          </nav>
+      {/* Always-Open Right Sidebar (Desktop) */}
+      <aside
+        aria-label="Site navigation"
+        className="hidden lg:fixed lg:inset-y-0 lg:right-0 lg:z-50 lg:flex lg:w-64 lg:flex-col lg:justify-between lg:overflow-y-auto lg:border-l lg:border-[rgb(var(--g200))] lg:bg-[rgb(var(--bg)/0.94)] lg:px-4 lg:py-5 lg:backdrop-blur-md"
+      >
+        {renderSideNav(false)}
+      </aside>
 
-          <div className="mt-8 border-t border-[rgb(var(--g200))] pt-5 font-mono text-[12px]">
-            <p className="text-[rgb(var(--g400))]">Direct Engineering Contact</p>
-            {p.contact.email && (
-              <a
-                href={`mailto:${p.contact.email}`}
-                className="mt-1.5 inline-flex items-center gap-2 text-[rgb(var(--accent))]"
-              >
-                <Mail size={14} aria-hidden="true" />
-                <span>{p.contact.email}</span>
-              </a>
-            )}
-          </div>
+      {/* Mobile / Tablet Slide-Out Navigation Drawer */}
+      {navDrawerOpen && (
+        <div
+          className="side-drawer-backdrop lg:hidden"
+          onClick={() => closeNavDrawer(true)}
+        >
+          <aside
+            id="side-nav-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            className="side-drawer-panel"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {renderSideNav(true)}
+          </aside>
         </div>
       )}
 
       {/* Main Content Container */}
-      <main id="main" ref={mainRef} tabIndex={-1} className="relative z-10">
+      <main id="main" ref={mainRef} tabIndex={-1} className="relative z-10 lg:pr-64">
         {isCaseStudy ? (
           <CaseStudyView projectId={caseStudyId} />
         ) : (
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            {/* 00 — ASYMMETRIC BENTO HERO SECTION (GK Architectural Blueprint Studio) */}
-            <section id="home" className="relative pt-8 pb-14 sm:pt-12">
-              <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-stretch">
-                {/* Left 7-Column Architectural Hero Card */}
-                <div className="gk-blueprint-card flex flex-col justify-between p-6 sm:p-7 lg:col-span-7">
-                  <CornerTicks />
-
+            {/* 00 — EDITORIAL HERO SECTION (Hairline Divided) */}
+            <section
+              id="home"
+              data-spec="<section#home> · 12-Col Split · Dual Typography"
+              className="relative pt-8 pb-14 sm:pt-12"
+            >
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch">
+                {/* Left 7-Column Editorial Hero */}
+                <div className="flex flex-col justify-between lg:col-span-7">
                   <div>
                     {/* Top Status Row */}
                     <div className="reveal d1 flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3.5">
@@ -456,23 +589,23 @@ export default function App() {
                           Available for Projects &amp; Collaborations
                         </span>
                       </div>
-                      <span className="rounded-full border border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.1)] px-2.5 py-0.5 font-mono text-[10.5px] font-semibold text-[rgb(var(--accent))]">
-                        {p.course} · Gordon College
+                      <span className="font-mono text-[11px] font-medium text-[rgb(var(--g500))]">
+                        Gordon College
                       </span>
                     </div>
 
                     {/* Display Name & Role */}
                     <div className="reveal d2 mt-5">
-                      <span className="font-mono text-[11px] font-medium uppercase tracking-wider text-[rgb(var(--accent))]">
-                        Aspiring Web Developer &amp; Software Engineer
-                      </span>
-                      <h1 className="mt-1 font-pixel text-3xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-[2.5rem] sm:leading-[1.1]">
+                      <h1 className="font-pixel text-3xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-[2.6rem] sm:leading-[1.08]">
                         {p.name}
                       </h1>
+                      <p className="mt-1.5 font-mono text-[11.5px] font-medium uppercase tracking-wider text-[rgb(var(--accent))]">
+                        Aspiring Web Developer &amp; Software Engineer
+                      </p>
                     </div>
 
-                    {/* Required AGENTS.md Introduction Quote in Architectural Callout */}
-                    <blockquote className="reveal d3 mt-4 border-l-2 border-[rgb(var(--accent))] bg-[rgb(var(--g50)/0.75)] py-2.5 pl-4 pr-3 text-[14.5px] font-medium leading-relaxed text-[rgb(var(--ink))]">
+                    {/* Required AGENTS.md Introduction Quote (Editorial Serif Contrast) */}
+                    <blockquote className="reveal d3 mt-5 border-l border-[rgb(var(--g300))] py-0.5 pl-4 font-serif-ui text-[16.5px] italic leading-relaxed text-[rgb(var(--ink))]">
                       “{p.introduction}”
                     </blockquote>
 
@@ -593,79 +726,9 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Right 5-Column Studio Pass Portrait Card */}
-                <div className="lg:col-span-5">
+                {/* Right 5-Column Studio Portrait (Divided by Vertical Hairline on Desktop) */}
+                <div className="border-t border-[rgb(var(--g200))] pt-6 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                   <Portrait className="h-full" />
-                </div>
-              </div>
-
-              {/* Full-Width Visual Preview of Featured Software Engineering Project (AGENTS.md requirement) */}
-              <div className="reveal d6 mt-5">
-                <div className="gk-blueprint-card p-5 sm:p-6">
-                  <CornerTicks />
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
-                        FEATURED CASE STUDY
-                      </span>
-                      <span className="font-mono text-[10.5px] text-[rgb(var(--g400))]">
-                        · {projects[0].category}
-                      </span>
-                    </div>
-                    <span className="font-mono text-[10.5px] text-[rgb(var(--g500))]">
-                      Lead Developer &amp; Project Manager
-                    </span>
-                  </div>
-
-                  <div className="mt-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
-                    <div className="max-w-2xl">
-                      <div className="flex items-center gap-2.5">
-                        <span
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[rgb(var(--accent)/0.4)] bg-[rgb(var(--accent)/0.1)] font-mono text-xs font-bold text-[rgb(var(--accent))]"
-                          aria-hidden="true"
-                        >
-                          {p.project.name.slice(0, 2)}
-                        </span>
-                        <h2 className="font-pixel text-xl font-bold text-[rgb(var(--ink))]">
-                          {p.project.name}
-                        </h2>
-                      </div>
-                      <p className="mt-2 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
-                        {p.project.description}
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {p.project.technologies.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--g50))] px-2 py-0.5 font-mono text-[10.5px] text-[rgb(var(--g600))]"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex shrink-0 flex-wrap items-center gap-2.5 pt-1 md:pt-0">
-                      <a
-                        href="#case-study"
-                        className="bryl-btn-primary"
-                      >
-                        <span>Inspect Full Case Study</span>
-                        <ArrowUpRight size={14} aria-hidden="true" />
-                      </a>
-                      {p.project.liveDemo && (
-                        <a
-                          href={p.project.liveDemo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bryl-btn-secondary"
-                        >
-                          <span>Live Demo</span>
-                          <ExternalLink size={13} aria-hidden="true" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
                 </div>
               </div>
             </section>
@@ -676,6 +739,7 @@ export default function App() {
             {/* 02 — ABOUT & PROJECT RESPONSIBILITIES SECTION */}
             <section
               id="about"
+              data-spec="<section#about> · Roles: PM / Dev / QA / BA"
               className="relative py-16 border-t border-[rgb(var(--g200))]"
               aria-labelledby="about-title"
             >
@@ -689,10 +753,9 @@ export default function App() {
                 <span className="micro-label">background · team roles · process</span>
               </div>
 
-              {/* 2-Column Bio + Academic Telemetry Bento */}
-              <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-                <div className="gk-blueprint-card p-6 lg:col-span-7">
-                  <CornerTicks />
+              {/* 2-Column Bio + Academic Background (Divided by Vertical Hairline on Desktop) */}
+              <div className="grid grid-cols-1 gap-8 border-t border-[rgb(var(--g200))] pt-7 lg:grid-cols-12">
+                <div className="lg:col-span-7">
                   <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                     About Gian Karlo
                   </span>
@@ -704,8 +767,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="gk-blueprint-card flex flex-col justify-between p-6 lg:col-span-5">
-                  <CornerTicks />
+                <div className="flex flex-col justify-between border-t border-[rgb(var(--g200))] pt-6 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                   <div>
                     <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                       Academic Background
@@ -730,15 +792,15 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Areas of Project Responsibility (Compact Monochrome Strip) */}
-              <div className="mt-8">
+              {/* Areas of Project Responsibility (Divided by Hairlines) */}
+              <div className="mt-10">
                 <h3 className="micro-label mb-3">Areas of Project Responsibility</h3>
 
-                <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--g200))] sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 lg:divide-x">
                   {p.roles.map((role, idx) => (
                     <div
                       key={role.title}
-                      className="bg-[rgb(var(--surface))] p-4 transition-colors hover:bg-[rgb(var(--g50))]"
+                      className="py-4 sm:px-4 lg:first:pl-0 lg:last:pr-0"
                     >
                       <div className="flex items-baseline gap-2">
                         <span className="font-mono text-[10.5px] font-medium text-[rgb(var(--g400))]">
@@ -756,7 +818,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Engineering & UI/UX Workflow Interactive Blueprint */}
+              {/* Engineering & UI/UX Workflow Interactive Blueprint (Hairline Divided) */}
               <div className="mt-10">
                 <div className="mb-4 flex items-baseline justify-between">
                   <h3 className="micro-label">Engineering &amp; UI/UX Workflow</h3>
@@ -766,7 +828,7 @@ export default function App() {
                 </div>
 
                 <div
-                  className="grid grid-cols-2 gap-2.5 sm:grid-cols-4"
+                  className="grid grid-cols-2 divide-x divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] sm:grid-cols-4 sm:divide-y-0"
                   role="tablist"
                   aria-label="Engineering workflow steps"
                 >
@@ -779,10 +841,10 @@ export default function App() {
                         role="tab"
                         aria-selected={selected}
                         onClick={() => setActiveProcess(idx)}
-                        className={`rounded-xl border p-3.5 text-left transition-all ${
+                        className={`border-b-2 px-3 py-3.5 text-left transition-colors ${
                           selected
-                            ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent)/0.12)] text-[rgb(var(--ink))] shadow-sm'
-                            : 'border-[rgb(var(--g200))] bg-[rgb(var(--surface))] text-[rgb(var(--ink))] hover:border-[rgb(var(--accent)/0.45)]'
+                            ? 'border-b-[rgb(var(--accent))] text-[rgb(var(--ink))]'
+                            : 'border-b-transparent text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]'
                         }`}
                       >
                         <span
@@ -806,9 +868,8 @@ export default function App() {
                   return (
                     <div
                       role="tabpanel"
-                      className="gk-blueprint-card mt-3 p-5 sm:p-6"
+                      className="pt-5"
                     >
-                      <CornerTicks />
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
                           {step.detail}
@@ -830,6 +891,7 @@ export default function App() {
             {/* 03 — STACK & SKILLS SECTION */}
             <section
               id="toolkit"
+              data-spec="<section#toolkit> · Filterable Stack Matrix"
               className="py-16 border-t border-[rgb(var(--g200))]"
               aria-labelledby="toolkit-title"
             >
@@ -859,12 +921,12 @@ export default function App() {
             <footer className="border-t border-[rgb(var(--g200))] py-10 font-mono text-[11.5px] text-[rgb(var(--g500))]">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2.5">
-                  <span className="inline-flex h-5 w-5 items-center justify-center rounded bg-[rgb(var(--accent))] font-mono text-[10px] font-bold text-[rgb(var(--accent-fg))]">
-                    gk
+                  <span className="font-mono text-xs font-bold text-[rgb(var(--accent))]">
+                    gk.
                   </span>
                   <span className="font-pixel text-xs font-bold text-[rgb(var(--ink))]">{p.name}</span>
                   <span className="text-[rgb(var(--g400))]">
-                    © {new Date().getFullYear()} · {p.course}
+                    © {new Date().getFullYear()} · {p.title}
                   </span>
                 </div>
                 <a
@@ -909,7 +971,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setQuickJumpOpen(false)}
-                className="rounded border border-[rgb(var(--g200))] px-1.5 py-0.5 font-mono text-[10px] text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]"
+                className="px-1 font-mono text-[10.5px] text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]"
               >
                 ESC
               </button>
@@ -957,6 +1019,20 @@ export default function App() {
                     ))}
                 </div>
               </div>
+              <div>
+                <span className="micro-label block mb-2">Interactive Modes</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSpecsMode((prev) => !prev);
+                    setQuickJumpOpen(false);
+                  }}
+                  className="flex w-full items-center justify-between rounded-md px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
+                >
+                  <span>{specsMode ? 'Disable Specs Lens' : 'Enable Specs Lens'}</span>
+                  <span className="text-[10.5px] text-[rgb(var(--accent))]">Alt+I</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -968,7 +1044,8 @@ export default function App() {
 const FALLBACK_GH_LEVELS =
   '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000002000000200000000000000000000000000000001000000000004110000000000013003001001020111100401200000000000000000000000000000000000000000230100000000000000000000000000000000020000011011000000000000000000000000000000000000100000010000002110000000000000000010010440';
 
-const GH_TILE_OPACITY = [0.55, 0.28, 0.5, 0.75, 1] as const;
+const GH_TILE_OPACITY = [0.42, 0.45, 0.65, 0.85, 1] as const;
+const GH_DOT_RADIUS = [1.3, 2.2, 3.0, 3.8, 4.6] as const;
 
 interface GhDay {
   date?: string;
@@ -1025,6 +1102,7 @@ function GitHubSection() {
   return (
     <section
       id="github"
+      data-spec="<section#github> · Halftone Contribution Matrix"
       className="py-16 border-t border-[rgb(var(--g200))]"
       aria-labelledby="github-title"
     >
@@ -1046,9 +1124,7 @@ function GitHubSection() {
         </a>
       </div>
 
-      <div className="gk-blueprint-card p-5 sm:p-6">
-        <CornerTicks />
-
+      <div className="border-t border-[rgb(var(--g200))] pt-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3">
           <div className="flex items-center gap-2">
             <Github size={15} className="text-[rgb(var(--accent))]" aria-hidden="true" />
@@ -1073,27 +1149,27 @@ function GitHubSection() {
             className="h-auto min-w-[540px] w-full"
             preserveAspectRatio="xMidYMid meet"
             role="img"
-            aria-label="GitHub contribution heatmap matrix"
+            aria-label="Halftone GitHub contribution matrix"
           >
             {cells.map(({ w, d, day }, idx) => {
-              const isZero = day.level === 0;
-              const fill = isZero ? 'rgb(var(--g200))' : 'rgb(var(--accent))';
-              const opacity = GH_TILE_OPACITY[day.level] ?? 0.55;
+              const lvl = Math.min(4, Math.max(0, day.level));
+              const isZero = lvl === 0;
+              const fill = isZero ? 'rgb(var(--g300))' : 'rgb(var(--accent))';
+              const opacity = GH_TILE_OPACITY[lvl] ?? 0.42;
+              const radius = GH_DOT_RADIUS[lvl] ?? 1.3;
               return (
-                <rect
+                <circle
                   key={idx}
-                  x={w * 13 + 1.5}
-                  y={d * 13 + 1.5}
-                  width={10}
-                  height={10}
-                  rx={2.5}
+                  cx={w * 13 + 6.5}
+                  cy={d * 13 + 6.5}
+                  r={radius}
                   fill={fill}
                   opacity={opacity}
                 >
                   {day.date && (
                     <title>{`${day.count ?? 0} contributions on ${day.date}`}</title>
                   )}
-                </rect>
+                </circle>
               );
             })}
           </svg>
@@ -1109,14 +1185,12 @@ function GitHubSection() {
           >
             <span>less</span>
             {[0, 1, 2, 3, 4].map((lvl) => (
-              <svg key={lvl} width="11" height="11" viewBox="0 0 11 11">
-                <rect
-                  x="0.5"
-                  y="0.5"
-                  width="10"
-                  height="10"
-                  rx="2.5"
-                  fill={lvl === 0 ? 'rgb(var(--g200))' : 'rgb(var(--accent))'}
+              <svg key={lvl} width="12" height="12" viewBox="0 0 12 12">
+                <circle
+                  cx="6"
+                  cy="6"
+                  r={GH_DOT_RADIUS[lvl]}
+                  fill={lvl === 0 ? 'rgb(var(--g300))' : 'rgb(var(--accent))'}
                   opacity={GH_TILE_OPACITY[lvl]}
                 />
               </svg>
@@ -1156,6 +1230,7 @@ function ContactSection() {
   return (
     <section
       id="contact"
+      data-spec="<section#contact> · Direct Channels + Email Clipboard"
       className="py-16 border-t border-[rgb(var(--g200))]"
       aria-labelledby="contact-title"
     >
@@ -1169,9 +1244,8 @@ function ContactSection() {
         <span className="micro-label">direct communication</span>
       </div>
 
-      <div className="gk-blueprint-card p-6 sm:p-8">
-        <CornerTicks />
-        <div className="relative z-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
+      <div className="border-t border-[rgb(var(--g200))] pt-7">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <span className="font-mono text-[10px] uppercase tracking-widest text-[rgb(var(--accent))]">
               CHANNEL // OPEN FOR OPPORTUNITIES
@@ -1204,15 +1278,15 @@ function ContactSection() {
                   </span>
                 </>
               ) : (
-                <div className="rounded-lg border border-dashed border-[rgb(var(--g300))] px-4 py-2.5 font-mono text-[12px] text-[rgb(var(--g500))]">
+                <div className="border-l-2 border-[rgb(var(--g300))] pl-3 font-mono text-[12px] text-[rgb(var(--g500))]">
                   [Email Placeholder — Add in src/portfolio.ts]
                 </div>
               )}
             </div>
           </div>
 
-          {/* GitHub & LinkedIn Rows */}
-          <div className="flex flex-col gap-3 lg:col-span-5">
+          {/* GitHub & LinkedIn Rows (Divided by Hairlines) */}
+          <div className="divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] lg:col-span-5 lg:border-l lg:pl-8">
             {links.map(({ name, handle, url, Icon }) =>
               url ? (
                 <a
@@ -1221,7 +1295,7 @@ function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${name} (${handle}, opens in a new tab)`}
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-4 py-3.5 transition-colors hover:border-[rgb(var(--accent))]"
+                  className="group flex items-center justify-between gap-3 py-4 transition-colors hover:text-[rgb(var(--accent))]"
                 >
                   <span className="inline-flex items-center gap-2.5 text-[14px] font-semibold text-[rgb(var(--ink))]">
                     <Icon size={16} strokeWidth={1.7} aria-hidden="true" className="text-[rgb(var(--accent))]" />
@@ -1239,7 +1313,7 @@ function ContactSection() {
               ) : (
                 <div
                   key={name}
-                  className="flex items-center justify-between gap-3 rounded-xl border border-dashed border-[rgb(var(--g300))] px-4 py-3.5 font-mono text-[12px] text-[rgb(var(--g400))]"
+                  className="flex items-center justify-between gap-3 py-4 font-mono text-[12px] text-[rgb(var(--g400))]"
                 >
                   <span className="inline-flex items-center gap-2">
                     <Icon size={15} aria-hidden="true" />
@@ -1273,7 +1347,7 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
           <span>back to projects</span>
         </a>
 
-        <div className="flex flex-wrap items-center gap-1.5" role="navigation" aria-label="Switch project case study">
+        <div className="flex flex-wrap items-center gap-4" role="navigation" aria-label="Switch project case study">
           {projects.slice(0, 4).map((item) => {
             const active = item.id === currentProject.id;
             return (
@@ -1281,10 +1355,10 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
                 key={item.id}
                 href={item.caseStudy}
                 aria-current={active ? 'page' : undefined}
-                className={`rounded-full px-3 py-1 font-mono text-[11px] transition-colors ${
+                className={`py-1 font-mono text-[11.5px] transition-colors ${
                   active
-                    ? 'bg-[rgb(var(--accent))] text-[rgb(var(--accent-fg))] font-semibold'
-                    : 'border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] text-[rgb(var(--g500))] hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--ink))]'
+                    ? 'font-semibold text-[rgb(var(--ink))] underline decoration-[rgb(var(--accent))] decoration-2 underline-offset-[6px]'
+                    : 'text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]'
                 }`}
               >
                 {item.name}
@@ -1295,12 +1369,12 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
       </div>
 
       {/* Case Study Header */}
-      <header className="gk-blueprint-card mt-8 p-6 sm:p-8">
-        <CornerTicks />
+      <header className="mt-8 border-b border-[rgb(var(--g200))] pb-6">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="bryl-chip-inverted">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
             {currentProject.featured ? 'Featured Case Study' : 'Project Case Study'}
           </span>
+          <span className="font-mono text-xs text-[rgb(var(--g400))]" aria-hidden="true">·</span>
           <span className="micro-label">{currentProject.category}</span>
         </div>
 
@@ -1339,7 +1413,7 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
       {/* Table of Contents Jump Bar */}
       <nav
         aria-label="Case study contents"
-        className="mt-8 flex flex-wrap items-center gap-2 rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] px-4 py-3 font-mono text-[11px]"
+        className="mt-8 flex flex-wrap items-center gap-2 border-y border-[rgb(var(--g200))] py-3 font-mono text-[11px]"
       >
         <span className="micro-label mr-2 text-[rgb(var(--accent))]">CONTENTS:</span>
         <a href="#case-study-overview" className="underline decoration-[rgb(var(--g300))] underline-offset-4 hover:text-[rgb(var(--accent))]">
@@ -1377,16 +1451,15 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
 
               <p className="case-prose">{section.prompt}</p>
 
-              {/* Illustrative Target Persona Card */}
+              {/* Illustrative Target Persona (Hairline Divided) */}
               {section.id === 'problem' && currentProject.persona && (
                 <div
-                  className="gk-blueprint-card mt-6 p-5 sm:p-6"
+                  className="mt-6 border-y border-[rgb(var(--g200))] py-5"
                   aria-label={`Illustrative Target Persona: ${currentProject.persona.name}`}
                 >
-                  <CornerTicks />
                   <div className="flex flex-wrap items-center gap-3.5 border-b border-[rgb(var(--g200))] pb-4">
-                    <div
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgb(var(--accent)/0.4)] bg-[rgb(var(--accent)/0.1)] font-pixel text-xs font-bold text-[rgb(var(--accent))]"
+                    <span
+                      className="font-pixel text-sm font-bold text-[rgb(var(--accent))]"
                       aria-hidden="true"
                     >
                       {currentProject.persona.name
@@ -1394,7 +1467,7 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
                         .map((n) => n[0])
                         .slice(0, 2)
                         .join('')}
-                    </div>
+                    </span>
                     <div>
                       <span className="micro-label text-[rgb(var(--accent))]">Illustrative Target Persona</span>
                       <h3 className="text-[15px] font-semibold text-[rgb(var(--ink))]">
@@ -1501,8 +1574,7 @@ function CaseStudyView({ projectId = 'featured-project' }: { projectId?: string 
       </div>
 
       {/* Project Links & Footer CTA */}
-      <section className="gk-blueprint-card mt-8 p-6">
-        <CornerTicks />
+      <section className="mt-8 border-t border-[rgb(var(--g200))] pt-6">
         <h2 className="font-pixel text-base font-bold text-[rgb(var(--ink))]">
           Project Links &amp; Verification
         </h2>

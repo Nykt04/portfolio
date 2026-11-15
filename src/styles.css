@@ -179,10 +179,10 @@ svg {
   color: rgb(var(--g500));
 }
 
-/* Hero inline pill tags & core language micro-badges */
+/* Hero inline emphasis & core language icons (unboxed) */
 .intro-copy {
   font-size: 14.5px;
-  line-height: 1.9;
+  line-height: 1.85;
   color: rgb(var(--g600));
 }
 .intro-tag,
@@ -190,41 +190,31 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  vertical-align: -2px;
-  padding: 0.1rem 0.5rem;
-  border-radius: 6px;
-  border: 1px solid rgb(var(--g200));
-  background: rgb(var(--g50));
   color: rgb(var(--ink));
   font-family: var(--ui-font-mono);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   line-height: 1.4;
 }
 .intro-logos {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 5px;
   margin-right: 2px;
 }
 .intro-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  border: 1px solid rgb(var(--accent) / 0.35);
-  background: rgb(var(--accent) / 0.12);
   color: rgb(var(--accent));
 }
 .intro-logo svg {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   fill: currentColor;
 }
 
-/* Section header with teal index badge */
+/* Section header with monospace index */
 .section-index-title {
   display: inline-flex;
   align-items: center;
@@ -239,26 +229,65 @@ svg {
 .section-index-badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.15rem 0.48rem;
-  border-radius: 5px;
-  background: rgb(var(--accent) / 0.14);
-  border: 1px solid rgb(var(--accent) / 0.35);
   color: rgb(var(--accent));
   font-family: var(--ui-font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+}
+.section-index-badge::after {
+  content: '/';
+  margin-left: 0.45rem;
+  color: rgb(var(--g300));
+  font-weight: 400;
 }
 
-/* Clean Ambient Radial Spotlight Backdrop */
+/* Halftone Dot-Matrix Corner Atmosphere & Subtle Radial Spotlight */
 .blueprint-backdrop {
   background-image:
-    radial-gradient(ellipse 65% 55% at 50% -10%, rgb(var(--ink) / 0.025), transparent 70%);
+    radial-gradient(circle at center, rgb(var(--ink) / 0.14) 1px, transparent 1.25px),
+    radial-gradient(ellipse 65% 55% at 50% -10%, rgb(var(--accent) / 0.05), transparent 70%);
+  background-size: 16px 16px, 100% 100%;
+  -webkit-mask-image:
+    radial-gradient(ellipse 92% 85% at 50% 45%, rgba(0, 0, 0, 0.22) 38%, rgba(0, 0, 0, 0.88) 100%);
+  mask-image:
+    radial-gradient(ellipse 92% 85% at 50% 45%, rgba(0, 0, 0, 0.22) 38%, rgba(0, 0, 0, 0.88) 100%);
 }
 html.dark .blueprint-backdrop {
   background-image:
-    radial-gradient(ellipse 65% 55% at 50% -10%, rgba(255, 255, 255, 0.06), transparent 70%);
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.13) 1px, transparent 1.25px),
+    radial-gradient(ellipse 65% 55% at 50% -10%, rgb(var(--accent) / 0.07), transparent 70%);
+  background-size: 16px 16px, 100% 100%;
+}
+
+/* Architect's Blueprint Specs Overlay Mode (Alt+I) */
+html.specs-mode #main {
+  background-image:
+    linear-gradient(to right, rgb(var(--accent) / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--accent) / 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+html.specs-mode [data-spec] {
+  position: relative;
+  outline: 1px dashed rgb(var(--accent) / 0.32);
+  outline-offset: -1px;
+}
+html.specs-mode [data-spec]::after {
+  content: attr(data-spec);
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  z-index: 40;
+  pointer-events: none;
+  font-family: var(--ui-font-mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--accent));
+  background: rgb(var(--bg) / 0.92);
+  padding: 3px 6px;
+  border: 1px solid rgb(var(--accent) / 0.45);
 }
 
 /* Subtle dot matrix for inside cards */
@@ -433,35 +462,32 @@ html.dark .blueprint-backdrop {
   }
 }
 
-/* Theme Switcher Pill */
+/* Theme Switcher (unboxed editorial controls) */
 .theme-switch {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  padding: 3px;
-  border-radius: 9999px;
-  border: 1px solid rgb(var(--g200));
-  background: rgb(var(--g50));
+  gap: 6px;
 }
 .theme-opt {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 9999px;
-  color: rgb(var(--g500));
+  width: 28px;
+  height: 28px;
+  border-radius: 0;
+  border-bottom: 1.5px solid transparent;
+  color: rgb(var(--g400));
 }
 .theme-opt:hover {
   color: rgb(var(--ink));
 }
 .theme-opt.is-active {
-  background: rgb(var(--accent));
-  color: rgb(var(--accent-fg));
+  color: rgb(var(--accent));
+  border-bottom-color: rgb(var(--accent));
 }
 .theme-opt svg {
-  width: 13.5px;
-  height: 13.5px;
+  width: 14px;
+  height: 14px;
 }
 
 /* Buttons & Chips */
@@ -510,29 +536,21 @@ html.dark .blueprint-backdrop {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border-radius: 6px;
-  background: rgb(var(--accent) / 0.14);
-  border: 1px solid rgb(var(--accent) / 0.4);
   color: rgb(var(--accent));
-  padding: 0.18rem 0.6rem;
   font-family: var(--ui-font-mono);
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
 }
 
 .bryl-tag-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border-radius: 5px;
-  border: 1px solid rgb(var(--g200));
-  background: rgb(var(--g50));
-  color: rgb(var(--g600));
-  padding: 0.16rem 0.55rem;
+  color: rgb(var(--g500));
   font-family: var(--ui-font-mono);
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 0.04em;
 }
 
@@ -599,6 +617,44 @@ html.dark .blueprint-backdrop {
   }
 }
 
+/* Right-side slide-out navigation drawer */
+.side-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(0, 0, 0, 0.56);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: brylFadeIn 180ms ease forwards;
+}
+.side-drawer-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 22rem;
+  height: 100%;
+  overflow-y: auto;
+  border-left: 1px solid rgb(var(--g200));
+  background: rgb(var(--bg));
+  padding: 1.25rem 1.35rem 1.5rem;
+  box-shadow: -24px 0 60px -16px rgba(0, 0, 0, 0.45);
+  animation: sideDrawerIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes sideDrawerIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* Case Study Typography & Layout */
 .case-prose {
   font-family: var(--ui-font-body);
@@ -627,7 +683,9 @@ html.dark .blueprint-backdrop {
   }
   .pulse-dot,
   .bryl-modal-backdrop,
-  .bryl-modal-panel {
+  .bryl-modal-panel,
+  .side-drawer-backdrop,
+  .side-drawer-panel {
     animation: none !important;
   }
   .bryl-surface-card,

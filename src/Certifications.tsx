@@ -42,6 +42,7 @@ export default function CertificationsSection() {
   return (
     <section
       id="certifications"
+      data-spec="<section#certifications> · 3-Col + Accessible Dialog"
       className="py-20 border-t border-[rgb(var(--g200))]"
       aria-labelledby="certifications-title"
     >
@@ -60,7 +61,7 @@ export default function CertificationsSection() {
         <span className="micro-label">{certifications.length} verified credentials</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert) => {
           const openModal = (el: HTMLElement) => {
             lastTriggerRef.current = el;
@@ -70,22 +71,20 @@ export default function CertificationsSection() {
           return (
             <article
               key={cert.id}
-              className="group flex flex-col justify-between rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-5 shadow-xs transition-all duration-200 hover:border-[rgb(var(--accent)/0.5)] hover:shadow-sm"
+              className="group flex flex-col justify-between border-t border-[rgb(var(--g200))] py-5"
             >
               {/* Header Row with View Credential Icon Alongside */}
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span
-                      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] text-[rgb(var(--ink))]"
-                      aria-hidden="true"
-                    >
-                      <Award size={14} strokeWidth={1.75} />
+                    <span className="inline-flex items-center text-[rgb(var(--ink))]" aria-hidden="true">
+                      <Award size={15} strokeWidth={1.75} />
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded border border-[rgb(var(--accent)/0.3)] bg-[rgb(var(--accent)/0.1)] px-2 py-0.5 font-mono text-[10px] font-semibold text-[rgb(var(--accent))]">
-                      <CheckCircle2 size={11} aria-hidden="true" />
+                    <span className="inline-flex items-center gap-1 font-mono text-[10.5px] font-semibold text-[rgb(var(--accent))]">
+                      <CheckCircle2 size={12} aria-hidden="true" />
                       <span>Verified</span>
                     </span>
+                    <span className="font-mono text-[10.5px] text-[rgb(var(--g400))]" aria-hidden="true">·</span>
                     <span className="font-mono text-[10.5px] text-[rgb(var(--g500))]">
                       {cert.date.split('·')[0].trim()}
                     </span>
@@ -106,22 +105,15 @@ export default function CertificationsSection() {
                   aria-label={`View credential details for ${cert.title}`}
                   title="View credential details"
                   onClick={(e) => openModal(e.currentTarget)}
-                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] text-[rgb(var(--ink))] transition-colors hover:border-[rgb(var(--accent))] hover:bg-[rgb(var(--accent))] hover:text-[rgb(var(--accent-fg))]"
+                  className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--accent))]"
                 >
                   <Eye size={16} aria-hidden="true" />
                 </button>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-1.5 pt-1">
-                {cert.skills.slice(0, 3).map((s) => (
-                  <span
-                    key={s}
-                    className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-2 py-0.5 font-mono text-[10px] text-[rgb(var(--g600))]"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
+              <p className="mt-4 pt-1 font-mono text-[10.5px] text-[rgb(var(--g500))]">
+                {cert.skills.slice(0, 3).join(' · ')}
+              </p>
             </article>
           );
         })}
@@ -153,9 +145,10 @@ export default function CertificationsSection() {
             </button>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-[rgb(var(--accent)/0.15)] px-3 py-0.5 font-mono text-[11px] font-semibold text-[rgb(var(--accent))]">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                 Official Credential Record
               </span>
+              <span className="font-mono text-xs text-[rgb(var(--g400))]" aria-hidden="true">·</span>
               <span className="font-mono text-xs text-[rgb(var(--g500))]">{activeCert.date}</span>
             </div>
 
@@ -168,7 +161,7 @@ export default function CertificationsSection() {
             </p>
 
             {activeCert.credentialId && (
-              <p className="mt-2 font-mono text-xs text-[rgb(var(--g500))] bg-[rgb(var(--bg))] px-2.5 py-1.5 rounded border border-[rgb(var(--g200))]">
+              <p className="mt-2 font-mono text-xs text-[rgb(var(--g500))]">
                 <strong>ID:</strong> {activeCert.credentialId}
               </p>
             )}
@@ -207,16 +200,9 @@ export default function CertificationsSection() {
               <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
                 Competencies Validated
               </span>
-              <div className="mt-1.5 flex flex-wrap gap-1">
-                {activeCert.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-2 py-0.5 font-mono text-[10px] text-[rgb(var(--g600))]"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              <p className="mt-1.5 font-mono text-[11px] text-[rgb(var(--g600))]">
+                {activeCert.skills.join(' · ')}
+              </p>
             </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-4">

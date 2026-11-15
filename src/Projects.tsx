@@ -20,7 +20,7 @@ export function ProjectVisual({
   if (project.screenshot) {
     return (
       <div
-        className={`overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] ${
+        className={`overflow-hidden border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] ${
           compact ? 'aspect-[16/10]' : ''
         }`}
       >
@@ -36,7 +36,7 @@ export function ProjectVisual({
 
   return (
     <div
-      className={`relative flex flex-col justify-between overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] ${
+      className={`relative flex flex-col justify-between overflow-hidden border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] ${
         compact ? 'aspect-[16/10] p-4' : 'p-5'
       }`}
       role="img"
@@ -57,7 +57,7 @@ export function ProjectVisual({
 
       {/* Wireframe Preview Canvas */}
       <div className={`${compact ? 'my-2 p-3' : 'my-4 p-4'} rounded-lg border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--bg))] text-center`}>
-        <span className="inline-block rounded-md border border-[rgb(var(--accent)/0.35)] bg-[rgb(var(--accent)/0.1)] px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+        <span className="inline-block font-mono text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
           Interface Preview
         </span>
 
@@ -88,7 +88,12 @@ export default function ProjectsSection() {
   const secondaryProjects = projects.filter((p) => !p.featured && !p.name.startsWith('['));
 
   return (
-    <section id="work" className="py-20 border-t border-[rgb(var(--g200))]" aria-labelledby="work-title">
+    <section
+      id="work"
+      data-spec="<section#work> · Featured + 2-Col Projects"
+      className="py-20 border-t border-[rgb(var(--g200))]"
+      aria-labelledby="work-title"
+    >
       {/* Section Header */}
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -105,15 +110,16 @@ export default function ProjectsSection() {
         <span className="micro-label">{projects.length} documented systems</span>
       </div>
 
-      {/* Flagship Featured Project Card (Prominent Placement) */}
-      <article className="overflow-hidden rounded-2xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-6 sm:p-8 shadow-sm transition-all duration-300 hover:border-[rgb(var(--accent)/0.5)] hover:shadow-md">
+      {/* Flagship Featured Project (Prominent Placement, Divided by Hairlines) */}
+      <article className="border-t border-[rgb(var(--g200))] pt-8 pb-10">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
           {/* Left Details */}
           <div className="lg:col-span-7">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-[rgb(var(--accent)/0.14)] px-3 py-1 font-mono text-[11px] font-semibold text-[rgb(var(--accent))]">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                 Flagship Case Study
               </span>
+              <span className="font-mono text-xs text-[rgb(var(--g400))]" aria-hidden="true">·</span>
               <span className="font-mono text-xs text-[rgb(var(--g500))]">{featured.category}</span>
             </div>
 
@@ -133,16 +139,9 @@ export default function ProjectsSection() {
             </div>
 
             {/* Technologies */}
-            <div className="mt-5 flex flex-wrap gap-1.5">
-              {featured.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-2.5 py-1 font-mono text-xs text-[rgb(var(--g600))]"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
+            <p className="mt-5 font-mono text-xs text-[rgb(var(--g500))]">
+              {featured.technologies.join(' · ')}
+            </p>
 
             {/* Actions */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -190,11 +189,11 @@ export default function ProjectsSection() {
       </article>
 
       {/* Secondary Projects Grid */}
-      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
         {secondaryProjects.map((item) => (
           <article
             key={item.id}
-            className="flex flex-col justify-between rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-6 shadow-sm transition-all duration-300 hover:border-[rgb(var(--accent)/0.5)] hover:shadow-md"
+            className="flex flex-col justify-between border-t border-[rgb(var(--g200))] pt-7"
           >
             <div>
               <ProjectVisual
@@ -221,16 +220,9 @@ export default function ProjectsSection() {
               </p>
 
               {/* Technologies */}
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {item.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] px-2 py-0.5 font-mono text-[10.5px] text-[rgb(var(--g500))]"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <p className="mt-4 font-mono text-[11px] text-[rgb(var(--g500))]">
+                {item.technologies.join(' · ')}
+              </p>
             </div>
 
             <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-[rgb(var(--g200))] pt-4">
