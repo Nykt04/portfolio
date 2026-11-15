@@ -34,11 +34,12 @@
   --ui-line: rgb(var(--g200));
   --ui-line-strong: rgb(var(--g300));
 
-  /* Typography: Space Grotesk (Display) + Geist (UI) + Geist Mono (Technical) + Source Serif 4 (Case Study Prose) */
-  --ui-font-display: 'Space Grotesk Variable', 'Geist', system-ui, sans-serif;
-  --ui-font-body: 'Geist', 'Manrope Variable', -apple-system, BlinkMacSystemFont, sans-serif;
-  --ui-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --ui-font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  /* Typography: Unified single-typeface system (Geist across display, UI, labels, and prose) */
+  --ui-font-sans: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --ui-font-display: var(--ui-font-sans);
+  --ui-font-body: var(--ui-font-sans);
+  --ui-font-mono: var(--ui-font-sans);
+  --ui-font-serif: var(--ui-font-sans);
 
   /* Radii */
   --radius-lg: 14px;
@@ -56,19 +57,19 @@
 html.dark {
   color-scheme: dark;
 
-  /* Dark Mode: Deep Charcoal Black + Elevated Charcoal + Warm Cream White Accent */
-  --bg: 9 9 11;               /* #09090b Neutral Dark Foundation */
-  --surface: 18 18 20;        /* #121214 Clean Elevated Surface */
-  --ink: 250 250 250;         /* #fafafa Crisp Readable Pure White */
+  /* Dark Mode: True Matte Black / Matte Dark Gray + Warm Cream White Accent */
+  --bg: 18 18 19;             /* #121213 Matte Black Foundation */
+  --surface: 26 26 28;        /* #1a1a1c Elevated Matte Surface */
+  --ink: 247 246 243;         /* #f7f6f3 Crisp Soft Off-White */
   --accent: 242 237 228;      /* #f2ede4 Warm Cream White Accent */
-  --accent-fg: 9 9 11;        /* #09090b Deep Charcoal Ink on Accent */
-  --accent-soft: 39 39 42;    /* #27272a Subtle Neutral Tint */
-  --g50: 18 18 20;
-  --g100: 28 28 32;
-  --g200: 39 39 42;
-  --g300: 63 63 70;
-  --g400: 113 113 122;
-  --g500: 161 161 170;
+  --accent-fg: 18 18 19;      /* #121213 Matte Black Ink on Accent */
+  --accent-soft: 42 42 45;    /* #2a2a2d Subtle Matte Tint */
+  --g50: 26 26 28;
+  --g100: 32 32 35;
+  --g200: 44 44 48;
+  --g300: 76 76 82;
+  --g400: 132 132 138;
+  --g500: 164 164 170;
   --g600: 212 212 216;
   --g700: 228 228 231;
   --g800: 244 244 245;

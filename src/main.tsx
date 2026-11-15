@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@fontsource-variable/space-grotesk';
-import '@fontsource-variable/manrope';
 import App from './App';
 import './styles.css';
 import './wireframes.css';

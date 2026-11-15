@@ -90,7 +90,6 @@ export default function ProjectsSection() {
   return (
     <section
       id="work"
-      data-spec="<section#work> · Featured + 2-Col Projects"
       className="py-20 border-t border-[rgb(var(--g200))]"
       aria-labelledby="work-title"
     >

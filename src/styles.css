@@ -23,7 +23,7 @@ html {
   background-color: rgb(var(--bg));
   color: rgb(var(--ink));
   font-family: var(--ui-font-body);
-  font-synthesis: none;
+  font-synthesis: style;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -107,6 +107,10 @@ html.vt-theme::view-transition-new(root) {
 
   button, a {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  input, textarea, select, code, kbd, samp, pre {
+    font-family: inherit;
   }
 }
 
@@ -260,36 +264,6 @@ html.dark .blueprint-backdrop {
   background-size: 16px 16px, 100% 100%;
 }
 
-/* Architect's Blueprint Specs Overlay Mode (Alt+I) */
-html.specs-mode #main {
-  background-image:
-    linear-gradient(to right, rgb(var(--accent) / 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--accent) / 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-html.specs-mode [data-spec] {
-  position: relative;
-  outline: 1px dashed rgb(var(--accent) / 0.32);
-  outline-offset: -1px;
-}
-html.specs-mode [data-spec]::after {
-  content: attr(data-spec);
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  z-index: 40;
-  pointer-events: none;
-  font-family: var(--ui-font-mono);
-  font-size: 10px;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgb(var(--accent));
-  background: rgb(var(--bg) / 0.92);
-  padding: 3px 6px;
-  border: 1px solid rgb(var(--accent) / 0.45);
-}
-
 /* Subtle dot matrix for inside cards */
 .halftone, .halftone-fine {
   background-image: radial-gradient(circle at center, rgb(var(--ink) / 0.12) 1px, transparent 1.5px);
@@ -333,6 +307,20 @@ html.specs-mode [data-spec]::after {
 .d4 { animation-delay: 0.22s; }
 .d5 { animation-delay: 0.28s; }
 .d6 { animation-delay: 0.34s; }
+
+/* Bidirectional smooth scroll fade-in/out for sections and project cards */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-fade.is-visible,
+.scroll-fade:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
@@ -676,10 +664,12 @@ html.specs-mode [data-spec]::after {
   html {
     scroll-behavior: auto;
   }
-  .reveal {
+  .reveal,
+  .scroll-fade {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
+    transition: none !important;
   }
   .pulse-dot,
   .bryl-modal-backdrop,

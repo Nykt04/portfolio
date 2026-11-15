@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Code2, UserRound } from 'lucide-react';
 import {
   siC,
@@ -51,6 +51,77 @@ const categories = ['All', ...Array.from(new Set(toolkit.map((t) => t.category))
 
 export function Portrait({ className = '' }: { className?: string }) {
   const [failed, setFailed] = useState(false);
+  const [restingDark, setRestingDark] = useState<boolean>(() =>
+    typeof document !== 'undefined' ? document.documentElement.classList.contains('dark') : true,
+  );
+  const [activeVideo, setActiveVideo] = useState<'to-dark' | 'to-light' | null>(null);
+  const lastThemeDark = useRef(restingDark);
+  const toDarkRef = useRef<HTMLVideoElement>(null);
+  const toLightRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const syncTheme = (nextDark: boolean) => {
+      if (nextDark === lastThemeDark.current) return;
+      lastThemeDark.current = nextDark;
+
+      const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      const targetKey = nextDark ? 'to-dark' : 'to-light';
+      const targetVideo = nextDark ? toDarkRef.current : toLightRef.current;
+      const otherVideo = nextDark ? toLightRef.current : toDarkRef.current;
+
+      otherVideo?.pause();
+
+      if (reduceMotion || !targetVideo) {
+        setActiveVideo(null);
+        setRestingDark(nextDark);
+        return;
+      }
+
+      targetVideo.currentTime = 0;
+      const playPromise = targetVideo.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+          setActiveVideo(null);
+          setRestingDark(nextDark);
+        });
+      }
+      // Show target layer cleanly once playback starts (also immediate if already buffered)
+      if (targetVideo.readyState >= 2) {
+        setActiveVideo(targetKey);
+        setRestingDark(nextDark);
+      }
+    };
+
+    const onThemeEvent = (e: Event) => {
+      const detail = (e as CustomEvent<{ dark?: boolean }>).detail;
+      const nextDark =
+        typeof detail?.dark === 'boolean'
+          ? detail.dark
+          : document.documentElement.classList.contains('dark');
+      syncTheme(nextDark);
+    };
+
+    const observer = new MutationObserver(() => {
+      syncTheme(document.documentElement.classList.contains('dark'));
+    });
+
+    window.addEventListener('gk-theme-change', onThemeEvent);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => {
+      window.removeEventListener('gk-theme-change', onThemeEvent);
+      observer.disconnect();
+    };
+  }, []);
+
+  const stillImages = [
+    { key: 'light', src: p.portrait.lightSrc, visible: !restingDark, alt: `${p.portrait.alt} (light mode, wearing sunglasses)` },
+    { key: 'dark', src: p.portrait.darkSrc, visible: restingDark, alt: `${p.portrait.alt} (dark mode, no glasses)` },
+  ] as const;
+
+  const transitionVideos = [
+    { key: 'to-dark' as const, ref: toDarkRef, src: p.portrait.toDarkVideo, targetDark: true },
+    { key: 'to-light' as const, ref: toLightRef, src: p.portrait.toLightVideo, targetDark: false },
+  ];
 
   return (
     <figure className={`flex flex-col justify-between ${className}`}>
@@ -63,17 +134,52 @@ export function Portrait({ className = '' }: { className?: string }) {
       </div>
 
       <div className="relative flex-1 min-h-[260px] sm:min-h-[290px] overflow-hidden bg-[rgb(var(--g50))]">
-        {p.portrait.src && !failed ? (
-          <img
-            src={p.portrait.src}
-            alt={p.portrait.alt}
-            width={575}
-            height={575}
-            loading="eager"
-            decoding="async"
-            onError={() => setFailed(true)}
-            className="block h-full w-full object-cover object-top"
-          />
+        {p.portrait.lightSrc && p.portrait.darkSrc && !failed ? (
+          <>
+            {stillImages.map(({ key, src, visible, alt }) => (
+              <img
+                key={key}
+                src={src}
+                alt={visible ? alt : ''}
+                aria-hidden={!visible}
+                width={1280}
+                height={720}
+                loading="eager"
+                decoding="async"
+                onError={() => setFailed(true)}
+                className={`absolute inset-0 block h-full w-full object-cover object-top transition-opacity duration-300 ease-out ${
+                  visible ? 'opacity-100' : 'pointer-events-none opacity-0'
+                }`}
+              />
+            ))}
+            {transitionVideos.map(({ key, ref, src, targetDark }) => (
+              <video
+                key={key}
+                ref={ref}
+                src={src}
+                muted
+                playsInline
+                preload="auto"
+                aria-hidden="true"
+                onPlaying={() => {
+                  if (lastThemeDark.current === targetDark) {
+                    setActiveVideo(key);
+                    setRestingDark(targetDark);
+                  }
+                }}
+                onEnded={() => {
+                  setActiveVideo((curr) => (curr === key ? null : curr));
+                }}
+                onError={() => {
+                  setActiveVideo((curr) => (curr === key ? null : curr));
+                  setRestingDark(lastThemeDark.current);
+                }}
+                className={`pointer-events-none absolute inset-0 block h-full w-full object-cover object-top transition-opacity duration-300 ease-out ${
+                  activeVideo === key ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ))}
+          </>
         ) : (
           <div className="flex h-full min-h-[260px] flex-col items-center justify-center p-6 text-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[rgb(var(--accent)/0.1)] text-[rgb(var(--accent))]">

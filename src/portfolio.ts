@@ -9,8 +9,15 @@ export const portfolio = {
   education: 'Bachelor of Science in Computer Science, Gordon College',
   interests: 'Web technologies, human-centered UI/UX design, and open-source software.',
   skills: ['Python', 'TypeScript', 'JavaScript', 'C'],
-  // Put your photo in public/images/ and set src to '/images/your-photo.jpg'.
-  portrait: { src: '/images/gian-karlo.jpg', alt: 'Portrait of Gian Karlo C. Reguindin' },
+  // Put your portrait images/clips in public/images/ (Light wears glasses, Dark removes them).
+  portrait: {
+    src: '/images/portrait-dark.jpg',
+    lightSrc: '/images/portrait-light.jpg',
+    darkSrc: '/images/portrait-dark.jpg',
+    toLightVideo: '/images/portrait-to-light.mp4',
+    toDarkVideo: '/images/portrait-to-dark.mp4',
+    alt: 'Portrait of Gian Karlo C. Reguindin',
+  },
   tools: [
     { name: 'VS Code', category: 'IDE & AI', description: 'Primary code editor for frontend and backend development.' },
     { name: 'Figma', category: 'Design', description: 'Interface wireframing, design layouts, and interactive prototypes.' },

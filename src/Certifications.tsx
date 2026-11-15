@@ -42,7 +42,6 @@ export default function CertificationsSection() {
   return (
     <section
       id="certifications"
-      data-spec="<section#certifications> · 3-Col + Accessible Dialog"
       className="py-20 border-t border-[rgb(var(--g200))]"
       aria-labelledby="certifications-title"
     >

@@ -165,7 +165,6 @@ export default function App() {
   const [quickQuery, setQuickQuery] = useState('');
   const [activeSection, setActiveSection] = useState('home');
   const [activeProcess, setActiveProcess] = useState(0);
-  const [specsMode, setSpecsMode] = useState(false);
 
   const mainRef = useRef<HTMLElement>(null);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
@@ -259,15 +258,45 @@ export default function App() {
     return () => observer.disconnect();
   }, [isCaseStudy, caseStudyId]);
 
-  // Sync Architect's Blueprint Specs Overlay (Alt+I)
+  // Bidirectional smooth fade-in transition on scroll (respects reduced motion)
   useEffect(() => {
-    document.documentElement.classList.toggle('specs-mode', specsMode);
-    return () => {
-      document.documentElement.classList.remove('specs-mode');
-    };
-  }, [specsMode]);
+    const rootEl = mainRef.current;
+    if (!rootEl) return;
 
-  // Global keyboard shortcuts: Alt+K Quick Jump, Alt+I Specs Overlay, Escape closes overlays
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const fadeTargets = Array.from(
+      rootEl.querySelectorAll<HTMLElement>(
+        'section:not(#home):not(#work), #work > div:first-child, #work article',
+      ),
+    );
+    if (!fadeTargets.length || reduceMotion) return;
+
+    fadeTargets.forEach((el) => {
+      el.classList.add('scroll-fade');
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 16 && rect.bottom > 0) {
+        el.classList.add('is-visible');
+      }
+    });
+
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle('is-visible', entry.isIntersecting);
+        });
+      },
+      { rootMargin: '0px 0px -16px 0px', threshold: 0.01 },
+    );
+
+    fadeTargets.forEach((el) => fadeObserver.observe(el));
+
+    return () => {
+      fadeObserver.disconnect();
+      fadeTargets.forEach((el) => el.classList.remove('scroll-fade', 'is-visible'));
+    };
+  }, [isCaseStudy, caseStudyId]);
+
+  // Global keyboard shortcuts: Alt+K Quick Jump, Escape closes overlays
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyK') {
@@ -278,11 +307,6 @@ export default function App() {
           if (next) setQuickQuery('');
           return next;
         });
-        return;
-      }
-      if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyI') {
-        e.preventDefault();
-        setSpecsMode((prev) => !prev);
         return;
       }
       if (e.key === 'Escape') {
@@ -414,25 +438,6 @@ export default function App() {
               <span>Jump Search</span>
             </span>
             <span className="text-[10px] text-[rgb(var(--g400))]">Alt+K</span>
-          </button>
-
-          <button
-            type="button"
-            aria-pressed={specsMode}
-            onClick={() => setSpecsMode((prev) => !prev)}
-            className="flex w-full items-center justify-between py-1 text-[11.5px] text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--ink))]"
-          >
-            <span className="inline-flex items-center gap-2">
-              <ScanLine
-                size={13}
-                aria-hidden="true"
-                className={specsMode ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'}
-              />
-              <span className={specsMode ? 'font-semibold text-[rgb(var(--ink))]' : ''}>Specs Lens</span>
-            </span>
-            <span className={`text-[10px] ${specsMode ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'}`}>
-              {specsMode ? 'ON' : 'Alt+I'}
-            </span>
           </button>
 
           <div className="flex items-center justify-between">
@@ -574,7 +579,6 @@ export default function App() {
             {/* 00 — EDITORIAL HERO SECTION (Hairline Divided) */}
             <section
               id="home"
-              data-spec="<section#home> · 12-Col Split · Dual Typography"
               className="relative pt-8 pb-14 sm:pt-12"
             >
               <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch">
@@ -739,7 +743,6 @@ export default function App() {
             {/* 02 — ABOUT & PROJECT RESPONSIBILITIES SECTION */}
             <section
               id="about"
-              data-spec="<section#about> · Roles: PM / Dev / QA / BA"
               className="relative py-16 border-t border-[rgb(var(--g200))]"
               aria-labelledby="about-title"
             >
@@ -891,7 +894,6 @@ export default function App() {
             {/* 03 — STACK & SKILLS SECTION */}
             <section
               id="toolkit"
-              data-spec="<section#toolkit> · Filterable Stack Matrix"
               className="py-16 border-t border-[rgb(var(--g200))]"
               aria-labelledby="toolkit-title"
             >
@@ -1019,20 +1021,6 @@ export default function App() {
                     ))}
                 </div>
               </div>
-              <div>
-                <span className="micro-label block mb-2">Interactive Modes</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSpecsMode((prev) => !prev);
-                    setQuickJumpOpen(false);
-                  }}
-                  className="flex w-full items-center justify-between rounded-md px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
-                >
-                  <span>{specsMode ? 'Disable Specs Lens' : 'Enable Specs Lens'}</span>
-                  <span className="text-[10.5px] text-[rgb(var(--accent))]">Alt+I</span>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -1045,7 +1033,7 @@ const FALLBACK_GH_LEVELS =
   '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000002000000200000000000000000000000000000001000000000004110000000000013003001001020111100401200000000000000000000000000000000000000000230100000000000000000000000000000000020000011011000000000000000000000000000000000000100000010000002110000000000000000010010440';
 
 const GH_TILE_OPACITY = [0.42, 0.45, 0.65, 0.85, 1] as const;
-const GH_DOT_RADIUS = [1.3, 2.2, 3.0, 3.8, 4.6] as const;
+const GH_DOT_RADIUS = [1.5, 2.4, 3.3, 4.2, 5.0] as const;
 
 interface GhDay {
   date?: string;
@@ -1102,100 +1090,111 @@ function GitHubSection() {
   return (
     <section
       id="github"
-      data-spec="<section#github> · Halftone Contribution Matrix"
-      className="py-16 border-t border-[rgb(var(--g200))]"
+      className="py-12 border-t border-[rgb(var(--g200))]"
       aria-labelledby="github-title"
     >
-      <div className="mb-8 flex flex-wrap items-baseline justify-between gap-2">
-        <div className="flex items-center gap-2.5">
-          <span className="section-index-badge">05</span>
-          <h2 id="github-title" className="section-index-title">
-            GitHub Activity
-          </h2>
-        </div>
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-mono text-[11.5px] font-medium text-[rgb(var(--accent))] hover:underline"
-          aria-label={`GitHub profile @${username} (opens in a new tab)`}
-        >
-          @{username} ↗
-        </a>
-      </div>
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+        {/* Left Summary Column */}
+        <div className="lg:col-span-4">
+          <div className="flex items-center gap-2.5">
+            <span className="section-index-badge">05</span>
+            <h2 id="github-title" className="section-index-title">
+              GitHub Activity
+            </h2>
+          </div>
 
-      <div className="border-t border-[rgb(var(--g200))] pt-5">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3">
-          <div className="flex items-center gap-2">
-            <Github size={15} className="text-[rgb(var(--accent))]" aria-hidden="true" />
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--ink))]">
-              Contributions // @{username}
+          <div className="mt-4 flex items-baseline gap-2">
+            <strong className="font-display-ui text-2xl font-bold tracking-tight text-[rgb(var(--ink))]">
+              {total.toLocaleString()}
+            </strong>
+            <span className="font-mono text-[11.5px] text-[rgb(var(--g500))]">
+              contributions in the last year
             </span>
           </div>
-          <span className="font-mono text-[11px] text-[rgb(var(--g500))]">
-            <strong className="text-[rgb(var(--accent))]">{total.toLocaleString()}</strong> contributions in the last year
-          </span>
+
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex items-center gap-1.5 font-mono text-[11.5px] font-medium text-[rgb(var(--accent))] hover:underline"
+            aria-label={`GitHub profile @${username} (opens in a new tab)`}
+          >
+            <Github size={13} aria-hidden="true" />
+            <span>@{username} ↗</span>
+          </a>
         </div>
 
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group block overflow-x-auto"
-          aria-label={`View @${username}'s ${total.toLocaleString()} GitHub contributions in the last year`}
-        >
-          <svg
-            viewBox="0 0 689 91"
-            className="h-auto min-w-[540px] w-full"
-            preserveAspectRatio="xMidYMid meet"
-            role="img"
-            aria-label="Halftone GitHub contribution matrix"
-          >
-            {cells.map(({ w, d, day }, idx) => {
-              const lvl = Math.min(4, Math.max(0, day.level));
-              const isZero = lvl === 0;
-              const fill = isZero ? 'rgb(var(--g300))' : 'rgb(var(--accent))';
-              const opacity = GH_TILE_OPACITY[lvl] ?? 0.42;
-              const radius = GH_DOT_RADIUS[lvl] ?? 1.3;
-              return (
-                <circle
-                  key={idx}
-                  cx={w * 13 + 6.5}
-                  cy={d * 13 + 6.5}
-                  r={radius}
-                  fill={fill}
-                  opacity={opacity}
-                >
-                  {day.date && (
-                    <title>{`${day.count ?? 0} contributions on ${day.date}`}</title>
-                  )}
-                </circle>
-              );
-            })}
-          </svg>
-        </a>
+        {/* Right Compact Matrix Column */}
+        <div className="lg:col-span-8 flex flex-col lg:items-end">
+          <div className="w-full max-w-[640px] border-t border-b border-[rgb(var(--g200))] py-4">
+            <div className="mb-3.5 flex items-center justify-between gap-2">
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--g500))]">
+                Contributions // @{username}
+              </span>
+              <span className="font-mono text-[11px] text-[rgb(var(--g400))]">
+                53-week matrix
+              </span>
+            </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[rgb(var(--g200))] pt-3">
-          <span className="font-mono text-[10.5px] text-[rgb(var(--g400))]">
-            Live sync via GitHub Contributions API · Snapshot fallback enabled
-          </span>
-          <div
-            className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--g400))]"
-            aria-hidden="true"
-          >
-            <span>less</span>
-            {[0, 1, 2, 3, 4].map((lvl) => (
-              <svg key={lvl} width="12" height="12" viewBox="0 0 12 12">
-                <circle
-                  cx="6"
-                  cy="6"
-                  r={GH_DOT_RADIUS[lvl]}
-                  fill={lvl === 0 ? 'rgb(var(--g300))' : 'rgb(var(--accent))'}
-                  opacity={GH_TILE_OPACITY[lvl]}
-                />
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block overflow-x-auto"
+              aria-label={`View @${username}'s ${total.toLocaleString()} GitHub contributions in the last year`}
+            >
+              <svg
+                viewBox="0 0 689 91"
+                className="h-auto w-full min-w-[420px]"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                aria-label="Halftone GitHub contribution matrix"
+              >
+                {cells.map(({ w, d, day }, idx) => {
+                  const lvl = Math.min(4, Math.max(0, day.level));
+                  const isZero = lvl === 0;
+                  const fill = isZero ? 'rgb(var(--g300))' : 'rgb(var(--accent))';
+                  const opacity = GH_TILE_OPACITY[lvl] ?? 0.42;
+                  const radius = GH_DOT_RADIUS[lvl] ?? 1.5;
+                  return (
+                    <circle
+                      key={idx}
+                      cx={w * 13 + 6.5}
+                      cy={d * 13 + 6.5}
+                      r={radius}
+                      fill={fill}
+                      opacity={opacity}
+                    >
+                      {day.date && (
+                        <title>{`${day.count ?? 0} contributions on ${day.date}`}</title>
+                      )}
+                    </circle>
+                  );
+                })}
               </svg>
-            ))}
-            <span>more</span>
+            </a>
+
+            <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2 text-[10.5px] text-[rgb(var(--g400))]">
+              <span>Live API · Snapshot fallback</span>
+              <div
+                className="flex items-center gap-1.5 uppercase tracking-wider"
+                aria-hidden="true"
+              >
+                <span>less</span>
+                {[0, 1, 2, 3, 4].map((lvl) => (
+                  <svg key={lvl} width="12" height="12" viewBox="0 0 12 12">
+                    <circle
+                      cx="6"
+                      cy="6"
+                      r={GH_DOT_RADIUS[lvl]}
+                      fill={lvl === 0 ? 'rgb(var(--g300))' : 'rgb(var(--accent))'}
+                      opacity={GH_TILE_OPACITY[lvl]}
+                    />
+                  </svg>
+                ))}
+                <span>more</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1230,7 +1229,6 @@ function ContactSection() {
   return (
     <section
       id="contact"
-      data-spec="<section#contact> · Direct Channels + Email Clipboard"
       className="py-16 border-t border-[rgb(var(--g200))]"
       aria-labelledby="contact-title"
     >
