@@ -653,7 +653,7 @@ export default function App() {
             {/* 00 — EDITORIAL HERO SECTION (Hairline Divided) */}
             <section
               id="home"
-              className="relative pt-8 pb-14 sm:pt-12"
+              className="relative pt-8 pb-10 sm:pt-12"
             >
               <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch">
                 {/* Left 7-Column Editorial Hero */}
@@ -817,7 +817,7 @@ export default function App() {
             {/* 02 — ABOUT & PROJECT RESPONSIBILITIES SECTION */}
             <section
               id="about"
-              className="relative py-16 border-t border-[rgb(var(--g200))]"
+              className="relative py-12 border-t border-[rgb(var(--g200))]"
               aria-labelledby="about-title"
             >
               <div className="mb-8 flex flex-wrap items-baseline justify-between gap-2">
@@ -968,7 +968,7 @@ export default function App() {
             {/* 03 — STACK & SKILLS SECTION */}
             <section
               id="toolkit"
-              className="py-16 border-t border-[rgb(var(--g200))]"
+              className="py-12 border-t border-[rgb(var(--g200))]"
               aria-labelledby="toolkit-title"
             >
               <div className="mb-8 flex flex-wrap items-baseline justify-between gap-2">
@@ -1303,7 +1303,7 @@ function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-16 border-t border-[rgb(var(--g200))]"
+      className="py-12 border-t border-[rgb(var(--g200))]"
       aria-labelledby="contact-title"
     >
       <div className="mb-8 flex flex-wrap items-baseline justify-between gap-2">

@@ -475,7 +475,7 @@ export const projects: PortfolioProject[] = [
       overview: {
         product: 'CRHS Web is a mobile-friendly school portal for Castillejos Resettlement High School (DepEd School ID 301016) in Castillejos, Zambales. It serves as the official public gateway for campus announcements, Junior High & ARAL academic programs, admissions guides, and school contacts.',
         targetUsers: 'High school students, parents/guardians, prospective enrollees, and faculty members.',
-        duration: 'January 2026 – March 2026',
+        duration: 'July 2026 – August 2026',
         problem: 'Important school announcements, enrollment steps, and schedules get buried inside social media feeds and group chats, making it harder for parents and students on everyday mobile connections to verify official information.',
         goal: 'Create a fast, easy-to-read school portal with high text contrast and clear navigation across phones, tablets, and desktop computers.',
       },
