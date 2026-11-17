@@ -639,7 +639,7 @@ export const projects: PortfolioProject[] = [
       overview: {
         product: 'Check8 is a web-based school clearance system for Gordon College Computer Science students. It replaces paper clearance slips with digital QR checkpoints so students and office staff can track sign-offs online.',
         targetUsers: 'Gordon College CCS students, computer lab staff, library staff, student council officers, and department signatories.',
-        duration: 'October 2025 – December 2025',
+        duration: 'April 2026 – November 2026',
         problem: 'At the end of every semester, students wait in long campus lines to collect signatures from labs, the library, student council, and department offices on paper slips that are easy to lose or damage.',
         goal: 'Bring all clearance approvals into one clear website using digital QR codes and live status updates.',
         teamContext: 'Built with a student team inside a groupmate-hosted repository, where Gian Karlo served as the main contributor for core features, workflow planning, and interface design.',
