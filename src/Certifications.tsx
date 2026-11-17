@@ -42,7 +42,7 @@ export default function CertificationsSection() {
   return (
     <section
       id="certifications"
-      className="py-12 border-t border-[rgb(var(--g200))]"
+      className="pt-7 pb-10 border-t border-[rgb(var(--g200))]"
       aria-labelledby="certifications-title"
     >
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">

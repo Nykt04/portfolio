@@ -90,7 +90,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="work"
-      className="py-12 border-t border-[rgb(var(--g200))]"
+      className="pt-7 pb-10 border-t border-[rgb(var(--g200))]"
       aria-labelledby="work-title"
     >
       {/* Section Header */}
