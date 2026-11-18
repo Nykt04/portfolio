@@ -51,7 +51,7 @@ export const portfolio = {
     screenshot: '/images/check8.png',
     screenshotAlt: 'Check8 QR-enabled clearance management portal login and overview screen',
     repository: '',
-    liveDemo: 'https://check8-1.onrender.com',
+    liveDemo: '',
     reference: '',
     persona: {
       name: 'Marco Reyes',
@@ -380,7 +380,7 @@ export const projects: PortfolioProject[] = [
             alt: 'Check8 Admin Dashboard showing student records, CSV/SQLite import, groups and classes, and course management',
           },
         ],
-        hifiNote: 'Live on Render at check8-1.onrender.com, featuring core workflows and screens I built in our team repo.',
+        hifiNote: 'Built as a dedicated department portal inside our team repo, featuring core workflows and screens I implemented.',
         accessibilityConsiderations: [
           'Words Alongside Color: Status pills pair Cleared and Pending text with distinct borders.',
           'Thumb-Friendly Targets: Buttons and tabs are sized for easy one-handed mobile taps.',
@@ -388,7 +388,7 @@ export const projects: PortfolioProject[] = [
         ],
       },
       goingForward: {
-        impact: 'Check8 runs live at check8-1.onrender.com, replacing fragile paper slips with trackable QR clearance.',
+        impact: 'Dedicated department clearance system replacing fragile paper slips with trackable QR verification.',
         whatILearned: 'Leading Check8 taught me how to simplify paper workflows, collaborate in a shared Git repo, and always pair QR scanners with manual ID lookup.',
         nextSteps: [
           'Printable Clearance Summary: Export a clean PDF once all stations are signed off.',
