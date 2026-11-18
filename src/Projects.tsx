@@ -105,7 +105,7 @@ export default function ProjectsSection() {
             </h2>
           </div>
           <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
-            Systems and web apps I built for real classmates and local schools, focused on clear flows, fast loading, and accessible screens.
+            Web apps built for classmates and local schools with clear flows and accessible screens.
           </p>
         </div>
         <span className="micro-label">{projects.length} documented systems</span>
@@ -132,17 +132,22 @@ export default function ProjectsSection() {
               {featured.description}
             </p>
 
-            <div className="mt-4">
-              <span className="block font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--g400))]">
-                Engineering Responsibilities
-              </span>
-              <p className="mt-1 font-mono text-xs text-[rgb(var(--ink))]">{featured.role}</p>
+            <div className="mt-5 grid grid-cols-1 gap-4 border-y border-[rgb(var(--g200))] py-3.5 sm:grid-cols-2">
+              <div>
+                <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
+                  Engineering Role
+                </span>
+                <p className="mt-1 font-mono text-xs text-[rgb(var(--ink))]">{featured.role}</p>
+              </div>
+              <div>
+                <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
+                  Core Stack
+                </span>
+                <p className="mt-1 font-mono text-xs text-[rgb(var(--g500))]">
+                  {featured.technologies.join(' · ')}
+                </p>
+              </div>
             </div>
-
-            {/* Technologies */}
-            <p className="mt-5 font-mono text-xs text-[rgb(var(--g500))]">
-              {featured.technologies.join(' · ')}
-            </p>
 
             {/* Actions */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -188,7 +193,9 @@ export default function ProjectsSection() {
 
           {/* Right Visual */}
           <div className="lg:col-span-5">
-            <ProjectVisual project={featured} category={featured.category} />
+            <div className="mx-auto w-full max-w-[290px] lg:ml-auto lg:mr-0">
+              <ProjectVisual project={featured} category={featured.category} />
+            </div>
           </div>
         </div>
       </article>

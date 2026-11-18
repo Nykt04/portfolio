@@ -32,10 +32,10 @@ export const techIcons = {
 };
 
 const languageDescriptions: Record<string, string> = {
-  Python: 'What I reach for when solving algorithms, automating scripts, or writing clean class exercises.',
-  TypeScript: 'How I keep your UI components and state predictable as React apps grow.',
-  JavaScript: 'Where I build interactive browser views and Node.js / Express backends.',
-  C: 'Where I learned how memory, pointers, and low-level logic actually work under the hood.',
+  Python: 'Scripting, algorithms, and backend automation.',
+  TypeScript: 'Type-safe UI components and predictable app state.',
+  JavaScript: 'Interactive browser views and Node.js / Express APIs.',
+  C: 'Low-level memory management, pointers, and systems logic.',
 };
 
 export const toolkit = [

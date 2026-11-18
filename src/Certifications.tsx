@@ -72,7 +72,7 @@ export default function CertificationsSection() {
             </h2>
           </div>
           <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
-            Certificates I earned across visual design, Python, frontend fundamentals, and cybersecurity. Open any card if you want to check the credential ID.
+            Verified credentials in UI/UX design, Python, frontend development, and cybersecurity.
           </p>
         </div>
         <span className="micro-label">{certifications.length} verified credentials</span>

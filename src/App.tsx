@@ -70,7 +70,7 @@ const processSteps = [
     title: 'Requirements Analysis',
     question: 'Who am I building for, and what slows you down right now?',
     detail: 'User workflows · Functional scope · Data modeling',
-    body: 'I start by talking with classmates, students, or staff to see where paper forms or clunky apps waste your time, then turn those notes into simple features.',
+    body: 'I talk with students and staff to turn paper bottlenecks into simple features.',
     Icon: Search,
   },
   {
@@ -78,7 +78,7 @@ const processSteps = [
     title: 'UI/UX & Accessibility',
     question: 'Can you read and navigate every screen without guesswork?',
     detail: 'Wireframing · WCAG 2.2 AA · Typography & contrast',
-    body: 'Before touching code, I map clear headings, full keyboard navigation, comfortable tap sizes, and readable contrast so nothing feels hidden.',
+    body: 'I map clear headings, keyboard navigation, and WCAG 2.2 AA contrast before coding.',
     Icon: PanelsTopLeft,
   },
   {
@@ -86,7 +86,7 @@ const processSteps = [
     title: 'Full-Stack Implementation',
     question: 'How do your clicks connect cleanly to saved data?',
     detail: 'TypeScript · React / Next.js · Modular architecture',
-    body: 'I turn those wireframes into reusable TypeScript components and lean API routes so pages respond quickly even on everyday mobile data.',
+    body: 'I build reusable TypeScript components and lean APIs that load fast on mobile.',
     Icon: Code2,
   },
   {
@@ -94,7 +94,7 @@ const processSteps = [
     title: 'Quality Assurance & Testing',
     question: 'Does everything hold up when you tab, zoom, or lose signal?',
     detail: 'Cross-viewport checks · Keyboard sweeps · Edge-case fixes',
-    body: 'I test across phones and laptops, tab through forms without a mouse, and catch edge cases before you ever see the live link.',
+    body: 'I test across phones and laptops, tabbing through forms to catch edge cases early.',
     Icon: ScanLine,
   },
 ];
@@ -907,40 +907,46 @@ export default function App() {
               </div>
 
               {/* 2-Column Bio + Academic Background (Divided by Vertical Hairline on Desktop) */}
-              <div className="grid grid-cols-1 gap-8 border-t border-[rgb(var(--g200))] pt-7 lg:grid-cols-12">
-                <div className="lg:col-span-7">
-                  <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
-                    How I Work
-                  </span>
-                  <p className="mt-2.5 text-[15.5px] font-medium leading-relaxed text-[rgb(var(--ink))]">
-                    {p.introduction}
-                  </p>
-                  <p className="mt-3 text-[14px] leading-relaxed text-[rgb(var(--g600))]">
-                    {p.about}
-                  </p>
+              <div className="grid grid-cols-1 gap-8 border-t border-[rgb(var(--g200))] pt-7 lg:grid-cols-12 lg:items-stretch">
+                <div className="flex flex-col justify-between lg:col-span-6">
+                  <div>
+                    <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                      How I Work
+                    </span>
+                    <p className="mt-2.5 text-[15.5px] font-medium leading-relaxed text-[rgb(var(--ink))]">
+                      {p.about}
+                    </p>
+                  </div>
+                  <div className="mt-5 flex items-center justify-between gap-4 border-t border-[rgb(var(--g200))] pt-3 font-mono text-[11px]">
+                    <span className="text-[rgb(var(--g400))]">Institution · Gordon College</span>
+                    <span className="font-medium text-[rgb(var(--ink))]">{p.course}</span>
+                  </div>
                 </div>
 
-                <div className="flex flex-col justify-between border-t border-[rgb(var(--g200))] pt-6 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                <div className="flex flex-col justify-between border-t border-[rgb(var(--g200))] pt-6 lg:col-span-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
                   <div>
                     <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                       Academic Background
                     </span>
-                    <div className="mt-3 border-b border-[rgb(var(--g200))] pb-3.5">
-                      <span className="micro-label block">Education</span>
-                      <strong className="mt-1 flex items-center gap-2 text-[14.5px] font-semibold text-[rgb(var(--ink))]">
-                        <GraduationCap size={16} aria-hidden="true" className="text-[rgb(var(--accent))]" />
-                        <span>{p.education}</span>
-                      </strong>
-                    </div>
-                    <div className="mt-3.5">
-                      <span className="micro-label block">Primary Focus</span>
-                      <strong className="mt-1 block text-[14px] font-medium text-[rgb(var(--ink))]">
-                        {p.interests}
-                      </strong>
+                    <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                      <div>
+                        <span className="micro-label block">Education</span>
+                        <strong className="mt-1 flex items-start gap-2 text-[14px] font-semibold leading-snug text-[rgb(var(--ink))]">
+                          <GraduationCap size={16} aria-hidden="true" className="mt-0.5 shrink-0 text-[rgb(var(--accent))]" />
+                          <span>{p.education}</span>
+                        </strong>
+                      </div>
+                      <div>
+                        <span className="micro-label block">Primary Focus</span>
+                        <strong className="mt-1 block text-[13.5px] font-medium leading-snug text-[rgb(var(--ink))]">
+                          {p.interests}
+                        </strong>
+                      </div>
                     </div>
                   </div>
-                  <div className="mt-4 border-t border-[rgb(var(--g200))] pt-3 font-mono text-[11px] text-[rgb(var(--g400))]">
-                    Target Standard: WCAG 2.2 Level AA Compliance
+                  <div className="mt-5 flex items-center justify-between gap-4 border-t border-[rgb(var(--g200))] pt-3 font-mono text-[11px]">
+                    <span className="text-[rgb(var(--g400))]">Accessibility Standard</span>
+                    <span className="font-medium text-[rgb(var(--ink))]">WCAG 2.2 Level AA</span>
                   </div>
                 </div>
               </div>
@@ -1035,20 +1041,22 @@ export default function App() {
                       id={`workflow-panel-${activeProcess}`}
                       role="tabpanel"
                       aria-labelledby={`workflow-tab-${activeProcess}`}
-                      className="pt-5"
+                      className="grid grid-cols-1 gap-4 border-b border-[rgb(var(--g200))] py-5 lg:grid-cols-12 lg:items-center"
                     >
-                      <div className="flex items-center justify-between gap-2">
+                      <div className="lg:col-span-5">
                         <span className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
                           {step.detail}
                         </span>
-                        <StepIcon size={16} className="text-[rgb(var(--accent))]" aria-hidden="true" />
+                        <h4 className="mt-1.5 font-pixel text-lg font-bold leading-snug text-[rgb(var(--ink))]">
+                          {step.question}
+                        </h4>
                       </div>
-                      <h4 className="mt-2 font-pixel text-lg font-bold text-[rgb(var(--ink))]">
-                        {step.question}
-                      </h4>
-                      <p className="mt-2 text-[14px] leading-relaxed text-[rgb(var(--g600))]">
-                        {step.body}
-                      </p>
+                      <div className="flex items-start justify-between gap-4 lg:col-span-7 lg:border-l lg:border-[rgb(var(--g200))] lg:pl-6">
+                        <p className="text-[14px] leading-relaxed text-[rgb(var(--g600))]">
+                          {step.body}
+                        </p>
+                        <StepIcon size={18} className="mt-0.5 shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
+                      </div>
                     </div>
                   );
                 })()}
@@ -1417,7 +1425,7 @@ function ContactSection() {
               Let’s talk.
             </p>
             <p className="mt-2 text-[14px] leading-relaxed text-[rgb(var(--g600))]">
-              If you want to ask about any project here, talk through a UI idea, or discuss an internship or build together, email me anytime or find me on GitHub and LinkedIn.
+              Reach out via email, GitHub, or LinkedIn for internships, project collaborations, or UI questions.
             </p>
 
             {/* Email Action Row */}
@@ -1661,12 +1669,12 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
             <h2 className="font-pixel text-lg font-bold text-[rgb(var(--ink))]">Project Overview</h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">The Product</h3>
               <p className="mt-1.5 case-prose">{detail.overview.product}</p>
             </div>
-            <div>
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">Target Users</h3>
               <p className="mt-1.5 case-prose">{detail.overview.targetUsers}</p>
               {detail.overview.teamContext && (
@@ -1675,11 +1683,11 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
                 </p>
               )}
             </div>
-            <div>
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">The Problem</h3>
               <p className="mt-1.5 case-prose">{detail.overview.problem}</p>
             </div>
-            <div>
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">The Goal</h3>
               <p className="mt-1.5 case-prose">{detail.overview.goal}</p>
             </div>
@@ -1693,9 +1701,9 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
               </h3>
               <span className="micro-label">PM · Lead Dev · QA · Requirements Analysis</span>
             </div>
-            <div className="divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] case-details">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 case-details">
               {currentRoles.map((role, rIdx) => (
-                <details key={role.title} open={rIdx === 0} className="group py-3.5">
+                <details key={role.title} open className="group border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
                   <summary className="flex items-center justify-between gap-3 font-mono text-[13px] font-semibold text-[rgb(var(--ink))]">
                     <span className="inline-flex items-center gap-2.5">
                       <span className="text-[11px] text-[rgb(var(--accent))]">0{rIdx + 1}</span>
@@ -1707,7 +1715,7 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
                       className="text-[rgb(var(--g400))] transition-transform group-open:rotate-180"
                     />
                   </summary>
-                  <p className="mt-2.5 pl-6 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
+                  <p className="mt-2.5 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
                     {role.description}
                   </p>
                 </details>
@@ -1723,11 +1731,21 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
             <h2 className="font-pixel text-lg font-bold text-[rgb(var(--ink))]">Understanding the User</h2>
           </div>
 
-          <div>
-            <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-              User Research: Summary
-            </h3>
-            <p className="mt-1.5 case-prose">{detail.understanding.researchSummary}</p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
+              <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
+                User Research: Summary
+              </h3>
+              <p className="mt-1.5 case-prose">{detail.understanding.researchSummary}</p>
+            </div>
+            <div className="border border-[rgb(var(--g200))] border-l-2 border-l-[rgb(var(--accent))] bg-[rgb(var(--surface))] p-4">
+              <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
+                Problem Statement
+              </h3>
+              <p className="mt-1.5 text-[14px] font-medium leading-relaxed text-[rgb(var(--ink))]">
+                {detail.understanding.problemStatement}
+              </p>
+            </div>
           </div>
 
           {/* Pain Points 1-4 */}
@@ -1820,16 +1838,6 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
             </div>
           )}
 
-          {/* Problem Statement */}
-          <div className="mt-6 border-l-2 border-[rgb(var(--accent))] bg-[rgb(var(--surface))] p-4">
-            <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-              Problem Statement
-            </h3>
-            <p className="mt-1.5 text-[14px] font-medium leading-relaxed text-[rgb(var(--ink))]">
-              {detail.understanding.problemStatement}
-            </p>
-          </div>
-
           {/* User Journey Map (Cards on Mobile, Table on Desktop) */}
           <div className="mt-6">
             <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
@@ -1880,42 +1888,46 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
             <h2 className="font-pixel text-lg font-bold text-[rgb(var(--ink))]">Starting the Design</h2>
           </div>
 
-          <div>
-            <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-              Early Layout Exploration
-            </h3>
-            <p className="mt-1.5 case-prose">{detail.startingDesign.paperWireframesNote}</p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
+              <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
+                Early Layout Exploration
+              </h3>
+              <p className="mt-1.5 case-prose">{detail.startingDesign.paperWireframesNote}</p>
+            </div>
+            <div className="flex flex-col justify-between border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
+              <div>
+                <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
+                  Low-Fidelity Prototype &amp; User Flow
+                </h3>
+                <p className="mt-1.5 case-prose">{detail.startingDesign.lofiPrototype.description}</p>
+              </div>
+              {detail.startingDesign.lofiPrototype.url && (
+                <div className="mt-3">
+                  <a
+                    href={detail.startingDesign.lofiPrototype.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bryl-btn-secondary"
+                  >
+                    <span>Open Figma Lo-Fi Prototype</span>
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="mt-6">
-            <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-              Low-Fidelity Prototype &amp; User Flow
-            </h3>
-            <p className="mt-1.5 case-prose">{detail.startingDesign.lofiPrototype.description}</p>
-            {detail.startingDesign.lofiPrototype.image && (
-              <div className="mt-3 overflow-hidden border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]">
-                {renderZoomableImage(
-                  detail.startingDesign.lofiPrototype.image,
-                  detail.startingDesign.lofiPrototype.alt || `${currentProject.name} low-fidelity prototype user flow`,
-                  `${currentProject.name} Low-Fidelity Prototype & User Flow`,
-                  'block h-auto w-full'
-                )}
-              </div>
-            )}
-            {detail.startingDesign.lofiPrototype.url && (
-              <div className="mt-3">
-                <a
-                  href={detail.startingDesign.lofiPrototype.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bryl-btn-secondary"
-                >
-                  <span>Open Figma Lo-Fi Prototype</span>
-                  <ExternalLink size={14} aria-hidden="true" />
-                </a>
-              </div>
-            )}
-          </div>
+          {detail.startingDesign.lofiPrototype.image && (
+            <div className="mt-4 overflow-hidden border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]">
+              {renderZoomableImage(
+                detail.startingDesign.lofiPrototype.image,
+                detail.startingDesign.lofiPrototype.alt || `${currentProject.name} low-fidelity prototype user flow`,
+                `${currentProject.name} Low-Fidelity Prototype & User Flow`,
+                'block h-auto w-full'
+              )}
+            </div>
+          )}
 
           <div className="mt-6">
             <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
@@ -2114,14 +2126,14 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
             <h2 className="font-pixel text-lg font-bold text-[rgb(var(--ink))]">Going Forward</h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
                 Takeaways: Impact
               </h3>
               <p className="mt-1.5 case-prose">{detail.goingForward.impact}</p>
             </div>
-            <div>
+            <div className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-4">
               <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
                 Takeaways: What I Learned
               </h3>
@@ -2144,14 +2156,16 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
           </div>
 
           {/* Let's Connect */}
-          <div className="mt-6 border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-5">
-            <h3 className="font-pixel text-base font-bold text-[rgb(var(--ink))]">
-              Let&apos;s Connect!
-            </h3>
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
-              Thanks for reading through the {currentProject.name} case study. If you want to talk through the design choices or check out what I’m building next, reach out below:
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-4 font-mono text-[12px]">
+          <div className="mt-6 flex flex-col justify-between gap-4 border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-5 sm:flex-row sm:items-center">
+            <div>
+              <h3 className="font-pixel text-base font-bold text-[rgb(var(--ink))]">
+                Let&apos;s Connect!
+              </h3>
+              <p className="mt-1 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
+                Questions about {currentProject.name} or want to collaborate? Reach out below:
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-4 font-mono text-[12px]">
               <a href={`mailto:${p.contact.email}`} className="inline-flex items-center gap-1.5 text-[rgb(var(--accent))] hover:underline">
                 <Mail size={14} aria-hidden="true" />
                 <span>{p.contact.email}</span>
