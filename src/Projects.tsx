@@ -58,7 +58,7 @@ export function ProjectVisual({
       </div>
 
       {/* Wireframe Preview Canvas */}
-      <div className={`${compact ? 'my-2 p-3' : 'my-4 p-4'} rounded-lg border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--bg))] text-center`}>
+      <div className={`${compact ? 'my-2 p-3' : 'my-4 p-4'} border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--bg))] text-center`}>
         <span className="inline-block font-mono text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
           Interface Preview
         </span>
@@ -67,12 +67,12 @@ export function ProjectVisual({
 
         {/* Wireframe Mockup Lines */}
         <div className="mt-2.5 space-y-1.5" aria-hidden="true">
-          <div className="mx-auto h-2 w-4/5 rounded bg-[rgb(var(--g200))]" />
-          <div className="mx-auto h-2 w-3/5 rounded bg-[rgb(var(--g200))]" />
+          <div className="mx-auto h-2 w-4/5 bg-[rgb(var(--g200))]" />
+          <div className="mx-auto h-2 w-3/5 bg-[rgb(var(--g200))]" />
           <div className="mx-auto mt-2.5 grid max-w-xs grid-cols-3 gap-2 pt-0.5">
-            <div className="h-6 rounded border border-[rgb(var(--accent)/0.3)] bg-[rgb(var(--accent)/0.08)]" />
-            <div className="h-6 rounded border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]" />
-            <div className="h-6 rounded border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]" />
+            <div className="h-6 border border-[rgb(var(--accent)/0.3)] bg-[rgb(var(--accent)/0.08)]" />
+            <div className="h-6 border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]" />
+            <div className="h-6 border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]" />
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default function ProjectsSection() {
       aria-labelledby="work-title"
     >
       {/* Section Header */}
-      <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="section-index-badge">01</span>
@@ -155,7 +155,7 @@ export default function ProjectsSection() {
                 href={featured.caseStudy}
                 className="bryl-btn-primary"
               >
-                <span>Read Full Case Study</span>
+                <span>Read Case Study</span>
                 <ArrowRight size={14} aria-hidden="true" />
               </a>
 
@@ -165,9 +165,9 @@ export default function ProjectsSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bryl-btn-secondary"
-                  aria-label={`Open ${featured.name} live application in a new tab`}
+                  aria-label={`Open ${featured.name} live site in a new tab`}
                 >
-                  <span>Live Application</span>
+                  <span>Live Site</span>
                   <ExternalLink size={13} aria-hidden="true" />
                 </a>
               )}

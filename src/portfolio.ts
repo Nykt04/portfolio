@@ -47,7 +47,7 @@ export const portfolio = {
   project: {
     name: 'Check8',
     description: 'Web-based QR clearance portal for Gordon College students. Check pending items on your phone and clear each station in one scan.',
-    technologies: ['JavaScript', 'Node.js', 'Express', 'HTML5 / CSS3', 'QR Code API', 'Render'],
+    technologies: ['JavaScript', 'Node.js', 'Express', 'HTML5 / CSS3', 'QR Code API'],
     screenshot: '/images/check8.png',
     screenshotAlt: 'Check8 QR-enabled clearance management portal login and overview screen',
     repository: '',

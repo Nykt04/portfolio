@@ -192,7 +192,7 @@
 3. **Expanded Keyboard & Screen Reader Testing:** Run formal assistive-technology validation across the study canvas.
 
 #### Slide 25: Let's Connect!
-* **Email:** [giankarloreguindin811@gmail.com](mailto:giankarloreguindin811@gmail.com)
+* **Email:** [reguindin.giankarlo@gmail.com](mailto:reguindin.giankarlo@gmail.com)
 * **GitHub:** [https://github.com/Nykt04](https://github.com/Nykt04)
 * **LinkedIn:** [https://www.linkedin.com/in/gian-karlo-reguindin-762712349/](https://www.linkedin.com/in/gian-karlo-reguindin-762712349/)
 
@@ -220,7 +220,7 @@
 ### Project Overview (Slides 02 – 04)
 
 #### Slide 02: Project Overview — Product & Team Context
-* **The Product:** Check8 is a web-based academic clearance management platform developed for Gordon College Computer Science students (`https://check8-1.onrender.com`). It replaces paper clearance slips with digital QR checkpoint verification.
+* **The Product:** Check8 is a web-based academic clearance management platform developed for Gordon College Computer Science students. It replaces paper clearance slips with digital QR checkpoint verification.
 * **Target Users:** Gordon College CCS students, laboratory custodians, library staff, student council officers, and department signatories.
 * **Team Context:** Built collaboratively in a student groupmate-hosted repository, with Gian Karlo serving as the **main contributor** for core application development and requirements mapping.
 
@@ -350,7 +350,7 @@
 * **Screen 4 — Approval History:** Timestamped verification record.
 
 #### Slide 20: Live Deployment Notes
-* **Live Deployment:** [https://check8-1.onrender.com](https://check8-1.onrender.com) (hosted on Render; protected by Cloudflare verification on automated loads).
+* **Deployment Context:** Built as a dedicated department clearance portal for Gordon College CCS.
 * **Repository Context:** Core implementation led by Gian Karlo inside a groupmate-hosted repository.
 
 #### Slide 21: Accessibility Considerations
@@ -375,7 +375,7 @@
 3. **Direct Repository Cross-Link:** Add the group repository link once finalized for public portfolio display.
 
 #### Slide 25: Let's Connect!
-* **Email:** [giankarloreguindin811@gmail.com](mailto:giankarloreguindin811@gmail.com)
+* **Email:** [reguindin.giankarlo@gmail.com](mailto:reguindin.giankarlo@gmail.com)
 * **GitHub:** [https://github.com/Nykt04](https://github.com/Nykt04)
 * **LinkedIn:** [https://www.linkedin.com/in/gian-karlo-reguindin-762712349/](https://www.linkedin.com/in/gian-karlo-reguindin-762712349/)
 
@@ -561,7 +561,7 @@
 3. **Downloadable Forms Checklist:** Provide structured printable enrollment requirement sheets.
 
 #### Slide 25: Let's Connect!
-* **Email:** [giankarloreguindin811@gmail.com](mailto:giankarloreguindin811@gmail.com)
+* **Email:** [reguindin.giankarlo@gmail.com](mailto:reguindin.giankarlo@gmail.com)
 * **GitHub:** [https://github.com/Nykt04](https://github.com/Nykt04)
 * **LinkedIn:** [https://www.linkedin.com/in/gian-karlo-reguindin-762712349/](https://www.linkedin.com/in/gian-karlo-reguindin-762712349/)
 

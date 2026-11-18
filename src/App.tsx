@@ -712,7 +712,7 @@ export default function App() {
       )}
 
       {/* Main Content Container */}
-      <main id="main" ref={mainRef} tabIndex={-1} className="relative z-10 lg:pr-64">
+      <main id="main" ref={mainRef} tabIndex={-1} className="relative lg:pr-64">
         {isCaseStudy ? (
           <CaseStudyView projectId={caseStudyId} />
         ) : (
@@ -1181,7 +1181,7 @@ export default function App() {
                         key={item.id}
                         href={`#${item.id}`}
                         onClick={() => closeQuickJump(false)}
-                        className="flex items-center justify-between rounded-md px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
+                        className="flex items-center justify-between px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
                       >
                         <span>{item.label}</span>
                         <span className="text-[10.5px] text-[rgb(var(--accent))]">{item.num}</span>
@@ -1204,7 +1204,7 @@ export default function App() {
                         key={proj.id}
                         href={proj.caseStudy}
                         onClick={() => closeQuickJump(false)}
-                        className="flex items-center justify-between rounded-md px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
+                        className="flex items-center justify-between px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
                       >
                         <span>{proj.name}</span>
                         <span className="text-[10.5px] text-[rgb(var(--g400))]">{proj.category}</span>
@@ -1535,12 +1535,12 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
     setLightbox(null);
     const trigger = lightboxTriggerRef.current;
     lightboxTriggerRef.current = null;
-    requestAnimationFrame(() => trigger?.focus());
+    requestAnimationFrame(() => trigger?.focus({ preventScroll: true }));
   };
 
   useEffect(() => {
     if (!lightbox) return;
-    requestAnimationFrame(() => lightboxCloseBtnRef.current?.focus());
+    requestAnimationFrame(() => lightboxCloseBtnRef.current?.focus({ preventScroll: true }));
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeLightbox();
       else if (e.key === 'Tab') trapTabKey(e, lightboxRef.current);
@@ -1562,9 +1562,10 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
       <img src={src} alt={alt} loading="lazy" className={imgClassName} />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute top-2 right-2 inline-flex h-7 w-7 items-center justify-center rounded border border-[rgb(var(--g200))] bg-[rgb(var(--bg)/0.9)] text-[rgb(var(--ink))] shadow-sm transition-transform group-hover:scale-105 group-hover:text-[rgb(var(--accent))]"
+        className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 border border-[rgb(var(--g200))] bg-[rgb(var(--bg)/0.92)] px-2 py-1 font-mono text-[10.5px] text-[rgb(var(--ink))] shadow-sm backdrop-blur-xs transition-colors group-hover:border-[rgb(var(--accent))] group-hover:text-[rgb(var(--accent))]"
       >
-        <Maximize2 size={13} />
+        <Maximize2 size={12} />
+        <span>Enlarge</span>
       </span>
     </button>
   );
@@ -2214,7 +2215,7 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
               rel="noopener noreferrer"
               className="bryl-btn-primary"
             >
-              <span>Open Live Deployment</span>
+              <span>Live Site</span>
               <ExternalLink size={14} aria-hidden="true" />
             </a>
           )}
@@ -2226,11 +2227,11 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
               className="bryl-btn-secondary"
             >
               <Github size={14} aria-hidden="true" />
-              <span>View Repository</span>
+              <span>Repository</span>
             </a>
           ) : (
             <span className="inline-flex min-h-[40px] items-center border border-dashed border-[rgb(var(--g300))] px-3 font-mono text-[11.5px] text-[rgb(var(--g400))]">
-              Team-hosted repo (link pending)
+              Team-hosted repo
             </span>
           )}
           {nextProject && nextProject.id !== currentProject.id && (
@@ -2252,7 +2253,7 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
           aria-modal="true"
           aria-label={lightbox.title}
           onClick={closeLightbox}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs"
+          className="fixed inset-0 z-[130] flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs"
         >
           <div
             ref={lightboxRef}

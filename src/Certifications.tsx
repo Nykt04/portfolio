@@ -93,7 +93,7 @@ export default function CertificationsSection() {
       className="pt-7 pb-10 border-t border-[rgb(var(--g200))]"
       aria-labelledby="certifications-title"
     >
-      <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="section-index-badge">04</span>
@@ -185,7 +185,7 @@ export default function CertificationsSection() {
             <button
               type="button"
               onClick={closeModal}
-              className="absolute right-4 top-4 rounded-md p-1.5 text-[rgb(var(--g400))] hover:bg-[rgb(var(--g100))] hover:text-[rgb(var(--ink))]"
+              className="absolute right-4 top-4 p-1.5 text-[rgb(var(--g400))] hover:bg-[rgb(var(--g100))] hover:text-[rgb(var(--ink))]"
               aria-label="Close credential details"
             >
               <X size={18} aria-hidden="true" />
@@ -215,7 +215,7 @@ export default function CertificationsSection() {
 
             {/* Certificate Image Preview */}
             {activeCert.image && !imgFailed && (
-              <div className="mt-4 overflow-hidden rounded-xl border border-[rgb(var(--g200))] bg-[rgb(var(--bg))]">
+              <div className="mt-4 overflow-hidden border border-[rgb(var(--g200))] bg-[rgb(var(--bg))]">
                 <button
                   type="button"
                   onClick={(e) => openEnlarged(e.currentTarget)}
@@ -230,7 +230,7 @@ export default function CertificationsSection() {
                   />
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 rounded bg-[rgb(var(--surface)/0.9)] px-2 py-1 font-mono text-[10.5px] text-[rgb(var(--ink))] shadow-sm backdrop-blur-xs transition-colors group-hover:text-[rgb(var(--accent))]"
+                    className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 border border-[rgb(var(--g200))] bg-[rgb(var(--bg)/0.92)] px-2 py-1 font-mono text-[10.5px] text-[rgb(var(--ink))] shadow-sm backdrop-blur-xs transition-colors group-hover:border-[rgb(var(--accent))] group-hover:text-[rgb(var(--accent))]"
                   >
                     <Maximize2 size={12} />
                     <span>Enlarge</span>

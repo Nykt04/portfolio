@@ -467,7 +467,7 @@ html.dark .blueprint-backdrop {
   max-width: 34rem;
   max-height: 88vh;
   overflow-y: auto;
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   border: 1px solid rgb(var(--g200));
   background: rgb(var(--surface));
   padding: 1.75rem;
