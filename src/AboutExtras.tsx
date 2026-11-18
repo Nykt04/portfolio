@@ -32,10 +32,10 @@ export const techIcons = {
 };
 
 const languageDescriptions: Record<string, string> = {
-  Python: 'General-purpose programming, scripting, and algorithmic problem solving.',
-  TypeScript: 'Static typing for maintainable, scalable modern web applications.',
-  JavaScript: 'Core client and server-side interactive web development (ES6+).',
-  C: 'Systems programming fundamentals, memory management, and pointers.',
+  Python: 'What I reach for when solving algorithms, automating scripts, or writing clean class exercises.',
+  TypeScript: 'How I keep your UI components and state predictable as React apps grow.',
+  JavaScript: 'Where I build interactive browser views and Node.js / Express backends.',
+  C: 'Where I learned how memory, pointers, and low-level logic actually work under the hood.',
 };
 
 export const toolkit = [
@@ -159,7 +159,7 @@ export function Portrait({ className = '' }: { className?: string }) {
                 src={src}
                 muted
                 playsInline
-                preload="auto"
+                preload="none"
                 aria-hidden="true"
                 onPlaying={() => {
                   if (lastThemeDark.current === targetDark) {

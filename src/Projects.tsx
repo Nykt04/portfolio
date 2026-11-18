@@ -28,6 +28,8 @@ export function ProjectVisual({
           className={`block w-full object-cover object-top ${compact ? 'h-full' : 'h-auto'}`}
           src={project.screenshot}
           alt={project.screenshotAlt || `${project.name} interface screenshot`}
+          width={1280}
+          height={800}
           loading="lazy"
         />
       </div>
@@ -103,7 +105,7 @@ export default function ProjectsSection() {
             </h2>
           </div>
           <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
-            Web applications and software engineering coursework built with modern frameworks, clean state management, and WCAG accessibility.
+            Systems and web apps I built for real classmates and local schools, focused on clear flows, fast loading, and accessible screens.
           </p>
         </div>
         <span className="micro-label">{projects.length} documented systems</span>
@@ -114,11 +116,11 @@ export default function ProjectsSection() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
           {/* Left Details */}
           <div className="lg:col-span-7">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                 Flagship Case Study
               </span>
-              <span className="font-mono text-xs text-[rgb(var(--g400))]" aria-hidden="true">·</span>
+              <span className="hidden font-mono text-xs text-[rgb(var(--g400))] sm:inline" aria-hidden="true">·</span>
               <span className="font-mono text-xs text-[rgb(var(--g500))]">{featured.category}</span>
             </div>
 
@@ -165,7 +167,7 @@ export default function ProjectsSection() {
                 </a>
               )}
 
-              {featured.repository && (
+              {featured.repository ? (
                 <a
                   href={featured.repository}
                   target="_blank"
@@ -176,6 +178,10 @@ export default function ProjectsSection() {
                   <Github size={13} aria-hidden="true" />
                   <span>Repository</span>
                 </a>
+              ) : (
+                <span className="font-mono text-[11px] text-[rgb(var(--g400))]">
+                  Team-hosted repo
+                </span>
               )}
             </div>
           </div>

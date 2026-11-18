@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
+} from 'react';
 import { flushSync } from 'react-dom';
 import {
   AlertCircle,
@@ -62,36 +68,55 @@ const processSteps = [
   {
     num: '01',
     title: 'Requirements Analysis',
-    question: 'Who am I building for, and what problem needs solving?',
+    question: 'Who am I building for, and what slows you down right now?',
     detail: 'User workflows · Functional scope · Data modeling',
-    body: 'Every project begins with understanding real user friction—interviewing students or stakeholders, mapping user journeys, and defining clear, testable requirements.',
+    body: 'I start by talking with classmates, students, or staff to see where paper forms or clunky apps waste your time, then turn those notes into simple features.',
     Icon: Search,
   },
   {
     num: '02',
     title: 'UI/UX & Accessibility',
-    question: 'Can anyone navigate this interface effortlessly?',
+    question: 'Can you read and navigate every screen without guesswork?',
     detail: 'Wireframing · WCAG 2.2 AA · Typography & contrast',
-    body: 'I structure layouts around clear visual hierarchy, semantic landmarks, full keyboard operability, and generous touch targets before writing component code.',
+    body: 'Before touching code, I map clear headings, full keyboard navigation, comfortable tap sizes, and readable contrast so nothing feels hidden.',
     Icon: PanelsTopLeft,
   },
   {
     num: '03',
     title: 'Full-Stack Implementation',
-    question: 'How do components and data layers fit together cleanly?',
+    question: 'How do your clicks connect cleanly to saved data?',
     detail: 'TypeScript · React / Next.js · Modular architecture',
-    body: 'Translating wireframes into reusable, type-safe components with resilient state management, clean API boundaries, and minimal dependencies.',
+    body: 'I turn those wireframes into reusable TypeScript components and lean API routes so pages respond quickly even on everyday mobile data.',
     Icon: Code2,
   },
   {
     num: '04',
     title: 'Quality Assurance & Testing',
-    question: 'Does it hold up across devices, edge cases, and screen readers?',
+    question: 'Does everything hold up when you tab, zoom, or lose signal?',
     detail: 'Cross-viewport checks · Keyboard sweeps · Edge-case fixes',
-    body: 'Rigorous verification across mobile and desktop viewports, slow network conditions, and assistive navigation to ensure a reliable release.',
+    body: 'I test across phones and laptops, tab through forms without a mouse, and catch edge cases before you ever see the live link.',
     Icon: ScanLine,
   },
 ];
+
+function trapTabKey(e: KeyboardEvent | ReactKeyboardEvent, container: HTMLElement | null) {
+  if (e.key !== 'Tab' || !container) return;
+  const focusables = Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((el) => el.offsetParent !== null);
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
 
 function ThemeSwitcher() {
   const [pref, setPref] = useState<'system' | 'light' | 'dark'>(() => {
@@ -171,14 +196,26 @@ export default function App() {
 
   const mainRef = useRef<HTMLElement>(null);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
   const closeDrawerBtnRef = useRef<HTMLButtonElement>(null);
+  const quickModalRef = useRef<HTMLDivElement>(null);
   const quickInputRef = useRef<HTMLInputElement>(null);
+  const quickTriggerRef = useRef<HTMLElement | null>(null);
   const priorView = useRef(isCaseStudy);
 
   const closeNavDrawer = (returnFocus = false) => {
     setNavDrawerOpen(false);
     if (returnFocus) {
       requestAnimationFrame(() => menuBtnRef.current?.focus());
+    }
+  };
+
+  const closeQuickJump = (returnFocus = true) => {
+    setQuickJumpOpen(false);
+    if (returnFocus) {
+      const trigger = quickTriggerRef.current;
+      quickTriggerRef.current = null;
+      requestAnimationFrame(() => trigger?.focus());
     }
   };
 
@@ -231,8 +268,8 @@ export default function App() {
   useEffect(() => {
     const currentProj = projects.find((item) => item.id === caseStudyId) || projects[0];
     document.title = isCaseStudy
-      ? `${currentProj.name} — Case Study | ${p.shortName}`
-      : `${p.name} — ${p.title}`;
+      ? `${currentProj.name} · Case Study | ${p.shortName}`
+      : `${p.name} · ${p.title}`;
 
     if (priorView.current !== isCaseStudy) {
       priorView.current = isCaseStudy;
@@ -288,7 +325,10 @@ export default function App() {
     const fadeObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          entry.target.classList.toggle('is-visible', entry.isIntersecting);
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            fadeObserver.unobserve(entry.target);
+          }
         });
       },
       { rootMargin: '0px 0px -16px 0px', threshold: 0.01 },
@@ -302,25 +342,32 @@ export default function App() {
     };
   }, [isCaseStudy, caseStudyId]);
 
-  // Global keyboard shortcuts: Alt+K Quick Jump, Escape closes overlays
+  // Global keyboard shortcuts: Alt+K Quick Jump, Escape closes overlays, Tab traps active modal/drawer
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.altKey || e.ctrlKey) && e.code === 'KeyK') {
         e.preventDefault();
         setNavDrawerOpen(false);
-        setQuickJumpOpen((prev) => {
-          const next = !prev;
-          if (next) setQuickQuery('');
-          return next;
-        });
+        if (quickJumpOpen) {
+          closeQuickJump();
+        } else {
+          quickTriggerRef.current = document.activeElement as HTMLElement | null;
+          setQuickQuery('');
+          setQuickJumpOpen(true);
+        }
         return;
       }
       if (e.key === 'Escape') {
         if (quickJumpOpen) {
-          setQuickJumpOpen(false);
+          closeQuickJump();
         } else if (navDrawerOpen) {
           closeNavDrawer(true);
         }
+        return;
+      }
+      if (e.key === 'Tab') {
+        if (quickJumpOpen) trapTabKey(e, quickModalRef.current);
+        else if (navDrawerOpen) trapTabKey(e, drawerRef.current);
       }
     };
     window.addEventListener('keydown', onKeyDown);
@@ -499,7 +546,8 @@ export default function App() {
         <div className="mb-4 space-y-2.5 border-b border-[rgb(var(--g200))] pb-4">
           <button
             type="button"
-            onClick={() => {
+            onClick={(e) => {
+              quickTriggerRef.current = isDrawer ? menuBtnRef.current : e.currentTarget;
               if (isDrawer) closeNavDrawer(false);
               setQuickQuery('');
               setQuickJumpOpen(true);
@@ -632,6 +680,7 @@ export default function App() {
           onClick={() => closeNavDrawer(true)}
         >
           <aside
+            ref={drawerRef}
             id="side-nav-drawer"
             role="dialog"
             aria-modal="true"
@@ -650,7 +699,7 @@ export default function App() {
           <CaseStudyView projectId={caseStudyId} />
         ) : (
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            {/* 00 — EDITORIAL HERO SECTION (Hairline Divided) */}
+            {/* 00 - EDITORIAL HERO SECTION (Hairline Divided) */}
             <section
               id="home"
               className="relative pt-6 pb-8 sm:pt-10"
@@ -804,17 +853,44 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Right 5-Column Studio Portrait (Divided by Vertical Hairline on Desktop) */}
-                <div className="border-t border-[rgb(var(--g200))] pt-6 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-                  <Portrait className="h-full" />
+                {/* Right 5-Column Studio Portrait & Flagship Preview Bar */}
+                <div className="flex flex-col justify-between gap-4 border-t border-[rgb(var(--g200))] pt-6 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                  <Portrait className="flex-1" />
+                  <a
+                    href={projects[0].caseStudy}
+                    className="group flex items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-3.5 transition-colors hover:border-[rgb(var(--accent))]"
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
+                      <img
+                        src={projects[0].screenshot}
+                        alt={projects[0].screenshotAlt}
+                        width={160}
+                        height={100}
+                        loading="lazy"
+                        className="h-11 w-16 shrink-0 border border-[rgb(var(--g200))] object-cover object-top"
+                      />
+                      <div className="min-w-0">
+                        <span className="block font-mono text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                          Flagship Preview · {projects[0].name}
+                        </span>
+                        <span className="block truncate text-[12.5px] font-medium text-[rgb(var(--ink))]">
+                          QR-powered digital clearance for Gordon College
+                        </span>
+                      </div>
+                    </div>
+                    <span className="inline-flex shrink-0 items-center gap-1 font-mono text-[11px] font-semibold text-[rgb(var(--accent))] group-hover:underline">
+                      <span>Case Study</span>
+                      <ArrowUpRight size={13} aria-hidden="true" />
+                    </span>
+                  </a>
                 </div>
               </div>
             </section>
 
-            {/* 01 — PROJECTS SECTION */}
+            {/* 01 - PROJECTS SECTION */}
             <ProjectsSection />
 
-            {/* 02 — ABOUT & PROJECT RESPONSIBILITIES SECTION */}
+            {/* 02 - ABOUT & PROJECT RESPONSIBILITIES SECTION */}
             <section
               id="about"
               className="relative pt-7 pb-10 border-t border-[rgb(var(--g200))]"
@@ -834,7 +910,7 @@ export default function App() {
               <div className="grid grid-cols-1 gap-8 border-t border-[rgb(var(--g200))] pt-7 lg:grid-cols-12">
                 <div className="lg:col-span-7">
                   <span className="font-mono text-[10.5px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
-                    About Gian Karlo
+                    How I Work
                   </span>
                   <p className="mt-2.5 text-[15.5px] font-medium leading-relaxed text-[rgb(var(--ink))]">
                     {p.introduction}
@@ -914,10 +990,22 @@ export default function App() {
                     return (
                       <button
                         key={step.num}
+                        id={`workflow-tab-${idx}`}
                         type="button"
                         role="tab"
                         aria-selected={selected}
+                        aria-controls={`workflow-panel-${idx}`}
+                        tabIndex={selected ? 0 : -1}
                         onClick={() => setActiveProcess(idx)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            const delta = e.key === 'ArrowRight' ? 1 : -1;
+                            const next = (idx + delta + processSteps.length) % processSteps.length;
+                            setActiveProcess(next);
+                            document.getElementById(`workflow-tab-${next}`)?.focus();
+                          }
+                        }}
                         className={`border-b-2 px-3 py-3.5 text-left transition-colors ${
                           selected
                             ? 'border-b-[rgb(var(--accent))] text-[rgb(var(--ink))]'
@@ -944,7 +1032,9 @@ export default function App() {
                   const StepIcon = step.Icon;
                   return (
                     <div
+                      id={`workflow-panel-${activeProcess}`}
                       role="tabpanel"
+                      aria-labelledby={`workflow-tab-${activeProcess}`}
                       className="pt-5"
                     >
                       <div className="flex items-center justify-between gap-2">
@@ -965,7 +1055,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* 03 — STACK & SKILLS SECTION */}
+            {/* 03 - STACK & SKILLS SECTION */}
             <section
               id="toolkit"
               className="pt-7 pb-10 border-t border-[rgb(var(--g200))]"
@@ -984,13 +1074,13 @@ export default function App() {
               <Toolkit />
             </section>
 
-            {/* 04 — CERTIFICATIONS SECTION */}
+            {/* 04 - CERTIFICATIONS SECTION */}
             <CertificationsSection />
 
-            {/* 05 — GITHUB CONTRIBUTIONS SECTION (Teal Blueprint Matrix) */}
+            {/* 05 - GITHUB CONTRIBUTIONS SECTION */}
             <GitHubSection />
 
-            {/* 06 — CONTACT SECTION */}
+            {/* 06 - CONTACT SECTION */}
             <ContactSection />
 
             {/* Footer */}
@@ -1023,11 +1113,12 @@ export default function App() {
         <div
           className="bryl-modal-backdrop"
           onClick={(e) => {
-            if (e.target === e.currentTarget) setQuickJumpOpen(false);
+            if (e.target === e.currentTarget) closeQuickJump();
           }}
           role="presentation"
         >
           <div
+            ref={quickModalRef}
             className="bryl-modal-panel"
             role="dialog"
             aria-modal="true"
@@ -1046,7 +1137,7 @@ export default function App() {
               />
               <button
                 type="button"
-                onClick={() => setQuickJumpOpen(false)}
+                onClick={() => closeQuickJump()}
                 className="px-1 font-mono text-[10.5px] text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]"
               >
                 ESC
@@ -1063,7 +1154,7 @@ export default function App() {
                       <a
                         key={item.id}
                         href={`#${item.id}`}
-                        onClick={() => setQuickJumpOpen(false)}
+                        onClick={() => closeQuickJump(false)}
                         className="flex items-center justify-between rounded-md px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
                       >
                         <span>{item.label}</span>
@@ -1086,7 +1177,7 @@ export default function App() {
                       <a
                         key={proj.id}
                         href={proj.caseStudy}
-                        onClick={() => setQuickJumpOpen(false)}
+                        onClick={() => closeQuickJump(false)}
                         className="flex items-center justify-between rounded-md px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
                       >
                         <span>{proj.name}</span>
@@ -1323,10 +1414,10 @@ function ContactSection() {
               CHANNEL // OPEN FOR OPPORTUNITIES
             </span>
             <p className="mt-1.5 font-pixel text-2xl font-bold text-[rgb(var(--ink))]">
-              Let’s build something thoughtful.
+              Let’s talk.
             </p>
             <p className="mt-2 text-[14px] leading-relaxed text-[rgb(var(--g600))]">
-              Have a question about my coursework, software engineering projects, or internship opportunities? Reach out directly via email or connect on GitHub and LinkedIn.
+              If you want to ask about any project here, talk through a UI idea, or discuss an internship or build together, email me anytime or find me on GitHub and LinkedIn.
             </p>
 
             {/* Email Action Row */}
@@ -1351,7 +1442,7 @@ function ContactSection() {
                 </>
               ) : (
                 <div className="border-l-2 border-[rgb(var(--g300))] pl-3 font-mono text-[12px] text-[rgb(var(--g500))]">
-                  [Email Placeholder — Add in src/portfolio.ts]
+                  [Email Placeholder: Add in src/portfolio.ts]
                 </div>
               )}
             </div>
@@ -1391,7 +1482,7 @@ function ContactSection() {
                     <Icon size={15} aria-hidden="true" />
                     <span>{name}</span>
                   </span>
-                  <span>[Placeholder — To be added]</span>
+                  <span>[Placeholder: To be added]</span>
                 </div>
               ),
             )}
@@ -1404,15 +1495,29 @@ function ContactSection() {
 
 function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }) {
   const currentProject = projects.find((item) => item.id === projectId) || projects[0];
+  const currentIdx = projects.findIndex((item) => item.id === currentProject.id);
+  const nextProject = projects[(currentIdx + 1) % projects.length];
   const currentRoles = currentProject.roles || p.roles;
   const detail = currentProject.caseStudyDetail || projects[0].caseStudyDetail!;
   const persona = currentProject.persona;
   const [lightbox, setLightbox] = useState<{ src: string; alt: string; title: string } | null>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const lightboxCloseBtnRef = useRef<HTMLButtonElement>(null);
+  const lightboxTriggerRef = useRef<HTMLElement | null>(null);
+
+  const closeLightbox = () => {
+    setLightbox(null);
+    const trigger = lightboxTriggerRef.current;
+    lightboxTriggerRef.current = null;
+    requestAnimationFrame(() => trigger?.focus());
+  };
 
   useEffect(() => {
     if (!lightbox) return;
+    requestAnimationFrame(() => lightboxCloseBtnRef.current?.focus());
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'Tab') trapTabKey(e, lightboxRef.current);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -1421,7 +1526,10 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
   const renderZoomableImage = (src: string, alt: string, title: string, imgClassName: string) => (
     <button
       type="button"
-      onClick={() => setLightbox({ src, alt, title })}
+      onClick={(e) => {
+        lightboxTriggerRef.current = e.currentTarget;
+        setLightbox({ src, alt, title });
+      }}
       aria-label={`Enlarge ${title}`}
       className="group relative block w-full cursor-zoom-in overflow-hidden text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))]"
     >
@@ -1483,13 +1591,13 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
 
       {/* Case Study Header */}
       <header className="mt-8 border-b border-[rgb(var(--g200))] pb-6">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
-            {currentProject.featured ? 'Featured Case Study' : 'Project Case Study'}
+            {currentProject.featured ? 'Flagship Case Study' : 'Project Case Study'}
           </span>
-          <span className="font-mono text-xs text-[rgb(var(--g400))]" aria-hidden="true">·</span>
+          <span className="hidden font-mono text-xs text-[rgb(var(--g400))] sm:inline" aria-hidden="true">·</span>
           <span className="micro-label">{currentProject.category}</span>
-          <span className="font-mono text-xs text-[rgb(var(--g400))]" aria-hidden="true">·</span>
+          <span className="hidden font-mono text-xs text-[rgb(var(--g400))] sm:inline" aria-hidden="true">·</span>
           <span className="micro-label">{p.name}</span>
         </div>
 
@@ -2041,7 +2149,7 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
               Let&apos;s Connect!
             </h3>
             <p className="mt-1.5 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
-              Thank you for reviewing the {currentProject.name} case study! Reach out to discuss this project or review more of my work:
+              Thanks for reading through the {currentProject.name} case study. If you want to talk through the design choices or check out what I’m building next, reach out below:
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-4 font-mono text-[12px]">
               <a href={`mailto:${p.contact.email}`} className="inline-flex items-center gap-1.5 text-[rgb(var(--accent))] hover:underline">
@@ -2078,7 +2186,7 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
               <ExternalLink size={14} aria-hidden="true" />
             </a>
           )}
-          {currentProject.repository && (
+          {currentProject.repository ? (
             <a
               href={currentProject.repository}
               target="_blank"
@@ -2087,6 +2195,16 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
             >
               <Github size={14} aria-hidden="true" />
               <span>View Repository</span>
+            </a>
+          ) : (
+            <span className="inline-flex min-h-[40px] items-center border border-dashed border-[rgb(var(--g300))] px-3 font-mono text-[11.5px] text-[rgb(var(--g400))]">
+              Team-hosted repo (link pending)
+            </span>
+          )}
+          {nextProject && nextProject.id !== currentProject.id && (
+            <a href={nextProject.caseStudy} className="bryl-btn-secondary">
+              <span>Next Case Study: {nextProject.name}</span>
+              <ArrowRight size={14} aria-hidden="true" />
             </a>
           )}
           <a href="#work" className="bryl-btn-secondary">
@@ -2101,18 +2219,20 @@ function CaseStudyView({ projectId = defaultFeaturedId }: { projectId?: string }
           role="dialog"
           aria-modal="true"
           aria-label={lightbox.title}
-          onClick={() => setLightbox(null)}
+          onClick={closeLightbox}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs"
         >
           <div
+            ref={lightboxRef}
             onClick={(e) => e.stopPropagation()}
             className="relative max-h-[90vh] w-full max-w-5xl overflow-auto border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] p-3 shadow-2xl sm:p-4"
           >
             <div className="mb-3 flex items-center justify-between gap-3 border-b border-[rgb(var(--g200))] pb-2.5">
               <p className="font-mono text-xs font-medium text-[rgb(var(--ink))]">{lightbox.title}</p>
               <button
+                ref={lightboxCloseBtnRef}
                 type="button"
-                onClick={() => setLightbox(null)}
+                onClick={closeLightbox}
                 aria-label="Close enlarged image"
                 className="inline-flex h-8 w-8 items-center justify-center border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] text-[rgb(var(--ink))] hover:text-[rgb(var(--accent))]"
               >

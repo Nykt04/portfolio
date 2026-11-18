@@ -19,6 +19,24 @@ export default function CertificationsSection() {
       if (e.key === 'Escape') {
         if (imgZoomed) setImgZoomed(false);
         else closeModal();
+        return;
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusables = Array.from(
+          modalRef.current.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((el) => el.offsetParent !== null);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
     window.addEventListener('keydown', onKeyDown);
@@ -54,7 +72,7 @@ export default function CertificationsSection() {
             </h2>
           </div>
           <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
-            Professional certifications and coursework accredited in visual design, programming, and cybersecurity fundamentals.
+            Certificates I earned across visual design, Python, frontend fundamentals, and cybersecurity. Open any card if you want to check the credential ID.
           </p>
         </div>
         <span className="micro-label">{certifications.length} verified credentials</span>

@@ -330,126 +330,6 @@ html.dark .blueprint-backdrop {
   animation: blink 2s ease-in-out infinite;
 }
 
-/* Professional Elevated Surface Card */
-.gk-blueprint-card {
-  position: relative;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgb(var(--g200));
-  background: rgb(var(--surface));
-  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.08);
-  transition: transform 250ms ease, border-color 200ms ease, box-shadow 250ms ease;
-}
-.gk-blueprint-card:hover {
-  border-color: rgb(var(--accent) / 0.45);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.16);
-}
-
-/* Hidden corner crosshairs for clean professional finish */
-.gk-corner-tick {
-  display: none !important;
-}
-
-.bryl-surface-card {
-  position: relative;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgb(var(--g200));
-  background: rgb(var(--surface));
-  box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.16);
-  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 280ms ease, border-color 200ms ease;
-}
-.bryl-surface-card:hover {
-  transform: translateY(-2px);
-  border-color: rgb(var(--accent) / 0.6);
-  box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.24);
-}
-
-.bryl-inset-frame {
-  pointer-events: none;
-  position: absolute;
-  inset: 5px;
-  border-radius: calc(var(--radius-lg) - 4px);
-  border: 1px solid rgb(var(--g100));
-}
-
-/* Bryl Lim 3-Card Spotlight Fan Deck (01 - projects) */
-.bryl-fan-stage {
-  position: relative;
-  width: 100%;
-  height: 21.5rem;
-}
-.bryl-fan-card {
-  position: absolute;
-  top: 0.75rem;
-  left: 50%;
-  width: min(100%, 24rem);
-  border-radius: 1rem;
-  border: 1px solid rgb(var(--g200));
-  background: rgb(var(--surface));
-  padding: 1.5rem;
-  text-align: left;
-  transition:
-    transform 520ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 400ms ease,
-    box-shadow 400ms ease,
-    border-color 220ms ease;
-}
-.bryl-fan-card.is-center {
-  z-index: 30;
-  transform: translateX(-50%) translateY(0) rotate(0deg) scale(1);
-  opacity: 1;
-  border-color: rgb(var(--accent) / 0.45);
-  box-shadow:
-    0 24px 60px -15px rgba(0, 0, 0, 0.28),
-    0 0 1px 1px rgba(0, 0, 0, 0.06);
-}
-.bryl-fan-card.is-center:hover {
-  transform: translateX(-50%) translateY(-4px) rotate(0deg) scale(1.015);
-  border-color: rgb(var(--accent));
-}
-.bryl-fan-card.is-left {
-  z-index: 20;
-  transform: translateX(calc(-50% - 11rem)) translateY(1.1rem) rotate(-5deg) scale(0.91);
-  opacity: 0.72;
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.16);
-}
-.bryl-fan-card.is-left:hover {
-  transform: translateX(calc(-50% - 11.4rem)) translateY(0.75rem) rotate(-4deg) scale(0.93);
-  opacity: 0.94;
-}
-.bryl-fan-card.is-right {
-  z-index: 10;
-  transform: translateX(calc(-50% + 11rem)) translateY(1.1rem) rotate(5deg) scale(0.91);
-  opacity: 0.72;
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.16);
-}
-.bryl-fan-card.is-right:hover {
-  transform: translateX(calc(-50% + 11.4rem)) translateY(0.75rem) rotate(4deg) scale(0.93);
-  opacity: 0.94;
-}
-
-@media (max-width: 699px) {
-  .bryl-fan-stage {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-  .bryl-fan-card,
-  .bryl-fan-card.is-center,
-  .bryl-fan-card.is-left,
-  .bryl-fan-card.is-right,
-  .bryl-fan-card.is-center:hover,
-  .bryl-fan-card.is-left:hover,
-  .bryl-fan-card.is-right:hover {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    transform: none !important;
-    opacity: 1 !important;
-  }
-}
-
 /* Theme Switcher (unboxed editorial controls) */
 .theme-switch {
   display: inline-flex;
@@ -460,8 +340,8 @@ html.dark .blueprint-backdrop {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 0;
   border-bottom: 1.5px solid transparent;
   color: rgb(var(--g400));
@@ -678,8 +558,6 @@ html.dark .blueprint-backdrop {
   .side-drawer-panel {
     animation: none !important;
   }
-  .bryl-surface-card,
-  .gk-blueprint-card,
   a,
   button {
     transition: none !important;

@@ -1,4 +1,4 @@
-/* GK Editorial Cream & Gray Monochrome — Design Tokens
+/* GK Editorial Cream & Gray Monochrome - Design Tokens
    Calibrated Charcoal, Deep Gray, and Warm Cream White with WCAG 2.2 AA Contrast */
 
 :root {
@@ -15,7 +15,7 @@
   --g100: 244 244 245;
   --g200: 228 228 231;
   --g300: 212 212 216;
-  --g400: 161 161 170;
+  --g400: 100 100 108;
   --g500: 113 113 122;
   --g600: 63 63 70;
   --g700: 39 39 42;
@@ -68,7 +68,7 @@ html.dark {
   --g100: 32 32 35;
   --g200: 44 44 48;
   --g300: 76 76 82;
-  --g400: 132 132 138;
+  --g400: 150 150 158;
   --g500: 164 164 170;
   --g600: 212 212 216;
   --g700: 228 228 231;
