@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Code2, UserRound } from 'lucide-react';
+import { Check, Code2, UserRound } from 'lucide-react';
 import {
   siC,
   siFigma,
@@ -11,7 +11,7 @@ import {
   siTypescript,
   siVercel,
 } from 'simple-icons';
-import { portfolio as p } from './portfolio';
+import { portfolio as p, projects, type PortfolioProject } from './portfolio';
 import { designIcons } from './designIcons';
 import { editorIcons } from './editorIcons';
 
@@ -38,16 +38,28 @@ const languageDescriptions: Record<string, string> = {
   C: 'Low-level memory management, pointers, and systems logic.',
 };
 
-export const toolkit = [
-  ...p.skills.map((name) => ({
-    name,
-    category: 'Languages',
-    description: languageDescriptions[name] || 'Core programming language.',
-  })),
-  ...p.tools.filter((t) => t.category !== 'IDE & AI'),
-];
+const toolkit = p.tools.filter((t) => t.category !== 'IDE & AI');
 
-const categories = ['All', ...Array.from(new Set(toolkit.map((t) => t.category)))];
+function getProjectStackSet(proj: PortfolioProject): Set<string> {
+  const matched = new Set<string>();
+  const allNames = [...p.skills, ...toolkit.map((t) => t.name)];
+  for (const tech of proj.technologies) {
+    const low = tech.toLowerCase();
+    for (const name of allNames) {
+      if (low === name.toLowerCase() || low.startsWith(`${name.toLowerCase()} `)) {
+        matched.add(name);
+      }
+    }
+  }
+  if (proj.caseStudyDetail?.startingDesign.lofiPrototype.url?.includes('figma.com')) {
+    matched.add('Figma');
+  }
+  if (proj.repository || proj.id === 'project-3') {
+    matched.add('Git');
+    matched.add('GitHub');
+  }
+  return matched;
+}
 
 export function Portrait({ className = '' }: { className?: string }) {
   const [failed, setFailed] = useState(false);
@@ -206,42 +218,107 @@ export function Portrait({ className = '' }: { className?: string }) {
 }
 
 export function Toolkit() {
-  const [category, setCategory] = useState('All');
-  const visible = toolkit.filter((tool) => category === 'All' || tool.category === category);
+  const [projectId, setProjectId] = useState<'all' | string>('all');
+  const [activeToolName, setActiveToolName] = useState<string | null>(null);
+
+  const selectedProject = projects.find((item) => item.id === projectId);
+  const projectStack = selectedProject ? getProjectStackSet(selectedProject) : null;
+  const activeTool = toolkit.find((t) => t.name === activeToolName);
+
+  const matchCount = projectStack
+    ? p.skills.filter((s) => projectStack.has(s)).length +
+      toolkit.filter((t) => projectStack.has(t.name)).length
+    : p.skills.length + toolkit.length;
 
   return (
     <div>
+      {/* "Used In Project" X-Ray Toggle */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-[rgb(var(--g200))] pb-3">
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Highlight stack used in project">
+          <span className="font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))] mr-1">
+            X-Ray:
+          </span>
+          <button
+            type="button"
+            aria-pressed={projectId === 'all'}
+            onClick={() => setProjectId('all')}
+            className={`px-2.5 py-1 font-mono text-xs transition-colors border ${
+              projectId === 'all'
+                ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent))] font-semibold text-[rgb(var(--accent-fg))]'
+                : 'border-[rgb(var(--g200))] text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]'
+            }`}
+          >
+            All
+          </button>
+          {projects.map((proj) => {
+            const active = projectId === proj.id;
+            return (
+              <button
+                key={proj.id}
+                type="button"
+                aria-pressed={active}
+                onClick={() => setProjectId(active ? 'all' : proj.id)}
+                className={`px-2.5 py-1 font-mono text-xs transition-colors border ${
+                  active
+                    ? 'border-[rgb(var(--accent))] bg-[rgb(var(--accent))] font-semibold text-[rgb(var(--accent-fg))]'
+                    : 'border-[rgb(var(--g200))] text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]'
+                }`}
+              >
+                {proj.name}
+              </button>
+            );
+          })}
+        </div>
+        <span className="font-mono text-xs text-[rgb(var(--accent))] font-medium">
+          {selectedProject ? `${matchCount} used in ${selectedProject.name}` : `${matchCount} total`}
+        </span>
+      </div>
+
       {/* Core Programming Languages Grid (AGENTS.md: Python, TypeScript, JavaScript, and C) */}
-      <div className="mb-10">
-        <div className="mb-3 flex items-baseline justify-between">
+      <div className="mb-7">
+        <div className="mb-2.5 flex items-baseline justify-between">
           <h3 className="micro-label">Primary Languages</h3>
-          <span className="font-mono text-xs text-[rgb(var(--accent))] font-medium">{p.skills.length} core languages</span>
+          <span className="font-mono text-[11px] text-[rgb(var(--g400))]">{p.skills.length} core</span>
         </div>
         <div className="grid grid-cols-1 divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 lg:divide-x">
           {p.skills.map((lang) => {
             const icon = techIcons[lang as keyof typeof techIcons];
+            const isMatch = !projectStack || projectStack.has(lang);
             return (
               <div
                 key={lang}
-                className="py-5 sm:px-5 lg:first:pl-0 lg:last:pr-0"
+                className={`py-4 transition-opacity sm:px-4 lg:first:pl-0 lg:last:pr-0 ${
+                  isMatch ? 'opacity-100' : 'opacity-35'
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center text-[rgb(var(--accent))]">
                     {icon ? (
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d={icon.path} />
                       </svg>
                     ) : (
-                      <Code2 size={20} aria-hidden="true" />
+                      <Code2 size={18} aria-hidden="true" />
                     )}
                   </span>
-                  <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-[rgb(var(--g400))]">
-                    Core Skill
-                  </span>
+                  {projectStack ? (
+                    <span
+                      className={`inline-flex items-center gap-1 font-mono text-[10px] font-medium uppercase tracking-wider ${
+                        isMatch ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'
+                      }`}
+                    >
+                      {isMatch && <Check size={11} aria-hidden="true" />}
+                      <span>{isMatch ? 'Used' : 'Unused'}</span>
+                    </span>
+                  ) : (
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-[rgb(var(--g400))]">
+                      Core
+                    </span>
+                  )}
                 </div>
-                <div className="mt-3.5 font-display-ui text-base font-bold text-[rgb(var(--ink))]">{lang}</div>
-                <p className="mt-1.5 text-xs leading-relaxed text-[rgb(var(--g600))]">
-                  {languageDescriptions[lang] || 'Core language in my software engineering toolkit.'}
+                <div className="mt-2.5 font-display-ui text-base font-bold text-[rgb(var(--ink))]">{lang}</div>
+                <p className="mt-1 text-xs leading-snug text-[rgb(var(--g600))]">
+                  {languageDescriptions[lang] || 'Core language.'}
                 </p>
               </div>
             );
@@ -249,71 +326,79 @@ export function Toolkit() {
         </div>
       </div>
 
-      {/* Category Filter Row */}
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h3 className="micro-label">Frameworks, Libraries &amp; Developer Tools</h3>
-        <span className="font-mono text-xs text-[rgb(var(--g400))]">
-          {visible.length} technologies
+      {/* Frameworks & Tools Compact Grid */}
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+        <h3 className="micro-label">Frameworks, Cloud &amp; Design Tools</h3>
+        <span className="font-mono text-[11px] text-[rgb(var(--g400))]">
+          {toolkit.length} tools · select for note
         </span>
       </div>
 
-      <div
-        className="mb-6 flex flex-wrap gap-4 border-b border-[rgb(var(--g200))] pb-2"
-        role="group"
-        aria-label="Filter technologies by category"
-      >
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            aria-pressed={category === cat}
-            onClick={() => setCategory(cat)}
-            className={`py-1 font-mono text-xs transition-colors ${
-              category === cat
-                ? 'font-semibold text-[rgb(var(--ink))] underline decoration-[rgb(var(--accent))] decoration-2 underline-offset-[10px]'
-                : 'text-[rgb(var(--g500))] hover:text-[rgb(var(--ink))]'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* Filtered Tools Grid */}
-      <div className="grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((tool) => {
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
+        {toolkit.map((tool) => {
           const icon = techIcons[tool.name as keyof typeof techIcons];
+          const isMatch = !projectStack || projectStack.has(tool.name);
+          const isSelected = activeToolName === tool.name;
           return (
-            <div
+            <button
               key={tool.name}
-              className="group flex items-start gap-3.5 border-t border-[rgb(var(--g200))] py-4"
+              type="button"
+              aria-pressed={isSelected}
+              onClick={() => setActiveToolName((curr) => (curr === tool.name ? null : tool.name))}
+              className={`group flex min-h-[46px] items-center justify-between gap-2 border px-3 py-2 text-left transition-all ${
+                isSelected
+                  ? 'border-[rgb(var(--accent))] bg-[rgb(var(--surface))]'
+                  : isMatch
+                    ? projectStack
+                      ? 'border-[rgb(var(--accent)/0.65)] bg-[rgb(var(--surface))] hover:border-[rgb(var(--accent))]'
+                      : 'border-[rgb(var(--g200))] bg-[rgb(var(--surface))] hover:border-[rgb(var(--ink))]'
+                    : 'border-dashed border-[rgb(var(--g200))] bg-transparent opacity-35 hover:opacity-75'
+              }`}
             >
-              <span className="mt-0.5 flex shrink-0 items-center justify-center text-[rgb(var(--accent))]">
-                {icon ? (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d={icon.path} />
-                  </svg>
-                ) : (
-                  <Code2 size={17} aria-hidden="true" />
-                )}
-              </span>
-
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-2">
-                  <strong className="font-display-ui text-sm font-semibold text-[rgb(var(--ink))]">
+              <span className="flex min-w-0 items-center gap-2.5">
+                <span className="flex shrink-0 items-center text-[rgb(var(--accent))]">
+                  {icon ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d={icon.path} />
+                    </svg>
+                  ) : (
+                    <Code2 size={16} aria-hidden="true" />
+                  )}
+                </span>
+                <span className="min-w-0">
+                  <strong className="block truncate font-display-ui text-[13px] font-semibold text-[rgb(var(--ink))]">
                     {tool.name}
                   </strong>
-                  <span className="font-mono text-[10px] text-[rgb(var(--g400))]">
+                  <span className="block truncate font-mono text-[9.5px] text-[rgb(var(--g400))]">
                     {tool.category}
                   </span>
-                </div>
-                <p className="mt-1 text-xs leading-relaxed text-[rgb(var(--g600))] line-clamp-2">
-                  {tool.description}
-                </p>
-              </div>
-            </div>
+                </span>
+              </span>
+              {projectStack && isMatch && (
+                <Check size={13} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
+              )}
+            </button>
           );
         })}
+      </div>
+
+      {/* Single-line Tool / Project Readout */}
+      <div className="mt-3 flex min-h-[38px] items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-3 font-mono text-xs text-[rgb(var(--g500))]">
+        {activeTool ? (
+          <span>
+            <strong className="text-[rgb(var(--ink))]">{activeTool.name}</strong> ({activeTool.category}) —{' '}
+            {activeTool.description}
+          </span>
+        ) : selectedProject ? (
+          <span>
+            Highlighted <strong className="text-[rgb(var(--ink))]">{selectedProject.name}</strong> stack.{' '}
+            <a href={selectedProject.caseStudy} className="text-[rgb(var(--accent))] hover:underline">
+              Open case study →
+            </a>
+          </span>
+        ) : (
+          <span>Pick a project to X-ray its stack, or click any tool for its role.</span>
+        )}
       </div>
     </div>
   );

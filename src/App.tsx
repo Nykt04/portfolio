@@ -202,12 +202,13 @@ export default function App() {
   const quickInputRef = useRef<HTMLInputElement>(null);
   const quickTriggerRef = useRef<HTMLElement | null>(null);
   const priorView = useRef(isCaseStudy);
+  const drawerScrollYRef = useRef<number | null>(null);
+  const restoreDrawerRef = useRef(false);
 
   const closeNavDrawer = (returnFocus = false) => {
+    restoreDrawerRef.current = returnFocus;
+    if (!returnFocus) drawerScrollYRef.current = null;
     setNavDrawerOpen(false);
-    if (returnFocus) {
-      requestAnimationFrame(() => menuBtnRef.current?.focus());
-    }
   };
 
   const closeQuickJump = (returnFocus = true) => {
@@ -215,7 +216,7 @@ export default function App() {
     if (returnFocus) {
       const trigger = quickTriggerRef.current;
       quickTriggerRef.current = null;
-      requestAnimationFrame(() => trigger?.focus());
+      requestAnimationFrame(() => trigger?.focus({ preventScroll: true }));
     }
   };
 
@@ -376,19 +377,36 @@ export default function App() {
 
   useEffect(() => {
     if (navDrawerOpen && window.innerWidth < 1024) {
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => closeDrawerBtnRef.current?.focus(), 30);
+      drawerScrollYRef.current = window.scrollY;
+      document.documentElement.style.overflowY = 'hidden';
+      setTimeout(() => closeDrawerBtnRef.current?.focus({ preventScroll: true }), 30);
     } else {
-      document.body.style.overflow = '';
+      document.documentElement.style.overflowY = '';
+      const savedY = drawerScrollYRef.current;
+      drawerScrollYRef.current = null;
+      if (restoreDrawerRef.current) {
+        restoreDrawerRef.current = false;
+        if (savedY !== null && Math.abs(window.scrollY - savedY) > 1) {
+          window.scrollTo({ top: savedY, behavior: 'instant' });
+        }
+        requestAnimationFrame(() => {
+          if (savedY !== null && Math.abs(window.scrollY - savedY) > 1) {
+            window.scrollTo({ top: savedY, behavior: 'instant' });
+          }
+          menuBtnRef.current?.focus({ preventScroll: true });
+        });
+      }
     }
     const onResize = () => {
       if (window.innerWidth >= 1024 && navDrawerOpen) {
+        restoreDrawerRef.current = false;
+        drawerScrollYRef.current = null;
         setNavDrawerOpen(false);
       }
     };
     window.addEventListener('resize', onResize);
     return () => {
-      document.body.style.overflow = '';
+      document.documentElement.style.overflowY = '';
       window.removeEventListener('resize', onResize);
     };
   }, [navDrawerOpen]);
