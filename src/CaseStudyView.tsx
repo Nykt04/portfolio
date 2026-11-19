@@ -769,10 +769,13 @@ export default function CaseStudyView({ projectId = defaultFeaturedId }: { proje
               <span>Repository</span>
             </a>
           ) : (
-            <span className="inline-flex min-h-[44px] items-center gap-1.5 border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] px-3 font-mono text-[11.5px] text-[rgb(var(--g500))]">
+            <a
+              href="#403"
+              className="inline-flex min-h-[44px] items-center gap-1.5 border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] px-3 font-mono text-[11.5px] text-[rgb(var(--g500))] transition-colors hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--ink))]"
+            >
               <Lock size={13} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
               <span>{currentProject.accessNotice || 'Exclusive System · Gordon College, College of Computer Studies'}</span>
-            </span>
+            </a>
           )}
           {nextProject && nextProject.id !== currentProject.id && (
             <a href={nextProject.caseStudy} className="bryl-btn-secondary">

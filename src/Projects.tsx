@@ -185,13 +185,14 @@ export default function ProjectsSection() {
                   <span>Repository</span>
                 </a>
               ) : (
-                <span
-                  className="inline-flex min-h-[40px] items-center gap-1.5 border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] px-3 font-mono text-[11px] text-[rgb(var(--g500))]"
+                <a
+                  href="#403"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] px-3 font-mono text-[11px] text-[rgb(var(--g500))] transition-colors hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--ink))]"
                   title={featured.accessNotice || 'Exclusive system for Gordon College, College of Computer Studies'}
                 >
                   <Lock size={12} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
                   <span>Exclusive System · Gordon College, College of Computer Studies</span>
-                </span>
+                </a>
               )}
             </div>
           </div>

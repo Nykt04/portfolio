@@ -6,6 +6,7 @@ import {
 } from 'react';
 import { flushSync } from 'react-dom';
 import {
+  AlertTriangle,
   ArrowRight,
   ArrowUpRight,
   Award,
@@ -36,6 +37,14 @@ import { Portrait, Toolkit, techIcons } from './AboutExtras';
 import CertificationsSection from './Certifications';
 import CaseStudyView, { defaultFeaturedId, trapTabKey } from './CaseStudyView';
 import { ContactSection, GitHubSection } from './ContactGitHub';
+import {
+  ERROR_CATALOG,
+  ERROR_JUMP_ITEMS,
+  ErrorPageView,
+  PortfolioErrorBoundary,
+  resolveRouteError,
+  type ErrorCode,
+} from './ErrorPages';
 
 declare global {
   interface Window {
@@ -153,6 +162,11 @@ function ThemeSwitcher() {
 }
 
 export default function App() {
+  const [routeError, setRouteError] = useState<ErrorCode | null>(() =>
+    typeof window !== 'undefined'
+      ? resolveRouteError(window.location.pathname, window.location.hash)
+      : null,
+  );
   const [isCaseStudy, setIsCaseStudy] = useState(() => window.location.hash.startsWith('#case-study'));
   const [caseStudyId, setCaseStudyId] = useState(() => {
     const match = typeof window !== 'undefined' ? window.location.hash.match(/[?&]p=([^&]+)/) : null;
@@ -191,21 +205,26 @@ export default function App() {
     }
   };
 
-  // Sync hash navigation (#case-study vs #home/#work/etc.)
+  // Sync hash navigation (#case-study vs #home/#work/etc. and error routes)
   useEffect(() => {
     const onHash = () => {
       const hash = window.location.hash;
       if (hash === '#main') return;
-      const nextIsCase = hash.startsWith('#case-study');
+      const nextErr = resolveRouteError(window.location.pathname, hash);
+      if (!nextErr && window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+        window.history.replaceState(null, '', `/${hash}`);
+      }
+      const nextIsCase = !nextErr && hash.startsWith('#case-study');
       const pidMatch = hash.match(/[?&]p=([^&]+)/);
       if (!hash.startsWith('#case-study-')) {
         setCaseStudyId(pidMatch ? pidMatch[1] : defaultFeaturedId);
       }
 
-      const viewChanged = nextIsCase !== priorView.current;
+      const viewChanged = nextIsCase !== priorView.current || Boolean(nextErr);
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const applyState = () => {
+        setRouteError(nextErr);
         setIsCaseStudy(nextIsCase);
         if (nextIsCase) setCaseMenuOpen(true);
         setNavDrawerOpen(false);
@@ -216,14 +235,14 @@ export default function App() {
         document.startViewTransition(() => {
           flushSync(applyState);
           const targetId = hash.split('?')[0].slice(1);
-          const target = document.getElementById(targetId);
+          const target = !nextErr ? document.getElementById(targetId) : null;
           if (target) target.scrollIntoView({ behavior: 'instant' });
           else window.scrollTo({ top: 0, behavior: 'instant' });
         });
       } else {
         applyState();
         const targetId = hash.split('?')[0].slice(1);
-        const target = document.getElementById(targetId);
+        const target = !nextErr ? document.getElementById(targetId) : null;
         if (target) {
           target.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth' });
         } else if (viewChanged) {
@@ -233,28 +252,34 @@ export default function App() {
     };
 
     window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
+    window.addEventListener('popstate', onHash);
+    return () => {
+      window.removeEventListener('hashchange', onHash);
+      window.removeEventListener('popstate', onHash);
+    };
   }, []);
 
   // Update document title and scroll spy
   useEffect(() => {
     const currentProj = projects.find((item) => item.id === caseStudyId) || projects[0];
-    document.title = isCaseStudy
-      ? `${currentProj.name} · Case Study | ${p.shortName}`
-      : `${p.name} · ${p.title}`;
+    document.title = routeError
+      ? `${routeError} · ${ERROR_CATALOG[routeError].statusText} | ${p.shortName}`
+      : isCaseStudy
+        ? `${currentProj.name} · Case Study | ${p.shortName}`
+        : `${p.name} · ${p.title}`;
 
-    if (priorView.current !== isCaseStudy) {
+    if (priorView.current !== isCaseStudy || routeError) {
       priorView.current = isCaseStudy;
       requestAnimationFrame(() => {
         const cleanId = window.location.hash.split('?')[0].slice(1);
-        const target = document.getElementById(cleanId);
+        const target = !routeError ? document.getElementById(cleanId) : null;
         if (target) target.scrollIntoView({ behavior: 'instant' });
         else window.scrollTo({ top: 0, behavior: 'instant' });
         mainRef.current?.focus({ preventScroll: true });
       });
     }
 
-    if (isCaseStudy) return;
+    if (isCaseStudy || routeError) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -271,7 +296,7 @@ export default function App() {
     });
 
     return () => observer.disconnect();
-  }, [isCaseStudy, caseStudyId]);
+  }, [isCaseStudy, caseStudyId, routeError]);
 
   // Bidirectional smooth fade-in transition on scroll (respects reduced motion)
   useEffect(() => {
@@ -312,7 +337,7 @@ export default function App() {
       fadeObserver.disconnect();
       fadeTargets.forEach((el) => el.classList.remove('scroll-fade', 'is-visible'));
     };
-  }, [isCaseStudy, caseStudyId]);
+  }, [isCaseStudy, caseStudyId, routeError]);
 
   // Global keyboard shortcuts: Alt+K Quick Jump, Escape closes overlays, Tab traps active modal/drawer
   useEffect(() => {
@@ -389,9 +414,11 @@ export default function App() {
   }, [quickJumpOpen]);
 
   const coreLogoSkills = ['Python', 'TypeScript', 'JavaScript', 'C'];
-  const activeNavItem = isCaseStudy
-    ? navItems.find((item) => item.isCaseLink) || navItems[2]
-    : navItems.find((item) => item.id === activeSection) || navItems[0];
+  const activeNavItem = routeError
+    ? { id: 'error', label: `Error ${routeError}`, num: 'ERR', Icon: AlertTriangle }
+    : isCaseStudy
+      ? navItems.find((item) => item.isCaseLink) || navItems[2]
+      : navItems.find((item) => item.id === activeSection) || navItems[0];
 
   const renderSideNav = (isDrawer: boolean) => (
     <>
@@ -684,10 +711,13 @@ export default function App() {
 
       {/* Main Content Container */}
       <main id="main" ref={mainRef} tabIndex={-1} className="relative lg:pr-64">
-        {isCaseStudy ? (
-          <CaseStudyView projectId={caseStudyId} />
-        ) : (
-          <div className="mx-auto max-w-5xl px-5 sm:px-8 lg:px-10">
+        <PortfolioErrorBoundary>
+          {routeError ? (
+            <ErrorPageView code={routeError} onReset={() => setRouteError(null)} />
+          ) : isCaseStudy ? (
+            <CaseStudyView projectId={caseStudyId} />
+          ) : (
+            <div className="mx-auto max-w-5xl px-5 sm:px-8 lg:px-10">
             {/* 00 - EDITORIAL HERO SECTION (Hairline Divided) */}
             <section
               id="home"
@@ -1092,17 +1122,28 @@ export default function App() {
                     © {new Date().getFullYear()} · {p.title}
                   </span>
                 </div>
-                <a
-                  href="#home"
-                  className="inline-flex items-center gap-1 text-[rgb(var(--g500))] hover:text-[rgb(var(--accent))]"
-                >
-                  <span>back to top</span>
-                  <ArrowUpRight size={13} aria-hidden="true" />
-                </a>
+                <div className="flex items-center gap-4">
+                  <a
+                    href="#404"
+                    className="text-[rgb(var(--g400))] hover:text-[rgb(var(--accent))]"
+                    aria-label="Preview custom HTTP error pages (404, 403, 500, 503)"
+                  >
+                    status &amp; error pages
+                  </a>
+                  <span className="text-[rgb(var(--g300))]" aria-hidden="true">·</span>
+                  <a
+                    href="#home"
+                    className="inline-flex items-center gap-1 text-[rgb(var(--g500))] hover:text-[rgb(var(--accent))]"
+                  >
+                    <span>back to top</span>
+                    <ArrowUpRight size={13} aria-hidden="true" />
+                  </a>
+                </div>
               </div>
             </footer>
           </div>
-        )}
+          )}
+        </PortfolioErrorBoundary>
       </main>
 
       {/* Quick Jump Command Palette (Alt+K / Cmd+K) */}
@@ -1128,7 +1169,7 @@ export default function App() {
                 type="text"
                 value={quickQuery}
                 onChange={(e) => setQuickQuery(e.target.value)}
-                placeholder="Jump to section or project case study..."
+                placeholder="Jump to section, case study, or error page (404, 403, 500, 503)..."
                 aria-label="Filter navigation commands"
                 className="w-full bg-transparent font-mono text-[13px] text-[rgb(var(--ink))] placeholder:text-[rgb(var(--g400))] focus:outline-none"
               />
@@ -1181,6 +1222,29 @@ export default function App() {
                         <span className="text-[10.5px] text-[rgb(var(--g400))]">{proj.category}</span>
                       </a>
                     ))}
+                </div>
+              </div>
+
+              <div>
+                <span className="micro-label block mb-2">System &amp; Error Pages</span>
+                <div className="flex flex-col gap-1">
+                  {ERROR_JUMP_ITEMS.filter(
+                    (err) =>
+                      err.code.includes(quickQuery.toLowerCase()) ||
+                      err.statusText.toLowerCase().includes(quickQuery.toLowerCase()) ||
+                      err.title.toLowerCase().includes(quickQuery.toLowerCase()) ||
+                      'error'.includes(quickQuery.toLowerCase()),
+                  ).map((err) => (
+                    <a
+                      key={err.code}
+                      href={err.hash}
+                      onClick={() => closeQuickJump(false)}
+                      className="flex items-center justify-between px-2.5 py-2 text-[rgb(var(--ink))] hover:bg-[rgb(var(--g100))]"
+                    >
+                      <span>{err.statusText}</span>
+                      <span className="text-[10.5px] text-[rgb(var(--accent))]">ERR {err.code}</span>
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
