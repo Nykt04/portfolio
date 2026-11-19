@@ -245,6 +245,7 @@ export interface PortfolioProject {
   screenshotAlt: string;
   repository: string;
   liveDemo: string;
+  accessNotice?: string;
   caseStudy: string;
   featured: boolean;
   roles?: ProjectRole[];
@@ -267,13 +268,14 @@ export const projects: PortfolioProject[] = [
     screenshotAlt: portfolio.project.screenshotAlt,
     repository: portfolio.project.repository,
     liveDemo: portfolio.project.liveDemo,
+    accessNotice: 'Exclusive internal system for the Gordon College CCS Department (private department & team repository).',
     caseStudy: '#case-study?p=project-3',
     featured: true,
     roles: [
-      { title: 'Requirements Analysis', description: 'Mapped Gordon College CCS clearance bottlenecks across labs, library, council, and the dean’s office into digital states.' },
-      { title: 'Main Contributor (Full-Stack)', description: 'Built core Node.js/Express routes, clearance state rules, QR pass generation, and mobile views in our team repo.' },
-      { title: 'UI/UX Design', description: 'Designed low-clutter mobile student views and fast officer QR scan screens.' },
-      { title: 'Quality Assurance', description: 'Tested state transitions, role guards, session persistence, and mobile layouts.' },
+      { title: 'Requirements Analysis', description: 'Interviewed CCS students and signatories to map physical clearance stages (labs, library, council, dean) into digital states and hold rules.' },
+      { title: 'Main Contributor (Full-Stack)', description: 'Authored core Node.js/Express clearance routes, status transition logic, QR token generation, and student/instructor dashboards in our shared team repo.' },
+      { title: 'UI/UX Design', description: 'Designed the high-contrast mobile QR Verification Pass, non-color status badges, and the camera scanner with manual Student ID fallback.' },
+      { title: 'Quality Assurance', description: 'Tested role-based route guards, duplicate scan prevention, low-light QR readability, and mobile layouts across student phones.' },
     ],
     persona: portfolio.project.persona,
     caseStudyDetail: {
@@ -283,7 +285,7 @@ export const projects: PortfolioProject[] = [
         duration: 'April 2026 – November 2026',
         problem: 'Students wait in long lines for paper signatures each semester, and losing that slip forces a full reset.',
         goal: 'Show cleared and pending stations on one phone screen with a scannable QR pass for fast sign-offs.',
-        teamContext: 'Built in a groupmate-hosted repo where I led core implementation, clearance flows, and UI.',
+        teamContext: 'Exclusive internal system for the Gordon College CCS Department; built in a groupmate-hosted repo where I led core full-stack routes, clearance flows, and UI.',
       },
       understanding: {
         researchSummary: 'Interviews with 6 BSCS students and 2 office staff showed students lacked visibility into missing items while staff disliked manual binder lookups.',
@@ -378,7 +380,7 @@ export const projects: PortfolioProject[] = [
             alt: 'Check8 Admin Dashboard showing student records, CSV/SQLite import, groups and classes, and course management',
           },
         ],
-        hifiNote: 'Built as a dedicated department portal inside our team repo, featuring core workflows and screens I implemented.',
+        hifiNote: 'Built as an exclusive internal portal for the Gordon College CCS Department inside our shared team repo, featuring the core clearance workflows and screens I implemented.',
         accessibilityConsiderations: [
           'Words Alongside Color: Status pills pair Cleared and Pending text with distinct borders.',
           'Thumb-Friendly Targets: Buttons and tabs are sized for easy one-handed mobile taps.',
@@ -386,12 +388,12 @@ export const projects: PortfolioProject[] = [
         ],
       },
       goingForward: {
-        impact: 'Dedicated department clearance system replacing fragile paper slips with trackable QR verification.',
+        impact: 'Dedicated Gordon College CCS Department clearance system replacing fragile paper slips with trackable QR verification.',
         whatILearned: 'Leading Check8 taught me how to simplify paper workflows, collaborate in a shared Git repo, and always pair QR scanners with manual ID lookup.',
         nextSteps: [
           'Printable Clearance Summary: Export a clean PDF once all stations are signed off.',
           'Office Hours Indicator: Show when each signatory desk is open.',
-          'Public Repository Mirror: Link the finalized team repository once approved.',
+          'Department Rollout Expansion: Support additional CCS semester event and laboratory checkpoints.',
         ],
       },
     },
@@ -469,10 +471,10 @@ export const projects: PortfolioProject[] = [
       startingDesign: {
         paperWireframesNote: 'Early sketches tucked navigation into a clean drawer so the study canvas stays quiet and reachable in one tap.',
         lofiPrototype: {
-          description: 'User flow: Onboarding & Consent -> Sign In -> Study Set Hub -> Create / AI Generate / Upload -> Active Recall.',
-          url: 'https://ace-it-ten.vercel.app/',
-          image: '/images/ace-it-lofi-flow.png',
-          alt: 'ACE IT 5-screen low-fidelity wireframe flow covering onboarding, sign in, study set hub, AI deck builder, and active recall',
+          description: '6-screen Figma flow: Account Login & Sign Up -> Study Decks Dashboard -> AI Generate Study Deck -> Study Deck Overview & Cards -> Flashcards Active Recall Mode -> Quiz Mode.',
+          url: 'https://www.figma.com/design/nEYnHjFgojJYzfRzm8BEjr/ACE-IT-%E2%80%94-Low-Fidelity-Wireframes?node-id=2-2&p=f&t=MimFHK2uCKnydipz-0',
+          image: '/images/ace-it-lofi-flow.png?v=2',
+          alt: 'ACE IT 6-screen low-fidelity wireframes from Figma: Account Login & Sign Up, Study Decks Dashboard, AI Generate Study Deck, Study Deck Overview & Cards, Flashcards Active Recall Mode, and Quiz Mode',
         },
         usabilityStudy: {
           intro: 'Testing the prototype with 5 peers led to these refinements:',
@@ -633,10 +635,10 @@ export const projects: PortfolioProject[] = [
       startingDesign: {
         paperWireframesNote: 'Early sketches paired a sticky header (crest, labeled Menu button, theme toggle, Enroll CTA) with the DepEd ID badge and a 4-column footer.',
         lofiPrototype: {
-          description: 'Figma flow: Home -> "Menu" drawer -> Academics, Admissions (4-step guide + FAQ), Faculty, News, and Contact.',
+          description: '6-screen Figma flow: Homepage & Hero Banner -> Navigation Directory Drawer -> Junior High & DepEd ARAL Curriculum -> Admissions & Enrollment Guide -> Faculty & School Administration -> News Bulletins & Campus Contact.',
           url: 'https://www.figma.com/design/yFPXRCpF5VLj3cXnQIT0Mv',
-          image: '/images/crhs-lofi-flow.png?v=4',
-          alt: 'CRHS Web 7-screen low-fidelity wireframe flow in Figma covering Home, Menu drawer, Academics, Admissions, Faculty, News, and Contact',
+          image: '/images/crhs-lofi-flow.png?v=5',
+          alt: 'CRHS Web 6-screen low-fidelity wireframes from Figma: Homepage & Hero Banner, Navigation Directory Drawer, Junior High & DepEd ARAL Curriculum, Admissions & Enrollment Guide, Faculty & School Administration, and News Bulletins & Campus Contact',
         },
         usabilityStudy: {
           intro: 'Testing with 5 students and guardians on mobile and desktop led to these updates:',

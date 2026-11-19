@@ -1,94 +1,67 @@
-# Gian Karlo Reguindin — Personal Portfolio
+# Gian Karlo C. Reguindin — Portfolio
 
-A responsive React + TypeScript portfolio, styled with Tailwind CSS and custom design tokens. Fonts are self-hosted; all icons are Lucide SVGs.
+Personal portfolio and software engineering case studies for **Gian Karlo C. Reguindin** (3rd Year BSCS, Gordon College), built with React 19, TypeScript, Tailwind CSS v4, and Vite.
 
-## Run locally
+## Setup & Deployment
 
-Requires Node.js 20.19+ or a compatible newer LTS release.
+### Local Development
 
-```sh
+```bash
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. To create a production build:
+Opens locally at `http://127.0.0.1:5173/`.
 
-```sh
+### Production Build
+
+```bash
 npm run build
 npm run preview
 ```
 
-## Personalize
+Type-checks with `tsc -b` and outputs static production assets into `dist/`.
 
-Edit `src/portfolio.ts`. It holds your name, introduction, skills, roles, project, case study sections, and contact links.
+### Hosting & Custom Domain Options (Before Publishing)
 
-### Project slider
+> Domain names below are candidates only—check live availability and ask for owner approval before purchasing anything. Pricing varies by registrar promo and currency rates; verify current checkout rates before registering.
 
-The `projects` array at the bottom of `src/portfolio.ts` controls the project slider. The first entry reuses `portfolio.project` and keeps its existing featured case study. Three clearly labeled entries provide space for the other projects. Delete the object with `id: 'project-4'` to show three projects total. Edit each object's details individually. Every project supports a title, description, category, technologies, role, screenshot, screenshot alternative text, repository URL, live demo URL, and optional case study link.
+| Provider / Role | Cost Summary | Notes |
+| --- | --- | --- |
+| **Vercel** (Static Hosting) | Free Hobby tier for personal/student sites | Instant Git deploys (`npm run build` -> `dist`) |
+| **Cloudflare Pages** (Static Hosting) | Free tier with unlimited bandwidth | Fast global CDN; easy pairing with Cloudflare Registrar DNS |
+| **Porkbun / Cloudflare Registrar** (`.com` or `.dev` domain) | Typically ~$10–$15/yr registration & renewal (at-cost on Cloudflare) | Candidate names: `gianreguindin.dev`, `giankarlo.dev`, `gianreguindin.com` (check availability first) |
 
-The slider supports previous/next controls, project-name buttons, left/right and Home/End keys, and native horizontal touch/trackpad scrolling. It never advances automatically. Reduced-motion preferences make button navigation instant. Only the current slide's links are exposed to keyboard and assistive-technology navigation. Empty repository/demo URLs produce no broken links.
+## Documented Projects & Case Studies
 
-- Replace the project name, description, and technology list.
-- Fill in each case study section using the class slide deck as your guide.
-- Describe your individual contributions under each role.
-- Put screenshots in `public/` and set `project.screenshot` to a path such as `/project-home.webp`. Write accurate alternative text in `project.screenshotAlt`.
-- Replace the wireframe placeholder in `src/App.tsx` with your actual figures and descriptive captions.
-- Add the reference deck URL in `project.reference`.
-- Add your email to `contact.email`; the email link and copy button become active automatically.
-- Add full HTTPS URLs for GitHub and LinkedIn. Empty URLs display “To be added” and do not create broken links.
-- Add repository and live demo URLs when available. These buttons remain hidden until populated.
-- Review all AI-assisted wording and personalize it before submitting.
+All personal data, project entries, certifications, and links are centralized in [`src/portfolio.ts`](src/portfolio.ts):
 
-The case study uses hash navigation (`#case-study`) so it works on static hosting without server rewrite rules. Native disclosure elements make contribution sections keyboard accessible.
+1. **Check8** *(Flagship Case Study)* — Web-based QR clearance portal for Gordon College CS students.
+   - **Access Notice:** Check8 is an exclusive internal system developed for the **Gordon College CCS Department** inside a private department/team repository.
+2. **ACE IT** — Distraction-free study web app with AI flashcard generation and active recall ([Live Site](https://ace-it-ten.vercel.app/) · [Repository](https://github.com/Nykt04/_AceIt)).
+3. **CRHS Web** — Lightweight public school portal for Castillejos Resettlement High School, DepEd ID `301016` ([Live Site](https://crhs-web.vercel.app/home.html) · [Repository](https://github.com/Nykt04/CRHS_Web)).
 
-## Design decisions to explain in class
+## Source Structure
 
-### UI variables and animations
+- [`src/portfolio.ts`](src/portfolio.ts) — Single source of truth for profile metadata, skills, responsibilities, certifications, and 5-stage UX/engineering case studies.
+- [`src/App.tsx`](src/App.tsx) — Layout shell, sticky top telemetry header, persistent right sidebar / mobile drawer, quick jump command palette (`Alt+K`), hero, about, and stack sections.
+- [`src/Projects.tsx`](src/Projects.tsx) — Flagship project showcase, department access notices, and secondary projects grid.
+- [`src/CaseStudyView.tsx`](src/CaseStudyView.tsx) — 5-section case study reader (`Overview`, `Understanding the User`, `Starting the Design`, `Refining the Design`, `Going Forward`) with project switcher, TOC jump bar, and zoomable mockup lightbox.
+- [`src/AboutExtras.tsx`](src/AboutExtras.tsx) — Theme-linked portrait (`portrait-light.jpg` / `portrait-dark.jpg`) and interactive project stack filter.
+- [`src/Certifications.tsx`](src/Certifications.tsx) — Verified credentials grid with accessible dialog and zoomable certificate lightbox.
+- [`src/ContactGitHub.tsx`](src/ContactGitHub.tsx) — Live GitHub 53-week contribution matrix (with offline snapshot fallback) and direct contact channels (`mailto:` + clipboard copy, GitHub, LinkedIn).
+- [`src/ui-tokens.css`](src/ui-tokens.css) & [`src/styles.css`](src/styles.css) — Semantic light/dark design tokens, View Transition circular reveal, and reduced-motion rules.
 
-Customize `src/ui-tokens.css` to change the shared UI settings:
+## Class Discussion Notes: Design, Accessibility & Tech Decisions
 
-| Variables | Controls |
-| --- | --- |
-| `--ui-canvas`, `--ui-surface`, `--ui-ink`, `--ui-muted`, `--ui-accent` | Main colors |
-| `--ui-font-body`, `--ui-font-display` | Font families |
-| `--ui-content-width`, `--ui-page-gutter`, `--ui-section-space` | Layout spacing |
-| `--ui-card-radius`, `--ui-control-radius` | Corner shapes |
-| `--ui-motion-fast`, `--ui-motion-page`, `--ui-motion-reveal` | Hover, page entrance, and reveal durations |
-| `--ui-motion-float`, `--ui-motion-orbit`, `--ui-float-distance` | Floating hero motion |
+### 1. Visual System & Color Tokens
 
-Keep duration values in milliseconds (for example `650ms`). Mobile variables are in the media queries at the bottom of that file. Verify contrast again after changing colors.
+- Defined semantic CSS tokens in `src/ui-tokens.css` supporting both **Crisp Off-White** light mode (`#fafafa` / `#ffffff`, `#09090b` ink, `#3f3f46` slate accent) and **Matte Black** dark mode (`#121213` / `#1a1a1c`, `#f7f6f3` ink, `#f2ede4` warm-cream accent).
+- Calibrated muted text (`--g400` at `100 100 108` light / `150 150 158` dark) to satisfy **WCAG 2.2 AA** 4.5:1+ contrast rather than sacrificing readability for aesthetics.
+- Unified typography on `Geist` across headings, prose, and technical indices, paired with Lucide and Simple Icons SVGs (zero emojis).
 
-Motion includes gently floating hero icons and monogram, orbit movement, once-per-view content entrances, a sliding mobile menu, disclosure feedback, and small hover responses. `src/motion.css` defines the visual effects; `src/usePageMotion.ts` coordinates visibility and user preferences. The hero's pause button stops motion for the current session. It is omitted when the device already requests reduced motion. Decorative loops pause offscreen and when the browser tab is hidden. Content remains visible without animations. Native anchor scrolling stays under the visitor's control.
+### 2. Accessibility (WCAG 2.2 Level AA)
 
-- Charcoal backgrounds reduce visual clutter; mint accents identify primary actions. A lighter contact section provides a clear ending.
-- Space Grotesk gives headings a distinct identity; Manrope provides readable body text.
-- A consistent navigation bar, descriptive links, and section anchors make the page easy to explore.
-- Mobile layouts stack the content and expose a labeled navigation toggle. Escape closes the menu.
-- A skip link, semantic landmarks, focus indicators, and native disclosure controls support keyboard users.
-- Reduced-motion preferences disable the introductory motion and smooth scrolling.
-- Bracketed placeholders clearly distinguish unfinished content from factual achievements.
-
-## Deployment
-
-The production files are in `dist/`. Upload the **contents** of that folder to your paid host's public web directory, or configure a static host with `npm run build` as its build command and `dist` as its publish directory. Enable HTTPS and connect your purchased domain using that provider's DNS instructions.
-
-The Sites configuration is in `.openai/hosting.json`; it identifies this portfolio's hosted project. Do not replace its project ID when updating the same site.
-
-## Before class submission
-
-- [ ] Replace the project and case study placeholders with your real work.
-- [ ] Add screenshots, captions, and the supplied reference deck.
-- [ ] Add and test a working contact email and professional links.
-- [ ] Test all repository, demo, and reference links.
-- [ ] Check keyboard navigation, zoom, narrow layouts, and screen-reader output after adding content.
-- [ ] Purchase an approved name-based domain and affordable paid hosting; compare registration, renewal, and hosting costs before committing.
-- [ ] Verify public access, HTTPS, and the custom domain from a signed-out browser.
-- [ ] Be ready to explain your code, design decisions, and individual project contributions.
-
-This starter does not establish full WCAG conformance. Re-check accessibility with your final content and include assistive-technology testing. The paid domain/hosting requirement remains separate from a Sites preview or deployment.
-
-### About photo and interactive toolkit
-
-Place your portrait in `public/images/` and set `portfolio.portrait.src` in `src/portfolio.ts` to `/images/your-photo.jpg`. Update its alternative text there. An empty or broken path displays an honest placeholder. Tool names and descriptions also live in that file; brand SVGs come from Simple Icons.
-
-Toolkit filters and tool buttons work with keyboard input. Scroll fades replay in either direction, and hovering the hero word “code” (or focusing a hero link) triggers a brief glitch. Motion respects the system reduced-motion preference and the existing pause control. Adjust motion and portrait variables in `src/motion.css`.
+- **Landmarks & Skip Link**: Semantic `<header>`, `<aside>`, `<main>`, `<section>`, `<article>`, and `<footer>` structure plus a keyboard-revealed `.skip-link` to `#main`.
+- **Keyboard Operability & Focus Management**: Full `Tab`/`Shift+Tab` focus traps and trigger focus restoration across the mobile drawer, `Alt+K` Quick Jump palette, credential modal, and case study image lightbox; workflow tabs implement `role="tablist"` with roving `tabIndex` and `ArrowLeft`/`ArrowRight` switching.
+- **Motion & Sizing**: Theme circular reveal, entrance fades, and smooth scroll respect `prefers-reduced-motion: reduce`; primary/secondary action buttons enforce a 44px minimum height; status badges and links pair clear text labels with color/borders rather than relying on color alone.

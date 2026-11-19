@@ -350,8 +350,8 @@
 * **Screen 4 — Approval History:** Timestamped verification record.
 
 #### Slide 20: Live Deployment Notes
-* **Deployment Context:** Built as a dedicated department clearance portal for Gordon College CCS.
-* **Repository Context:** Core implementation led by Gian Karlo inside a groupmate-hosted repository.
+* **Deployment Context:** Built as an exclusive internal clearance portal for the Gordon College CCS Department.
+* **Repository Context:** Core implementation led by Gian Karlo inside a private department and groupmate-hosted repository.
 
 #### Slide 21: Accessibility Considerations
 1. **WCAG 1.4.1 Use of Color Compliance:** Status badges pair icons and text labels rather than relying on color dots alone.

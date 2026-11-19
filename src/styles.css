@@ -341,8 +341,8 @@ html.dark .blueprint-backdrop {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 0;
   border-bottom: 1.5px solid transparent;
   color: rgb(var(--g400));
@@ -365,7 +365,7 @@ html.dark .blueprint-backdrop {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.5rem 1.05rem;
   border-radius: var(--radius-sm);
   background: rgb(var(--accent));
@@ -385,7 +385,7 @@ html.dark .blueprint-backdrop {
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.5rem 1.05rem;
   border-radius: var(--radius-sm);
   background: rgb(var(--surface));
@@ -540,38 +540,10 @@ html.dark .blueprint-backdrop {
   display: none;
 }
 
-/* Theme-linked portrait crossfade (light: sunglasses, dark: without glasses) */
-.portrait-sunglasses {
-  opacity: 1;
-  transition: opacity 550ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-html.dark .portrait-sunglasses {
-  opacity: 0;
-}
-html.vt-theme .portrait-frame {
-  view-transition-name: gk-portrait;
-}
-html.vt-theme .portrait-sunglasses {
-  transition: none;
-}
-html.vt-theme::view-transition-group(gk-portrait) {
-  animation-duration: 550ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 2;
-}
-html.vt-theme::view-transition-old(gk-portrait),
-html.vt-theme::view-transition-new(gk-portrait) {
-  animation-duration: 550ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 /* Reduced motion compliance (WCAG 2.2 AA) */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .portrait-sunglasses {
-    transition: none !important;
   }
   .reveal,
   .scroll-fade {

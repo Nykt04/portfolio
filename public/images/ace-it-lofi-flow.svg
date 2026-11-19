@@ -1,0 +1,301 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1100" viewBox="0 0 2200 1100">
+  <rect width="2200" height="1100" fill="#E5E2E2"/>
+  <style>
+    .frame-title { font: 500 18px "Inter", "Segoe UI", sans-serif; fill: #8A8687; }
+    .h1 { font: 700 16px "Inter", "Segoe UI", sans-serif; fill: #201F22; }
+    .h2 { font: 700 13px "Inter", "Segoe UI", sans-serif; fill: #201F22; }
+    .small { font: 400 11px "Inter", "Segoe UI", sans-serif; fill: #6E6C72; }
+    .tiny { font: 700 9px "Inter", "Segoe UI", sans-serif; fill: #6E6C72; }
+  </style>
+  <g id="Frame-01-Login">
+  <text x="48" y="54" class="frame-title">01 — Account Login &amp; Sign Up (/login, /register)</text>
+  <rect x="48" y="68" width="656" height="428"  fill="#F7F5F7" stroke="#5A585C" stroke-width="1"/>
+  <rect x="48" y="68" width="656" height="34"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="62" y="76" width="54" height="18"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="62" y1="76" x2="116" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="116" y1="76" x2="62" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="672" y="76" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="672" y1="76" x2="690" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="690" y1="76" x2="672" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="236" y="126" width="280" height="340"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="236" y="126" width="280" height="28"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="254" y="143" class="h2">Sign In to ACE IT</text>
+  <rect x="254" y="168" width="118" height="24"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="254" y1="168" x2="372" y2="192" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="372" y1="168" x2="254" y2="192" stroke="#AFACB2" stroke-width="1"/>
+  <rect x="380" y="168" width="118" height="24"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="380" y1="168" x2="498" y2="192" stroke="#87848A" stroke-width="1"/>
+  <line x1="498" y1="168" x2="380" y2="192" stroke="#87848A" stroke-width="1"/>
+  <text x="254" y="212" class="small">Study Email</text>
+  <rect x="254" y="220" width="244" height="28"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="254" y1="220" x2="498" y2="248" stroke="#87848A" stroke-width="1"/>
+  <line x1="498" y1="220" x2="254" y2="248" stroke="#87848A" stroke-width="1"/>
+  <text x="254" y="266" class="small">Password</text>
+  <text x="422" y="266" class="tiny">Forgot Password?</text>
+  <rect x="254" y="274" width="244" height="28"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="254" y1="274" x2="498" y2="302" stroke="#87848A" stroke-width="1"/>
+  <line x1="498" y1="274" x2="254" y2="302" stroke="#87848A" stroke-width="1"/>
+  <rect x="254" y="318" width="244" height="30"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="254" y1="318" x2="498" y2="348" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="498" y1="318" x2="254" y2="348" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="254" y1="366" x2="498" y2="366" stroke="#D6D4D8" stroke-width="1"/>
+  <rect x="340" y="359" width="72" height="14"  fill="#FFFFFF" />
+  <text x="348" y="369" class="tiny">OR SIGN IN</text>
+  <rect x="254" y="384" width="244" height="28"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="254" y1="384" x2="498" y2="412" stroke="#87848A" stroke-width="1"/>
+  <line x1="498" y1="384" x2="254" y2="412" stroke="#87848A" stroke-width="1"/>
+  <rect x="254" y="424" width="244" height="24"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  </g>
+  <g id="Frame-02-Dashboard">
+  <text x="772" y="54" class="frame-title">02 — Study Decks Dashboard (/dashboard)</text>
+  <rect x="772" y="68" width="656" height="428"  fill="#F7F5F7" stroke="#5A585C" stroke-width="1"/>
+  <rect x="772" y="68" width="656" height="34"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="786" y="76" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="786" y1="76" x2="804" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="804" y1="76" x2="786" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="1072" y="76" width="56" height="18"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1072" y1="76" x2="1128" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="1128" y1="76" x2="1072" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="1346" y="76" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1346" y1="76" x2="1364" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="1364" y1="76" x2="1346" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="1370" y="76" width="44" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1370" y1="76" x2="1414" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="1414" y1="76" x2="1370" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="800" y="120" width="600" height="86"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="818" y="134" width="54" height="12" rx="6" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <text x="818" y="165" class="h1">Study Decks</text>
+  <rect x="818" y="176" width="220" height="10"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <rect x="1204" y="146" width="84" height="30"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1204" y1="146" x2="1288" y2="176" stroke="#87848A" stroke-width="1"/>
+  <line x1="1288" y1="146" x2="1204" y2="176" stroke="#87848A" stroke-width="1"/>
+  <rect x="1298" y="146" width="84" height="30"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="1298" y1="146" x2="1382" y2="176" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="1382" y1="146" x2="1298" y2="176" stroke="#AFACB2" stroke-width="1"/>
+  <rect x="800" y="222" width="600" height="250"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1072" y="246" width="56" height="48"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1072" y1="246" x2="1128" y2="294" stroke="#87848A" stroke-width="1"/>
+  <line x1="1128" y1="246" x2="1072" y2="294" stroke="#87848A" stroke-width="1"/>
+  <rect x="1080.25" y="262.5" width="39.5" height="15"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <text x="1086.25" y="272.5" class="tiny">DECKS</text>
+  <text x="1042" y="316" class="h2">Study Set Workspace</text>
+  <rect x="990" y="328" width="220" height="10"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <rect x="1004" y="354" width="192" height="30"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="1004" y1="354" x2="1196" y2="384" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="1196" y1="354" x2="1004" y2="384" stroke="#AFACB2" stroke-width="1"/>
+  <rect x="1004" y="394" width="192" height="30"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1004" y1="394" x2="1196" y2="424" stroke="#87848A" stroke-width="1"/>
+  <line x1="1196" y1="394" x2="1004" y2="424" stroke="#87848A" stroke-width="1"/>
+  </g>
+  <g id="Frame-03-Generate">
+  <text x="1496" y="54" class="frame-title">03 — AI Generate Study Deck (/decks/generate)</text>
+  <rect x="1496" y="68" width="656" height="428"  fill="#F7F5F7" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1496" y="68" width="656" height="34"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1510" y="76" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1510" y1="76" x2="1528" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="1528" y1="76" x2="1510" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="1796" y="76" width="56" height="18"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1796" y1="76" x2="1852" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="1852" y1="76" x2="1796" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="2070" y="76" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="2070" y1="76" x2="2088" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="2088" y1="76" x2="2070" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="2094" y="76" width="44" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="2094" y1="76" x2="2138" y2="94" stroke="#87848A" stroke-width="1"/>
+  <line x1="2138" y1="76" x2="2094" y2="94" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="116" width="600" height="54"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1538" y="126" width="68" height="10" rx="5" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <text x="1538" y="151" class="h2">Generate Study Deck</text>
+  <rect x="1524" y="180" width="600" height="146"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1524" y="180" width="600" height="22"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="1536" y="192" class="small">1. Choose Deck Format</text>
+  <rect x="1538" y="210" width="572" height="30"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1538" y1="210" x2="2110" y2="240" stroke="#87848A" stroke-width="1"/>
+  <line x1="2110" y1="210" x2="1538" y2="240" stroke="#87848A" stroke-width="1"/>
+  <rect x="2050" y="219" width="46" height="12" rx="6" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="1538" y="246" width="572" height="30"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1538" y1="246" x2="2110" y2="276" stroke="#87848A" stroke-width="1"/>
+  <line x1="2110" y1="246" x2="1538" y2="276" stroke="#87848A" stroke-width="1"/>
+  <rect x="1538" y="282" width="572" height="30"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1538" y1="282" x2="2110" y2="312" stroke="#87848A" stroke-width="1"/>
+  <line x1="2110" y1="282" x2="1538" y2="312" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="336" width="600" height="70"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1524" y="336" width="600" height="20"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="1536" y="347" class="small">2. Study Topic or Concept</text>
+  <rect x="1538" y="364" width="572" height="30"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1538" y1="364" x2="2110" y2="394" stroke="#87848A" stroke-width="1"/>
+  <line x1="2110" y1="364" x2="1538" y2="394" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="416" width="600" height="64"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1524" y="416" width="600" height="20"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="1536" y="427" class="small">3. Academic Difficulty</text>
+  <rect x="1538" y="444" width="185" height="26"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1538" y1="444" x2="1723" y2="470" stroke="#87848A" stroke-width="1"/>
+  <line x1="1723" y1="444" x2="1538" y2="470" stroke="#87848A" stroke-width="1"/>
+  <rect x="1731" y="444" width="185" height="26"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="1731" y1="444" x2="1916" y2="470" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="1916" y1="444" x2="1731" y2="470" stroke="#AFACB2" stroke-width="1"/>
+  <rect x="1924" y="444" width="185" height="26"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1924" y1="444" x2="2109" y2="470" stroke="#87848A" stroke-width="1"/>
+  <line x1="2109" y1="444" x2="1924" y2="470" stroke="#87848A" stroke-width="1"/>
+  </g>
+  <g id="Frame-04-Deck-Overview">
+  <text x="48" y="586" class="frame-title">04 — Study Deck Overview &amp; Cards (/decks/[id])</text>
+  <rect x="48" y="600" width="656" height="428"  fill="#F7F5F7" stroke="#5A585C" stroke-width="1"/>
+  <rect x="48" y="600" width="656" height="34"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="72" y="607" width="88" height="20"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="72" y1="607" x2="160" y2="627" stroke="#87848A" stroke-width="1"/>
+  <line x1="160" y1="607" x2="72" y2="627" stroke="#87848A" stroke-width="1"/>
+  <rect x="640" y="611" width="40" height="12" rx="6" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="76" y="648" width="600" height="84"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="76" y="648" width="600" height="20"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="90" y="689" class="h1">Study Deck Overview</text>
+  <rect x="90" y="706" width="44" height="12" rx="6" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="142" y="706" width="52" height="12" rx="6" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="202" y="706" width="60" height="12" rx="6" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="76" y="746" width="292" height="86"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="76" y="746" width="292" height="22"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="88" y="758" class="small">Flashcards Mode</text>
+  <rect x="88" y="778" width="268" height="42"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="88" y1="778" x2="356" y2="820" stroke="#87848A" stroke-width="1"/>
+  <line x1="356" y1="778" x2="88" y2="820" stroke="#87848A" stroke-width="1"/>
+  <rect x="384" y="746" width="292" height="86"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="384" y="746" width="292" height="22"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="396" y="758" class="small">Quiz Mode</text>
+  <rect x="396" y="778" width="268" height="42"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="396" y1="778" x2="664" y2="820" stroke="#87848A" stroke-width="1"/>
+  <line x1="664" y1="778" x2="396" y2="820" stroke="#87848A" stroke-width="1"/>
+  <text x="76" y="856" class="h2">Deck Cards (5)</text>
+  <rect x="566" y="844" width="110" height="20"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="566" y1="844" x2="676" y2="864" stroke="#87848A" stroke-width="1"/>
+  <line x1="676" y1="844" x2="566" y2="864" stroke="#87848A" stroke-width="1"/>
+  <rect x="76" y="872" width="192" height="134"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="86" y="882" width="22" height="10" rx="5" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="114" y="882" width="34" height="10" rx="5" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="242" y="880" width="16" height="16"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="242" y1="880" x2="258" y2="896" stroke="#87848A" stroke-width="1"/>
+  <line x1="258" y1="880" x2="242" y2="896" stroke="#87848A" stroke-width="1"/>
+  <rect x="88" y="908" width="168" height="62"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="88" y1="908" x2="256" y2="970" stroke="#87848A" stroke-width="1"/>
+  <line x1="256" y1="908" x2="88" y2="970" stroke="#87848A" stroke-width="1"/>
+  <rect x="88" y="980" width="168" height="14"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <rect x="280" y="872" width="192" height="134"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="290" y="882" width="22" height="10" rx="5" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="318" y="882" width="34" height="10" rx="5" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="446" y="880" width="16" height="16"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="446" y1="880" x2="462" y2="896" stroke="#87848A" stroke-width="1"/>
+  <line x1="462" y1="880" x2="446" y2="896" stroke="#87848A" stroke-width="1"/>
+  <rect x="292" y="908" width="168" height="62"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="292" y1="908" x2="460" y2="970" stroke="#87848A" stroke-width="1"/>
+  <line x1="460" y1="908" x2="292" y2="970" stroke="#87848A" stroke-width="1"/>
+  <rect x="292" y="980" width="168" height="14"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <rect x="484" y="872" width="192" height="134"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="494" y="882" width="22" height="10" rx="5" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="522" y="882" width="34" height="10" rx="5" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="650" y="880" width="16" height="16"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="650" y1="880" x2="666" y2="896" stroke="#87848A" stroke-width="1"/>
+  <line x1="666" y1="880" x2="650" y2="896" stroke="#87848A" stroke-width="1"/>
+  <rect x="496" y="908" width="168" height="62"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="496" y1="908" x2="664" y2="970" stroke="#87848A" stroke-width="1"/>
+  <line x1="664" y1="908" x2="496" y2="970" stroke="#87848A" stroke-width="1"/>
+  <rect x="496" y="980" width="168" height="14"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  </g>
+  <g id="Frame-05-Flashcards">
+  <text x="772" y="586" class="frame-title">05 — Flashcards Active Recall Mode (/study/flashcards)</text>
+  <rect x="772" y="600" width="656" height="428"  fill="#F7F5F7" stroke="#5A585C" stroke-width="1"/>
+  <rect x="772" y="600" width="656" height="34"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="786" y="608" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="786" y1="608" x2="804" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="804" y1="608" x2="786" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="1072" y="608" width="56" height="18"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1072" y1="608" x2="1128" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="1128" y1="608" x2="1072" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="1346" y="608" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1346" y1="608" x2="1364" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="1364" y1="608" x2="1346" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="1370" y="608" width="44" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1370" y1="608" x2="1414" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="1414" y1="608" x2="1370" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="772" y="634" width="656" height="30"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="786" y="640" width="48" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="786" y1="640" x2="834" y2="658" stroke="#87848A" stroke-width="1"/>
+  <line x1="834" y1="640" x2="786" y2="658" stroke="#87848A" stroke-width="1"/>
+  <text x="1064" y="652" class="h2">Flashcards</text>
+  <rect x="800" y="676" width="56" height="14" rx="7" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="1344" y="676" width="56" height="14" rx="7" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="800" y="704" width="600" height="212"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="800" y="704" width="600" height="24"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="812" y="717" class="small">Front · Click or Press Space to Flip</text>
+  <rect x="816" y="740" width="568" height="160"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <line x1="816" y1="740" x2="1384" y2="900" stroke="#87848A" stroke-width="1"/>
+  <line x1="1384" y1="740" x2="816" y2="900" stroke="#87848A" stroke-width="1"/>
+  <rect x="1039.0" y="812.5" width="122.0" height="15"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <text x="1045.0" y="822.5" class="tiny">ACTIVE RECALL PROMPT</text>
+  <rect x="800" y="932" width="600" height="30"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="800" y1="932" x2="1400" y2="962" stroke="#87848A" stroke-width="1"/>
+  <line x1="1400" y1="932" x2="800" y2="962" stroke="#87848A" stroke-width="1"/>
+  <rect x="800" y="972" width="293" height="32"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="800" y1="972" x2="1093" y2="1004" stroke="#87848A" stroke-width="1"/>
+  <line x1="1093" y1="972" x2="800" y2="1004" stroke="#87848A" stroke-width="1"/>
+  <rect x="1107" y="972" width="293" height="32"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="1107" y1="972" x2="1400" y2="1004" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="1400" y1="972" x2="1107" y2="1004" stroke="#AFACB2" stroke-width="1"/>
+  </g>
+  <g id="Frame-06-Quiz">
+  <text x="1496" y="586" class="frame-title">06 — Quiz Mode (/study/quiz)</text>
+  <rect x="1496" y="600" width="656" height="428"  fill="#F7F5F7" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1496" y="600" width="656" height="34"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1510" y="608" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1510" y1="608" x2="1528" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="1528" y1="608" x2="1510" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="1796" y="608" width="56" height="18"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1796" y1="608" x2="1852" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="1852" y1="608" x2="1796" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="2070" y="608" width="18" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="2070" y1="608" x2="2088" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="2088" y1="608" x2="2070" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="2094" y="608" width="44" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="2094" y1="608" x2="2138" y2="626" stroke="#87848A" stroke-width="1"/>
+  <line x1="2138" y1="608" x2="2094" y2="626" stroke="#87848A" stroke-width="1"/>
+  <rect x="1496" y="634" width="656" height="30"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1510" y="640" width="48" height="18"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1510" y1="640" x2="1558" y2="658" stroke="#87848A" stroke-width="1"/>
+  <line x1="1558" y1="640" x2="1510" y2="658" stroke="#87848A" stroke-width="1"/>
+  <text x="1790" y="652" class="h2">Quiz Mode</text>
+  <rect x="1524" y="674" width="64" height="14" rx="7" fill="#D6D4D8" stroke="#87848A" stroke-width="1"/>
+  <rect x="2076" y="674" width="48" height="14" rx="7" fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <rect x="1524" y="698" width="600" height="74"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1524" y="698" width="600" height="22"  fill="#EDEAEE" stroke="#5A585C" stroke-width="1"/>
+  <text x="1536" y="710" class="small">Question #1</text>
+  <rect x="1538" y="730" width="572" height="30"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <line x1="1538" y1="730" x2="2110" y2="760" stroke="#87848A" stroke-width="1"/>
+  <line x1="2110" y1="730" x2="1538" y2="760" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="784" width="600" height="44"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1536" y="794" width="24" height="24"  fill="#2E2D30" stroke="#2E2D30" stroke-width="1"/>
+  <line x1="1536" y1="794" x2="1560" y2="818" stroke="#AFACB2" stroke-width="1"/>
+  <line x1="1560" y1="794" x2="1536" y2="818" stroke="#AFACB2" stroke-width="1"/>
+  <rect x="1572" y="796" width="536" height="20"  fill="#EDEAEE" stroke="#87848A" stroke-width="1"/>
+  <line x1="1572" y1="796" x2="2108" y2="816" stroke="#87848A" stroke-width="1"/>
+  <line x1="2108" y1="796" x2="1572" y2="816" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="838" width="600" height="44"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1536" y="848" width="24" height="24"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1536" y1="848" x2="1560" y2="872" stroke="#87848A" stroke-width="1"/>
+  <line x1="1560" y1="848" x2="1536" y2="872" stroke="#87848A" stroke-width="1"/>
+  <rect x="1572" y="850" width="536" height="20"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <line x1="1572" y1="850" x2="2108" y2="870" stroke="#87848A" stroke-width="1"/>
+  <line x1="2108" y1="850" x2="1572" y2="870" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="892" width="600" height="44"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1536" y="902" width="24" height="24"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1536" y1="902" x2="1560" y2="926" stroke="#87848A" stroke-width="1"/>
+  <line x1="1560" y1="902" x2="1536" y2="926" stroke="#87848A" stroke-width="1"/>
+  <rect x="1572" y="904" width="536" height="20"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <line x1="1572" y1="904" x2="2108" y2="924" stroke="#87848A" stroke-width="1"/>
+  <line x1="2108" y1="904" x2="1572" y2="924" stroke="#87848A" stroke-width="1"/>
+  <rect x="1524" y="946" width="600" height="44"  fill="#FFFFFF" stroke="#5A585C" stroke-width="1"/>
+  <rect x="1536" y="956" width="24" height="24"  fill="#FFFFFF" stroke="#87848A" stroke-width="1"/>
+  <line x1="1536" y1="956" x2="1560" y2="980" stroke="#87848A" stroke-width="1"/>
+  <line x1="1560" y1="956" x2="1536" y2="980" stroke="#87848A" stroke-width="1"/>
+  <rect x="1572" y="958" width="536" height="20"  fill="#F7F5F7" stroke="#87848A" stroke-width="1"/>
+  <line x1="1572" y1="958" x2="2108" y2="978" stroke="#87848A" stroke-width="1"/>
+  <line x1="2108" y1="958" x2="1572" y2="978" stroke="#87848A" stroke-width="1"/>
+  </g>
+</svg>

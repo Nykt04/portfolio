@@ -6,16 +6,15 @@
 web
 
 ## Stack
-React, TypeScript, and Tailwind CSS per the owner's portfolio brief. Vite provides development and static production output.
+React 19, TypeScript, Tailwind CSS v4, and Vite per the owner's portfolio brief.
 
 ## Product Purpose
-A personal portfolio for Gian Karlo C. Reguindin's UI/UX class. Visitors can meet Gian Karlo, browse skills, explore the software engineering case study, and find contact information when supplied.
+A personal portfolio and software engineering case study collection for Gian Karlo C. Reguindin (3rd Year BSCS, Gordon College). Visitors can explore his background, core programming languages (`Python`, `TypeScript`, `JavaScript`, `C`), project responsibilities (`Project Manager`, `Lead Developer`, `Quality Assurance`, `Requirements Analysis`), verified certifications, and three documented case studies (`Check8`, `ACE IT`, `CRHS Web`).
 
 ## Capabilities and Constraints
-Responsive home, about, skills, featured work, case study, and contact. Project, email, professional links, and reference material are explicitly placeholders. No invented achievements or outcomes. A name-based paid domain and paid hosting remain a publication requirement; purchases require approval.
-
-## Evidence on Hand
-The owner supplied name, year/course, programming languages, and four project responsibilities. No screenshots, project title, reference deck, actual contact details, or outcome evidence have been supplied.
+- Responsive editorial layout with persistent right-hand navigation on desktop and slide-out drawer on mobile.
+- Three complete 5-stage UX and software engineering case studies (`Check8` as Flagship with an explicit notice that it is an exclusive internal system for the Gordon College CCS Department, plus `ACE IT` and `CRHS Web` with live Vercel deployments and public GitHub repositories).
+- Direct contact via email (`mailto:` and one-click clipboard copy), GitHub (`@Nykt04`), and LinkedIn.
 
 ## Accessibility & Inclusion
-Target WCAG 2.2 AA. Keyboard operation, readable contrast, semantic markup, mobile navigation, zoom/reflow, and reduced motion support.
+Target WCAG 2.2 Level AA: semantic landmarks, skip-to-content link, calibrated light/dark monochrome contrast tokens, descriptive image alternatives, focus-trapped modals/drawers/lightboxes, keyboard-operable tabs and filters, and `prefers-reduced-motion: reduce` compliance.

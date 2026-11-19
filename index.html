@@ -43,7 +43,7 @@
           if (meta) meta.setAttribute('content', dark ? '#121213' : '#ffffff');
           window.dispatchEvent(new CustomEvent('gk-theme-change', { detail: { pref: p, dark: dark } }));
         }
-        window.setPortfolioTheme = function (p, ev) {
+        window.setPortfolioTheme = function (p) {
           try {
             localStorage.setItem(KEY, p);
           } catch (e) {}
@@ -54,27 +54,13 @@
             return;
           }
           var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (reduce || !document.startViewTransition) {
+          if (!reduce) {
             root.classList.add('theme-xfade');
-            applyTheme(p);
             setTimeout(function () {
               root.classList.remove('theme-xfade');
-            }, 520);
-            return;
+            }, 620);
           }
-          var x = ev && typeof ev.clientX === 'number' ? ev.clientX : window.innerWidth / 2;
-          var y = ev && typeof ev.clientY === 'number' ? ev.clientY : 24;
-          var endRadius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
-          root.style.setProperty('--vt-x', x + 'px');
-          root.style.setProperty('--vt-y', y + 'px');
-          root.style.setProperty('--vt-r', endRadius + 'px');
-          root.classList.add('vt-theme');
-          var vt = document.startViewTransition(function () {
-            applyTheme(p);
-          });
-          vt.finished.finally(function () {
-            root.classList.remove('vt-theme');
-          });
+          applyTheme(p);
         };
         applyTheme(pref());
         if (mq && mq.addEventListener) {
