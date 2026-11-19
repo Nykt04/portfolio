@@ -220,8 +220,8 @@
 ### Project Overview (Slides 02 – 04)
 
 #### Slide 02: Project Overview — Product & Team Context
-* **The Product:** Check8 is a web-based academic clearance management platform developed for Gordon College Computer Science students. It replaces paper clearance slips with digital QR checkpoint verification.
-* **Target Users:** Gordon College CCS students, laboratory custodians, library staff, student council officers, and department signatories.
+* **The Product:** Check8 is a web-based academic clearance management platform developed for Gordon College, College of Computer Studies students. It replaces paper clearance slips with digital QR checkpoint verification.
+* **Target Users:** Gordon College, College of Computer Studies students, laboratory custodians, library staff, student council officers, and department signatories.
 * **Team Context:** Built collaboratively in a student groupmate-hosted repository, with Gian Karlo serving as the **main contributor** for core application development and requirements mapping.
 
 #### Slide 03: Project Overview — The Problem & The Goal

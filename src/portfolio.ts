@@ -44,7 +44,7 @@ export const portfolio = {
   },
   project: {
     name: 'Check8',
-    description: 'Web-based QR clearance portal for Gordon College students. Check pending items on your phone and clear each station in one scan.',
+    description: 'Web-based QR clearance portal for Gordon College, College of Computer Studies students. Check pending items on your phone and clear each station in one scan.',
     technologies: ['JavaScript', 'Node.js', 'Express', 'HTML5 / CSS3', 'QR Code API', 'Supabase', 'Vercel'],
     screenshot: '/images/check8.png',
     screenshotAlt: 'Check8 QR-enabled clearance management portal login and overview screen',
@@ -54,7 +54,7 @@ export const portfolio = {
     persona: {
       name: 'Marco Reyes',
       role: 'Illustrative Target Persona · Graduating Student',
-      demographics: 'Illustrative Profile · Gordon College CCS Student',
+      demographics: 'Illustrative Profile · Gordon College, College of Computer Studies Student',
       age: '21',
       education: '4th Year BS Computer Science',
       hometown: 'Olongapo City, Zambales',
@@ -280,7 +280,7 @@ export const projects: PortfolioProject[] = [
     persona: portfolio.project.persona,
     caseStudyDetail: {
       overview: {
-        product: 'Check8 is a web-based QR clearance portal for Gordon College CS students that replaces paper slips with online tracking.',
+        product: 'Check8 is a web-based QR clearance portal for Gordon College, College of Computer Studies students that replaces paper slips with online tracking.',
         targetUsers: 'Gordon College, College of Computer Studies students, lab staff, library personnel, student council officers, and faculty signatories.',
         duration: 'April 2026 – November 2026',
         problem: 'Students wait in long lines for paper signatures each semester, and losing that slip forces a full reset.',

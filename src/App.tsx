@@ -863,7 +863,7 @@ export default function App() {
                           Flagship Preview · {projects[0].name}
                         </span>
                         <span className="block truncate text-[12.5px] font-medium text-[rgb(var(--ink))]">
-                          QR-powered digital clearance for Gordon College
+                          QR-powered clearance for Gordon College, College of Computer Studies
                         </span>
                       </div>
                     </div>
