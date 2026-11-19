@@ -1,1 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#09090b"/><path d="M30 18H18v28h12V33h-6m16-15v28m0-14 11-14M40 32l11 14" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="square"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Chamfered Architectural Badge (pops on both dark and light browser tab bars) -->
+  <path d="M3 3H49L61 15V61H15L3 49V3Z" fill="#121213" stroke="#F2EDE4" stroke-width="2.5" stroke-linejoin="miter"/>
+  <!-- Inner Blueprint Drafting Hairline -->
+  <path d="M7.5 7.5H47L56.5 17V56.5H17L7.5 47V7.5Z" stroke="#2E2E32" stroke-width="1"/>
+  <!-- Top-Left Registration Corner Tick -->
+  <path d="M7.5 16V7.5H16" stroke="#F2EDE4" stroke-width="1.5"/>
+  <!-- Sculpted Chamfered G -->
+  <path d="M30 18H16L12 22V42L16 46H30V30H21V35.5H24.5V40.5H17.5V23.5H30V18Z" fill="#F2EDE4"/>
+  <!-- Sculpted Stencil K (Stem + Detached Chevron) -->
+  <path d="M34 18H39.5V46H34V18Z" fill="#F2EDE4"/>
+  <path d="M46.5 18L41 29.5V34.5L46.5 46H52.5L46.5 32L52.5 18H46.5Z" fill="#F2EDE4"/>
+  <!-- Signature gk. Terminal Square Accent -->
+  <rect x="49.5" y="49.5" width="4" height="4" fill="#F2EDE4"/>
+</svg>

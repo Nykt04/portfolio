@@ -9,13 +9,11 @@ export const portfolio = {
   education: 'Bachelor of Science in Computer Science, Gordon College',
   interests: 'Full-stack web apps, WCAG 2.2 AA accessibility, and practical student tools.',
   skills: ['Python', 'TypeScript', 'JavaScript', 'C'],
-  // Put your portrait images/clips in public/images/ (Light wears glasses, Dark removes them).
+  // Put your portrait images in public/images/ (Light wears sunglasses, Dark without).
   portrait: {
     src: '/images/portrait-dark.jpg',
     lightSrc: '/images/portrait-light.jpg',
     darkSrc: '/images/portrait-dark.jpg',
-    toLightVideo: '/images/portrait-to-light.mp4',
-    toDarkVideo: '/images/portrait-to-dark.mp4',
     alt: 'Portrait of Gian Karlo C. Reguindin',
   },
   tools: [
@@ -47,7 +45,7 @@ export const portfolio = {
   project: {
     name: 'Check8',
     description: 'Web-based QR clearance portal for Gordon College students. Check pending items on your phone and clear each station in one scan.',
-    technologies: ['JavaScript', 'Node.js', 'Express', 'HTML5 / CSS3', 'QR Code API'],
+    technologies: ['JavaScript', 'Node.js', 'Express', 'HTML5 / CSS3', 'QR Code API', 'Supabase', 'Vercel'],
     screenshot: '/images/check8.png',
     screenshotAlt: 'Check8 QR-enabled clearance management portal login and overview screen',
     repository: '',
@@ -306,10 +304,10 @@ export const projects: PortfolioProject[] = [
       startingDesign: {
         paperWireframesNote: 'Early sketches split the app into a mobile Student Clearance Pass and a focused Officer Verification Screen.',
         lofiPrototype: {
-          description: '6-screen Figma flow: Login -> Student Dashboard -> Instructor Dashboard -> QR Verification -> Event Payments -> Admin Dashboard.',
-          url: 'https://www.figma.com/design/SmRtxYwAAgpJvC4mVkmFaO/Check8-Wireframes?node-id=0-1',
-          image: '/images/check8-lofi-flow.jpg?v=2',
-          alt: 'Check8 6-screen low-fidelity wireframes from Figma: Login, Admin Dashboard, Instructor Dashboard, QR Verification, Event Payments, and Student Dashboard',
+          description: '6-screen Figma flow: Login & Portal Entry -> Student Clearance Dashboard -> Student Event Payments -> Admin Dashboard -> Instructor Dashboard -> Event Payment Desk.',
+          url: 'https://www.figma.com/design/wAT7RW50UdD6mVIZp0bBeQ/CHECK8-%E2%80%94-Low-Fidelity-Wireframes?node-id=0-1&p=f&t=ppyDvmAMFJ44Doie-0',
+          image: '/images/check8-lofi-flow.jpg?v=3',
+          alt: 'Check8 6-screen low-fidelity wireframes from Figma: Login & Portal Entry, Student Clearance Dashboard, Student Event Payments, Admin Dashboard, Instructor Dashboard, and Event Payment Desk',
         },
         usabilityStudy: {
           intro: 'Pilot testing with 4 classmates shaped these improvements:',
@@ -404,7 +402,7 @@ export const projects: PortfolioProject[] = [
     description: 'Distraction-free study app to organize notes, generate flashcards with AI, and practice active recall.',
     category: 'Educational Tech · Full-Stack Web App',
     role: 'Project Manager · Lead Developer · QA · Requirements Analysis',
-    technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'Supabase', 'Vercel'],
+    technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'Supabase', 'Vercel', 'Figma'],
     screenshot: '/images/ace-it.png',
     screenshotAlt: 'ACE IT web application account login and registration screen at ace-it-ten.vercel.app',
     repository: 'https://github.com/Nykt04/_AceIt',

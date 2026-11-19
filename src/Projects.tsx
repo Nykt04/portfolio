@@ -92,19 +92,19 @@ export default function ProjectsSection() {
   return (
     <section
       id="work"
-      className="pt-7 pb-10 border-t border-[rgb(var(--g200))]"
+      className="border-t border-[rgb(var(--g200))] py-11 sm:py-12"
       aria-labelledby="work-title"
     >
       {/* Section Header */}
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4 sm:mb-7">
         <div>
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-baseline gap-2.5">
             <span className="section-index-badge">01</span>
             <h2 id="work-title" className="section-index-title">
               Featured Projects &amp; Case Studies
             </h2>
           </div>
-          <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
+          <p className="mt-2 max-w-prose text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
             Web apps built for classmates and local schools with clear flows and accessible screens.
           </p>
         </div>
@@ -112,8 +112,8 @@ export default function ProjectsSection() {
       </div>
 
       {/* Flagship Featured Project (Prominent Placement, Divided by Hairlines) */}
-      <article className="border-t border-[rgb(var(--g200))] pt-8 pb-10">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
+      <article className="border-t border-[rgb(var(--g200))] pt-8 pb-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
           {/* Left Details */}
           <div className="lg:col-span-7">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -124,33 +124,33 @@ export default function ProjectsSection() {
               <span className="font-mono text-xs text-[rgb(var(--g500))]">{featured.category}</span>
             </div>
 
-            <h3 className="mt-3 font-display-ui text-2xl sm:text-3xl font-bold tracking-tight text-[rgb(var(--ink))]">
+            <h3 className="mt-3.5 font-display-ui text-2xl sm:text-3xl font-bold tracking-tight text-[rgb(var(--ink))]">
               {featured.name}
             </h3>
 
-            <p className="mt-3 text-[15px] leading-relaxed text-[rgb(var(--g600))]">
+            <p className="mt-3.5 max-w-prose text-[15px] leading-relaxed text-[rgb(var(--g600))]">
               {featured.description}
             </p>
 
-            <div className="mt-5 grid grid-cols-1 gap-4 border-y border-[rgb(var(--g200))] py-3.5 sm:grid-cols-2">
+            <div className="mt-7 grid grid-cols-1 gap-5 border-y border-[rgb(var(--g200))] py-5 sm:grid-cols-2">
               <div>
                 <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
                   Engineering Role
                 </span>
-                <p className="mt-1 font-mono text-xs text-[rgb(var(--ink))]">{featured.role}</p>
+                <p className="mt-1.5 font-mono text-xs text-[rgb(var(--ink))]">{featured.role}</p>
               </div>
               <div>
                 <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
                   Core Stack
                 </span>
-                <p className="mt-1 font-mono text-xs text-[rgb(var(--g500))]">
+                <p className="mt-1.5 font-mono text-xs text-[rgb(var(--g500))]">
                   {featured.technologies.join(' · ')}
                 </p>
               </div>
             </div>
 
             {/* Actions */}
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
                 href={featured.caseStudy}
                 className="bryl-btn-primary"
@@ -193,7 +193,7 @@ export default function ProjectsSection() {
 
           {/* Right Visual */}
           <div className="lg:col-span-5">
-            <div className="mx-auto w-full max-w-[290px] lg:ml-auto lg:mr-0">
+            <div className="mx-auto w-full max-w-[340px] lg:ml-auto lg:mr-0">
               <ProjectVisual project={featured} category={featured.category} />
             </div>
           </div>
@@ -201,11 +201,11 @@ export default function ProjectsSection() {
       </article>
 
       {/* Secondary Projects Grid */}
-      <div className="grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2">
         {secondaryProjects.map((item) => (
           <article
             key={item.id}
-            className="flex flex-col justify-between border-t border-[rgb(var(--g200))] pt-7"
+            className="flex flex-col justify-between border-t border-[rgb(var(--g200))] pt-8"
           >
             <div>
               <ProjectVisual
@@ -214,7 +214,7 @@ export default function ProjectsSection() {
                 category={item.category.split('·')[0].trim()}
               />
 
-              <div className="mt-5 flex items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3">
+              <div className="mt-6 flex items-center justify-between gap-2 border-b border-[rgb(var(--g200))] pb-3.5">
                 <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
                   {item.category.split('·')[0].trim()}
                 </span>
@@ -223,21 +223,21 @@ export default function ProjectsSection() {
                 </span>
               </div>
 
-              <h4 className="mt-4 font-display-ui text-xl font-bold tracking-tight text-[rgb(var(--ink))]">
+              <h4 className="mt-5 font-display-ui text-xl font-bold tracking-tight text-[rgb(var(--ink))]">
                 {item.name}
               </h4>
 
-              <p className="mt-2 text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">
+              <p className="mt-2.5 text-[14px] leading-relaxed text-[rgb(var(--g600))]">
                 {item.description}
               </p>
 
               {/* Technologies */}
-              <p className="mt-4 font-mono text-[11px] text-[rgb(var(--g500))]">
+              <p className="mt-5 font-mono text-[11px] text-[rgb(var(--g500))]">
                 {item.technologies.join(' · ')}
               </p>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-[rgb(var(--g200))] pt-4">
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-5">
               <a
                 href={item.caseStudy}
                 className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-[rgb(var(--accent))] hover:underline"

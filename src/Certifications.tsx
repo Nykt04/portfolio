@@ -90,25 +90,25 @@ export default function CertificationsSection() {
   return (
     <section
       id="certifications"
-      className="pt-7 pb-10 border-t border-[rgb(var(--g200))]"
+      className="border-t border-[rgb(var(--g200))] pt-11 pb-8 sm:pt-12 sm:pb-9"
       aria-labelledby="certifications-title"
     >
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-7 flex flex-wrap items-end justify-between gap-4 sm:mb-8">
         <div>
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-baseline gap-2.5">
             <span className="section-index-badge">04</span>
             <h2 id="certifications-title" className="section-index-title">
               Certifications &amp; Verified Credentials
             </h2>
           </div>
-          <p className="mt-2 text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
+          <p className="mt-2 max-w-prose text-[14.5px] leading-relaxed text-[rgb(var(--g600))]">
             Verified credentials in UI/UX design, Python, frontend development, and cybersecurity.
           </p>
         </div>
         <span className="micro-label">{certifications.length} verified credentials</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert) => {
           const openModal = (el: HTMLElement) => {
             lastTriggerRef.current = el;
@@ -118,7 +118,7 @@ export default function CertificationsSection() {
           return (
             <article
               key={cert.id}
-              className="group flex flex-col justify-between border-t border-[rgb(var(--g200))] py-5"
+              className="group flex flex-col justify-between border-t border-[rgb(var(--g200))] py-7"
             >
               {/* Header Row with View Credential Icon Alongside */}
               <div className="flex items-start justify-between gap-3">
@@ -137,11 +137,11 @@ export default function CertificationsSection() {
                     </span>
                   </div>
 
-                  <h3 className="mt-3 font-display-ui text-[15px] font-bold leading-snug text-[rgb(var(--ink))]">
+                  <h3 className="mt-3.5 font-display-ui text-[15px] font-bold leading-snug text-[rgb(var(--ink))]">
                     {cert.title}
                   </h3>
 
-                  <p className="mt-1 font-mono text-xs leading-relaxed text-[rgb(var(--g500))]">
+                  <p className="mt-1.5 font-mono text-xs leading-relaxed text-[rgb(var(--g500))]">
                     {cert.issuer}
                   </p>
                 </div>
@@ -152,13 +152,13 @@ export default function CertificationsSection() {
                   aria-label={`View credential details for ${cert.title}`}
                   title="View credential details"
                   onClick={(e) => openModal(e.currentTarget)}
-                  className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--accent))]"
+                  className="-mr-2.5 -mt-2.5 inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--accent))]"
                 >
                   <Eye size={16} aria-hidden="true" />
                 </button>
               </div>
 
-              <p className="mt-4 pt-1 font-mono text-[10.5px] text-[rgb(var(--g500))]">
+              <p className="mt-6 font-mono text-[10.5px] text-[rgb(var(--g500))]">
                 {cert.skills.slice(0, 3).join(' · ')}
               </p>
             </article>
