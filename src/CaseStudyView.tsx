@@ -151,8 +151,6 @@ export default function CaseStudyView({ projectId = defaultFeaturedId }: { proje
           </span>
           <span className="hidden font-mono text-xs text-[rgb(var(--g400))] sm:inline" aria-hidden="true">·</span>
           <span className="micro-label">{currentProject.category}</span>
-          <span className="hidden font-mono text-xs text-[rgb(var(--g400))] sm:inline" aria-hidden="true">·</span>
-          <span className="micro-label">{p.name}</span>
         </div>
 
         <h1 className="mt-5 font-pixel text-3xl font-bold sm:text-4xl leading-none text-[rgb(var(--ink))]">
@@ -171,7 +169,7 @@ export default function CaseStudyView({ projectId = defaultFeaturedId }: { proje
           >
             <Lock size={14} className="mt-0.5 shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
             <span>
-              <strong className="font-semibold text-[rgb(var(--accent))]">Department Notice:</strong>{' '}
+              <strong className="font-semibold text-[rgb(var(--accent))]">Notice:</strong>{' '}
               {currentProject.accessNotice}
             </span>
           </div>
