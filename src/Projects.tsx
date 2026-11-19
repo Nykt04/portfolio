@@ -187,10 +187,10 @@ export default function ProjectsSection() {
               ) : (
                 <span
                   className="inline-flex min-h-[40px] items-center gap-1.5 border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] px-3 font-mono text-[11px] text-[rgb(var(--g500))]"
-                  title={featured.accessNotice || 'Exclusive system for the GC CCS Department'}
+                  title={featured.accessNotice || 'Exclusive system for Gordon College, College of Computer Studies'}
                 >
                   <Lock size={12} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
-                  <span>Exclusive System · GC CCS Department</span>
+                  <span>Exclusive System · Gordon College, College of Computer Studies</span>
                 </span>
               )}
             </div>

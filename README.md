@@ -37,7 +37,7 @@ Type-checks with `tsc -b` and outputs static production assets into `dist/`.
 All personal data, project entries, certifications, and links are centralized in [`src/portfolio.ts`](src/portfolio.ts):
 
 1. **Check8** *(Flagship Case Study)* — Web-based QR clearance portal for Gordon College CS students.
-   - **Access Notice:** Check8 is an exclusive internal system developed for the **Gordon College CCS Department** inside a private department/team repository.
+   - **Access Notice:** Check8 is an exclusive internal system developed for **Gordon College, College of Computer Studies** inside a private department/team repository.
 2. **ACE IT** — Distraction-free study web app with AI flashcard generation and active recall ([Live Site](https://ace-it-ten.vercel.app/) · [Repository](https://github.com/Nykt04/_AceIt)).
 3. **CRHS Web** — Lightweight public school portal for Castillejos Resettlement High School, DepEd ID `301016` ([Live Site](https://crhs-web.vercel.app/home.html) · [Repository](https://github.com/Nykt04/CRHS_Web)).
 

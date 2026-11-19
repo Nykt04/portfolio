@@ -13,7 +13,7 @@ A personal portfolio and software engineering case study collection for Gian Kar
 
 ## Capabilities and Constraints
 - Responsive editorial layout with persistent right-hand navigation on desktop and slide-out drawer on mobile.
-- Three complete 5-stage UX and software engineering case studies (`Check8` as Flagship with an explicit notice that it is an exclusive internal system for the Gordon College CCS Department, plus `ACE IT` and `CRHS Web` with live Vercel deployments and public GitHub repositories).
+- Three complete 5-stage UX and software engineering case studies (`Check8` as Flagship with an explicit notice that it is an exclusive internal system for Gordon College, College of Computer Studies, plus `ACE IT` and `CRHS Web` with live Vercel deployments and public GitHub repositories).
 - Direct contact via email (`mailto:` and one-click clipboard copy), GitHub (`@Nykt04`), and LinkedIn.
 
 ## Accessibility & Inclusion

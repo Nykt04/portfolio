@@ -350,7 +350,7 @@
 * **Screen 4 — Approval History:** Timestamped verification record.
 
 #### Slide 20: Live Deployment Notes
-* **Deployment Context:** Built as an exclusive internal clearance portal for the Gordon College CCS Department.
+* **Deployment Context:** Built as an exclusive internal clearance portal for Gordon College, College of Computer Studies.
 * **Repository Context:** Core implementation led by Gian Karlo inside a private department and groupmate-hosted repository.
 
 #### Slide 21: Accessibility Considerations

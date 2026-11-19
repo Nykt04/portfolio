@@ -771,7 +771,7 @@ export default function CaseStudyView({ projectId = defaultFeaturedId }: { proje
           ) : (
             <span className="inline-flex min-h-[44px] items-center gap-1.5 border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--surface))] px-3 font-mono text-[11.5px] text-[rgb(var(--g500))]">
               <Lock size={13} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
-              <span>{currentProject.accessNotice || 'Exclusive System · GC CCS Department'}</span>
+              <span>{currentProject.accessNotice || 'Exclusive System · Gordon College, College of Computer Studies'}</span>
             </span>
           )}
           {nextProject && nextProject.id !== currentProject.id && (

@@ -12,7 +12,7 @@
 - **Navigation & Interactive Features**:
   - Hash routing (`#home`, `#work`, `#case-study?p=project-3`, `#about`, `#toolkit`, `#certifications`, `#github`, `#contact`) supports direct loads and page refreshes on static hosting.
   - `Alt+K` Quick Jump command palette, mobile navigation drawer, certificate preview dialog, and case study image lightboxes trap `Tab` focus, close on `Escape`, and restore focus to the triggering control.
-  - Check8 displays a clear department notice indicating that it is an exclusive internal system for the Gordon College CCS Department.
+  - Check8 displays a clear notice indicating that it is an exclusive internal system for Gordon College, College of Computer Studies.
   - ACE IT and CRHS Web link directly to their live Vercel deployments and public GitHub repositories.
 - **Accessibility (WCAG 2.2 Level AA)**:
   - Calibrated light (`#fafafa` base / `#09090b` ink) and dark (`#121213` base / `#f7f6f3` ink) tokens in `src/ui-tokens.css` satisfy 4.5:1+ normal text contrast.

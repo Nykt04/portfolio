@@ -268,7 +268,7 @@ export const projects: PortfolioProject[] = [
     screenshotAlt: portfolio.project.screenshotAlt,
     repository: portfolio.project.repository,
     liveDemo: portfolio.project.liveDemo,
-    accessNotice: 'Exclusive internal system for the Gordon College CCS Department (private department & team repository).',
+    accessNotice: 'Exclusive internal system for Gordon College, College of Computer Studies (private department & team repository).',
     caseStudy: '#case-study?p=project-3',
     featured: true,
     roles: [
@@ -281,11 +281,11 @@ export const projects: PortfolioProject[] = [
     caseStudyDetail: {
       overview: {
         product: 'Check8 is a web-based QR clearance portal for Gordon College CS students that replaces paper slips with online tracking.',
-        targetUsers: 'Gordon College CCS students, lab staff, library personnel, student council officers, and faculty signatories.',
+        targetUsers: 'Gordon College, College of Computer Studies students, lab staff, library personnel, student council officers, and faculty signatories.',
         duration: 'April 2026 – November 2026',
         problem: 'Students wait in long lines for paper signatures each semester, and losing that slip forces a full reset.',
         goal: 'Show cleared and pending stations on one phone screen with a scannable QR pass for fast sign-offs.',
-        teamContext: 'Exclusive internal system for the Gordon College CCS Department; built in a groupmate-hosted repo where I led core full-stack routes, clearance flows, and UI.',
+        teamContext: 'Exclusive internal system for Gordon College, College of Computer Studies; built in a groupmate-hosted repo where I led core full-stack routes, clearance flows, and UI.',
       },
       understanding: {
         researchSummary: 'Interviews with 6 BSCS students and 2 office staff showed students lacked visibility into missing items while staff disliked manual binder lookups.',
@@ -380,7 +380,7 @@ export const projects: PortfolioProject[] = [
             alt: 'Check8 Admin Dashboard showing student records, CSV/SQLite import, groups and classes, and course management',
           },
         ],
-        hifiNote: 'Built as an exclusive internal portal for the Gordon College CCS Department inside our shared team repo, featuring the core clearance workflows and screens I implemented.',
+        hifiNote: 'Built as an exclusive internal portal for Gordon College, College of Computer Studies inside our shared team repo, featuring the core clearance workflows and screens I implemented.',
         accessibilityConsiderations: [
           'Words Alongside Color: Status pills pair Cleared and Pending text with distinct borders.',
           'Thumb-Friendly Targets: Buttons and tabs are sized for easy one-handed mobile taps.',
@@ -388,7 +388,7 @@ export const projects: PortfolioProject[] = [
         ],
       },
       goingForward: {
-        impact: 'Dedicated Gordon College CCS Department clearance system replacing fragile paper slips with trackable QR verification.',
+        impact: 'Dedicated Gordon College, College of Computer Studies clearance system replacing fragile paper slips with trackable QR verification.',
         whatILearned: 'Leading Check8 taught me how to simplify paper workflows, collaborate in a shared Git repo, and always pair QR scanners with manual ID lookup.',
         nextSteps: [
           'Printable Clearance Summary: Export a clean PDF once all stations are signed off.',
