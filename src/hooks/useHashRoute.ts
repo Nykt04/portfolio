@@ -3,7 +3,7 @@ import { flushSync } from 'react-dom';
 import { ERROR_CATALOG } from '../data/errors';
 import { defaultFeaturedId, portfolio as p, projects } from '../data/portfolio';
 import type { ErrorCode } from '../types/portfolio';
-import { resolveRouteError } from '../utils/routeError';
+import { getRouteViewKey, isViewChange, resolveRouteError } from '../utils/routeError';
 
 export function useHashRoute(
   mainRef: RefObject<HTMLElement | null>,
@@ -22,7 +22,7 @@ export function useHashRoute(
     return match ? match[1] : defaultFeaturedId;
   });
 
-  const priorView = useRef(isCaseStudy);
+  const priorViewKey = useRef(getRouteViewKey(routeError, isCaseStudy));
   const onRouteTransitionRef = useRef(onRouteTransition);
   onRouteTransitionRef.current = onRouteTransition;
 
@@ -41,7 +41,7 @@ export function useHashRoute(
         setCaseStudyId(pidMatch ? pidMatch[1] : defaultFeaturedId);
       }
 
-      const viewChanged = nextIsCase !== priorView.current || Boolean(nextErr);
+      const viewChanged = isViewChange(priorViewKey.current, nextErr, nextIsCase);
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const applyState = () => {
@@ -53,10 +53,12 @@ export function useHashRoute(
       if (viewChanged && document.startViewTransition && !reduceMotion) {
         document.startViewTransition(() => {
           flushSync(applyState);
+          priorViewKey.current = getRouteViewKey(nextErr, nextIsCase);
           const targetId = hash.split('?')[0].slice(1);
           const target = !nextErr ? document.getElementById(targetId) : null;
           if (target) target.scrollIntoView({ behavior: 'instant' });
           else window.scrollTo({ top: 0, behavior: 'instant' });
+          mainRef.current?.focus({ preventScroll: true });
         });
       } else {
         applyState();
@@ -76,7 +78,7 @@ export function useHashRoute(
       window.removeEventListener('hashchange', onHash);
       window.removeEventListener('popstate', onHash);
     };
-  }, []);
+  }, [mainRef]);
 
   // Update document title and move focus to <main> on view switches
   useEffect(() => {
@@ -87,8 +89,9 @@ export function useHashRoute(
         ? `${currentProj.name} · Case Study | ${p.shortName}`
         : `${p.name} · ${p.title}`;
 
-    if (priorView.current !== isCaseStudy || routeError) {
-      priorView.current = isCaseStudy;
+    const currentViewKey = getRouteViewKey(routeError, isCaseStudy);
+    if (priorViewKey.current !== currentViewKey) {
+      priorViewKey.current = currentViewKey;
       requestAnimationFrame(() => {
         const cleanId = window.location.hash.split('?')[0].slice(1);
         const target = !routeError ? document.getElementById(cleanId) : null;

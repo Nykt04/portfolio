@@ -51,3 +51,21 @@ export function resolveRouteError(pathname: string, hash: string): ErrorCode | n
 
   return null;
 }
+
+export function getRouteViewKey(routeError: ErrorCode | null, isCaseStudy: boolean): string {
+  if (routeError) return `error:${routeError}`;
+  return isCaseStudy ? 'case-study' : 'home';
+}
+
+export function isViewChange(
+  prevViewKey: string,
+  nextRouteError: ErrorCode | null,
+  nextIsCaseStudy: boolean,
+): boolean {
+  return getRouteViewKey(nextRouteError, nextIsCaseStudy) !== prevViewKey;
+}
+
+export function getNormalizedPathnameForLink(pathname: string, currentHash: string): string | null {
+  if (pathname === '/' || pathname === '/index.html') return null;
+  return currentHash ? `/${currentHash}` : '/';
+}

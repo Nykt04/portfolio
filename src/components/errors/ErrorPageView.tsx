@@ -14,6 +14,7 @@ import {
 import { ERROR_CATALOG, ERROR_JUMP_ITEMS } from '../../data/errors';
 import { portfolio as p, projects } from '../../data/portfolio';
 import type { ErrorCode } from '../../types/portfolio';
+import { getNormalizedPathnameForLink } from '../../utils/routeError';
 
 function getErrorIcon(code: ErrorCode) {
   switch (code) {
@@ -49,8 +50,16 @@ export function ErrorPageView({
       : `/${info.code}`);
 
   const handleNavigate = (targetHash: string) => {
-    if (typeof window !== 'undefined' && window.location.pathname !== '/') {
-      window.history.replaceState(null, '', `/${targetHash}`);
+    if (typeof window !== 'undefined') {
+      const normalized = getNormalizedPathnameForLink(window.location.pathname, window.location.hash);
+      if (normalized) {
+        window.history.replaceState(null, '', normalized);
+      }
+      // Clear ErrorBoundary crashes immediately; for route errors let hashchange drive state unless hash is unchanged
+      if (errorMessage || window.location.hash === targetHash) {
+        onReset?.();
+      }
+      return;
     }
     onReset?.();
   };
