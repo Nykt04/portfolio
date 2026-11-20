@@ -6,7 +6,7 @@
 
 An architectural, hairline-divided developer portfolio built around a calibrated Matte Black (`#121213`) dark foundation and Crisp Off-White (`#fafafa`) light foundation, warm-cream/slate-gray monochrome accents, and a subtle halftone blueprint backdrop.
 
-## Color Tokens (`src/ui-tokens.css`)
+## Color Tokens (`src/styles/ui-tokens.css`)
 
 - **Dark Mode (`html.dark`)**:
   - `--bg`: `18 18 19` (`#121213` Matte Black Foundation)
