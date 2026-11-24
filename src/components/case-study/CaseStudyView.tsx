@@ -34,7 +34,7 @@ export default function CaseStudyView({ projectId = defaultFeaturedId }: { proje
     <article id="case-study" className="mx-auto max-w-4xl px-5 pt-12 pb-24 sm:px-8">
       <CaseStudyHeader currentProject={currentProject} allProjects={projects} detail={detail} />
 
-      <div className="mt-12 divide-y divide-[rgb(var(--g200))]">
+      <div key={currentProject.id} className="mt-12 divide-y divide-[rgb(var(--g200))]">
         <CaseStudyOverview overview={detail.overview} roles={currentRoles} />
         <CaseStudyResearch understanding={detail.understanding} persona={currentProject.persona} />
         <CaseStudyStartingDesign

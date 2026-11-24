@@ -5,10 +5,10 @@ import { ProjectVisual } from '../common/ProjectVisual';
 
 const TOC_ITEMS = [
   { id: 'case-study-overview', label: '01 Overview' },
-  { id: 'case-study-understanding', label: '02 Understanding the User' },
-  { id: 'case-study-starting', label: '03 Starting the Design' },
-  { id: 'case-study-refining', label: '04 Refining the Design' },
-  { id: 'case-study-forward', label: '05 Going Forward' },
+  { id: 'case-study-understanding', label: '02 Research' },
+  { id: 'case-study-starting', label: '03 Wireframes & QA' },
+  { id: 'case-study-refining', label: '04 UI & Accessibility' },
+  { id: 'case-study-forward', label: '05 Impact' },
 ];
 
 interface CaseStudyHeaderProps {

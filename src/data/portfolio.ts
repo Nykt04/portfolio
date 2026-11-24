@@ -20,9 +20,9 @@ export const portfolio = {
   introduction:
     'I’m Gian Karlo, a computer science student and aspiring web developer interested in building thoughtful, user-friendly digital experiences.',
   about:
-    'I’m a 3rd-year Computer Science student at Gordon College building fast, accessible web apps. I turn everyday campus workflows into calm, readable interfaces.',
-  education: 'Bachelor of Science in Computer Science, Gordon College',
-  interests: 'Full-stack web apps, WCAG 2.2 AA accessibility, and practical student tools.',
+    '3rd-year BSCS student at Gordon College building fast, accessible full-stack web apps.',
+  education: 'BS Computer Science · Gordon College',
+  interests: 'Full-Stack Web · WCAG 2.2 AA',
   skills: ['Python', 'TypeScript', 'JavaScript', 'C'],
   // Put your portrait images in public/images/ (Light wears sunglasses, Dark without).
   portrait: {
@@ -32,37 +32,39 @@ export const portfolio = {
     alt: 'Portrait of Gian Karlo C. Reguindin',
   },
   tools: [
-    { name: 'VS Code', category: 'IDE & AI', description: 'Daily editor for TypeScript, React, and backend code.' },
-    { name: 'Figma', category: 'Design', description: 'Wireframes, user flows, and UI prototypes.' },
-    { name: 'Photoshop', category: 'Design', description: 'Photo retouching and raster asset prep (TESDA NC III).' },
-    { name: 'Illustrator', category: 'Design', description: 'Logos, icons, and scalable vector graphics (TESDA NC III).' },
-    { name: 'Canva', category: 'Design', description: 'Quick slide decks and class visual summaries.' },
-    { name: 'Git', category: 'Workflow', description: 'Branching, version tracking, and clean team merges.' },
-    { name: 'GitHub', category: 'Workflow', description: 'Code hosting, pull requests, and group builds.' },
-    { name: 'Vercel', category: 'Cloud', description: 'Live frontend hosting with instant commit previews.' },
-    { name: 'Supabase', category: 'Cloud', description: 'Auth and database storage for apps like ACE IT.' },
-    { name: 'React', category: 'Frameworks', description: 'Reusable UI components and predictable state.' },
-    { name: 'Next.js', category: 'Frameworks', description: 'Full-stack React routing, auth flows, and API endpoints.' },
-    { name: 'Tailwind', category: 'Frameworks', description: 'Consistent spacing, typography, and responsive contrast.' },
-    { name: 'Node.js', category: 'Backend', description: 'Express API routes and clearance workflows in Check8.' },
+    { name: 'VS Code', category: 'IDE & AI', description: 'Primary code editor.' },
+    { name: 'Figma', category: 'Design', description: 'Wireframes and UI prototypes.' },
+    { name: 'Photoshop', category: 'Design', description: 'Photo retouching (TESDA NC III).' },
+    { name: 'Illustrator', category: 'Design', description: 'Vector graphics and icons (TESDA NC III).' },
+    { name: 'Canva', category: 'Design', description: 'Slide decks and visual summaries.' },
+    { name: 'Git', category: 'Workflow', description: 'Version control and team branching.' },
+    { name: 'GitHub', category: 'Workflow', description: 'Repo hosting and pull requests.' },
+    { name: 'Vercel', category: 'Cloud', description: 'Frontend hosting and previews.' },
+    { name: 'Supabase', category: 'Cloud', description: 'Auth and PostgreSQL storage.' },
+    { name: 'React', category: 'Frameworks', description: 'Reusable UI components.' },
+    { name: 'Next.js', category: 'Frameworks', description: 'Full-stack routing and API endpoints.' },
+    { name: 'Tailwind', category: 'Frameworks', description: 'Consistent layout and spacing tokens.' },
+    { name: 'Node.js', category: 'Backend', description: 'Express APIs for Check8.' },
   ],
   roles: [
-    { title: 'Project Manager', description: 'I plan weekly milestones, unblock teammates, and keep releases on schedule.' },
+    { title: 'Project Manager', description: 'Sprint planning, milestones & team delivery.' },
     {
       title: 'Lead Developer',
-      description: 'I build frontend views and backend APIs in TypeScript, React, Next.js, and Node.js.',
+      description: 'React, Next.js, TypeScript & Node.js APIs.',
     },
     {
       title: 'Quality Assurance',
-      description: 'I test keyboard navigation, WCAG 2.2 AA contrast, and mobile layouts before launch.',
+      description: 'WCAG 2.2 AA, keyboard & mobile testing.',
     },
     {
       title: 'Requirements Analysis',
-      description: 'I map student and staff bottlenecks into simple user flows and database schemas.',
+      description: 'User flows, scope & database schemas.',
     },
   ],
   contact: {
     email: 'reguindin.giankarlo@gmail.com',
+    // Leave blank to use FormSubmit's default /ajax/<email> endpoint, or paste your activated hashed URL.
+    formEndpoint: '',
     github: 'https://github.com/Nykt04',
     linkedin: 'https://www.linkedin.com/in/gian-karlo-reguindin-762712349/',
   },
@@ -71,7 +73,7 @@ export const portfolio = {
     {
       id: 'cert-tesda-nc3-vgd',
       title: 'National Certificate III (NC III) in Visual Graphic Design',
-      issuer: 'Technical Education and Skills Development Authority (TESDA)',
+      issuer: 'TESDA',
       date: 'November 23, 2025 · Valid until Nov 22, 2030',
       credentialId: 'Cert No: 25037103008717 · ULI: ULI-RGC-06-124-03071-001',
       credentialUrl: 'https://www.tesda.gov.ph/',
@@ -83,7 +85,7 @@ export const portfolio = {
     {
       id: 'cert-python-2',
       title: 'Python Essentials 2',
-      issuer: 'Cisco Networking Academy & Python Institute',
+      issuer: 'Cisco Networking Academy',
       date: 'April 23, 2026',
       credentialId: '92939b1c-5da2-4844-8fcd-7d7f76474cc7',
       credentialUrl: 'https://www.netacad.com/',
@@ -95,7 +97,7 @@ export const portfolio = {
     {
       id: 'cert-python-1',
       title: 'Python Essentials 1',
-      issuer: 'Cisco Networking Academy & Python Institute',
+      issuer: 'Cisco Networking Academy',
       date: 'April 09, 2026',
       credentialId: '2c63efc5-1369-442c-bd42-908efc9cdcc9',
       credentialUrl: 'https://www.netacad.com/',
@@ -119,7 +121,7 @@ export const portfolio = {
     {
       id: 'cert-css-essentials',
       title: 'CSS Essentials',
-      issuer: 'Cisco Networking Academy & JS Institute',
+      issuer: 'Cisco Networking Academy',
       date: 'March 11, 2026',
       credentialId: 'DICT-ITU-CSS-2026',
       credentialUrl: 'https://www.netacad.com/',
@@ -130,7 +132,7 @@ export const portfolio = {
     {
       id: 'cert-html-essentials',
       title: 'HTML Essentials',
-      issuer: 'Cisco Networking Academy & JS Institute',
+      issuer: 'Cisco Networking Academy',
       date: 'March 07, 2026',
       credentialId: 'DICT-ITU-HTML-2026',
       credentialUrl: 'https://www.netacad.com/',

@@ -29,61 +29,61 @@ export default function CertificationsSection() {
     >
       <SectionHeader
         index="04"
-        title="Certifications & Verified Credentials"
+        title="Certifications"
         titleId="certifications-title"
-        subtitle="Verified credentials in UI/UX design, Python, frontend development, and cybersecurity."
-        meta={`${certifications.length} verified credentials`}
+        meta={`${certifications.length} verified`}
         className="mb-7 flex flex-wrap items-end justify-between gap-4 sm:mb-8"
       />
 
-      <div className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert) => (
           <article
             key={cert.id}
-            className="group flex flex-col justify-between border-t border-[rgb(var(--g200))] py-7"
+            className="group flex items-start justify-between gap-3 border-t border-[rgb(var(--g200))] py-5"
           >
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center text-[rgb(var(--ink))]" aria-hidden="true">
-                    <Award size={15} strokeWidth={1.75} />
-                  </span>
-                  <span className="inline-flex items-center gap-1 font-mono text-[10.5px] font-semibold text-[rgb(var(--accent))]">
-                    <CheckCircle2 size={12} aria-hidden="true" />
-                    <span>Verified</span>
-                  </span>
-                  <span className="font-mono text-[10.5px] text-[rgb(var(--g400))]" aria-hidden="true">
-                    ·
-                  </span>
-                  <span className="font-mono text-[10.5px] text-[rgb(var(--g500))]">
-                    {cert.date.split('·')[0].trim()}
-                  </span>
-                </div>
-
-                <h3 className="mt-3.5 font-display-ui text-[15px] font-bold leading-snug text-[rgb(var(--ink))]">
-                  {cert.title}
-                </h3>
-
-                <p className="mt-1.5 font-mono text-xs leading-relaxed text-[rgb(var(--g500))]">
-                  {cert.issuer}
-                </p>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center text-[rgb(var(--ink))]" aria-hidden="true">
+                  <Award size={15} strokeWidth={1.75} />
+                </span>
+                <span className="inline-flex items-center gap-1 font-mono text-[10.5px] font-semibold text-[rgb(var(--accent))]">
+                  <CheckCircle2 size={12} aria-hidden="true" />
+                  <span>Verified</span>
+                </span>
+                <span className="font-mono text-[10.5px] text-[rgb(var(--g400))]" aria-hidden="true">
+                  ·
+                </span>
+                <span className="font-mono text-[10.5px] text-[rgb(var(--g500))]">
+                  {cert.date.split('·')[0].trim()}
+                </span>
               </div>
 
-              <button
-                type="button"
-                aria-haspopup="dialog"
-                aria-label={`View credential details for ${cert.title}`}
-                title="View credential details"
-                onClick={(e) => openModal(cert, e.currentTarget)}
-                className="-mr-2.5 -mt-2.5 inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--accent))]"
-              >
-                <Eye size={16} aria-hidden="true" />
-              </button>
+              <h3 className="mt-3 font-display-ui text-[15px] font-bold leading-snug text-[rgb(var(--ink))]">
+                <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  onClick={(e) => openModal(cert, e.currentTarget)}
+                  className="text-left transition-colors hover:text-[rgb(var(--accent))]"
+                >
+                  {cert.title}
+                </button>
+              </h3>
+
+              <p className="mt-1.5 font-mono text-xs leading-relaxed text-[rgb(var(--g500))]">
+                {cert.issuer}
+              </p>
             </div>
 
-            <p className="mt-6 font-mono text-[10.5px] text-[rgb(var(--g500))]">
-              {cert.skills.slice(0, 3).join(' · ')}
-            </p>
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              aria-label={`View credential details for ${cert.title}`}
+              title="View credential details"
+              onClick={(e) => openModal(cert, e.currentTarget)}
+              className="-mr-2.5 -mt-2.5 inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-[rgb(var(--g500))] transition-colors hover:text-[rgb(var(--accent))]"
+            >
+              <Eye size={16} aria-hidden="true" />
+            </button>
           </article>
         ))}
       </div>

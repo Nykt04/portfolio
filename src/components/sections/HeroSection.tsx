@@ -1,8 +1,6 @@
-import { ArrowRight, ArrowUpRight, Github, Linkedin, PanelsTopLeft, Terminal } from 'lucide-react';
-import { coreLogoSkills } from '../../data/navigation';
+import { ArrowRight, ArrowUpRight, Github, Linkedin } from 'lucide-react';
 import { portfolio as p, projects } from '../../data/portfolio';
 import { Portrait } from '../common/Portrait';
-import { TechIcon } from '../common/TechIcon';
 
 export function HeroSection() {
   return (
@@ -15,7 +13,7 @@ export function HeroSection() {
               <div className="inline-flex items-center gap-2">
                 <span className="pulse-dot h-2 w-2 rounded-full bg-[rgb(var(--accent))]" aria-hidden="true" />
                 <span className="font-mono text-[11px] font-medium text-[rgb(var(--ink))]">
-                  Available for Projects &amp; Collaborations
+                  Open for Internships
                 </span>
               </div>
               <span className="font-mono text-[11px] font-medium text-[rgb(var(--g500))]">
@@ -28,40 +26,15 @@ export function HeroSection() {
                 {p.name}
               </h1>
               <p className="mt-2 font-mono text-[11.5px] font-medium uppercase tracking-wider text-[rgb(var(--accent))]">
-                Aspiring Web Developer &amp; Software Engineer
+                {p.title}
               </p>
             </div>
 
-            <blockquote className="reveal d3 mt-6 max-w-prose border-l border-[rgb(var(--g300))] py-1 pl-4 font-serif-ui text-[16.5px] italic leading-relaxed text-[rgb(var(--ink))]">
-              “{p.introduction}”
-            </blockquote>
-
-            <p className="intro-copy reveal d4 mt-6 max-w-prose text-[14px]">
-              Designing and engineering{' '}
-              <span className="intro-tag">
-                <PanelsTopLeft size={13} aria-hidden="true" className="text-[rgb(var(--accent))]" />
-                accessible interfaces
-              </span>{' '}
-              and{' '}
-              <span className="intro-tag">
-                <Terminal size={13} aria-hidden="true" className="text-[rgb(var(--accent))]" />
-                full-stack systems
-              </span>{' '}
-              powered by{' '}
-              <span className="intro-ai">
-                <span className="intro-logos" aria-hidden="true">
-                  {coreLogoSkills.map((skill) => (
-                    <span key={skill} className="intro-logo" title={skill}>
-                      <TechIcon name={skill} size={12} />
-                    </span>
-                  ))}
-                </span>
-                Python, TypeScript, JS &amp; C
-              </span>
-              .
+            <p className="reveal d3 mt-5 max-w-md text-[15px] leading-relaxed text-[rgb(var(--g600))]">
+              {p.introduction}
             </p>
 
-            <div className="reveal d5 mt-8 flex flex-wrap items-center justify-between gap-4">
+            <div className="reveal d4 mt-8 flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-3">
                 <a href="#work" className="bryl-btn-primary">
                   <span>Explore My Work</span>
@@ -104,11 +77,11 @@ export function HeroSection() {
 
           <div
             aria-label="Portfolio highlights"
-            className="reveal d6 mt-8 grid min-h-[64px] grid-cols-1 gap-4 border-t border-[rgb(var(--g200))] pt-5 sm:grid-cols-3 sm:items-center sm:gap-0 sm:divide-x sm:divide-[rgb(var(--g200))]"
+            className="reveal d5 mt-8 grid min-h-[64px] grid-cols-1 gap-4 border-t border-[rgb(var(--g200))] pt-5 sm:grid-cols-3 sm:items-center sm:gap-0 sm:divide-x sm:divide-[rgb(var(--g200))]"
           >
             <a href="#about" className="group block sm:pr-4">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--accent))]">
-                Academic Standing
+                Year &amp; Course
               </span>
               <div className="mt-1 flex items-center gap-1">
                 <span className="font-pixel text-base font-bold leading-none text-[rgb(var(--ink))] sm:text-lg">
@@ -119,7 +92,7 @@ export function HeroSection() {
 
             <a href="#about" className="group block sm:px-4">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--accent))]">
-                Core Competencies
+                Roles
               </span>
               <div className="mt-1 flex items-center gap-1">
                 <span className="font-pixel text-base font-bold leading-none text-[rgb(var(--ink))] sm:text-lg">
@@ -130,11 +103,11 @@ export function HeroSection() {
 
             <a href="#work" className="group block sm:pl-4">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--accent))]">
-                Verified Systems
+                Shipped
               </span>
               <div className="mt-1 flex items-center gap-1">
                 <span className="font-pixel text-base font-bold leading-none text-[rgb(var(--ink))] sm:text-lg">
-                  3 Shipped Apps
+                  {projects.length} Web Apps
                 </span>
               </div>
             </a>
@@ -159,10 +132,10 @@ export function HeroSection() {
               />
               <div className="min-w-0">
                 <span className="block font-mono text-[10px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
-                  Flagship Preview · {projects[0].name}
+                  Flagship · {projects[0].name}
                 </span>
                 <span className="block truncate text-[12.5px] font-medium text-[rgb(var(--ink))]">
-                  QR-powered clearance for Gordon College, College of Computer Studies
+                  QR clearance portal · Gordon College CCS
                 </span>
               </div>
             </div>

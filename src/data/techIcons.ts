@@ -27,10 +27,3 @@ export const techIcons: Record<string, { path: string }> = {
   Canva: designIcons.canva,
   'VS Code': editorIcons.visualstudiocode,
 };
-
-export const languageDescriptions: Record<string, string> = {
-  Python: 'Scripting, algorithms, and backend automation.',
-  TypeScript: 'Type-safe UI components and predictable app state.',
-  JavaScript: 'Interactive browser views and Node.js / Express APIs.',
-  C: 'Low-level memory management, pointers, and systems logic.',
-};

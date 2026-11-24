@@ -33,7 +33,7 @@ export interface ProjectRole {
 
 export interface CaseStudyDetail {
   overview: {
-    product: string;
+    product?: string;
     targetUsers: string;
     duration: string;
     problem: string;
@@ -41,7 +41,7 @@ export interface CaseStudyDetail {
     teamContext?: string;
   };
   understanding: {
-    researchSummary: string;
+    researchSummary?: string;
     painPoints: { title: string; detail: string }[];
     problemStatement: string;
     journeyMap: {
@@ -53,10 +53,10 @@ export interface CaseStudyDetail {
     }[];
   };
   startingDesign: {
-    paperWireframesNote: string;
+    paperWireframesNote?: string;
     lofiPrototype: { description: string; url?: string; image?: string; alt?: string };
     usabilityStudy: {
-      intro: string;
+      intro?: string;
       round1: string[];
       round2: string[];
     };
@@ -74,7 +74,7 @@ export interface CaseStudyDetail {
       afterAlt?: string;
     }[];
     mainMockups: (string | { title: string; image?: string; alt?: string })[];
-    hifiNote: string;
+    hifiNote?: string;
     accessibilityConsiderations: string[];
   };
   goingForward: {

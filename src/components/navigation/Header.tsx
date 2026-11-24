@@ -32,17 +32,10 @@ export function Header({
         </a>
 
         <div className="flex shrink-0 items-center gap-4">
-          <div className="hidden items-center gap-3 font-mono text-[11px] lg:flex">
+          <div className="hidden items-center font-mono text-[11px] lg:flex">
             <span className="text-[rgb(var(--g500))]">
               {activeNavItem.num} ·{' '}
               <strong className="font-medium text-[rgb(var(--ink))]">{activeNavItem.label}</strong>
-            </span>
-            <span className="text-[rgb(var(--g300))]" aria-hidden="true">
-              /
-            </span>
-            <span className="inline-flex items-center gap-2 text-[rgb(var(--g500))]">
-              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-[rgb(var(--accent))]" aria-hidden="true" />
-              <span>Available for Projects</span>
             </span>
           </div>
 

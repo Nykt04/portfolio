@@ -38,5 +38,3 @@ export const allSectionIds = [
   'github',
   'contact',
 ] as const;
-
-export const coreLogoSkills = ['Python', 'TypeScript', 'JavaScript', 'C'] as const;

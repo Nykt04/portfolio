@@ -76,7 +76,7 @@ export function CaseStudyRefiningDesign({
     <section id="case-study-refining" className="scroll-mt-24 py-9 sm:py-10">
       <SectionHeader
         index="04"
-        title="Refining the Design"
+        title="UI Refinement & Accessibility"
         compact
         className="mb-6 flex items-baseline gap-2.5"
         headingClassName="font-pixel text-lg font-bold text-[rgb(var(--ink))]"
@@ -84,7 +84,7 @@ export function CaseStudyRefiningDesign({
 
       <div className="space-y-6">
         <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-          Mockups: Before &amp; After Usability Study
+          Before &amp; After Usability Study
         </h3>
         {refiningDesign.mockupsBeforeAfter.map((comp) => (
           <div key={comp.title} className="border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-5 sm:p-6">
@@ -92,13 +92,13 @@ export function CaseStudyRefiningDesign({
             <p className="mt-1.5 max-w-prose text-[13.5px] leading-relaxed text-[rgb(var(--g600))]">{comp.notes}</p>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="border border-dashed border-[rgb(var(--g300))] bg-[rgb(var(--bg))] p-3 font-mono text-[11.5px] text-[rgb(var(--g500))]">
-                <span className="block font-semibold text-[rgb(var(--ink))]">Before usability study</span>
+                <span className="block font-semibold text-[rgb(var(--ink))]">Before</span>
                 {comp.beforeImage && (
                   <div className="my-2 border border-[rgb(var(--g200))]">
                     <ZoomableImage
                       src={comp.beforeImage}
                       alt={comp.beforeAlt || `${comp.title} before usability study`}
-                      title={`${comp.title} (Before usability study)`}
+                      title={`${comp.title} (Before)`}
                       imgClassName="block aspect-[16/10] w-full object-cover object-top"
                       onZoom={onZoom}
                     />
@@ -114,13 +114,13 @@ export function CaseStudyRefiningDesign({
                   comp.afterImage ? 'border-[rgb(var(--accent)/0.5)]' : 'border-dashed border-[rgb(var(--accent)/0.5)]'
                 } bg-[rgb(var(--bg))] p-3 font-mono text-[11.5px] text-[rgb(var(--g500))]`}
               >
-                <span className="block font-semibold text-[rgb(var(--accent))]">After usability study</span>
+                <span className="block font-semibold text-[rgb(var(--accent))]">After</span>
                 {comp.afterImage && (
                   <div className="my-2 border border-[rgb(var(--g200))] bg-[rgb(var(--surface))]">
                     <ZoomableImage
                       src={comp.afterImage}
                       alt={comp.afterAlt || `${comp.title} after usability study`}
-                      title={`${comp.title} (After usability study)`}
+                      title={`${comp.title} (After)`}
                       imgClassName="block aspect-[16/10] w-full object-contain"
                       onZoom={onZoom}
                     />
@@ -135,7 +135,7 @@ export function CaseStudyRefiningDesign({
 
       <div className="mt-10">
         <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-          Main Mockup Screens
+          Main Screens
         </h3>
         <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
           {refiningDesign.mainMockups.map((screen, i) => {
@@ -159,8 +159,8 @@ export function CaseStudyRefiningDesign({
                   </div>
                 )}
                 <figcaption className="p-4">
-                  <span className="font-mono text-[10.5px] text-[rgb(var(--accent))]">MOCKUP 0{i + 1}</span>
-                  <p className="mt-1.5 text-[13.5px] font-medium text-[rgb(var(--ink))]">{item.title}</p>
+                  <span className="font-mono text-[10.5px] text-[rgb(var(--accent))]">0{i + 1}</span>
+                  <p className="mt-1 text-[13.5px] font-medium text-[rgb(var(--ink))]">{item.title}</p>
                 </figcaption>
               </figure>
             );
@@ -170,14 +170,7 @@ export function CaseStudyRefiningDesign({
 
       <div className="mt-10">
         <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-          High-Fidelity Prototype &amp; Live Build
-        </h3>
-        <p className="case-prose mt-2.5 max-w-prose">{refiningDesign.hifiNote}</p>
-      </div>
-
-      <div className="mt-10">
-        <h3 className="font-mono text-[11px] uppercase tracking-wider text-[rgb(var(--accent))]">
-          Accessibility Considerations
+          Accessibility Decisions
         </h3>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
           {refiningDesign.accessibilityConsiderations.map((item, i) => (

@@ -202,14 +202,6 @@ export function Portrait({ className = '' }: { className?: string }) {
 
   return (
     <figure className={`flex flex-col justify-between ${className}`}>
-      <div className="mb-4 flex items-center justify-between border-b border-[rgb(var(--g200))] pb-3.5 font-mono text-[11px] leading-none text-[rgb(var(--g500))]">
-        <span className="inline-flex items-center gap-2 font-semibold text-[rgb(var(--accent))]">
-          <span className="pulse-dot h-2 w-2 rounded-full bg-[rgb(var(--accent))]" aria-hidden="true" />
-          <span>Portrait</span>
-        </span>
-        <span>Gordon College</span>
-      </div>
-
       <div
         ref={frameRef}
         className="portrait-frame relative mx-auto aspect-[10/9] w-full max-w-[360px] overflow-hidden bg-[rgb(var(--g50))] lg:mx-0 lg:min-h-[290px] lg:max-w-none lg:flex-1"
@@ -248,13 +240,6 @@ export function Portrait({ className = '' }: { className?: string }) {
           </div>
         )}
       </div>
-
-      <figcaption className="mt-3.5">
-        <strong className="block font-display-ui text-[14px] font-semibold text-[rgb(var(--ink))]">
-          {p.name}
-        </strong>
-        <span className="font-mono text-xs text-[rgb(var(--g500))]">{p.title}</span>
-      </figcaption>
     </figure>
   );
 }

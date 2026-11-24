@@ -59,7 +59,6 @@ export function GitHubSection() {
               <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--g500))]">
                 Contributions // @{username}
               </span>
-              <span className="font-mono text-[11px] text-[rgb(var(--g400))]">53-week matrix</span>
             </div>
 
             <a
@@ -98,8 +97,7 @@ export function GitHubSection() {
               </svg>
             </a>
 
-            <div className="mt-3.5 flex flex-wrap items-center justify-between gap-2 text-[10.5px] text-[rgb(var(--g400))]">
-              <span>Live API · Snapshot fallback</span>
+            <div className="mt-3.5 flex justify-end text-[10.5px] text-[rgb(var(--g400))]">
               <div className="flex items-center gap-1.5 uppercase tracking-wider" aria-hidden="true">
                 <span>less</span>
                 {[0, 1, 2, 3, 4].map((lvl) => (

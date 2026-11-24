@@ -4,7 +4,7 @@ import type { ProjectPersona } from '../../types/portfolio';
 export function PersonaCard({ persona }: { persona: ProjectPersona }) {
   return (
     <div
-      className="mt-10 border border-[rgb(var(--g200))] bg-[rgb(var(--surface))] p-6 sm:p-7"
+      className="mt-4 border border-[rgb(var(--g200))] bg-[rgb(var(--bg))] p-5 sm:p-6"
       aria-label={`Illustrative Target Persona: ${persona.name}`}
     >
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[rgb(var(--g200))] pb-5">

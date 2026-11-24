@@ -17,10 +17,9 @@ export default function ProjectsSection() {
     >
       <SectionHeader
         index="01"
-        title="Featured Projects & Case Studies"
+        title="Selected Work"
         titleId="work-title"
-        subtitle="Web apps built for classmates and local schools with clear flows and accessible screens."
-        meta={`${projects.length} documented systems`}
+        meta={`${projects.length} shipped apps`}
       />
 
       {/* Flagship Featured Project */}
@@ -29,7 +28,7 @@ export default function ProjectsSection() {
           <div className="lg:col-span-7">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
-                Flagship Case Study
+                Flagship
               </span>
               <span className="hidden font-mono text-xs text-[rgb(var(--g400))] sm:inline" aria-hidden="true">
                 ·
@@ -37,32 +36,29 @@ export default function ProjectsSection() {
               <span className="font-mono text-xs text-[rgb(var(--g500))]">{featured.category}</span>
             </div>
 
-            <h3 className="mt-3.5 font-display-ui text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl">
+            <h3 className="mt-3 font-display-ui text-2xl font-bold tracking-tight text-[rgb(var(--ink))] sm:text-3xl">
               {featured.name}
             </h3>
 
-            <p className="mt-3.5 max-w-prose text-[15px] leading-relaxed text-[rgb(var(--g600))]">
+            <p className="mt-3 max-w-prose text-[15px] leading-relaxed text-[rgb(var(--g600))]">
               {featured.description}
             </p>
 
-            <div className="mt-7 grid grid-cols-1 gap-5 border-y border-[rgb(var(--g200))] py-5 sm:grid-cols-2">
-              <div>
-                <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
-                  Engineering Role
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <span className="border border-[rgb(var(--accent)/0.4)] bg-[rgb(var(--surface))] px-2.5 py-1 font-mono text-[11px] font-medium text-[rgb(var(--ink))]">
+                {featured.role}
+              </span>
+              {featured.technologies.slice(0, 5).map((tech) => (
+                <span
+                  key={tech}
+                  className="border border-[rgb(var(--g200))] px-2.5 py-1 font-mono text-[11px] text-[rgb(var(--g500))]"
+                >
+                  {tech}
                 </span>
-                <p className="mt-1.5 font-mono text-xs text-[rgb(var(--ink))]">{featured.role}</p>
-              </div>
-              <div>
-                <span className="block font-mono text-[10.5px] uppercase tracking-wider text-[rgb(var(--g400))]">
-                  Core Stack
-                </span>
-                <p className="mt-1.5 font-mono text-xs text-[rgb(var(--g500))]">
-                  {featured.technologies.join(' · ')}
-                </p>
-              </div>
+              ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <a href={featured.caseStudy} className="bryl-btn-primary">
                 <span>Read Case Study</span>
                 <ArrowRight size={14} aria-hidden="true" />
@@ -93,10 +89,7 @@ export default function ProjectsSection() {
                   <span>Repository</span>
                 </a>
               ) : (
-                <AccessNoticeLink
-                  notice={featured.accessNotice}
-                  label="Exclusive System · Gordon College, College of Computer Studies"
-                />
+                <AccessNoticeLink notice={featured.accessNotice} label="Internal CCS Repo" />
               )}
             </div>
           </div>

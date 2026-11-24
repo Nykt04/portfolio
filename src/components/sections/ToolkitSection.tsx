@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Check } from 'lucide-react';
 import { portfolio as p, projects } from '../../data/portfolio';
-import { languageDescriptions } from '../../data/techIcons';
 import { getProjectStackSet, toolkitTools } from '../../utils/projectStack';
 import { SectionHeader } from '../common/SectionHeader';
 import { TechIcon } from '../common/TechIcon';
@@ -29,7 +28,7 @@ export function ToolkitSection() {
         index="03"
         title="Stack & Technical Skills"
         titleId="toolkit-title"
-        meta="languages, frameworks & tools"
+        meta="languages & tools"
         className="mb-7 flex flex-wrap items-baseline justify-between gap-2 sm:mb-8"
       />
 
@@ -77,44 +76,30 @@ export function ToolkitSection() {
         </div>
 
         {/* Core Programming Languages Grid */}
-        <div className="mb-10">
+        <div className="mb-9">
           <div className="mb-3.5 flex items-baseline justify-between">
             <h3 className="micro-label">Primary Languages</h3>
             <span className="font-mono text-[11px] text-[rgb(var(--g400))]">{p.skills.length} core</span>
           </div>
-          <div className="grid grid-cols-1 divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-y-0">
+          <div className="grid grid-cols-2 divide-x divide-y divide-[rgb(var(--g200))] border-y border-[rgb(var(--g200))] lg:grid-cols-4 lg:divide-y-0">
             {p.skills.map((lang) => {
               const isMatch = !projectStack || projectStack.has(lang);
               return (
                 <div
                   key={lang}
-                  className={`py-5 transition-opacity sm:px-5 lg:first:pl-0 lg:last:pr-0 ${
+                  className={`flex items-center justify-between gap-2 px-4 py-3.5 transition-opacity lg:first:pl-0 lg:last:pr-0 ${
                     isMatch ? 'opacity-100' : 'opacity-35'
                   }`}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
                     <span className="inline-flex items-center text-[rgb(var(--accent))]">
-                      <TechIcon name={lang} size={18} />
+                      <TechIcon name={lang} size={17} />
                     </span>
-                    {projectStack ? (
-                      <span
-                        className={`inline-flex items-center gap-1 font-mono text-[10px] font-medium uppercase tracking-wider ${
-                          isMatch ? 'text-[rgb(var(--accent))]' : 'text-[rgb(var(--g400))]'
-                        }`}
-                      >
-                        {isMatch && <Check size={11} aria-hidden="true" />}
-                        <span>{isMatch ? 'Used' : 'Unused'}</span>
-                      </span>
-                    ) : (
-                      <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-[rgb(var(--g400))]">
-                        Core
-                      </span>
-                    )}
+                    <span className="font-display-ui text-sm font-bold text-[rgb(var(--ink))]">{lang}</span>
                   </div>
-                  <div className="mt-3 font-display-ui text-base font-bold text-[rgb(var(--ink))]">{lang}</div>
-                  <p className="mt-2 text-xs leading-relaxed text-[rgb(var(--g600))]">
-                    {languageDescriptions[lang] || 'Core language.'}
-                  </p>
+                  {projectStack && isMatch && (
+                    <Check size={13} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
+                  )}
                 </div>
               );
             })}
@@ -124,12 +109,10 @@ export function ToolkitSection() {
         {/* Frameworks & Tools Grid */}
         <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
           <h3 className="micro-label">Frameworks, Cloud &amp; Design Tools</h3>
-          <span className="font-mono text-[11px] text-[rgb(var(--g400))]">
-            {toolkitTools.length} tools · select for note
-          </span>
+          <span className="font-mono text-[11px] text-[rgb(var(--g400))]">{toolkitTools.length} tools</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {toolkitTools.map((tool) => {
             const isMatch = !projectStack || projectStack.has(tool.name);
             const isSelected = activeToolName === tool.name;
@@ -139,7 +122,7 @@ export function ToolkitSection() {
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => setActiveToolName((curr) => (curr === tool.name ? null : tool.name))}
-                className={`group flex min-h-[54px] items-center justify-between gap-2.5 border px-3.5 py-3 text-left transition-all ${
+                className={`group flex min-h-[48px] items-center justify-between gap-2.5 border px-3.5 py-2.5 text-left transition-all ${
                   isSelected
                     ? 'border-[rgb(var(--accent))] bg-[rgb(var(--surface))]'
                     : isMatch
@@ -153,14 +136,9 @@ export function ToolkitSection() {
                   <span className="flex shrink-0 items-center text-[rgb(var(--accent))]">
                     <TechIcon name={tool.name} size={16} />
                   </span>
-                  <span className="min-w-0">
-                    <strong className="block truncate font-display-ui text-[13px] font-semibold text-[rgb(var(--ink))]">
-                      {tool.name}
-                    </strong>
-                    <span className="block truncate font-mono text-[9.5px] text-[rgb(var(--g400))]">
-                      {tool.category}
-                    </span>
-                  </span>
+                  <strong className="truncate font-display-ui text-[13px] font-semibold text-[rgb(var(--ink))]">
+                    {tool.name}
+                  </strong>
                 </span>
                 {projectStack && isMatch && (
                   <Check size={13} className="shrink-0 text-[rgb(var(--accent))]" aria-hidden="true" />
@@ -170,24 +148,25 @@ export function ToolkitSection() {
           })}
         </div>
 
-        {/* Single-line Tool / Project Readout */}
-        <div className="mt-5 flex min-h-[42px] items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-4 font-mono text-xs text-[rgb(var(--g500))]">
-          {activeTool ? (
-            <span>
-              <strong className="text-[rgb(var(--ink))]">{activeTool.name}</strong> ({activeTool.category}) —{' '}
-              {activeTool.description}
-            </span>
-          ) : selectedProject ? (
-            <span>
-              Highlighted <strong className="text-[rgb(var(--ink))]">{selectedProject.name}</strong> stack.{' '}
-              <a href={selectedProject.caseStudy} className="text-[rgb(var(--accent))] hover:underline">
-                Open case study →
-              </a>
-            </span>
-          ) : (
-            <span>Pick a project to filter its stack, or click any tool for its role.</span>
-          )}
-        </div>
+        {/* Single-line Tool / Project Readout (shown on interaction) */}
+        {(activeTool || selectedProject) && (
+          <div className="mt-5 flex min-h-[38px] items-center justify-between gap-3 border-t border-[rgb(var(--g200))] pt-4 font-mono text-xs text-[rgb(var(--g500))]">
+            {activeTool ? (
+              <span>
+                <strong className="text-[rgb(var(--ink))]">{activeTool.name}</strong> — {activeTool.description}
+              </span>
+            ) : (
+              selectedProject && (
+                <span>
+                  Filtered to <strong className="text-[rgb(var(--ink))]">{selectedProject.name}</strong>.{' '}
+                  <a href={selectedProject.caseStudy} className="text-[rgb(var(--accent))] hover:underline">
+                    Open case study →
+                  </a>
+                </span>
+              )
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -28,7 +28,7 @@ export function ProjectCard({ project }: { project: PortfolioProject }) {
         </p>
 
         <p className="mt-5 font-mono text-[11px] text-[rgb(var(--g500))]">
-          {project.technologies.join(' · ')}
+          {project.technologies.slice(0, 4).join(' · ')}
         </p>
       </div>
 
